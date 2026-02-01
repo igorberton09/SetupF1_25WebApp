@@ -61,63 +61,50 @@ function buildDiscordMessage(key, track) {
   );
 }
 
-// ─── LEADERBOARD DATA (2024 season) ──────────────────────────────
+// ─── LEADERBOARD DATA (from PDF - Carriera A 3) ──────────────────
 const RACE_RESULTS = [
-  { race: "Bahrain",    results: ["Verstappen","Perez","Sainz","Alonso","Norris","Albon","Gasly","Ocon","Hulkenberg","Tsunoda"] },
-  { race: "Saudi Arabia", results: ["Verstappen","Perez","Sainz","Alonso","Norris","Albon","Gasly","Ocon","Hulkenberg","Tsunoda"] },
-  { race: "Australia",  results: ["Sainz","Norris","Alonso","Perez","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen","Zhou"] },
-  { race: "Japan",      results: ["Verstappen","Perez","Sainz","Alonso","Norris","Albon","Gasly","Ocon","Hulkenberg","Tsunoda"] },
-  { race: "China",      results: ["Verstappen","Norris","Perez","Sainz","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Miami",      results: ["Norris","Verstappen","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Emilia Romagna", results: ["Verstappen","Norris","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Monaco",     results: ["Sainz","Norris","Alonso","Perez","Verstappen","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Spain",      results: ["Verstappen","Norris","Hamilton","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Canada",     results: ["Verstappen","Norris","Russell","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Austria",    results: ["Verstappen","Piastri","Sainz","Norris","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Britain",    results: ["Hamilton","Verstappen","Norris","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Hungary",    results: ["Piastri","Norris","Sainz","Verstappen","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Belgium",    results: ["Piastri","Sainz","Verstappen","Norris","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Netherlands",results: ["Verstappen","Norris","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Monza",      results: ["Sainz","Norris","Verstappen","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Singapore",  results: ["Norris","Verstappen","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "USA",        results: ["Verstappen","Norris","Sainz","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Mexico",     results: ["Sainz","Norris","Verstappen","Perez","Alonso","Gasly","Albon","Tsunoda","Hulkenberg","Magnussen"] },
-  { race: "Brazil",     results: ["Verstappen","Ocon","Gasly","Sainz","Norris","Perez","Alonso","Albon","Tsunoda","Hulkenberg"] },
-  { race: "Las Vegas",  results: ["Russell","Hamilton","Sainz","Verstappen","Norris","Perez","Alonso","Gasly","Albon","Tsunoda"] },
-  { race: "Qatar",      results: ["Verstappen","Sainz","Norris","Perez","Alonso","Russell","Hamilton","Gasly","Albon","Tsunoda"] },
-  { race: "Abu Dhabi",  results: ["Norris","Sainz","Verstappen","Perez","Alonso","Russell","Hamilton","Gasly","Albon","Tsunoda"] },
+  { race: "Australia", results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
+  { race: "Olanda", results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
+  { race: "Messico", results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
+  { race: "Brasile", results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll"] },
+  { race: "Qatar", results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
 ];
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 const DRIVER_TEAMS = {
-  Verstappen: { team: "Red Bull", num: 1, flag: "🇳🇱" },
-  Perez:      { team: "Red Bull", num: 11, flag: "🇲🇽" },
-  Norris:     { team: "McLaren", num: 4, flag: "🇬🇧" },
-  Sainz:      { team: "Ferrari", num: 55, flag: "🇪🇸" },
-  Alonso:     { team: "Aston Martin", num: 14, flag: "🇪🇸" },
-  Hamilton:   { team: "Mercedes", num: 44, flag: "🇬🇧" },
-  Russell:    { team: "Mercedes", num: 63, flag: "🇬🇧" },
   Piastri:    { team: "McLaren", num: 81, flag: "🇦🇺" },
-  Gasly:      { team: "Alpine", num: 10, flag: "🇫🇷" },
-  Ocon:       { team: "Alpine", num: 31, flag: "🇫🇷" },
+  Norris:     { team: "McLaren", num: 4, flag: "🇬🇧" },
+  Verstappen: { team: "Red Bull", num: 1, flag: "🇳🇱" },
+  Tsunoda:    { team: "Red Bull", num: 22, flag: "🇯🇵" },
+  Russell:    { team: "Mercedes", num: 63, flag: "🇬🇧" },
+  Antonelli:  { team: "Mercedes", num: 12, flag: "🇮🇹" },
+  Leclerc:    { team: "Ferrari", num: 16, flag: "🇲🇨" },
+  Hamilton:   { team: "Ferrari", num: 44, flag: "🇬🇧" },
   Albon:      { team: "Williams", num: 23, flag: "🇹🇭" },
-  Tsunoda:    { team: "RB", num: 22, flag: "🇯🇵" },
-  Hulkenberg: { team: "Haas", num: 27, flag: "🇩🇪" },
-  Magnussen:  { team: "Haas", num: 20, flag: "🇩🇰" },
-  Zhou:       { team: "Sauber", num: 24, flag: "🇨🇳" },
+  Sainz:      { team: "Williams", num: 55, flag: "🇪🇸" },
+  Alonso:     { team: "Aston Martin", num: 14, flag: "🇪🇸" },
+  Stroll:     { team: "Aston Martin", num: 18, flag: "🇨🇦" },
+  Lawson:     { team: "Visa Cash App RB", num: 40, flag: "🇳🇿" },
+  Igor:       { team: "Visa Cash App RB", num: 30, flag: "🇮🇹" },
+  Bearman:    { team: "Haas", num: 87, flag: "🇬🇧" },
+  Manuel:     { team: "Haas", num: 50, flag: "🇮🇹" },
+  Gasly:      { team: "Alpine", num: 10, flag: "🇫🇷" },
+  Alex:       { team: "Alpine", num: 3, flag: "🇮🇹" },
+  Hulkenberg: { team: "Sauber", num: 27, flag: "🇩🇪" },
+  Bortoleto:  { team: "Sauber", num: 5, flag: "🇧🇷" },
 };
 
 const TEAM_COLORS = {
-  "Red Bull": "#3671C6",
   "McLaren": "#FF8000",
-  "Ferrari": "#E8002D",
-  "Aston Martin": "#358C75",
+  "Red Bull": "#3671C6",
   "Mercedes": "#27C7B7",
-  "Alpine": "#FF5733",
+  "Ferrari": "#E8002D",
   "Williams": "#2ECC71",
-  "RB": "#5E5B73",
+  "Aston Martin": "#358C75",
+  "Visa Cash App RB": "#5E5B73",
   "Haas": "#B8B8B8",
+  "Alpine": "#FF5733",
   "Sauber": "#A6A6A6",
 };
 
@@ -127,6 +114,7 @@ function computeDriverStandings() {
   const podiums = {};
   RACE_RESULTS.forEach(({ results }) => {
     results.forEach((d, i) => {
+      if (i >= POINTS_TABLE.length) return;
       pts[d] = (pts[d] || 0) + POINTS_TABLE[i];
       if (i === 0) wins[d] = (wins[d] || 0) + 1;
       if (i < 3) podiums[d] = (podiums[d] || 0) + 1;
@@ -147,6 +135,7 @@ function computeTeamStandings() {
   const teams = {};
   RACE_RESULTS.forEach(({ results }) => {
     results.forEach((d, i) => {
+      if (i >= POINTS_TABLE.length) return;
       const info = DRIVER_TEAMS[d];
       if (!info) return;
       if (!teams[info.team]) teams[info.team] = { points: 0, wins: 0 };
@@ -164,34 +153,21 @@ const TEAM_STANDINGS   = computeTeamStandings();
 
 // ─── CALENDAR DATA ────────────────────────────────────────────────
 const CALENDAR = [
-  { round: 1,  race: "Bahrain GP",           city: "Sakhir",      date: "01 Mar", status: "done",    winner: "Verstappen" },
-  { round: 2,  race: "Saudi Arabian GP",     city: "Jeddah",      date: "09 Mar", status: "done",    winner: "Verstappen" },
-  { round: 3,  race: "Australian GP",        city: "Melbourne",   date: "24 Mar", status: "done",    winner: "Sainz" },
-  { round: 4,  race: "Japanese GP",          city: "Suzuka",      date: "07 Apr", status: "done",    winner: "Verstappen" },
-  { round: 5,  race: "Chinese GP",           city: "Shanghai",    date: "21 Apr", status: "done",    winner: "Verstappen" },
-  { round: 6,  race: "Miami GP",             city: "Miami",       date: "05 May", status: "done",    winner: "Norris" },
-  { round: 7,  race: "Emilia Romagna GP",    city: "Imola",       date: "19 May", status: "done",    winner: "Verstappen" },
-  { round: 8,  race: "Monaco GP",            city: "Monaco",      date: "26 May", status: "done",    winner: "Sainz" },
-  { round: 9,  race: "Spanish GP",           city: "Barcelona",   date: "23 Jun", status: "done",    winner: "Verstappen" },
-  { round: 10, race: "Canadian GP",          city: "Montreal",    date: "09 Jun", status: "done",    winner: "Verstappen" },
-  { round: 11, race: "Austrian GP",          city: "Spielberg",   date: "30 Jun", status: "done",    winner: "Verstappen" },
-  { round: 12, race: "British GP",           city: "Silverstone", date: "07 Jul", status: "done",    winner: "Hamilton" },
-  { round: 13, race: "Hungarian GP",         city: "Budapest",    date: "21 Jul", status: "done",    winner: "Piastri" },
-  { round: 14, race: "Belgian GP",           city: "Spa",         date: "28 Jul", status: "done",    winner: "Piastri" },
-  { round: 15, race: "Dutch GP",             city: "Zandvoort",   date: "25 Aug", status: "done",    winner: "Verstappen" },
-  { round: 16, race: "Italian GP",           city: "Monza",       date: "01 Sep", status: "done",    winner: "Sainz" },
-  { round: 17, race: "Singapore GP",         city: "Singapore",   date: "22 Sep", status: "done",    winner: "Norris" },
-  { round: 18, race: "United States GP",     city: "Austin",      date: "20 Oct", status: "done",    winner: "Verstappen" },
-  { round: 19, race: "Mexico City GP",       city: "Mexico City", date: "27 Oct", status: "done",    winner: "Sainz" },
-  { round: 20, race: "São Paulo GP",         city: "São Paulo",   date: "03 Nov", status: "done",    winner: "Verstappen" },
-  { round: 21, race: "Las Vegas GP",         city: "Las Vegas",   date: "23 Nov", status: "done",    winner: "Russell" },
-  { round: 22, race: "Qatar GP",             city: "Lusail",      date: "01 Dec", status: "done",    winner: "Verstappen" },
-  { round: 23, race: "Abu Dhabi GP",         city: "Yas Marina",  date: "08 Dec", status: "done",    winner: "Norris" },
+  { round: 1, race: "Australian GP",   city: "Melbourne",   status: "done",   winner: "Alex" },
+  { round: 2, race: "Dutch GP",        city: "Zandvoort",   status: "done",   winner: "Igor" },
+  { round: 3, race: "Mexico City GP",  city: "Mexico City", status: "done",   winner: "Alex" },
+  { round: 4, race: "São Paulo GP",    city: "São Paulo",   status: "done",   winner: "Alex" },
+  { round: 5, race: "Qatar GP",        city: "Lusail",      status: "done",   winner: "Norris" },
+  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "upcoming", winner: "..." },
+  { round: 7, race: "Monaco GP",       city: "Monaco",      status: "upcoming", winner: "..." },
 ];
 
-// ─── DRIVERS PAGE DATA (poles added manually for realism) ─────────
+// ─── DRIVERS PAGE DATA (poles - estimated based on performance) ───
 const DRIVER_POLES = {
-  Verstappen: 8, Norris: 5, Sainz: 4, Hamilton: 2, Russell: 2, Perez: 1, Piastri: 1, Alonso: 0, Gasly: 0, Ocon: 0, Albon: 0, Tsunoda: 0, Hulkenberg: 0, Magnussen: 0, Zhou: 0
+  Alex: 3, Norris: 2, Igor: 1, Verstappen: 1, Hamilton: 0, Russell: 0,
+  Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
+  Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
+  Hulkenberg: 0, Bortoleto: 0
 };
 
 // ─── NAV ITEMS ────────────────────────────────────────────────────
@@ -870,7 +846,7 @@ function LeaderboardPage() {
   function getDriverRaces(driverName) {
     return RACE_RESULTS.map(({ race, results }) => {
       const pos = results.indexOf(driverName);
-      return { race, pos: pos >= 0 ? pos + 1 : null, pts: pos >= 0 ? POINTS_TABLE[pos] : 0 };
+      return { race, pos: pos >= 0 ? pos + 1 : null, pts: pos >= 0 && pos < POINTS_TABLE.length ? POINTS_TABLE[pos] : 0 };
     }).filter(r => r.pos !== null);
   }
 
@@ -878,7 +854,7 @@ function LeaderboardPage() {
     <div className="f1-page">
       <div className="page-header">
         <h2>Classifica Generale</h2>
-        <p>Stagione 2024 · ordinata per punti</p>
+        <p>Carriera A 3 · 5/7 gare completate</p>
       </div>
       <div className="lb-tabs">
         <button className={`lb-tab${tab === "drivers" ? " active" : ""}`} onClick={() => setTab("drivers")}>Piloti</button>
@@ -979,8 +955,8 @@ function CalendarPage() {
   return (
     <div className="f1-page">
       <div className="page-header">
-        <h2>Calendario 2024</h2>
-        <p>{CALENDAR.length} gare · stagione completata</p>
+        <h2>Calendario</h2>
+        <p>Carriera A 3 · {CALENDAR.length} gare programmate</p>
       </div>
       <div className="cal-grid">
         {CALENDAR.map((race, i) => (
@@ -996,8 +972,8 @@ function CalendarPage() {
               </span>
             </div>
             <div className="cal-race-name">{race.race}</div>
-            <div className="cal-city">{race.city} · {race.date}</div>
-            {race.winner && (
+            <div className="cal-city">{race.city}</div>
+            {race.winner && race.winner !== "..." && (
               <div className="cal-winner">
                 <span className="cal-winner-flag">🏆</span>
                 <span>{race.winner}</span>
@@ -1023,7 +999,7 @@ function DriversPage() {
     <div className="f1-page">
       <div className="page-header">
         <h2>Piloti</h2>
-        <p>Statistiche complete · stagione 2024</p>
+        <p>Statistiche complete · Carriera A 3</p>
       </div>
       <div className="drv-grid">
         {drivers.map((d, i) => (
@@ -1158,11 +1134,11 @@ export default function App() {
             <div>
               <div className="f1-status">
                 <div className="f1-status-dot" />
-                <span className="f1-status-label">F1 Setup System · Online</span>
+                <span className="f1-status-label">Carriera A 3 · Online</span>
               </div>
               <div className="f1-title-row">
                 <h1 className="f1-title">F1 Dashboard</h1>
-                <span className="f1-subtitle">2024 Season</span>
+                <span className="f1-subtitle">Stagione in corso</span>
               </div>
             </div>
           </div>
