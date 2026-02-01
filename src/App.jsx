@@ -120,13 +120,13 @@ function computeDriverStandings() {
       if (i < 3) podiums[d] = (podiums[d] || 0) + 1;
     });
   });
-  // Include all drivers from DRIVER_TEAMS, even those with 0 points
   return Object.keys(DRIVER_TEAMS)
     .map((name) => ({
       name,
       points: pts[name] || 0,
       wins: wins[name] || 0,
       podiums: podiums[name] || 0,
+      wdc: 0,
       ...DRIVER_TEAMS[name],
     }))
     .sort((a, b) => b.points - a.points || b.wins - a.wins);
@@ -139,7 +139,7 @@ function computeTeamStandings() {
       if (i >= POINTS_TABLE.length) return;
       const info = DRIVER_TEAMS[d];
       if (!info) return;
-      if (!teams[info.team]) teams[info.team] = { points: 0, wins: 0 };
+      if (!teams[info.team]) teams[info.team] = { points: 0, wins: 0, poles: 0, wcc: 0 };
       teams[info.team].points += POINTS_TABLE[i];
       if (i === 0) teams[info.team].wins += 1;
     });
@@ -163,7 +163,7 @@ const CALENDAR = [
   { round: 7, race: "Monaco GP",       city: "Monaco",      status: "upcoming", winner: "..." },
 ];
 
-// ─── DRIVERS PAGE DATA (poles - estimated based on performance) ───
+// ─── DRIVERS PAGE DATA (poles) ────────────────────────────────────
 const DRIVER_POLES = {
   Alex: 3, Norris: 2, Igor: 1, Verstappen: 1, Hamilton: 0, Russell: 0,
   Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
@@ -171,11 +171,14 @@ const DRIVER_POLES = {
   Hulkenberg: 0, Bortoleto: 0
 };
 
+// ─── SEASONS DATA ─────────────────────────────────────────────────
+const SEASONS = ["Carriera A 3", "Carriera A 2", "Carriera A 1"];
+
 // ─── NAV ITEMS ────────────────────────────────────────────────────
 const NAV = [
   { id: "leaderboard", label: "Leaderboard", icon: "🏆" },
   { id: "calendar",    label: "Calendario",  icon: "📅" },
-  { id: "drivers",     label: "Piloti",      icon: "🏎️" },
+  { id: "career",      label: "Carriera",    icon: "🏁" },
   { id: "setup",       label: "Setup",       icon: "⚙️" },
 ];
 
@@ -198,6 +201,10 @@ const css = `
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
   }
 
   /* ── Root ──────────────────────────────────────────────────── */
@@ -289,14 +296,79 @@ const css = `
   /* ── Page header ───────────────────────────────────────────── */
   .page-header {
     margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .page-header h2 {
+  .page-header-left h2 {
     font-family: 'Orbitron', sans-serif;
     font-size: 16px; font-weight: 600;
     color: #dde4eb; letter-spacing: 0.2px; margin-bottom: 4px;
   }
-  .page-header p {
+  .page-header-left p {
     font-size: 10.5px; color: #2a3f52; letter-spacing: 0.3px;
+  }
+
+  /* ── Season selector ───────────────────────────────────────── */
+  .season-selector {
+    position: relative;
+  }
+  .season-btn {
+    padding: 8px 16px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 7px;
+    color: #c8d6e0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .season-btn:hover {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.08);
+  }
+  .season-btn-icon {
+    font-size: 9px;
+    transition: transform 0.2s;
+  }
+  .season-btn.open .season-btn-icon {
+    transform: rotate(180deg);
+  }
+  .season-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 7px;
+    overflow: hidden;
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 100;
+  }
+  .season-option {
+    padding: 10px 16px;
+    font-size: 11px;
+    color: #c8d6e0;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-bottom: 1px solid rgba(26,35,50,0.6);
+  }
+  .season-option:last-child {
+    border-bottom: none;
+  }
+  .season-option:hover {
+    background: rgba(232,0,29,0.08);
+  }
+  .season-option.active {
+    background: rgba(232,0,29,0.12);
+    color: #e8001d;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -370,7 +442,6 @@ const css = `
   }
   .lb-stat { color: #5a7a8f; text-align: center; font-size: 11.5px; }
 
-  /* Race results expandable */
   .lb-race-toggle {
     font-size: 9.5px; color: #2e4455; cursor: pointer;
     background: none; border: none; font-family: 'Share Tech Mono', monospace;
@@ -395,7 +466,7 @@ const css = `
   .lb-race-item-pos { color: #c8d6e0; font-size: 10px; }
 
   /* ═══════════════════════════════════════════════════════════════
-     CALENDAR
+     CALENDAR & MODAL
      ══════════════════════════════════════════════════════════════ */
   .cal-grid {
     display: grid;
@@ -410,13 +481,17 @@ const css = `
     position: relative;
     overflow: hidden;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
-  .cal-card:hover {
+  .cal-card.done {
+    border-left: 3px solid #e8001d;
+    cursor: pointer;
+  }
+  .cal-card.done:hover {
     border-color: #243848;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
   }
-  .cal-card.done { border-left: 3px solid #e8001d; }
   .cal-card.upcoming { border-left: 3px solid #00d4ff; }
 
   .cal-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
@@ -425,7 +500,6 @@ const css = `
     font-size: 9px; font-weight: 700;
     color: #2e4455; letter-spacing: 1px;
   }
-  .cal-date { font-size: 10px; color: #5a7a8f; }
   .cal-status {
     font-size: 8px; text-transform: uppercase;
     letter-spacing: 1.2px; font-weight: 600;
@@ -447,70 +521,191 @@ const css = `
   .cal-winner-flag { font-size: 11px; }
   .cal-winner span { color: #c8d6e0; font-weight: 600; }
 
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.25s ease;
+  }
+  .modal {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #1a2332;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+  .modal-subtitle {
+    font-size: 10px;
+    color: #2e4455;
+    margin-top: 2px;
+  }
+  .modal-close {
+    background: transparent;
+    border: none;
+    color: #5a7a8f;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .modal-close:hover {
+    background: rgba(232,0,29,0.1);
+    color: #e8001d;
+  }
+  .modal-body {
+    padding: 20px 24px;
+  }
+  .modal-results-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .modal-results-table tr {
+    border-bottom: 1px solid rgba(26,35,50,0.5);
+  }
+  .modal-results-table tr:last-child {
+    border-bottom: none;
+  }
+  .modal-results-table td {
+    padding: 10px 8px;
+    font-size: 11.5px;
+  }
+  .modal-pos {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    width: 40px;
+  }
+  .modal-pos.p1 { color: #FFD700; }
+  .modal-pos.p2 { color: #C0C0C0; }
+  .modal-pos.p3 { color: #CD7F32; }
+  .modal-driver {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-driver-flag {
+    font-size: 14px;
+  }
+  .modal-driver-name {
+    color: #dde4eb;
+  }
+  .modal-pts {
+    text-align: right;
+    color: #5a7a8f;
+    font-size: 11px;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
-     DRIVERS
+     CAREER PAGE
      ══════════════════════════════════════════════════════════════ */
-  .drv-grid {
+  .career-section {
+    margin-bottom: 32px;
+  }
+  .career-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #dde4eb;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2332;
+  }
+  .career-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
   }
-  .drv-card {
+  .career-card {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #162232;
     border-radius: 10px;
-    padding: 18px 16px 16px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    cursor: default;
   }
-  .drv-card:hover {
+  .career-card:hover {
     border-color: #243848;
     box-shadow: 0 4px 20px rgba(0,0,0,0.35);
     transform: translateY(-2px);
   }
-  .drv-card-num {
-    position: absolute; top: 8px; right: 12px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 38px; font-weight: 900;
-    color: rgba(255,255,255,0.05);
-    line-height: 1; pointer-events: none; user-select: none;
+  .career-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
   }
-  .drv-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .drv-flag { font-size: 20px; }
-  .drv-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12.5px; font-weight: 600; color: #dde4eb;
+  .career-entity-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
-  .drv-team { font-size: 9.5px; color: #2e4455; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
-  .drv-team-dot { width: 7px; height: 7px; border-radius: 50%; }
-
-  .drv-stats {
-    display: grid; grid-template-columns: 1fr 1fr;
+  .career-entity-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+  .career-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
-  .drv-stat-box {
+  .career-stat-box {
     background: #0a1018;
     border: 1px solid #152230;
-    border-radius: 7px;
-    padding: 8px 10px;
+    border-radius: 6px;
+    padding: 8px;
     text-align: center;
   }
-  .drv-stat-label {
-    font-size: 7.5px; color: #2e4455;
-    text-transform: uppercase; letter-spacing: 1.2px;
+  .career-stat-label {
+    font-size: 7.5px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
     margin-bottom: 3px;
   }
-  .drv-stat-val {
+  .career-stat-val {
     font-family: 'Orbitron', sans-serif;
-    font-size: 18px; font-weight: 700; color: #dde4eb;
+    font-size: 16px;
+    font-weight: 700;
+    color: #dde4eb;
   }
-  .drv-stat-val.pts { color: #e8001d; }
-  .drv-stat-val.wins { color: #FFD700; }
-  .drv-stat-val.pods { color: #C0C0C0; }
-  .drv-stat-val.poles { color: #00d4ff; }
+  .career-stat-val.pts { color: #e8001d; }
+  .career-stat-val.wins { color: #FFD700; }
+  .career-stat-val.poles { color: #00d4ff; }
+  .career-stat-val.wdc { color: #C0C0C0; }
+  .career-stat-val.wcc { color: #C0C0C0; }
 
   /* ═══════════════════════════════════════════════════════════════
      SETUP PAGE (original)
@@ -730,9 +925,10 @@ const css = `
     .track-card.open { grid-column: 1 / -1; }
     .setup-grid { grid-template-columns: 1fr; }
     .cal-grid { grid-template-columns: 1fr; }
-    .drv-grid { grid-template-columns: 1fr 1fr; }
+    .career-grid { grid-template-columns: 1fr; }
     .lb-table th, .lb-table td { padding: 8px 8px; font-size: 10.5px; }
     .lb-driver-name { font-size: 10px; }
+    .page-header { flex-direction: column; align-items: flex-start; }
   }
 `;
 
@@ -839,8 +1035,87 @@ function TrackCard({ id, track, isOpen, onToggle, onCopy, copied, index }) {
   );
 }
 
+// Season Selector Component
+function SeasonSelector({ currentSeason, onSeasonChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="season-selector">
+      <button 
+        className={`season-btn${isOpen ? " open" : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{currentSeason}</span>
+        <span className="season-btn-icon">▼</span>
+      </button>
+      {isOpen && (
+        <div className="season-dropdown">
+          {SEASONS.map((season) => (
+            <div
+              key={season}
+              className={`season-option${season === currentSeason ? " active" : ""}`}
+              onClick={() => {
+                onSeasonChange(season);
+                setIsOpen(false);
+              }}
+            >
+              {season}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Race Results Modal
+function RaceResultsModal({ race, onClose }) {
+  const raceData = RACE_RESULTS.find(r => r.race === race.race.replace(" GP", ""));
+  if (!raceData) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <div>
+            <div className="modal-title">{race.race}</div>
+            <div className="modal-subtitle">{race.city} · Round {race.round}</div>
+          </div>
+          <button className="modal-close" onClick={onClose}>×</button>
+        </div>
+        <div className="modal-body">
+          <table className="modal-results-table">
+            <tbody>
+              {raceData.results.map((driver, i) => {
+                const info = DRIVER_TEAMS[driver];
+                const points = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
+                return (
+                  <tr key={`${driver}-${i}`}>
+                    <td>
+                      <div className={`modal-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
+                        P{i + 1}
+                      </div>
+                    </td>
+                    <td>
+                      <div className="modal-driver">
+                        <span className="modal-driver-flag">{info?.flag || "🏁"}</span>
+                        <span className="modal-driver-name">{driver}</span>
+                      </div>
+                    </td>
+                    <td className="modal-pts">{points > 0 ? `${points} pts` : "—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── LEADERBOARD PAGE ─────────────────────────────────────────────
-function LeaderboardPage() {
+function LeaderboardPage({ season }) {
   const [tab, setTab] = useState("drivers");
   const [expandedDriver, setExpandedDriver] = useState(null);
 
@@ -852,11 +1127,7 @@ function LeaderboardPage() {
   }
 
   return (
-    <div className="f1-page">
-      <div className="page-header">
-        <h2>Classifica Generale</h2>
-        <p>Carriera A 3 · 5/7 gare completate</p>
-      </div>
+    <>
       <div className="lb-tabs">
         <button className={`lb-tab${tab === "drivers" ? " active" : ""}`} onClick={() => setTab("drivers")}>Piloti</button>
         <button className={`lb-tab${tab === "teams" ? " active" : ""}`} onClick={() => setTab("teams")}>Costruttori</button>
@@ -947,24 +1218,23 @@ function LeaderboardPage() {
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 }
 
 // ─── CALENDAR PAGE ────────────────────────────────────────────────
-function CalendarPage() {
+function CalendarPage({ season }) {
+  const [selectedRace, setSelectedRace] = useState(null);
+
   return (
-    <div className="f1-page">
-      <div className="page-header">
-        <h2>Calendario</h2>
-        <p>Carriera A 3 · {CALENDAR.length} gare programmate</p>
-      </div>
+    <>
       <div className="cal-grid">
         {CALENDAR.map((race, i) => (
           <div
             key={race.round}
             className={`cal-card ${race.status}`}
             style={{ animationDelay: `${i * 0.04}s` }}
+            onClick={() => race.status === "done" && setSelectedRace(race)}
           >
             <div className="cal-card-header">
               <span className="cal-round">Round {race.round}</span>
@@ -983,12 +1253,15 @@ function CalendarPage() {
           </div>
         ))}
       </div>
-    </div>
+      {selectedRace && (
+        <RaceResultsModal race={selectedRace} onClose={() => setSelectedRace(null)} />
+      )}
+    </>
   );
 }
 
-// ─── DRIVERS PAGE ─────────────────────────────────────────────────
-function DriversPage() {
+// ─── CAREER PAGE ──────────────────────────────────────────────────
+function CareerPage({ season }) {
   const drivers = useMemo(() => {
     return DRIVER_STANDINGS.map((d) => ({
       ...d,
@@ -996,48 +1269,79 @@ function DriversPage() {
     }));
   }, []);
 
+  const teams = useMemo(() => {
+    return TEAM_STANDINGS.map((t) => ({
+      ...t,
+      poles: 0,
+    }));
+  }, []);
+
   return (
-    <div className="f1-page">
-      <div className="page-header">
-        <h2>Piloti</h2>
-        <p>Statistiche complete · Carriera A 3</p>
-      </div>
-      <div className="drv-grid">
-        {drivers.map((d, i) => (
-          <div className="drv-card" key={d.name} style={{ animationDelay: `${i * 0.045}s` }}>
-            <div className="drv-card-num">{d.num}</div>
-            <div className="drv-top">
-              <span className="drv-flag">{d.flag}</span>
-              <div>
-                <div className="drv-name">{d.name}</div>
-                <div className="drv-team">
-                  <span className="drv-team-dot" style={{ background: TEAM_COLORS[d.team] || "#555" }} />
-                  {d.team}
+    <>
+      <div className="career-section">
+        <h3 className="career-section-title">Piloti</h3>
+        <div className="career-grid">
+          {drivers.map((d, i) => (
+            <div className="career-card" key={d.name} style={{ animationDelay: `${i * 0.035}s` }}>
+              <div className="career-card-header">
+                <div className="career-entity-dot" style={{ background: TEAM_COLORS[d.team] || "#555" }} />
+                <div className="career-entity-name">{d.flag} {d.name}</div>
+              </div>
+              <div className="career-stats">
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Punti</div>
+                  <div className="career-stat-val pts">{d.points}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Pole</div>
+                  <div className="career-stat-val poles">{d.poles}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Vittorie</div>
+                  <div className="career-stat-val wins">{d.wins}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">WDC</div>
+                  <div className="career-stat-val wdc">{d.wdc}</div>
                 </div>
               </div>
             </div>
-            <div className="drv-stats">
-              <div className="drv-stat-box">
-                <div className="drv-stat-label">Punti</div>
-                <div className="drv-stat-val pts">{d.points}</div>
+          ))}
+        </div>
+      </div>
+
+      <div className="career-section">
+        <h3 className="career-section-title">Costruttori</h3>
+        <div className="career-grid">
+          {teams.map((t, i) => (
+            <div className="career-card" key={t.team} style={{ animationDelay: `${i * 0.035}s` }}>
+              <div className="career-card-header">
+                <div className="career-entity-dot" style={{ background: TEAM_COLORS[t.team] || "#555" }} />
+                <div className="career-entity-name">{t.team}</div>
               </div>
-              <div className="drv-stat-box">
-                <div className="drv-stat-label">Vittorie</div>
-                <div className="drv-stat-val wins">{d.wins}</div>
-              </div>
-              <div className="drv-stat-box">
-                <div className="drv-stat-label">Podi</div>
-                <div className="drv-stat-val pods">{d.podiums}</div>
-              </div>
-              <div className="drv-stat-box">
-                <div className="drv-stat-label">Pole</div>
-                <div className="drv-stat-val poles">{d.poles}</div>
+              <div className="career-stats">
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Punti</div>
+                  <div className="career-stat-val pts">{t.points}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Pole</div>
+                  <div className="career-stat-val poles">{t.poles}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Vittorie</div>
+                  <div className="career-stat-val wins">{t.wins}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">WCC</div>
+                  <div className="career-stat-val wcc">{t.wcc}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -1074,11 +1378,7 @@ function SetupPage() {
   };
 
   return (
-    <div className="f1-page">
-      <div className="page-header">
-        <h2>Setup Dashboard</h2>
-        <p>{Object.keys(TRACKS).length} circuiti · simulatore</p>
-      </div>
+    <>
       <div className="f1-toolbar">
         <div className="f1-search-wrap">
           <span className="f1-search-icon">⌕</span>
@@ -1114,7 +1414,7 @@ function SetupPage() {
           ))
         )}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -1122,6 +1422,23 @@ function SetupPage() {
 export default function App() {
   useFonts();
   const [page, setPage] = useState("leaderboard");
+  const [season, setSeason] = useState(SEASONS[0]);
+
+  const pageTitle = {
+    leaderboard: "Classifica Generale",
+    calendar: "Calendario",
+    career: "Statistiche Carriera",
+    setup: "Setup Dashboard"
+  }[page];
+
+  const pageSubtitle = {
+    leaderboard: `${season} · 5/7 gare completate`,
+    calendar: `${season} · ${CALENDAR.length} gare programmate`,
+    career: `${season} · Statistiche complete`,
+    setup: `${Object.keys(TRACKS).length} circuiti · simulatore`
+  }[page];
+
+  const showSeasonSelector = ["leaderboard", "calendar", "career"].includes(page);
 
   return (
     <>
@@ -1135,7 +1452,7 @@ export default function App() {
             <div>
               <div className="f1-status">
                 <div className="f1-status-dot" />
-                <span className="f1-status-label">Carriera A 3 · Online</span>
+                <span className="f1-status-label">{season} · Online</span>
               </div>
               <div className="f1-title-row">
                 <h1 className="f1-title">F1 Dashboard</h1>
@@ -1157,10 +1474,22 @@ export default function App() {
           </nav>
         </header>
 
-        {page === "leaderboard" && <LeaderboardPage />}
-        {page === "calendar"    && <CalendarPage />}
-        {page === "drivers"     && <DriversPage />}
-        {page === "setup"       && <SetupPage />}
+        <div className="f1-page">
+          <div className="page-header">
+            <div className="page-header-left">
+              <h2>{pageTitle}</h2>
+              <p>{pageSubtitle}</p>
+            </div>
+            {showSeasonSelector && (
+              <SeasonSelector currentSeason={season} onSeasonChange={setSeason} />
+            )}
+          </div>
+
+          {page === "leaderboard" && <LeaderboardPage season={season} />}
+          {page === "calendar" && <CalendarPage season={season} />}
+          {page === "career" && <CareerPage season={season} />}
+          {page === "setup" && <SetupPage />}
+        </div>
       </div>
     </>
   );
