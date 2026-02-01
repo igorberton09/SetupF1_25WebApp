@@ -68,6 +68,7 @@ const RACE_RESULTS = [
   { race: "Messico", results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
   { race: "Brasile", results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll"] },
   { race: "Qatar", results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
+  { race: "Singapore", results: ["Antonelli","Verstappen","Hamilton","Piastri","Leclerc","Alonso","Bortoleto","Igor","Sainz","Stroll","Tsunoda","Russell","Norris","Alex","Lawson","Bearman","Albon","Hulkenberg","Manuel","Gasly"] },
 ];
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
@@ -159,20 +160,20 @@ const CALENDAR = [
   { round: 3, race: "Mexico City GP",  city: "Mexico City", status: "done",   winner: "Alex" },
   { round: 4, race: "São Paulo GP",    city: "São Paulo",   status: "done",   winner: "Alex" },
   { round: 5, race: "Qatar GP",        city: "Lusail",      status: "done",   winner: "Norris" },
-  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "upcoming", winner: "..." },
+  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "upcoming", winner: "Antonelli" },
   { round: 7, race: "Monaco GP",       city: "Monaco",      status: "upcoming", winner: "..." },
 ];
 
 // ─── DRIVERS PAGE DATA (poles) ────────────────────────────────────
 const DRIVER_POLES = {
-  Alex: 3, Norris: 2, Igor: 1, Verstappen: 1, Hamilton: 0, Russell: 0,
+  Alex: 3, Norris: 2, Igor: 2, Verstappen: 1, Hamilton: 0, Russell: 0,
   Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
   Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
   Hulkenberg: 0, Bortoleto: 0
 };
 
 // ─── SEASONS DATA ─────────────────────────────────────────────────
-const SEASONS = ["Carriera A 3", "Carriera A 2", "Carriera A 1"];
+const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
 
 // ─── NAV ITEMS ────────────────────────────────────────────────────
 const NAV = [
