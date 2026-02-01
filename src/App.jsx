@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 
-// ─── FONT LOADER (React-safe, esegue una sola volta) ─────────────
+// ─── FONT LOADER ──────────────────────────────────────────────────
 function useFonts() {
   useEffect(() => {
     if (document.getElementById("f1-fonts")) return;
@@ -49,15 +49,9 @@ const SHARED = {
 };
 
 const CONTINENTI = ["Tutti", "Europa", "Asia", "America", "Oceania"];
+const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oceania: "🌏" };
 
-const CONTINENT_EMOJI = {
-  Europa: "🇪🇺",
-  Asia: "🌏",
-  America: "🌎",
-  Oceania: "🌏",
-};
-
-// ─── DISCORD MESSAGE ──────────────────────────────────────────────
+// ─── DISCORD ──────────────────────────────────────────────────────
 function buildDiscordMessage(key, track) {
   return (
     `📍 **${track.nome}**\n` +
@@ -74,30 +68,20 @@ function buildDiscordMessage(key, track) {
 const css = `
   *, *::before, *::after { box-sizing: border-box; }
 
-  /* ── Keyframes ─────────────────────────────────────────────── */
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; box-shadow: 0 0 4px #e8001d; }
     50%      { opacity: 0.55; box-shadow: 0 0 12px #e8001d, 0 0 24px rgba(232,0,29,0.25); }
   }
   @keyframes card-in {
     from { opacity: 0; transform: translateY(12px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0)    scale(1);    }
-  }
-  @keyframes panel-in {
-    from { opacity: 0; transform: translateX(20px); }
-    to   { opacity: 1; transform: translateX(0);    }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   @keyframes value-pop {
-    0%   { color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.5); transform: scale(1.05); }
-    60%  { transform: scale(1); }
-    100% { color: #e2e8f0; text-shadow: none; transform: scale(1); }
-  }
-  @keyframes glow-pulse {
-    0%, 100% { opacity: 0.6; }
-    50%      { opacity: 1; }
+    0%   { color: #00d4ff; text-shadow: 0 0 10px rgba(0,212,255,0.5); }
+    100% { color: #e2e8f0; text-shadow: none; }
   }
 
-  /* ── Root / Layout ─────────────────────────────────────────── */
+  /* ── Root ──────────────────────────────────────────────────── */
   .f1-root {
     min-height: 100vh;
     background: #050810;
@@ -107,176 +91,93 @@ const css = `
     overflow-x: hidden;
   }
   .f1-grid-bg {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background-image:
       linear-gradient(rgba(0,212,255,0.028) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0,212,255,0.028) 1px, transparent 1px);
     background-size: 48px 48px;
   }
-  /* Subtle radial vignette */
   .f1-vignette {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(5,8,16,0.55) 100%);
   }
 
   /* ── Header ────────────────────────────────────────────────── */
   .f1-header {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     padding: 26px 32px 20px;
     border-bottom: 1px solid #1a2332;
     background: linear-gradient(180deg, #0b0f1a 0%, #050810 100%);
   }
   .f1-header-inner { max-width: 1120px; margin: 0 auto; }
-  .f1-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
+  .f1-status { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
   .f1-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
+    width: 7px; height: 7px; border-radius: 50%;
     background: #e8001d;
     animation: pulse-dot 2s ease-in-out infinite;
   }
   .f1-status-label {
-    font-size: 9px;
-    color: #e8001d;
-    text-transform: uppercase;
-    letter-spacing: 2.8px;
-    font-weight: 600;
+    font-size: 9px; color: #e8001d;
+    text-transform: uppercase; letter-spacing: 2.8px; font-weight: 600;
   }
-  .f1-title-row {
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-    flex-wrap: wrap;
-  }
+  .f1-title-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
   .f1-title {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #f0f4f8;
-    letter-spacing: -0.3px;
+    margin: 0; font-family: 'Orbitron', sans-serif;
+    font-size: 24px; font-weight: 700; color: #f0f4f8; letter-spacing: -0.3px;
   }
-  .f1-subtitle {
-    font-size: 10.5px;
-    color: #2a3f52;
-    letter-spacing: 0.3px;
-  }
+  .f1-subtitle { font-size: 10.5px; color: #2a3f52; letter-spacing: 0.3px; }
 
   /* ── Main ──────────────────────────────────────────────────── */
   .f1-main {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     padding: 22px 32px 48px;
-    max-width: 1120px;
-    margin: 0 auto;
+    max-width: 1120px; margin: 0 auto;
   }
 
   /* ── Toolbar ───────────────────────────────────────────────── */
   .f1-toolbar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    align-items: center;
+    display: flex; gap: 10px; margin-bottom: 20px;
+    flex-wrap: wrap; align-items: center;
   }
-  .f1-search-wrap {
-    position: relative;
-    flex: 1 1 220px;
-    min-width: 180px;
-  }
+  .f1-search-wrap { position: relative; flex: 1 1 220px; min-width: 180px; }
   .f1-search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #2a3f52;
-    font-size: 13px;
-    pointer-events: none;
+    position: absolute; left: 12px; top: 50%;
+    transform: translateY(-50%); color: #2a3f52;
+    font-size: 13px; pointer-events: none;
   }
   .f1-search {
-    width: 100%;
-    padding: 10px 14px 10px 36px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 7px;
-    color: #c8d6e0;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    outline: none;
+    width: 100%; padding: 10px 14px 10px 36px;
+    background: #0a1018; border: 1px solid #1a2332; border-radius: 7px;
+    color: #c8d6e0; font-family: 'Share Tech Mono', monospace;
+    font-size: 12px; outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   .f1-search::placeholder { color: #2a3f52; }
-  .f1-search:focus {
-    border-color: #e8001d;
-    box-shadow: 0 0 0 2px rgba(232,0,29,0.12);
-  }
+  .f1-search:focus { border-color: #e8001d; box-shadow: 0 0 0 2px rgba(232,0,29,0.12); }
 
-  /* ── Pills ─────────────────────────────────────────────────── */
   .f1-pills { display: flex; gap: 5px; flex-wrap: wrap; }
   .f1-pill {
-    padding: 6px 14px;
-    border-radius: 5px;
-    background: transparent;
-    border: 1px solid #1a2332;
-    color: #3d5a6e;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    cursor: pointer;
+    padding: 6px 14px; border-radius: 5px;
+    background: transparent; border: 1px solid #1a2332;
+    color: #3d5a6e; font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1.2px; cursor: pointer;
     transition: all 0.18s ease;
   }
-  .f1-pill:hover {
-    border-color: #3a5068;
-    color: #8aacbe;
-    background: rgba(58,80,104,0.08);
-  }
-  .f1-pill.active {
-    background: rgba(232,0,29,0.1);
-    border-color: rgba(232,0,29,0.4);
-    color: #e8001d;
-  }
-  .f1-pill.active:hover {
-    background: rgba(232,0,29,0.16);
-    border-color: rgba(232,0,29,0.55);
-  }
+  .f1-pill:hover { border-color: #3a5068; color: #8aacbe; background: rgba(58,80,104,0.08); }
+  .f1-pill.active { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.4); color: #e8001d; }
+  .f1-pill.active:hover { background: rgba(232,0,29,0.16); border-color: rgba(232,0,29,0.55); }
+  .f1-count { font-size: 10px; color: #2a3f52; margin-left: auto; letter-spacing: 0.4px; }
 
-  .f1-count {
-    font-size: 10px;
-    color: #2a3f52;
-    margin-left: auto;
-    letter-spacing: 0.4px;
-  }
-
-  /* ── Main Layout ───────────────────────────────────────────── */
-  .f1-layout {
-    display: flex;
-    gap: 22px;
-    align-items: flex-start;
-  }
-
-  /* ── Track Grid ────────────────────────────────────────────── */
+  /* ── Grid ──────────────────────────────────────────────────── */
   .f1-grid {
-    flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     align-content: start;
   }
 
-  /* ── Track Card ────────────────────────────────────────────── */
+  /* ── Card (collapsed) ──────────────────────────────────────── */
   .track-card {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #162232;
@@ -286,18 +187,14 @@ const css = `
     text-align: left;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
   }
-  /* Bottom accent line */
   .track-card::after {
     content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, transparent 10%, #e8001d 50%, transparent 90%);
-    opacity: 0;
-    transition: opacity 0.25s ease;
+    opacity: 0; transition: opacity 0.25s;
   }
   .track-card:hover {
     border-color: #243848;
@@ -306,294 +203,184 @@ const css = `
   }
   .track-card:hover::after { opacity: 0.7; }
 
-  /* Selected state */
-  .track-card.selected {
+  /* ── Card aperta (expanded) ─── span 2 colonne ────────────── */
+  .track-card.open {
+    grid-column: span 2;
     border-color: #e8001d;
+    background: linear-gradient(155deg, #12101a 0%, #0b1018 100%);
     box-shadow:
-      0 0 0 1px rgba(232,0,29,0.5),
-      0 6px 32px rgba(232,0,29,0.18),
-      inset 0 1px 0 rgba(232,0,29,0.08);
-    background: linear-gradient(155deg, #1a1215 0%, #0e1220 100%);
+      0 0 0 1px rgba(232,0,29,0.4),
+      0 8px 36px rgba(232,0,29,0.15),
+      0 4px 12px rgba(0,0,0,0.3);
+    transform: none;
+    cursor: default;
   }
-  .track-card.selected::after {
-    opacity: 1;
-    background: #e8001d;
+  .track-card.open::after { opacity: 1; background: #e8001d; }
+  .track-card.open:hover {
+    transform: none;
+    box-shadow:
+      0 0 0 1px rgba(232,0,29,0.4),
+      0 8px 36px rgba(232,0,29,0.15),
+      0 4px 12px rgba(0,0,0,0.3);
   }
 
-  /* Card watermark number */
   .card-index {
-    position: absolute;
-    top: 4px; right: 8px;
+    position: absolute; top: 4px; right: 8px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 36px;
-    font-weight: 900;
+    font-size: 36px; font-weight: 900;
     color: rgba(255,255,255,0.04);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
+    line-height: 1; pointer-events: none; user-select: none;
   }
-
-  /* Card header */
   .card-top {
-    display: flex;
-    align-items: flex-start;
+    display: flex; align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 3px;
-    position: relative;
+    margin-bottom: 3px; position: relative;
   }
   .card-name {
     font-family: 'Orbitron', sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #dde4eb;
-    letter-spacing: 0.3px;
+    font-size: 12.5px; font-weight: 600;
+    color: #dde4eb; letter-spacing: 0.3px;
   }
-  .card-continent {
-    font-size: 11px;
-    opacity: 0.5;
-    flex-shrink: 0;
-  }
+  .card-continent { font-size: 11px; opacity: 0.5; flex-shrink: 0; }
   .card-cmd {
-    font-size: 10px;
-    color: #2e4455;
-    letter-spacing: 0.6px;
-    margin-bottom: 10px;
+    font-size: 10px; color: #2e4455;
+    letter-spacing: 0.6px; margin-bottom: 10px;
     transition: color 0.2s;
   }
-  .track-card.selected .card-cmd { color: rgba(232,0,29,0.7); }
+  .track-card.open .card-cmd { color: rgba(232,0,29,0.6); }
 
-  /* ── Aero Bars ─────────────────────────────────────────────── */
+  /* ── Freccia (toggle apri/chiudi) ──────────────────────────── */
+  .card-arrow-btn {
+    position: absolute; top: 12px; right: 12px;
+    width: 28px; height: 28px; border-radius: 7px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid #1e2d3d;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .card-arrow-btn:hover {
+    background: rgba(232,0,29,0.1);
+    border-color: rgba(232,0,29,0.4);
+  }
+  .card-arrow-btn svg {
+    width: 13px; height: 13px;
+    stroke: #3d5a6e; fill: none;
+    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+    transition: stroke 0.2s, transform 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .card-arrow-btn:hover svg { stroke: #e8001d; }
+  /* Rotazione freccia quando aperta */
+  .track-card.open .card-arrow-btn svg { transform: rotate(180deg); stroke: #e8001d; }
+  .track-card.open .card-arrow-btn { border-color: rgba(232,0,29,0.4); background: rgba(232,0,29,0.08); }
+
+  /* ── Aero bars (card collassata) ───────────────────────────── */
   .aero-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
   .aero-row:last-child { margin-bottom: 0; }
   .aero-label {
-    font-size: 8.5px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    width: 34px;
-    flex-shrink: 0;
+    font-size: 8.5px; color: #2e4455;
+    text-transform: uppercase; letter-spacing: 1px;
+    width: 34px; flex-shrink: 0;
   }
-  .aero-track {
-    flex: 1;
-    height: 4px;
-    background: #0d1520;
-    border-radius: 2px;
+  .aero-track { flex: 1; height: 4px; background: #0d1520; border-radius: 2px; overflow: hidden; }
+  .aero-fill { height: 100%; border-radius: 2px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
+  .aero-val { font-size: 10.5px; color: #5a7a8f; width: 20px; text-align: right; flex-shrink: 0; }
+
+  /* ── Setup body (dentro carta aperta) ──────────────────────── */
+  .setup-body {
     overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.42s cubic-bezier(.4,0,.2,1), opacity 0.3s 0.05s ease;
   }
-  .aero-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.45s cubic-bezier(.4,0,.2,1);
-  }
-  .aero-val {
-    font-size: 10.5px;
-    color: #5a7a8f;
-    width: 20px;
-    text-align: right;
-    flex-shrink: 0;
+  .track-card.open .setup-body {
+    max-height: 500px;
+    opacity: 1;
+    transition: max-height 0.42s cubic-bezier(.4,0,.2,1), opacity 0.28s ease;
   }
 
-  /* ── Panel ─────────────────────────────────────────────────── */
-  .f1-panel {
-    flex: 0 0 310px;
-    background: #070c15;
-    border: 1px solid #162232;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
-    position: relative;
-    animation: panel-in 0.38s cubic-bezier(.4,0,.2,1) both;
-  }
-  /* Scanlines */
-  .f1-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent 0px, transparent 3px,
-      rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 4px
-    );
-    pointer-events: none;
-    z-index: 3;
-    border-radius: 12px;
+  .setup-divider {
+    height: 1px; background: #1a2332;
+    margin: 12px 0 14px;
   }
 
-  /* Panel Header */
-  .panel-header {
-    position: relative;
-    padding: 22px 22px 18px;
-    border-bottom: 1px solid #162232;
-    background: linear-gradient(180deg, #0f0e18 0%, #070c15 100%);
-    overflow: hidden;
+  /* Grid dei dettagli: 2 colonne */
+  .setup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
   }
-  .panel-header-glow {
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    pointer-events: none;
-    animation: glow-pulse 3s ease-in-out infinite;
+  .setup-item { display: flex; flex-direction: column; gap: 3px; }
+  .setup-item-label {
+    font-size: 8px; color: #2e4455;
+    text-transform: uppercase; letter-spacing: 1.4px;
   }
-  .panel-suptitle {
-    font-size: 8.5px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 2.8px;
-    margin-bottom: 6px;
-    position: relative;
+  .setup-item-value {
+    font-size: 11.5px; color: #dde4eb; letter-spacing: 0.2px;
+    animation: value-pop 0.5s ease forwards;
   }
-  .panel-title {
+
+  /* Sospensioni: row speciale con 5 valori */
+  .setup-item.sosp-full { grid-column: 1 / -1; }
+  .sosp-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sosp-val {
+    flex: 1 1 auto;
+    min-width: 36px;
+    text-align: center;
+    padding: 5px 8px;
+    background: #0b1420; border: 1px solid #152230; border-radius: 6px;
+    font-size: 11.5px; color: #dde4eb; letter-spacing: 0.3px;
+    animation: value-pop 0.5s ease forwards;
+  }
+
+  /* Aero bars nella carta aperta (più grandi) */
+  .setup-aero-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .setup-aero-row:last-child { margin-bottom: 0; }
+  .setup-aero-label {
+    font-size: 8.5px; color: #2e4455;
+    text-transform: uppercase; letter-spacing: 1px;
+    width: 38px; flex-shrink: 0;
+  }
+  .setup-aero-track { flex: 1; height: 5px; background: #0d1520; border-radius: 3px; overflow: hidden; }
+  .setup-aero-fill { height: 100%; border-radius: 3px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+  .setup-aero-val { font-size: 11px; color: #5a7a8f; width: 22px; text-align: right; flex-shrink: 0; }
+
+  /* Copy button */
+  .setup-copy-btn {
+    margin-top: 16px;
+    width: 100%; padding: 10px 0;
+    border: none; border-radius: 7px; cursor: pointer;
     font-family: 'Orbitron', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #f0f4f8;
-    letter-spacing: -0.3px;
-    position: relative;
-  }
-  .panel-cmd-badge {
-    position: absolute;
-    top: 22px; right: 22px;
-    font-size: 10.5px;
-    color: #e8001d;
-    background: rgba(232,0,29,0.1);
-    border: 1px solid rgba(232,0,29,0.25);
-    border-radius: 5px;
-    padding: 3px 10px;
-  }
-
-  /* Panel Body */
-  .panel-body { padding: 4px 22px 2px; position: relative; z-index: 1; }
-  .panel-row {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #0f1a26;
-    gap: 10px;
-  }
-  .panel-row:last-child { border-bottom: none; }
-  .panel-row-icon {
-    width: 28px; height: 28px;
-    border-radius: 6px;
-    background: #0b1420;
-    border: 1px solid #152230;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    flex-shrink: 0;
-  }
-  .panel-row-label {
-    font-size: 9px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    flex-shrink: 0;
-    min-width: 95px;
-  }
-  .panel-row-value {
-    font-size: 12px;
-    color: #dde4eb;
-    margin-left: auto;
-    text-align: right;
-    letter-spacing: 0.3px;
-  }
-  .panel-row-value.pop {
-    animation: value-pop 0.6s cubic-bezier(.4,0,.2,1) forwards;
-  }
-
-  /* Copy Button */
-  .copy-btn {
-    margin: 12px 22px 18px;
-    width: calc(100% - 44px);
-    padding: 11px 0;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
     color: #fff;
     background: linear-gradient(135deg, #c40018, #e8001d);
-    box-shadow: 0 4px 18px rgba(232,0,29,0.28);
+    box-shadow: 0 4px 16px rgba(232,0,29,0.28);
     transition: filter 0.2s, box-shadow 0.2s, background 0.25s, transform 0.1s;
-    position: relative;
-    z-index: 1;
   }
-  .copy-btn:hover {
+  .setup-copy-btn:hover {
     filter: brightness(1.1);
-    box-shadow: 0 6px 24px rgba(232,0,29,0.38);
+    box-shadow: 0 6px 22px rgba(232,0,29,0.38);
     transform: translateY(-1px);
   }
-  .copy-btn:active { transform: translateY(0); }
-  .copy-btn.copied {
+  .setup-copy-btn:active { transform: translateY(0); }
+  .setup-copy-btn.copied {
     background: linear-gradient(135deg, #15803d, #22c55e);
-    box-shadow: 0 4px 18px rgba(34,197,94,0.28);
+    box-shadow: 0 4px 16px rgba(34,197,94,0.28);
   }
 
-  /* Panel Empty State */
-  .panel-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 60px 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .panel-empty-ring {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    border: 1px solid #162232;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .panel-empty-ring::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0%, transparent 70%, #e8001d 85%, transparent 100%);
-    opacity: 0.3;
-    animation: spin 4s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .panel-empty-icon { font-size: 22px; position: relative; z-index: 1; }
-  .panel-empty-text {
-    font-size: 11px;
-    color: #2a3f52;
-    text-align: center;
-    line-height: 2;
-    letter-spacing: 0.2px;
-  }
-  .panel-empty-text strong {
-    color: #3d5a6e;
-    font-weight: 600;
-  }
-
-  /* ── No Results ─────────────────────────────────────────────── */
-  .no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 56px 20px;
-  }
+  /* ── No Results ────────────────────────────────────────────── */
+  .no-results { grid-column: 1 / -1; text-align: center; padding: 56px 20px; }
   .no-results-icon { font-size: 26px; opacity: 0.15; margin-bottom: 12px; }
-  .no-results-text {
-    font-size: 11.5px;
-    color: #2a3f52;
-    letter-spacing: 0.3px;
-  }
+  .no-results-text { font-size: 11.5px; color: #2a3f52; letter-spacing: 0.3px; }
 
-  /* ── Responsive ─────────────────────────────────────────────── */
-  @media (max-width: 820px) {
-    .f1-layout { flex-direction: column; }
-    .f1-panel { flex: none; width: 100%; }
-  }
+  /* ── Responsive ────────────────────────────────────────────── */
   @media (max-width: 560px) {
     .f1-header { padding: 20px 18px 16px; }
     .f1-main  { padding: 18px 18px 36px; }
     .f1-title { font-size: 20px; }
+    .track-card.open { grid-column: 1 / -1; }
+    .setup-grid { grid-template-columns: 1fr; }
   }
 `;
 
@@ -601,7 +388,7 @@ const css = `
 
 function AeroBar({ value, label, max = 50 }) {
   const pct = (value / max) * 100;
-  const hue = 120 - (pct / 100) * 110; // verde → rosso
+  const hue = 120 - (pct / 100) * 110;
   const color = `hsl(${hue}, 75%, 42%)`;
   return (
     <div className="aero-row">
@@ -614,103 +401,110 @@ function AeroBar({ value, label, max = 50 }) {
   );
 }
 
-function TrackCard({ id, track, isSelected, onClick, index }) {
+function SetupAeroBar({ value, label, max = 50 }) {
+  const pct = (value / max) * 100;
+  const hue = 120 - (pct / 100) * 110;
+  const color = `hsl(${hue}, 75%, 42%)`;
   return (
-    <button
-      className={`track-card${isSelected ? " selected" : ""}`}
-      style={{ animationDelay: `${index * 0.035}s` }}
-      onClick={onClick}
-    >
-      <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
-      <div className="card-top">
-        <div className="card-name">{track.nome}</div>
-        <span className="card-continent">{CONTINENT_EMOJI[track.continente]}</span>
+    <div className="setup-aero-row">
+      <span className="setup-aero-label">{label}</span>
+      <div className="setup-aero-track">
+        <div className="setup-aero-fill" style={{ width: `${pct}%`, background: color }} />
       </div>
-      <div className="card-cmd">.{id}</div>
-      <AeroBar value={track.aero[0]} label="Front" />
-      <AeroBar value={track.aero[1]} label="Rear" />
-    </button>
+      <span className="setup-aero-val">{value}</span>
+    </div>
   );
 }
 
-function SetupPanel({ id, track, onCopy, copied }) {
-  const prevTrackRef = useRef(null);
-  const [popTick, setPopTick] = useState(0);
+// Freccia verso il basso (chevron)
+const ChevronDown = () => (
+  <svg viewBox="0 0 24 24">
+    <polyline points="6,9 12,15 18,9" />
+  </svg>
+);
 
-  // Attiva l'animazione pop solo quando cambia pista
-  useEffect(() => {
-    if (track && prevTrackRef.current !== id) {
-      prevTrackRef.current = id;
-      setPopTick((t) => t + 1);
-    }
-  }, [id, track]);
+function TrackCard({ id, track, isOpen, onToggle, onCopy, copied, index }) {
+  return (
+    <button
+      className={`track-card${isOpen ? " open" : ""}`}
+      style={{ animationDelay: `${index * 0.035}s` }}
+      onClick={() => !isOpen && onToggle()}
+    >
+      <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
 
-  // ── Empty state ──
-  if (!track) {
-    return (
-      <div className="f1-panel">
-        <div className="panel-empty">
-          <div className="panel-empty-ring">
-            <span className="panel-empty-icon">🏎️</span>
+      {/* Header della carta */}
+      <div className="card-top">
+        <div>
+          <div className="card-name">{track.nome}</div>
+          <div className="card-cmd">.{id}</div>
+        </div>
+        <span className="card-continent" style={{ marginRight: isOpen ? 32 : 0 }}>
+          {CONTINENT_EMOJI[track.continente]}
+        </span>
+      </div>
+
+      {/* Freccia toggle */}
+      <button
+        className="card-arrow-btn"
+        onClick={(e) => { e.stopPropagation(); onToggle(); }}
+      >
+        <ChevronDown />
+      </button>
+
+      {/* Aero bars collassate (visibili sempre) */}
+      <AeroBar value={track.aero[0]} label="Front" />
+      <AeroBar value={track.aero[1]} label="Rear" />
+
+      {/* ── Setup espanso ──────────────────────────────────── */}
+      <div className="setup-body">
+        <div className="setup-divider" />
+
+        {/* Aero grandi */}
+        <div className="setup-item" style={{ marginBottom: 14 }}>
+          <span className="setup-item-label">Aerodinamica</span>
+          <SetupAeroBar value={track.aero[0]} label="Front" />
+          <SetupAeroBar value={track.aero[1]} label="Rear" />
+        </div>
+
+        {/* Grid valori */}
+        <div className="setup-grid">
+          <div className="setup-item">
+            <span className="setup-item-label">Trasmissione</span>
+            <span className="setup-item-value">{SHARED.trasmissione}</span>
           </div>
-          <div className="panel-empty-text">
-            Seleziona una <strong>pista</strong><br />
-            per visualizzare il setup
+          <div className="setup-item">
+            <span className="setup-item-label">Freni</span>
+            <span className="setup-item-value">{SHARED.freni}</span>
+          </div>
+          <div className="setup-item">
+            <span className="setup-item-label">Geometria</span>
+            <span className="setup-item-value">{SHARED.geometria}</span>
+          </div>
+          <div className="setup-item">
+            <span className="setup-item-label">Gomme</span>
+            <span className="setup-item-value">{SHARED.gomme}</span>
+          </div>
+
+          {/* Sospensioni: row full-width con 5 box */}
+          <div className="setup-item sosp-full">
+            <span className="setup-item-label">Sospensioni</span>
+            <div className="sosp-row">
+              {track.sosp.map((v, i) => (
+                <div className="sosp-val" key={i} style={{ animationDelay: `${i * 0.06}s` }}>{v}</div>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* Copia Discord */}
+        <button
+          className={`setup-copy-btn${copied ? " copied" : ""}`}
+          onClick={(e) => { e.stopPropagation(); onCopy(); }}
+        >
+          {copied ? "✓ Copiato" : "⎘ Copia Discord"}
+        </button>
       </div>
-    );
-  }
-
-  // ── Glow intensità basata sull'aero medio ──
-  const aeroAvg = (track.aero[0] + track.aero[1]) / 2;
-  const glowOpacity = 0.12 + (aeroAvg / 50) * 0.25;
-
-  const rows = [
-    { icon: "🔧", label: "Aerodinamica", value: `${track.aero[0]} · ${track.aero[1]}` },
-    { icon: "⚙️", label: "Trasmissione", value: SHARED.trasmissione },
-    { icon: "📐", label: "Geometria",    value: SHARED.geometria },
-    { icon: "🔩", label: "Sospensioni",  value: track.sosp.join(" · ") },
-    { icon: "🛞", label: "Freni",        value: SHARED.freni },
-    { icon: "🏎️", label: "Gomme",        value: SHARED.gomme },
-  ];
-
-  return (
-    <div className="f1-panel" key={id}>
-      {/* Header */}
-      <div className="panel-header">
-        <div
-          className="panel-header-glow"
-          style={{
-            background: `radial-gradient(circle, rgba(232,0,29,${glowOpacity}) 0%, transparent 70%)`,
-          }}
-        />
-        <div className="panel-suptitle">Setup · Telemetria</div>
-        <div className="panel-title">{track.nome}</div>
-        <div className="panel-cmd-badge">.{id}</div>
-      </div>
-
-      {/* Rows */}
-      <div className="panel-body">
-        {rows.map((row, i) => (
-          <div className="panel-row" key={row.label}>
-            <div className="panel-row-icon">{row.icon}</div>
-            <span className="panel-row-label">{row.label}</span>
-            <span
-              className="panel-row-value pop"
-              key={`${popTick}-${i}`}
-            >
-              {row.value}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Copy */}
-      <button className={`copy-btn${copied ? " copied" : ""}`} onClick={onCopy}>
-        {copied ? "✓ Copiato" : "⎘ Copia Discord"}
-      </button>
-    </div>
+    </button>
   );
 }
 
@@ -720,7 +514,7 @@ export default function App() {
 
   const [search, setSearch]     = useState("");
   const [filter, setFilter]     = useState("Tutti");
-  const [selected, setSelected] = useState(null);
+  const [openCard, setOpenCard] = useState(null);
   const [copied, setCopied]     = useState(false);
 
   const filtered = useMemo(() =>
@@ -733,10 +527,15 @@ export default function App() {
     [search, filter]
   );
 
+  const handleToggle = (key) => {
+    setOpenCard((prev) => (prev === key ? null : key));
+    setCopied(false);
+  };
+
   const handleCopy = () => {
-    if (!selected) return;
+    if (!openCard) return;
     navigator.clipboard
-      .writeText(buildDiscordMessage(selected, TRACKS[selected]))
+      .writeText(buildDiscordMessage(openCard, TRACKS[openCard]))
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1800);
@@ -746,13 +545,10 @@ export default function App() {
   return (
     <>
       <style>{css}</style>
-
       <div className="f1-root">
-        {/* Background layers */}
         <div className="f1-grid-bg" />
         <div className="f1-vignette" />
 
-        {/* Header */}
         <header className="f1-header">
           <div className="f1-header-inner">
             <div className="f1-status">
@@ -761,22 +557,17 @@ export default function App() {
             </div>
             <div className="f1-title-row">
               <h1 className="f1-title">Setup Dashboard</h1>
-              <span className="f1-subtitle">
-                {Object.keys(TRACKS).length} circuiti · simulatore
-              </span>
+              <span className="f1-subtitle">{Object.keys(TRACKS).length} circuiti · simulatore</span>
             </div>
           </div>
         </header>
 
-        {/* Main */}
         <main className="f1-main">
-          {/* Toolbar */}
           <div className="f1-toolbar">
             <div className="f1-search-wrap">
               <span className="f1-search-icon">⌕</span>
               <input
-                className="f1-search"
-                type="text"
+                className="f1-search" type="text"
                 placeholder="Cerca pista o comando..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -788,45 +579,32 @@ export default function App() {
                   key={c}
                   className={`f1-pill${filter === c ? " active" : ""}`}
                   onClick={() => setFilter(c)}
-                >
-                  {c}
-                </button>
+                >{c}</button>
               ))}
             </div>
             <span className="f1-count">{filtered.length} risultati</span>
           </div>
 
-          {/* Grid + Panel */}
-          <div className="f1-layout">
-            <div className="f1-grid">
-              {filtered.length === 0 ? (
-                <div className="no-results">
-                  <div className="no-results-icon">🔍</div>
-                  <div className="no-results-text">Nessuna pista trovata</div>
-                </div>
-              ) : (
-                filtered.map(([key, track], i) => (
-                  <TrackCard
-                    key={key}
-                    id={key}
-                    track={track}
-                    isSelected={selected === key}
-                    index={i}
-                    onClick={() => {
-                      setSelected(key);
-                      setCopied(false);
-                    }}
-                  />
-                ))
-              )}
-            </div>
-
-            <SetupPanel
-              id={selected}
-              track={selected ? TRACKS[selected] : null}
-              onCopy={handleCopy}
-              copied={copied}
-            />
+          <div className="f1-grid">
+            {filtered.length === 0 ? (
+              <div className="no-results">
+                <div className="no-results-icon">🔍</div>
+                <div className="no-results-text">Nessuna pista trovata</div>
+              </div>
+            ) : (
+              filtered.map(([key, track], i) => (
+                <TrackCard
+                  key={key}
+                  id={key}
+                  track={track}
+                  isOpen={openCard === key}
+                  index={i}
+                  onToggle={() => handleToggle(key)}
+                  onCopy={handleCopy}
+                  copied={copied && openCard === key}
+                />
+              ))
+            )}
           </div>
         </main>
       </div>
