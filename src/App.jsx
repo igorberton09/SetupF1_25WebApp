@@ -15,30 +15,30 @@ function useFonts() {
 
 // ─── SETUP DATA ───────────────────────────────────────────────────
 const TRACKS = {
-  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: 41, sosp: [1, 12, 17, 20, 44], continente: "Oceania" },
-  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: 41, sosp: [1,  4,  8, 21, 48], continente: "Asia"    },
-  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: 41, sosp: [1,  6, 21, 22, 42], continente: "Asia"    },
-  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: 41, sosp: [10, 9, 10, 20, 40], continente: "Asia"    },
-  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: 41, sosp: [6,  1,  7, 18, 40], continente: "Asia"    },
-  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: 30, sosp: [1,  1, 17, 22, 40], continente: "America" },
-  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: 41, sosp: [1,  9, 21, 23, 52], continente: "Europa"  },
-  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: 41, sosp: [22, 3, 21, 19, 49], continente: "Europa"  },
-  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: 38, sosp: [2,  6, 21, 20, 43], continente: "Europa"  },
-  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: 41, sosp: [1,  1, 18, 19, 40], continente: "America" },
-  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: 41, sosp: [5,  3, 20, 20, 46], continente: "Europa"  },
-  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: 41, sosp: [1,  5, 18, 21, 40], continente: "Europa"  },
-  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: 41, sosp: [1,  6, 12, 20, 40], continente: "Europa"  },
-  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: 41, sosp: [1, 10, 21, 19, 40], continente: "Europa"  },
-  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: 41, sosp: [1,  9, 21, 22, 40], continente: "Europa"  },
-  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: 41, sosp: [1,  1, 21, 21, 40], continente: "Europa"  },
-  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: 41, sosp: [1,  1, 19, 21, 40], continente: "Asia"    },
-  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: 41, sosp: [1, 16, 21, 20, 40], continente: "Asia"    },
-  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: 41, sosp: [3,  1, 21, 20, 40], continente: "America" },
-  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: 32, sosp: [3,  5, 21, 23, 45], continente: "America" },
-  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: 41, sosp: [5,  2, 21, 22, 41], continente: "America" },
-  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: 41, sosp: [6,  5, 21, 23, 48], continente: "America" },
-  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: 41, sosp: [3,  1, 16, 19, 45], continente: "Asia"    },
-  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: 41, sosp: [1,  1, 17, 17, 40], continente: "Asia"    },
+  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: 41, sosp: [41, 1, 12, 17, 20, 44], continente: "Oceania" },
+  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: 41, sosp: [41, 1,  4,  8, 21, 48], continente: "Asia"    },
+  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: 41, sosp: [41, 1,  6, 21, 22, 42], continente: "Asia"    },
+  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: 41, sosp: [41, 10, 9, 10, 20, 40], continente: "Asia"    },
+  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: 41, sosp: [41, 6,  1,  7, 18, 40], continente: "Asia"    },
+  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: 30, sosp: [30, 1,  1, 17, 22, 40], continente: "America" },
+  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: 41, sosp: [41, 1,  9, 21, 23, 52], continente: "Europa"  },
+  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: 41, sosp: [41, 22, 3, 21, 19, 49], continente: "Europa"  },
+  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: 38, sosp: [38, 2,  6, 21, 20, 43], continente: "Europa"  },
+  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: 41, sosp: [41, 1,  1, 18, 19, 40], continente: "America" },
+  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: 41, sosp: [41, 5,  3, 20, 20, 46], continente: "Europa"  },
+  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: 41, sosp: [41, 1,  5, 18, 21, 40], continente: "Europa"  },
+  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: 41, sosp: [41, 1,  6, 12, 20, 40], continente: "Europa"  },
+  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: 41, sosp: [41, 1, 10, 21, 19, 40], continente: "Europa"  },
+  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: 41, sosp: [41, 1,  9, 21, 22, 40], continente: "Europa"  },
+  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: 41, sosp: [41, 1,  1, 21, 21, 40], continente: "Europa"  },
+  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: 41, sosp: [41, 1,  1, 19, 21, 40], continente: "Asia"    },
+  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: 41, sosp: [41, 1, 16, 21, 20, 40], continente: "Asia"    },
+  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: 41, sosp: [41, 3,  1, 21, 20, 40], continente: "America" },
+  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: 32, sosp: [32, 3,  5, 21, 23, 45], continente: "America" },
+  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: 41, sosp: [41, 5,  2, 21, 22, 41], continente: "America" },
+  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: 41, sosp: [41, 6,  5, 21, 23, 48], continente: "America" },
+  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: 41, sosp: [41, 3,  1, 16, 19, 45], continente: "Asia"    },
+  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: 41, sosp: [41, 1,  1, 17, 17, 40], continente: "Asia"    },
 };
 const SHARED = {
   trasmissione: "100 - 20",
@@ -48,18 +48,6 @@ const SHARED = {
 };
 const CONTINENTI = ["Tutti", "Europa", "Asia", "America", "Oceania"];
 const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oceania: "🌏" };
-
-function buildDiscordMessage(key, track) {
-  return (
-    `📍 **${track.nome}**\n` +
-    `🔧 AERODINAMICA: ${track.aero[0]} - ${track.aero[1]}\n` +
-    `⚙️ TRASMISSIONE: ${SHARED.trasmissione}\n` +
-    `📐 GEOMETRIA: ${SHARED.geometria}\n` +
-    `🔩 SOSPENSIONI: ${track.sosp.join(" - ")}\n` +
-    `🛞 FRENI: ${SHARED.freni}\n` +
-    `🏎️ GOMME: ${SHARED.gomme}`
-  );
-}
 
 // ─── LEADERBOARD DATA PER STAGIONE ──────────────────────────────────
 const SEASON_DATA = {
@@ -936,13 +924,41 @@ const css = `
     animation: value-pop 0.5s ease forwards;
   }
   .setup-item.sosp-full { grid-column: 1 / -1; }
-  .sosp-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sosp-grid { 
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .sosp-labeled-val {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .sosp-label {
+    font-size: 7px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: 600;
+  }
   .sosp-val {
-    flex: 1 1 auto; min-width: 36px; text-align: center;
-    padding: 5px 8px;
-    background: #0b1420; border: 1px solid #152230; border-radius: 6px;
-    font-size: 11.5px; color: #dde4eb; letter-spacing: 0.3px;
-    animation: value-pop 0.5s ease forwards;
+    text-align: center;
+    padding: 10px 6px;
+    background: linear-gradient(155deg, #0d1822 0%, #0a1218 100%);
+    border: 1px solid #1a2e3d; 
+    border-radius: 7px;
+    font-size: 13px; 
+    color: #dde4eb; 
+    letter-spacing: 0.4px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .sosp-labeled-val:hover .sosp-val {
+    background: linear-gradient(155deg, #121a26 0%, #0d1420 100%);
+    border-color: #2a3f52;
+    transform: translateY(-1px);
   }
   .setup-aero-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
   .setup-aero-row:last-child { margin-bottom: 0; }
@@ -954,24 +970,6 @@ const css = `
   .setup-aero-track { flex: 1; height: 5px; background: #0d1520; border-radius: 3px; overflow: hidden; }
   .setup-aero-fill { height: 100%; border-radius: 3px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
   .setup-aero-val { font-size: 11px; color: #5a7a8f; width: 22px; text-align: right; flex-shrink: 0; }
-
-  .setup-copy-btn {
-    margin-top: 16px; width: 100%; padding: 10px 0;
-    border: none; border-radius: 7px; cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(135deg, #c40018, #e8001d);
-    box-shadow: 0 4px 16px rgba(232,0,29,0.28);
-    transition: filter 0.2s, box-shadow 0.2s, background 0.25s, transform 0.1s;
-  }
-  .setup-copy-btn:hover { filter: brightness(1.1); box-shadow: 0 6px 22px rgba(232,0,29,0.38); transform: translateY(-1px); }
-  .setup-copy-btn:active { transform: translateY(0); }
-  .setup-copy-btn.copied {
-    background: linear-gradient(135deg, #15803d, #22c55e);
-    box-shadow: 0 4px 16px rgba(34,197,94,0.28);
-  }
 
   .no-results { grid-column: 1 / -1; text-align: center; padding: 56px 20px; }
   .no-results-icon { font-size: 26px; opacity: 0.15; margin-bottom: 12px; }
@@ -985,6 +983,7 @@ const css = `
     .f1-page { padding: 18px 16px 36px; }
     .track-card.open { grid-column: 1 / -1; }
     .setup-grid { grid-template-columns: 1fr; }
+    .sosp-grid { grid-template-columns: repeat(3, 1fr); }
     .cal-grid { grid-template-columns: 1fr; }
     .career-grid { grid-template-columns: 1fr; }
     .lb-table th, .lb-table td { padding: 8px 8px; font-size: 10.5px; }
@@ -1030,7 +1029,7 @@ const ChevronDown = () => (
   </svg>
 );
 
-function TrackCard({ id, track, isOpen, onToggle, onCopy, copied, index }) {
+function TrackCard({ id, track, isOpen, onToggle, index }) {
   return (
     <button
       className={`track-card${isOpen ? " open" : ""}`}
@@ -1078,19 +1077,34 @@ function TrackCard({ id, track, isOpen, onToggle, onCopy, copied, index }) {
           </div>
           <div className="setup-item sosp-full">
             <span className="setup-item-label">Sospensioni</span>
-            <div className="sosp-row">
-              {track.sosp.map((v, i) => (
-                <div className="sosp-val" key={i} style={{ animationDelay: `${i * 0.06}s` }}>{v}</div>
-              ))}
+            <div className="sosp-grid">
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">Trasmissione</div>
+                <div className="sosp-val">{track.sosp[0]}</div>
+              </div>
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">S1</div>
+                <div className="sosp-val">{track.sosp[1]}</div>
+              </div>
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">S2</div>
+                <div className="sosp-val">{track.sosp[2]}</div>
+              </div>
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">S3</div>
+                <div className="sosp-val">{track.sosp[3]}</div>
+              </div>
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">S4</div>
+                <div className="sosp-val">{track.sosp[4]}</div>
+              </div>
+              <div className="sosp-labeled-val">
+                <div className="sosp-label">S5</div>
+                <div className="sosp-val">{track.sosp[5]}</div>
+              </div>
             </div>
           </div>
         </div>
-        <button
-          className={`setup-copy-btn${copied ? " copied" : ""}`}
-          onClick={(e) => { e.stopPropagation(); onCopy(); }}
-        >
-          {copied ? "✓ Copiato" : "⎘ Copia Discord"}
-        </button>
       </div>
     </button>
   );
@@ -1438,7 +1452,6 @@ function SetupPage() {
   const [search, setSearch]     = useState("");
   const [filter, setFilter]     = useState("Tutti");
   const [openCard, setOpenCard] = useState(null);
-  const [copied, setCopied]     = useState(false);
 
   const filtered = useMemo(() =>
     Object.entries(TRACKS).filter(([key, t]) => {
@@ -1452,17 +1465,6 @@ function SetupPage() {
 
   const handleToggle = (key) => {
     setOpenCard((prev) => (prev === key ? null : key));
-    setCopied(false);
-  };
-
-  const handleCopy = () => {
-    if (!openCard) return;
-    navigator.clipboard
-      .writeText(buildDiscordMessage(openCard, TRACKS[openCard]))
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1800);
-      });
   };
 
   return (
@@ -1496,8 +1498,6 @@ function SetupPage() {
               key={key} id={key} track={track}
               isOpen={openCard === key} index={i}
               onToggle={() => handleToggle(key)}
-              onCopy={handleCopy}
-              copied={copied && openCard === key}
             />
           ))
         )}
