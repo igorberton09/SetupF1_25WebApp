@@ -86,11 +86,11 @@ const DRIVER_TEAMS = {
   Alonso:     { team: "Aston Martin", num: 14, flag: "🇪🇸" },
   Stroll:     { team: "Aston Martin", num: 18, flag: "🇨🇦" },
   Lawson:     { team: "Visa Cash App RB", num: 40, flag: "🇳🇿" },
-  Igor:       { team: "Visa Cash App RB", num: 92, flag: "🇮🇹" },
+  Igor:       { team: "Visa Cash App RB", num: 30, flag: "🇮🇹" },
   Bearman:    { team: "Haas", num: 87, flag: "🇬🇧" },
-  Manuel:     { team: "Haas", num: 95, flag: "🇮🇹" },
+  Manuel:     { team: "Haas", num: 50, flag: "🇮🇹" },
   Gasly:      { team: "Alpine", num: 10, flag: "🇫🇷" },
-  Alex:       { team: "Alpine", num: 99, flag: "🇮🇹" },
+  Alex:       { team: "Alpine", num: 3, flag: "🇮🇹" },
   Hulkenberg: { team: "Sauber", num: 27, flag: "🇩🇪" },
   Bortoleto:  { team: "Sauber", num: 5, flag: "🇧🇷" },
 };
@@ -120,10 +120,11 @@ function computeDriverStandings() {
       if (i < 3) podiums[d] = (podiums[d] || 0) + 1;
     });
   });
-  return Object.keys(pts)
+  // Include all drivers from DRIVER_TEAMS, even those with 0 points
+  return Object.keys(DRIVER_TEAMS)
     .map((name) => ({
       name,
-      points: pts[name],
+      points: pts[name] || 0,
       wins: wins[name] || 0,
       podiums: podiums[name] || 0,
       ...DRIVER_TEAMS[name],
