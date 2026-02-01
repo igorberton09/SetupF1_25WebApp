@@ -160,7 +160,7 @@ const CALENDAR = [
   { round: 3, race: "Mexico City GP",  city: "Mexico City", status: "done",   winner: "Alex" },
   { round: 4, race: "São Paulo GP",    city: "São Paulo",   status: "done",   winner: "Alex" },
   { round: 5, race: "Qatar GP",        city: "Lusail",      status: "done",   winner: "Norris" },
-  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "upcoming", winner: "Antonelli" },
+  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "done", winner: "Antonelli" },
   { round: 7, race: "Monaco GP",       city: "Monaco",      status: "upcoming", winner: "..." },
 ];
 
