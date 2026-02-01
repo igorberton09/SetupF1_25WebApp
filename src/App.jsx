@@ -61,15 +61,53 @@ function buildDiscordMessage(key, track) {
   );
 }
 
-// ─── LEADERBOARD DATA (Stagione 1) ──────────────────
-const RACE_RESULTS = [
-  { race: "Australia", results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
-  { race: "Olanda", results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
-  { race: "Messico", results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
-  { race: "Brasile", results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll"] },
-  { race: "Qatar", results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
-  { race: "Singapore", results: ["Antonelli","Verstappen","Hamilton","Piastri","Leclerc","Alonso","Bortoleto","Igor","Sainz","Stroll","Tsunoda","Russell","Norris","Alex","Lawson","Bearman","Albon","Hulkenberg","Manuel","Gasly"] },
-];
+// ─── LEADERBOARD DATA PER STAGIONE ──────────────────────────────────
+const SEASON_DATA = {
+  "Stagione 1": {
+    races: [
+      { race: "Australia", results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
+      { race: "Olanda", results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
+      { race: "Messico", results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
+      { race: "Brasile", results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll"] },
+      { race: "Qatar", results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
+      { race: "Singapore", results: ["Antonelli","Verstappen","Hamilton","Piastri","Leclerc","Alonso","Bortoleto","Igor","Sainz","Stroll","Tsunoda","Russell","Norris","Alex","Lawson","Bearman","Albon","Hulkenberg","Manuel","Gasly"] },
+    ],
+    calendar: [
+      { round: 1, race: "Australian GP", city: "Melbourne", status: "done", winner: "Alex", raceKey: "Australia" },
+      { round: 2, race: "Dutch GP", city: "Zandvoort", status: "done", winner: "Igor", raceKey: "Olanda" },
+      { round: 3, race: "Mexico City GP", city: "Mexico City", status: "done", winner: "Alex", raceKey: "Messico" },
+      { round: 4, race: "São Paulo GP", city: "São Paulo", status: "done", winner: "Alex", raceKey: "Brasile" },
+      { round: 5, race: "Qatar GP", city: "Lusail", status: "done", winner: "Norris", raceKey: "Qatar" },
+      { round: 6, race: "Singapore GP", city: "Singapore", status: "done", winner: "Antonelli", raceKey: "Singapore" },
+      { round: 7, race: "Monaco GP", city: "Monaco", status: "upcoming", winner: "...", raceKey: null },
+    ],
+    driverPoles: {
+      Alex: 3, Norris: 2, Igor: 2, Verstappen: 1, Hamilton: 0, Russell: 0,
+      Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
+      Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
+      Hulkenberg: 0, Bortoleto: 0
+    }
+  },
+  "Stagione 2": {
+    races: [],
+    calendar: [
+      { round: 1, race: "Bahrain GP", city: "Sakhir", status: "upcoming", winner: "...", raceKey: null },
+      { round: 2, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 3, race: "Australian GP", city: "Melbourne", status: "upcoming", winner: "...", raceKey: null },
+      { round: 4, race: "Japanese GP", city: "Suzuka", status: "upcoming", winner: "...", raceKey: null },
+      { round: 5, race: "Chinese GP", city: "Shanghai", status: "upcoming", winner: "...", raceKey: null },
+    ],
+    driverPoles: {}
+  },
+  "Stagione 3": {
+    races: [],
+    calendar: [
+      { round: 1, race: "Bahrain GP", city: "Sakhir", status: "upcoming", winner: "...", raceKey: null },
+      { round: 2, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+    ],
+    driverPoles: {}
+  }
+};
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
@@ -109,11 +147,11 @@ const TEAM_COLORS = {
   "Sauber": "#A6A6A6",
 };
 
-function computeDriverStandings() {
+function computeDriverStandings(raceResults) {
   const pts = {};
   const wins = {};
   const podiums = {};
-  RACE_RESULTS.forEach(({ results }) => {
+  raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
       pts[d] = (pts[d] || 0) + POINTS_TABLE[i];
@@ -133,9 +171,9 @@ function computeDriverStandings() {
     .sort((a, b) => b.points - a.points || b.wins - a.wins);
 }
 
-function computeTeamStandings() {
+function computeTeamStandings(raceResults) {
   const teams = {};
-  RACE_RESULTS.forEach(({ results }) => {
+  raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
       const info = DRIVER_TEAMS[d];
@@ -150,30 +188,44 @@ function computeTeamStandings() {
     .sort((a, b) => b.points - a.points);
 }
 
-const DRIVER_STANDINGS = computeDriverStandings();
-const TEAM_STANDINGS   = computeTeamStandings();
+const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
 
-// ─── CALENDAR DATA ────────────────────────────────────────────────
-const CALENDAR = [
-  { round: 1, race: "Australian GP",   city: "Melbourne",   status: "done",   winner: "Alex" },
-  { round: 2, race: "Dutch GP",        city: "Zandvoort",   status: "done",   winner: "Igor" },
-  { round: 3, race: "Mexico City GP",  city: "Mexico City", status: "done",   winner: "Alex" },
-  { round: 4, race: "São Paulo GP",    city: "São Paulo",   status: "done",   winner: "Alex" },
-  { round: 5, race: "Qatar GP",        city: "Lusail",      status: "done",   winner: "Norris" },
-  { round: 6, race: "Singapore GP",    city: "Singapore",   status: "done", winner: "Antonelli" },
-  { round: 7, race: "Monaco GP",       city: "Monaco",      status: "upcoming", winner: "..." },
-];
-
-// ─── DRIVERS PAGE DATA (poles) ────────────────────────────────────
-const DRIVER_POLES = {
-  Alex: 3, Norris: 2, Igor: 2, Verstappen: 1, Hamilton: 0, Russell: 0,
-  Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
-  Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
-  Hulkenberg: 0, Bortoleto: 0
+// ─── CAREER STATS (totali di tutte le stagioni) ──────────────────
+const CAREER_STATS = {
+  Piastri:    { totalPoints: 42, totalWins: 0, totalPoles: 0, totalPodiums: 3, championships: 0 },
+  Norris:     { totalPoints: 70, totalWins: 1, totalPoles: 2, totalPodiums: 4, championships: 0 },
+  Verstappen: { totalPoints: 51, totalWins: 0, totalPoles: 1, totalPodiums: 2, championships: 0 },
+  Tsunoda:    { totalPoints: 0, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Russell:    { totalPoints: 30, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Antonelli:  { totalPoints: 51, totalWins: 1, totalPoles: 0, totalPodiums: 2, championships: 0 },
+  Leclerc:    { totalPoints: 28, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Hamilton:   { totalPoints: 36, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
+  Albon:      { totalPoints: 14, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Sainz:      { totalPoints: 10, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Alonso:     { totalPoints: 44, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
+  Stroll:     { totalPoints: 0, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Lawson:     { totalPoints: 4, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Igor:       { totalPoints: 46, totalWins: 1, totalPoles: 2, totalPodiums: 2, championships: 0 },
+  Bearman:    { totalPoints: 4, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Manuel:     { totalPoints: 22, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Gasly:      { totalPoints: 6, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Alex:       { totalPoints: 93, totalWins: 3, totalPoles: 3, totalPodiums: 3, championships: 0 },
+  Hulkenberg: { totalPoints: 6, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Bortoleto:  { totalPoints: 23, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
 };
 
-// ─── SEASONS DATA ─────────────────────────────────────────────────
-const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
+const TEAM_CAREER_STATS = {
+  "McLaren": { totalPoints: 112, totalWins: 1, totalPoles: 2, championships: 0 },
+  "Red Bull": { totalPoints: 51, totalWins: 0, totalPoles: 1, championships: 0 },
+  "Mercedes": { totalPoints: 81, totalWins: 1, totalPoles: 0, championships: 0 },
+  "Ferrari": { totalPoints: 64, totalWins: 0, totalPoles: 0, championships: 0 },
+  "Williams": { totalPoints: 24, totalWins: 0, totalPoles: 0, championships: 0 },
+  "Aston Martin": { totalPoints: 44, totalWins: 0, totalPoles: 0, championships: 0 },
+  "Visa Cash App RB": { totalPoints: 50, totalWins: 1, totalPoles: 2, championships: 0 },
+  "Haas": { totalPoints: 26, totalWins: 0, totalPoles: 0, championships: 0 },
+  "Alpine": { totalPoints: 99, totalWins: 3, totalPoles: 3, championships: 0 },
+  "Sauber": { totalPoints: 29, totalWins: 0, totalPoles: 0, championships: 0 },
+};
 
 // ─── NAV ITEMS ────────────────────────────────────────────────────
 const NAV = [
@@ -466,6 +518,13 @@ const css = `
   .lb-race-item-name { color: #5a7a8f; }
   .lb-race-item-pos { color: #c8d6e0; font-size: 10px; }
 
+  .no-data-message {
+    text-align: center;
+    padding: 48px 20px;
+    color: #2a3f52;
+    font-size: 12px;
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      CALENDAR & MODAL
      ══════════════════════════════════════════════════════════════ */
@@ -641,7 +700,7 @@ const css = `
   }
   .career-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 10px;
   }
   .career-card {
@@ -679,7 +738,7 @@ const css = `
   }
   .career-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     gap: 8px;
   }
   .career-stat-box {
@@ -705,6 +764,7 @@ const css = `
   .career-stat-val.pts { color: #e8001d; }
   .career-stat-val.wins { color: #FFD700; }
   .career-stat-val.poles { color: #00d4ff; }
+  .career-stat-val.podiums { color: #CD7F32; }
   .career-stat-val.wdc { color: #C0C0C0; }
   .career-stat-val.wcc { color: #C0C0C0; }
 
@@ -1070,8 +1130,9 @@ function SeasonSelector({ currentSeason, onSeasonChange }) {
 }
 
 // Race Results Modal
-function RaceResultsModal({ race, onClose }) {
-  const raceData = RACE_RESULTS.find(r => r.race === race.race.replace(" GP", ""));
+function RaceResultsModal({ race, raceResults, onClose }) {
+  const raceData = raceResults.find(r => r.race === race.raceKey);
+  
   if (!raceData) return null;
 
   return (
@@ -1120,11 +1181,23 @@ function LeaderboardPage({ season }) {
   const [tab, setTab] = useState("drivers");
   const [expandedDriver, setExpandedDriver] = useState(null);
 
+  const seasonData = SEASON_DATA[season];
+  const driverStandings = useMemo(() => computeDriverStandings(seasonData.races), [season]);
+  const teamStandings = useMemo(() => computeTeamStandings(seasonData.races), [season]);
+
   function getDriverRaces(driverName) {
-    return RACE_RESULTS.map(({ race, results }) => {
+    return seasonData.races.map(({ race, results }) => {
       const pos = results.indexOf(driverName);
       return { race, pos: pos >= 0 ? pos + 1 : null, pts: pos >= 0 && pos < POINTS_TABLE.length ? POINTS_TABLE[pos] : 0 };
     }).filter(r => r.pos !== null);
+  }
+
+  if (seasonData.races.length === 0) {
+    return (
+      <div className="no-data-message">
+        Nessuna gara ancora disputata per {season}
+      </div>
+    );
   }
 
   return (
@@ -1146,7 +1219,7 @@ function LeaderboardPage({ season }) {
             </tr>
           </thead>
           <tbody>
-            {DRIVER_STANDINGS.map((d, i) => {
+            {driverStandings.map((d, i) => {
               const isExp = expandedDriver === d.name;
               const races = isExp ? getDriverRaces(d.name) : [];
               return (
@@ -1162,17 +1235,21 @@ function LeaderboardPage({ season }) {
                       <div>
                         <div className="lb-driver-name">{d.flag} {d.name}</div>
                         <div className="lb-driver-sub">{d.team} · #{d.num}</div>
-                        <button className="lb-race-toggle" onClick={() => setExpandedDriver(isExp ? null : d.name)}>
-                          {isExp ? "▲ chiudi risultati" : "▼ risultati gara"}
-                        </button>
-                        <div className={`lb-race-list${isExp ? " open" : ""}`}>
-                          {races.map((r) => (
-                            <div className="lb-race-item" key={r.race}>
-                              <span className="lb-race-item-name">{r.race}</span>
-                              <span className="lb-race-item-pos">P{r.pos} · {r.pts} pts</span>
+                        {races.length > 0 && (
+                          <>
+                            <button className="lb-race-toggle" onClick={() => setExpandedDriver(isExp ? null : d.name)}>
+                              {isExp ? "▲ chiudi risultati" : "▼ risultati gara"}
+                            </button>
+                            <div className={`lb-race-list${isExp ? " open" : ""}`}>
+                              {races.map((r) => (
+                                <div className="lb-race-item" key={r.race}>
+                                  <span className="lb-race-item-name">{r.race}</span>
+                                  <span className="lb-race-item-pos">P{r.pos} · {r.pts} pts</span>
+                                </div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </td>
@@ -1197,7 +1274,7 @@ function LeaderboardPage({ season }) {
             </tr>
           </thead>
           <tbody>
-            {TEAM_STANDINGS.map((t, i) => (
+            {teamStandings.map((t, i) => (
               <tr key={t.team}>
                 <td>
                   <div className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
@@ -1226,16 +1303,18 @@ function LeaderboardPage({ season }) {
 // ─── CALENDAR PAGE ────────────────────────────────────────────────
 function CalendarPage({ season }) {
   const [selectedRace, setSelectedRace] = useState(null);
+  
+  const seasonData = SEASON_DATA[season];
 
   return (
     <>
       <div className="cal-grid">
-        {CALENDAR.map((race, i) => (
+        {seasonData.calendar.map((race, i) => (
           <div
             key={race.round}
             className={`cal-card ${race.status}`}
             style={{ animationDelay: `${i * 0.04}s` }}
-            onClick={() => race.status === "done" && setSelectedRace(race)}
+            onClick={() => race.status === "done" && race.raceKey && setSelectedRace(race)}
           >
             <div className="cal-card-header">
               <span className="cal-round">Round {race.round}</span>
@@ -1255,26 +1334,30 @@ function CalendarPage({ season }) {
         ))}
       </div>
       {selectedRace && (
-        <RaceResultsModal race={selectedRace} onClose={() => setSelectedRace(null)} />
+        <RaceResultsModal 
+          race={selectedRace} 
+          raceResults={seasonData.races}
+          onClose={() => setSelectedRace(null)} 
+        />
       )}
     </>
   );
 }
 
 // ─── CAREER PAGE ──────────────────────────────────────────────────
-function CareerPage({ season }) {
+function CareerPage() {
   const drivers = useMemo(() => {
-    return DRIVER_STANDINGS.map((d) => ({
-      ...d,
-      poles: DRIVER_POLES[d.name] || 0,
-    }));
+    return Object.keys(DRIVER_TEAMS).map((name) => ({
+      name,
+      ...DRIVER_TEAMS[name],
+      ...CAREER_STATS[name],
+    })).sort((a, b) => b.totalPoints - a.totalPoints || b.totalWins - a.totalWins);
   }, []);
 
   const teams = useMemo(() => {
-    return TEAM_STANDINGS.map((t) => ({
-      ...t,
-      poles: 0,
-    }));
+    return Object.entries(TEAM_CAREER_STATS)
+      .map(([team, stats]) => ({ team, ...stats }))
+      .sort((a, b) => b.totalPoints - a.totalPoints);
   }, []);
 
   return (
@@ -1291,19 +1374,23 @@ function CareerPage({ season }) {
               <div className="career-stats">
                 <div className="career-stat-box">
                   <div className="career-stat-label">Punti</div>
-                  <div className="career-stat-val pts">{d.points}</div>
+                  <div className="career-stat-val pts">{d.totalPoints}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">Pole</div>
-                  <div className="career-stat-val poles">{d.poles}</div>
+                  <div className="career-stat-val poles">{d.totalPoles}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">Vittorie</div>
-                  <div className="career-stat-val wins">{d.wins}</div>
+                  <div className="career-stat-val wins">{d.totalWins}</div>
+                </div>
+                <div className="career-stat-box">
+                  <div className="career-stat-label">Podi</div>
+                  <div className="career-stat-val podiums">{d.totalPodiums}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">WDC</div>
-                  <div className="career-stat-val wdc">{d.wdc}</div>
+                  <div className="career-stat-val wdc">{d.championships}</div>
                 </div>
               </div>
             </div>
@@ -1323,19 +1410,19 @@ function CareerPage({ season }) {
               <div className="career-stats">
                 <div className="career-stat-box">
                   <div className="career-stat-label">Punti</div>
-                  <div className="career-stat-val pts">{t.points}</div>
+                  <div className="career-stat-val pts">{t.totalPoints}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">Pole</div>
-                  <div className="career-stat-val poles">{t.poles}</div>
+                  <div className="career-stat-val poles">{t.totalPoles}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">Vittorie</div>
-                  <div className="career-stat-val wins">{t.wins}</div>
+                  <div className="career-stat-val wins">{t.totalWins}</div>
                 </div>
                 <div className="career-stat-box">
                   <div className="career-stat-label">WCC</div>
-                  <div className="career-stat-val wcc">{t.wcc}</div>
+                  <div className="career-stat-val wcc">{t.championships}</div>
                 </div>
               </div>
             </div>
@@ -1425,6 +1512,10 @@ export default function App() {
   const [page, setPage] = useState("leaderboard");
   const [season, setSeason] = useState(SEASONS[0]);
 
+  const seasonData = SEASON_DATA[season];
+  const completedRaces = seasonData.calendar.filter(r => r.status === "done").length;
+  const totalRaces = seasonData.calendar.length;
+
   const pageTitle = {
     leaderboard: "Classifica Generale",
     calendar: "Calendario",
@@ -1433,13 +1524,13 @@ export default function App() {
   }[page];
 
   const pageSubtitle = {
-    leaderboard: `${season} · 5/7 gare completate`,
-    calendar: `${season} · ${CALENDAR.length} gare programmate`,
-    career: `${season} · Statistiche complete`,
+    leaderboard: `${season} · ${completedRaces}/${totalRaces} gare completate`,
+    calendar: `${season} · ${totalRaces} gare programmate`,
+    career: `Tutte le stagioni · Statistiche totali carriera`,
     setup: `${Object.keys(TRACKS).length} circuiti · simulatore`
   }[page];
 
-  const showSeasonSelector = ["leaderboard", "calendar", "career"].includes(page);
+  const showSeasonSelector = ["leaderboard", "calendar"].includes(page);
 
   return (
     <>
@@ -1457,7 +1548,7 @@ export default function App() {
               </div>
               <div className="f1-title-row">
                 <h1 className="f1-title">F1 Dashboard</h1>
-                <span className="f1-subtitle">Stagione in corso</span>
+                <span className="f1-subtitle">Campionato in corso</span>
               </div>
             </div>
           </div>
@@ -1488,7 +1579,7 @@ export default function App() {
 
           {page === "leaderboard" && <LeaderboardPage season={season} />}
           {page === "calendar" && <CalendarPage season={season} />}
-          {page === "career" && <CareerPage season={season} />}
+          {page === "career" && <CareerPage />}
           {page === "setup" && <SetupPage />}
         </div>
       </div>
