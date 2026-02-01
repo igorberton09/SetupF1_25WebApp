@@ -61,7 +61,7 @@ function buildDiscordMessage(key, track) {
   );
 }
 
-// ─── LEADERBOARD DATA (from PDF - Carriera A 3) ──────────────────
+// ─── LEADERBOARD DATA (Stagione 1) ──────────────────
 const RACE_RESULTS = [
   { race: "Australia", results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
   { race: "Olanda", results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
