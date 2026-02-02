@@ -191,7 +191,7 @@ const TEAM_COLORS = {
 };
 
 function computeDriverStandings(raceResults, season) {
-  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
+  const DRIVER_TEAMS = getDriverTeamsForSeason(raceResults, season);
   const pts = {};
   const wins = {};
   const podiums = {};
