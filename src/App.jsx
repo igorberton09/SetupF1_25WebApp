@@ -80,27 +80,45 @@ const SEASON_DATA = {
   "Stagione 2": {
     races: [],
     calendar: [
-      { round: 1, race: "Bahrain GP", city: "Sakhir", status: "upcoming", winner: "...", raceKey: null },
-      { round: 2, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 3, race: "Australian GP", city: "Melbourne", status: "upcoming", winner: "...", raceKey: null },
-      { round: 4, race: "Japanese GP", city: "Suzuka", status: "upcoming", winner: "...", raceKey: null },
-      { round: 5, race: "Chinese GP", city: "Shanghai", status: "upcoming", winner: "...", raceKey: null },
+      { round: 1, race: "Austrian GP",      city: "Red Bull Ring", status: "upcoming", winner: "...", raceKey: null },
+      { round: 2, race: "Hungary GP",       city: "Hungaroring",   status: "upcoming", winner: "...", raceKey: null },
+      { round: 3, race: "Australian GP",    city: "Melbourne",     status: "upcoming", winner: "...", raceKey: null },
+      { round: 4, race: "Abu Dhabi GP",     city: "Yas Marina",    status: "upcoming", winner: "...", raceKey: null },
+      { round: 5, race: "Dutch GP",         city: "Zandvoort",     status: "upcoming", winner: "...", raceKey: null },
+      { round: 6, race: "Saudi Arabian GP", city: "Jeddah",        status: "upcoming", winner: "...", raceKey: null },
+      { round: 7, race: "Qatar GP",         city: "Lusail",        status: "upcoming", winner: "...", raceKey: null },
     ],
-    driverPoles: {}
+    driverPoles: {
+      Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0,
+      Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
+      Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
+      Hulkenberg: 0, Bortoleto: 0
+    }
   },
   "Stagione 3": {
     races: [],
     calendar: [
-      { round: 1, race: "Bahrain GP", city: "Sakhir", status: "upcoming", winner: "...", raceKey: null },
+      { round: 1, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
       { round: 2, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 3, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 4, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 5, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 6, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 7, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
     ],
-    driverPoles: {}
+    driverPoles: {
+      Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0,
+      Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
+      Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
+      Hulkenberg: 0, Bortoleto: 0
+    }
   }
 };
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
-const DRIVER_TEAMS = {
+// ─── DRIVER TEAMS BASE (Stagione 1) ────────────────────────────────
+const DRIVER_TEAMS_BASE = {
   Piastri:    { team: "McLaren", num: 81, flag: "🇦🇺" },
   Norris:     { team: "McLaren", num: 4, flag: "🇬🇧" },
   Verstappen: { team: "Red Bull", num: 1, flag: "🇳🇱" },
@@ -123,23 +141,61 @@ const DRIVER_TEAMS = {
   Bortoleto:  { team: "Sauber", num: 5, flag: "🇧🇷" },
 };
 
-const TEAM_COLORS = {
-  "McLaren": "#FF8000",
-  "Red Bull": "#3671C6",
-  "Mercedes": "#27C7B7",
-  "Ferrari": "#E8002D",
-  "Williams": "#2ECC71",
-  "Aston Martin": "#358C75",
-  "Visa Cash App RB": "#5E5B73",
-  "Haas": "#B8B8B8",
-  "Alpine": "#FF5733",
-  "Sauber": "#A6A6A6",
+// ─── TEAM CHANGES PER STAGIONE ─────────────────────────────────────
+const TEAM_CHANGES = {
+  "Stagione 2": {
+    Alex: { team: "McLaren", num: 99 },
+    Igor: { team: "Red Bull", num: 92 },
+    Saiz: { team: "Mercedes", num: 55 },
+    Bortoleto: { team: "Ferrari", num: 5 },
+    Piastri: { team: "Williams", num: 81 },
+    Manuel: { team: "Aston Martin", num: 95 },
+    Leclerc: { team: "Visa Cash App RB", num: 16 },
+    Stroll: { team: "Haas", num: 18 },
+    Russell: { team: "Alpine", num: 63 },
+    Tsunoda: { team: "Sauber", num: 22 },
+    Norris: { num: 1 },
+    Verstappen: { num: 3 },
+  },
+  "Stagione 3": {
+    Piastri: { team: "Ferrari", num: 81 },
+    Leclerc: { team: "Red Bull", num: 16 },
+    Norris: { team: "Mercedes", num: 4 },
+    Russell: { team: "McLaren", num: 63 },
+  }
 };
 
-function computeDriverStandings(raceResults) {
+// Funzione per ottenere i team dei piloti per una specifica stagione
+function getDriverTeamsForSeason(season) {
+  const changes = TEAM_CHANGES[season] || {};
+  return Object.keys(DRIVER_TEAMS_BASE).reduce((acc, driver) => {
+    acc[driver] = {
+      ...DRIVER_TEAMS_BASE[driver],
+      ...(changes[driver] || {})
+    };
+    return acc;
+  }, {});
+}
+
+const TEAM_COLORS = {
+  "McLaren": "#FF8000",
+  "Red Bull": "#3070ca",
+  "Mercedes": "#a1a1a1",
+  "Ferrari": "#f10030",
+  "Williams": "#171bff",
+  "Aston Martin": "#228b6f",
+  "Visa Cash App RB": "#4460ff",
+  "Haas": "#999999",
+  "Alpine": "#3de2ff",
+  "Sauber": "#31ff31",
+};
+
+function computeDriverStandings(raceResults, season) {
+  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const pts = {};
   const wins = {};
   const podiums = {};
+  
   raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
@@ -148,6 +204,7 @@ function computeDriverStandings(raceResults) {
       if (i < 3) podiums[d] = (podiums[d] || 0) + 1;
     });
   });
+  
   return Object.keys(DRIVER_TEAMS)
     .map((name) => ({
       name,
@@ -160,8 +217,10 @@ function computeDriverStandings(raceResults) {
     .sort((a, b) => b.points - a.points || b.wins - a.wins);
 }
 
-function computeTeamStandings(raceResults) {
+function computeTeamStandings(raceResults, season) {
+  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const teams = {};
+  
   raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
@@ -172,6 +231,7 @@ function computeTeamStandings(raceResults) {
       if (i === 0) teams[info.team].wins += 1;
     });
   });
+  
   return Object.entries(teams)
     .map(([team, data]) => ({ team, ...data }))
     .sort((a, b) => b.points - a.points);
@@ -1145,7 +1205,8 @@ function SeasonSelector({ currentSeason, onSeasonChange }) {
 }
 
 // Race Results Modal
-function RaceResultsModal({ race, raceResults, onClose }) {
+function RaceResultsModal({ race, raceResults, season, onClose }) {
+  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const raceData = raceResults.find(r => r.race === race.raceKey);
   
   if (!raceData) return null;
@@ -1197,22 +1258,14 @@ function LeaderboardPage({ season }) {
   const [expandedDriver, setExpandedDriver] = useState(null);
 
   const seasonData = SEASON_DATA[season];
-  const driverStandings = useMemo(() => computeDriverStandings(seasonData.races), [season]);
-  const teamStandings = useMemo(() => computeTeamStandings(seasonData.races), [season]);
+  const driverStandings = useMemo(() => computeDriverStandings(seasonData.races, season), [season]);
+  const teamStandings = useMemo(() => computeTeamStandings(seasonData.races, season), [season]);
 
   function getDriverRaces(driverName) {
     return seasonData.races.map(({ race, results }) => {
       const pos = results.indexOf(driverName);
       return { race, pos: pos >= 0 ? pos + 1 : null, pts: pos >= 0 && pos < POINTS_TABLE.length ? POINTS_TABLE[pos] : 0 };
     }).filter(r => r.pos !== null);
-  }
-
-  if (seasonData.races.length === 0) {
-    return (
-      <div className="no-data-message">
-        Nessuna gara ancora disputata per {season}
-      </div>
-    );
   }
 
   return (
@@ -1352,6 +1405,7 @@ function CalendarPage({ season }) {
         <RaceResultsModal 
           race={selectedRace} 
           raceResults={seasonData.races}
+          season={season}
           onClose={() => setSelectedRace(null)} 
         />
       )}
@@ -1362,9 +1416,9 @@ function CalendarPage({ season }) {
 // ─── CAREER PAGE ──────────────────────────────────────────────────
 function CareerPage() {
   const drivers = useMemo(() => {
-    return Object.keys(DRIVER_TEAMS).map((name) => ({
+    return Object.keys(DRIVER_TEAMS_BASE).map((name) => ({
       name,
-      ...DRIVER_TEAMS[name],
+      ...DRIVER_TEAMS_BASE[name],
       ...CAREER_STATS[name],
     })).sort((a, b) => b.totalPoints - a.totalPoints || b.totalWins - a.totalWins);
   }, []);
