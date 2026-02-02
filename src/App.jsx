@@ -146,7 +146,7 @@ const TEAM_CHANGES = {
   "Stagione 2": {
     Alex: { team: "McLaren", num: 99 },
     Igor: { team: "Red Bull", num: 92 },
-    Saiz: { team: "Mercedes", num: 55 },
+    Sainz: { team: "Mercedes", num: 55 },
     Bortoleto: { team: "Ferrari", num: 5 },
     Piastri: { team: "Williams", num: 81 },
     Manuel: { team: "Aston Martin", num: 95 },
@@ -158,10 +158,19 @@ const TEAM_CHANGES = {
     Verstappen: { num: 3 },
   },
   "Stagione 3": {
-    Piastri: { team: "Ferrari", num: 81 },
-    Leclerc: { team: "Red Bull", num: 16 },
-    Norris: { team: "Mercedes", num: 4 },
-    Russell: { team: "McLaren", num: 63 },
+    // Cambi cumulativi dalla Stagione 2
+    Alex: { team: "McLaren", num: 99 },
+    Igor: { team: "Red Bull", num: 92 },
+    Sainz: { team: "Mercedes", num: 55 },
+    Bortoleto: { team: "Ferrari", num: 5 },
+    Piastri: { team: "Williams", num: 81 },
+    Manuel: { team: "Aston Martin", num: 95 },
+    Leclerc: { team: "Visa Cash App RB", num: 16 },
+    Stroll: { team: "Haas", num: 18 },
+    Russell: { team: "Alpine", num: 63 },
+    Tsunoda: { team: "Sauber", num: 22 },
+    Norris: { num: 1 },
+    Verstappen: { num: 3 },
   }
 };
 
@@ -191,7 +200,7 @@ const TEAM_COLORS = {
 };
 
 function computeDriverStandings(raceResults, season) {
-  const DRIVER_TEAMS = getDriverTeamsForSeason(raceResults, season);
+  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const pts = {};
   const wins = {};
   const podiums = {};
@@ -219,14 +228,21 @@ function computeDriverStandings(raceResults, season) {
 
 function computeTeamStandings(raceResults, season) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
-  const teams = {};
   
+  // Inizializza tutti i team con 0 punti
+  const teams = {};
+  Object.values(DRIVER_TEAMS).forEach(driver => {
+    if (!teams[driver.team]) {
+      teams[driver.team] = { points: 0, wins: 0, poles: 0, wcc: 0 };
+    }
+  });
+  
+  // Aggiungi i punti dalle gare
   raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
       const info = DRIVER_TEAMS[d];
       if (!info) return;
-      if (!teams[info.team]) teams[info.team] = { points: 0, wins: 0, poles: 0, wcc: 0 };
       teams[info.team].points += POINTS_TABLE[i];
       if (i === 0) teams[info.team].wins += 1;
     });
