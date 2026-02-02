@@ -53,12 +53,13 @@ const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oce
 const SEASON_DATA = {
   "Stagione 1": {
     races: [
-      { race: "Australia", results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
-      { race: "Olanda", results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
-      { race: "Messico", results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
-      { race: "Brasile", results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll"] },
-      { race: "Qatar", results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
-      { race: "Singapore", results: ["Antonelli","Verstappen","Hamilton","Piastri","Leclerc","Alonso","Bortoleto","Igor","Sainz","Stroll","Tsunoda","Russell","Norris","Alex","Lawson","Bearman","Albon","Hulkenberg","Manuel","Gasly"] },
+      { race: "Australia",  results: ["Alex","Igor","Hamilton","Norris","Russell","Verstappen","Tsunoda","Antonelli","Alonso","Leclerc","Bortoleto","Albon","Hulkenberg","Gasly","Sainz","Bearman","Lawson","Piastri","Manuel","Stroll"] },
+      { race: "Olanda",     results: ["Igor","Verstappen","Norris","Piastri","Hamilton","Russell","Leclerc","Antonelli","Lawson","Stroll","Bearman","Alonso","Gasly","Tsunoda","Manuel","Alex","Hulkenberg","Bortoleto","Sainz","Albon"] },
+      { race: "Messico",    results: ["Alex","Verstappen","Antonelli","Norris","Alonso","Russell","Igor","Bortoleto","Hamilton","Gasly","Tsunoda","Leclerc","Bearman","Albon","Stroll","Hulkenberg","Lawson","Sainz","Piastri","Manuel"] },
+      { race: "Brasile",    results: ["Alex","Manuel","Norris","Alonso","Leclerc","Piastri","Verstappen","Antonelli","Russell","Hamilton","Gasly","Hulkenberg","Bearman","Albon","Lawson","Bortoleto","Lawson","Sainz","Igor","Stroll" ] },
+      { race: "Qatar",      results: ["Norris","Piastri","Bortoleto","Albon","Sainz","Hamilton","Alonso","Antonelli","Manuel","Leclerc","Hulkenberg","Lawson","Gasly","Russell","Igor","Tsunoda","Verstappen","Stroll","Bearman","Alex"] },
+      { race: "Singapore",  results: ["Antonelli","Verstappen","Hamilton","Piastri","Leclerc","Alonso","Bortoleto","Igor","Sainz","Stroll","Tsunoda","Russell","Norris","Alex","Lawson","Bearman","Albon","Hulkenberg","Manuel","Gasly"] },
+      { race: "Monaco",     results: ["Sainz","Norris","Bortoleto","Tsunoda","Leclerc","Piastri","Albon","Hulkenberg","Manuel","Igor","Gasly","Hamilton","Verstappen","Alex","Lawson","Stroll","Russell","Antonelli","Alonso","Bearman"] },
     ],
     calendar: [
       { round: 1, race: "Australian GP", city: "Melbourne", status: "done", winner: "Alex", raceKey: "Australia" },
@@ -67,10 +68,10 @@ const SEASON_DATA = {
       { round: 4, race: "São Paulo GP", city: "São Paulo", status: "done", winner: "Alex", raceKey: "Brasile" },
       { round: 5, race: "Qatar GP", city: "Lusail", status: "done", winner: "Norris", raceKey: "Qatar" },
       { round: 6, race: "Singapore GP", city: "Singapore", status: "done", winner: "Antonelli", raceKey: "Singapore" },
-      { round: 7, race: "Monaco GP", city: "Monaco", status: "upcoming", winner: "...", raceKey: null },
+      { round: 7, race: "Monaco GP", city: "Monaco", status: "done", winner: "Sainz", raceKey: "Monaco" },
     ],
     driverPoles: {
-      Alex: 3, Norris: 2, Igor: 2, Verstappen: 1, Hamilton: 0, Russell: 0,
+      Alex: 3, Igor: 3, Norris: 1, Verstappen: 0, Hamilton: 0, Russell: 0,
       Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
       Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
       Hulkenberg: 0, Bortoleto: 0
@@ -183,7 +184,7 @@ const CAREER_STATS = {
   Piastri:    { totalPoints: 42, totalWins: 0, totalPoles: 0, totalPodiums: 3, championships: 0 },
   Norris:     { totalPoints: 70, totalWins: 1, totalPoles: 2, totalPodiums: 4, championships: 0 },
   Verstappen: { totalPoints: 51, totalWins: 0, totalPoles: 1, totalPodiums: 2, championships: 0 },
-  Tsunoda:    { totalPoints: 0, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Tsunoda:    { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Russell:    { totalPoints: 30, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Antonelli:  { totalPoints: 51, totalWins: 1, totalPoles: 0, totalPodiums: 2, championships: 0 },
   Leclerc:    { totalPoints: 28, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
@@ -191,14 +192,14 @@ const CAREER_STATS = {
   Albon:      { totalPoints: 14, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Sainz:      { totalPoints: 10, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Alonso:     { totalPoints: 44, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
-  Stroll:     { totalPoints: 0, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
-  Lawson:     { totalPoints: 4, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Stroll:     { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Lawson:     { totalPoints: 4,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Igor:       { totalPoints: 46, totalWins: 1, totalPoles: 2, totalPodiums: 2, championships: 0 },
-  Bearman:    { totalPoints: 4, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Bearman:    { totalPoints: 4,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Manuel:     { totalPoints: 22, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
-  Gasly:      { totalPoints: 6, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Gasly:      { totalPoints: 6,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Alex:       { totalPoints: 93, totalWins: 3, totalPoles: 3, totalPodiums: 3, championships: 0 },
-  Hulkenberg: { totalPoints: 6, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Hulkenberg: { totalPoints: 6,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Bortoleto:  { totalPoints: 23, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
 };
 
