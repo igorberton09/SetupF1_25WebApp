@@ -296,6 +296,7 @@ const TEAM_CAREER_STATS = {
 const NAV = [
   { id: "leaderboard", label: "Leaderboard", icon: "🏆" },
   { id: "calendar",    label: "Calendario",  icon: "📅" },
+  { id: "h2h",         label: "Head-to-Head", icon: "⚔️" },
   { id: "career",      label: "Carriera",    icon: "🏁" },
   { id: "setup",       label: "Setup",       icon: "⚙️" },
 ];
@@ -834,6 +835,162 @@ const css = `
   .career-stat-val.wcc { color: #C0C0C0; }
 
   /* ═══════════════════════════════════════════════════════════════
+     HEAD TO HEAD PAGE
+     ══════════════════════════════════════════════════════════════ */
+  .h2h-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .h2h-team-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #162232;
+    border-radius: 12px;
+    overflow: hidden;
+    animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .h2h-team-card:hover {
+    border-color: #243848;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    transform: translateY(-2px);
+  }
+  .h2h-team-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #1a2332;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .h2h-team-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .h2h-team-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+  .h2h-drivers-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 16px;
+  }
+  .h2h-driver {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .h2h-driver.right {
+    align-items: flex-end;
+  }
+  .h2h-driver-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #dde4eb;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .h2h-driver-num {
+    font-size: 10px;
+    color: #2e4455;
+  }
+  .h2h-vs {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #e8001d;
+    padding: 6px 12px;
+    background: rgba(232,0,29,0.1);
+    border-radius: 6px;
+  }
+  .h2h-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: #1a2332;
+    border-top: 1px solid #1a2332;
+  }
+  .h2h-stat-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    padding: 10px 20px;
+    gap: 16px;
+  }
+  .h2h-stat-val {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #dde4eb;
+  }
+  .h2h-stat-val.left {
+    text-align: right;
+  }
+  .h2h-stat-val.winner {
+    color: #e8001d;
+  }
+  .h2h-stat-label {
+    font-size: 9px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .h2h-detail-section {
+    padding: 16px 20px;
+    border-top: 1px solid #1a2332;
+  }
+  .h2h-detail-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    margin-bottom: 12px;
+  }
+  .h2h-race-results {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .h2h-race-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: rgba(26,35,50,0.3);
+    border-radius: 6px;
+    font-size: 10px;
+  }
+  .h2h-race-name {
+    color: #5a7a8f;
+  }
+  .h2h-race-pos {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #c8d6e0;
+    min-width: 30px;
+    text-align: center;
+  }
+  .h2h-race-pos.winner {
+    color: #e8001d;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      SETUP PAGE (original)
      ══════════════════════════════════════════════════════════════ */
   .f1-toolbar {
@@ -1066,6 +1223,8 @@ const css = `
     .lb-table th, .lb-table td { padding: 8px 8px; font-size: 10.5px; }
     .lb-driver-name { font-size: 10px; }
     .page-header { flex-direction: column; align-items: flex-start; }
+    .h2h-team-grid { grid-template-columns: 1fr; }
+    .h2h-race-item { grid-template-columns: 1fr auto auto; font-size: 9px; }
   }
 `;
 
@@ -1518,6 +1677,176 @@ function CareerPage() {
   );
 }
 
+// ─── HEAD TO HEAD PAGE ────────────────────────────────────────────
+function HeadToHeadPage({ season }) {
+  const seasonData = SEASON_DATA[season];
+  const DRIVER_TEAMS = getDriverTeamsForSeason(season);
+
+  // Raggruppa i piloti per team
+  const teamPairs = useMemo(() => {
+    const teams = {};
+    Object.entries(DRIVER_TEAMS).forEach(([driver, info]) => {
+      if (!teams[info.team]) teams[info.team] = [];
+      teams[info.team].push({ name: driver, ...info });
+    });
+    return Object.entries(teams)
+      .filter(([_, drivers]) => drivers.length === 2)
+      .map(([team, drivers]) => ({ team, drivers }));
+  }, [season]);
+
+  // Calcola statistiche H2H per una coppia di piloti
+  function calculateH2H(driver1, driver2) {
+    const stats1 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
+    const stats2 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
+
+    seasonData.races.forEach(({ race, results }) => {
+      const pos1 = results.indexOf(driver1.name);
+      const pos2 = results.indexOf(driver2.name);
+      
+      if (pos1 >= 0 && pos1 < POINTS_TABLE.length) {
+        stats1.points += POINTS_TABLE[pos1];
+      }
+      if (pos2 >= 0 && pos2 < POINTS_TABLE.length) {
+        stats2.points += POINTS_TABLE[pos2];
+      }
+
+      if (pos1 === 0) stats1.wins++;
+      if (pos2 === 0) stats2.wins++;
+
+      if (pos1 >= 0 && pos1 < 3) stats1.podiums++;
+      if (pos2 >= 0 && pos2 < 3) stats2.podiums++;
+
+      // Qualifica (usando driverPoles)
+      const poles = seasonData.driverPoles || {};
+      stats1.poles = poles[driver1.name] || 0;
+      stats2.poles = poles[driver2.name] || 0;
+
+      // Race head-to-head
+      if (pos1 >= 0 && pos2 >= 0) {
+        if (pos1 < pos2) {
+          stats1.raceWins++;
+        } else if (pos2 < pos1) {
+          stats2.raceWins++;
+        }
+        stats1.races.push({ race, pos: pos1 + 1 });
+        stats2.races.push({ race, pos: pos2 + 1 });
+      }
+    });
+
+    return { stats1, stats2 };
+  }
+
+  return (
+    <div className="h2h-team-grid">
+      {teamPairs.map(({ team, drivers }, idx) => {
+        const [driver1, driver2] = drivers;
+        const { stats1, stats2 } = calculateH2H(driver1, driver2);
+
+        return (
+          <div className="h2h-team-card" key={team} style={{ animationDelay: `${idx * 0.05}s` }}>
+            <div className="h2h-team-header">
+              <div className="h2h-team-dot" style={{ background: TEAM_COLORS[team] || "#555" }} />
+              <div className="h2h-team-name">{team}</div>
+            </div>
+
+            <div className="h2h-drivers-row">
+              <div className="h2h-driver">
+                <div className="h2h-driver-name">
+                  <span>{driver1.flag}</span>
+                  <span>{driver1.name}</span>
+                </div>
+                <div className="h2h-driver-num">#{driver1.num}</div>
+              </div>
+              <div className="h2h-vs">VS</div>
+              <div className="h2h-driver right">
+                <div className="h2h-driver-name">
+                  <span>{driver2.name}</span>
+                  <span>{driver2.flag}</span>
+                </div>
+                <div className="h2h-driver-num">#{driver2.num}</div>
+              </div>
+            </div>
+
+            <div className="h2h-stats-grid">
+              <div className="h2h-stat-row">
+                <div className={`h2h-stat-val left${stats1.points > stats2.points ? " winner" : ""}`}>
+                  {stats1.points}
+                </div>
+                <div className="h2h-stat-label">Punti</div>
+                <div className={`h2h-stat-val${stats2.points > stats1.points ? " winner" : ""}`}>
+                  {stats2.points}
+                </div>
+              </div>
+
+              <div className="h2h-stat-row">
+                <div className={`h2h-stat-val left${stats1.wins > stats2.wins ? " winner" : ""}`}>
+                  {stats1.wins}
+                </div>
+                <div className="h2h-stat-label">Vittorie</div>
+                <div className={`h2h-stat-val${stats2.wins > stats1.wins ? " winner" : ""}`}>
+                  {stats2.wins}
+                </div>
+              </div>
+
+              <div className="h2h-stat-row">
+                <div className={`h2h-stat-val left${stats1.podiums > stats2.podiums ? " winner" : ""}`}>
+                  {stats1.podiums}
+                </div>
+                <div className="h2h-stat-label">Podi</div>
+                <div className={`h2h-stat-val${stats2.podiums > stats1.podiums ? " winner" : ""}`}>
+                  {stats2.podiums}
+                </div>
+              </div>
+
+              <div className="h2h-stat-row">
+                <div className={`h2h-stat-val left${stats1.poles > stats2.poles ? " winner" : ""}`}>
+                  {stats1.poles}
+                </div>
+                <div className="h2h-stat-label">Pole Position</div>
+                <div className={`h2h-stat-val${stats2.poles > stats1.poles ? " winner" : ""}`}>
+                  {stats2.poles}
+                </div>
+              </div>
+
+              <div className="h2h-stat-row">
+                <div className={`h2h-stat-val left${stats1.raceWins > stats2.raceWins ? " winner" : ""}`}>
+                  {stats1.raceWins}
+                </div>
+                <div className="h2h-stat-label">Gare Vinte H2H</div>
+                <div className={`h2h-stat-val${stats2.raceWins > stats1.raceWins ? " winner" : ""}`}>
+                  {stats2.raceWins}
+                </div>
+              </div>
+            </div>
+
+            {stats1.races.length > 0 && (
+              <div className="h2h-detail-section">
+                <div className="h2h-detail-title">Risultati Gara</div>
+                <div className="h2h-race-results">
+                  {stats1.races.map((r1, i) => {
+                    const r2 = stats2.races[i];
+                    return (
+                      <div className="h2h-race-item" key={r1.race}>
+                        <div className="h2h-race-name">{r1.race}</div>
+                        <div className={`h2h-race-pos${r1.pos < r2.pos ? " winner" : ""}`}>
+                          P{r1.pos}
+                        </div>
+                        <div className={`h2h-race-pos${r2.pos < r1.pos ? " winner" : ""}`}>
+                          P{r2.pos}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── SETUP PAGE ───────────────────────────────────────────────────
 function SetupPage() {
   const [search, setSearch]     = useState("");
@@ -1590,6 +1919,7 @@ export default function App() {
   const pageTitle = {
     leaderboard: "Classifica Generale",
     calendar: "Calendario",
+    h2h: "Head-to-Head",
     career: "Statistiche Carriera",
     setup: "Setup Dashboard"
   }[page];
@@ -1597,11 +1927,12 @@ export default function App() {
   const pageSubtitle = {
     leaderboard: `${season} · ${completedRaces}/${totalRaces} gare completate`,
     calendar: `${season} · ${totalRaces} gare programmate`,
+    h2h: `${season} · Confronto compagni di squadra`,
     career: `Tutte le stagioni · Statistiche totali carriera`,
     setup: `${Object.keys(TRACKS).length} circuiti · simulatore`
   }[page];
 
-  const showSeasonSelector = ["leaderboard", "calendar"].includes(page);
+  const showSeasonSelector = ["leaderboard", "calendar", "h2h"].includes(page);
 
   return (
     <>
@@ -1650,6 +1981,7 @@ export default function App() {
 
           {page === "leaderboard" && <LeaderboardPage season={season} />}
           {page === "calendar" && <CalendarPage season={season} />}
+          {page === "h2h" && <HeadToHeadPage season={season} />}
           {page === "career" && <CareerPage />}
           {page === "setup" && <SetupPage />}
         </div>
