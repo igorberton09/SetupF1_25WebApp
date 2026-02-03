@@ -1625,6 +1625,10 @@ function CareerPage() {
                   <div className="career-stat-val poles">{d.totalPoles}</div>
                 </div>
                 <div className="career-stat-box">
+                  <div className="career-stat-label">InterPole</div>
+                  <div className="career-stat-val poles">{d.interpole}</div>
+                </div>
+                <div className="career-stat-box">
                   <div className="career-stat-label">Vittorie</div>
                   <div className="career-stat-val wins">{d.totalWins}</div>
                 </div>
