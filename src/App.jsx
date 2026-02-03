@@ -78,7 +78,15 @@ const SEASON_DATA = {
     }
   },
   "Stagione 2": {
-    races: [],
+    races: [
+      { race: "Austria",   results: []},
+      { race: "Ungheria",  results: []},
+      { race: "Australia", results: []},
+      { race: "Abu Dhabi", results: []},
+      { race: "Olanda",    results: []},
+      { race: "Jeddah",    results: []},
+      { race: "Qatar",     results: []},
+    ],
     calendar: [
       { round: 1, race: "Austrian GP",      city: "Red Bull Ring", status: "upcoming", winner: "...", raceKey: null },
       { round: 2, race: "Hungary GP",       city: "Hungaroring",   status: "upcoming", winner: "...", raceKey: null },
