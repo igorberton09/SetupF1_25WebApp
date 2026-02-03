@@ -90,8 +90,8 @@ const SEASON_DATA = {
     ],
     driverPoles: {
       Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0,
-      Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
-      Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0,
+      Ocon: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
+      Colapinto: 0, Lawson: 0, Hadjar: 0, Bearman: 0, Manuel: 0, Gasly: 0,
       Hulkenberg: 0, Bortoleto: 0
     }
   },
@@ -139,6 +139,9 @@ const DRIVER_TEAMS_BASE = {
   Alex:       { team: "Alpine", num: 99, flag: "🇮🇹" },
   Hulkenberg: { team: "Sauber", num: 27, flag: "🇩🇪" },
   Bortoleto:  { team: "Sauber", num: 5, flag: "🇧🇷" },
+  Ocon:       { team: "No Seat", num: 31, flag: "🇫🇷" },
+  Colapinto:  { team: "No Seat", num: 43, flag: "🇫🇷" },
+  Hadjar:     { team: "No Seat", num: 6, flag: "🇫🇷" },
 };
 
 // ─── TEAM CHANGES PER STAGIONE ─────────────────────────────────────
@@ -146,10 +149,10 @@ const TEAM_CHANGES = {
   "Stagione 2": {
     Alex: { team: "McLaren", num: 99 },
     Igor: { team: "Red Bull", num: 92 },
-    Piastri: { team: "", num: 81 },
+    Piastri: { team: "No Seat", num: 81 },
     Manuel: { team: "Aston Martin", num: 95 },
-    Stroll: { team: "", num: 18 },
-    Tsunoda: { team: "", num: 22 },
+    Stroll: { team: "No Seat", num: 18 },
+    Tsunoda: { team: "No Seat", num: 22 },
     Ocon: { team: "Haas", num: 31},
     Colapinto: { team: "Alpine", num:  43},
     Hadjar: { team: "Visa Cash Up RB", num: 6},
