@@ -140,7 +140,7 @@ const DRIVER_TEAMS_BASE = {
   Hulkenberg: { team: "Sauber", num: 27, flag: "🇩🇪" },
   Bortoleto:  { team: "Sauber", num: 5, flag: "🇧🇷" },
   Ocon:       { team: "No Seat", num: 31, flag: "🇫🇷" },
-  Colapinto:  { team: "No Seat", num: 43, flag: "🇫🇷" },
+  Colapinto:  { team: "No Seat", num: 43, flag: "ES" },
   Hadjar:     { team: "No Seat", num: 6, flag: "🇫🇷" },
 };
 
