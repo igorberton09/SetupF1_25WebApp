@@ -163,7 +163,7 @@ const TEAM_CHANGES = {
     Tsunoda: { team: "No Seat", num: 22 },
     Ocon: { team: "Haas", num: 31},
     Colapinto: { team: "Alpine", num:  43},
-    Hadjar: { team: "Visa Cash Up RB", num: 6},
+    Hadjar: { team: "Visa Cash App RB", num: 6},
     Norris: { num: 1 },
     Verstappen: { num: 3 },
   },
