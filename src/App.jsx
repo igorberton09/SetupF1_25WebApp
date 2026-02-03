@@ -212,6 +212,7 @@ function computeDriverStandings(raceResults, season) {
   });
   
   return Object.keys(DRIVER_TEAMS)
+    .filter(name => DRIVER_TEAMS[name].team !== "No Seat")
     .map((name) => ({
       name,
       points: pts[name] || 0,
@@ -226,20 +227,18 @@ function computeDriverStandings(raceResults, season) {
 function computeTeamStandings(raceResults, season) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   
-  // Inizializza tutti i team con 0 punti
   const teams = {};
   Object.values(DRIVER_TEAMS).forEach(driver => {
-    if (!teams[driver.team]) {
+    if (driver.team !== "No Seat" && !teams[driver.team]) {
       teams[driver.team] = { points: 0, wins: 0, poles: 0, wcc: 0 };
     }
   });
   
-  // Aggiungi i punti dalle gare
   raceResults.forEach(({ results }) => {
     results.forEach((d, i) => {
       if (i >= POINTS_TABLE.length) return;
       const info = DRIVER_TEAMS[d];
-      if (!info) return;
+      if (!info || info.team === "No Seat") return;
       teams[info.team].points += POINTS_TABLE[i];
       if (i === 0) teams[info.team].wins += 1;
     });
@@ -267,11 +266,11 @@ const CAREER_STATS = {
   Alonso:     { totalPoints: 38, totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Stroll:     { totalPoints: 2,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Lawson:     { totalPoints: 2,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
-  Igor:       { totalPoints: 54, totalWins: 1, totalPoles: 3, interPoles: 0, totalPodiums: 2, championships: 0 },
+  Igor:       { totalPoints: 54, totalWins: 1, totalPoles: 3, totalInterpole: 2, totalPodiums: 2, championships: 0 },
   Bearman:    { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
-  Manuel:     { totalPoints: 22, totalWins: 0, totalPoles: 0, interPoles: 0, totalPodiums: 1, championships: 0 },
+  Manuel:     { totalPoints: 22, totalWins: 0, totalPoles: 0, totalInterpole: 1, totalPodiums: 1, championships: 0 },
   Gasly:      { totalPoints: 1,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
-  Alex:       { totalPoints: 75, totalWins: 3, totalPoles: 3, interPoles: 0, totalPodiums: 3, championships: 0 },
+  Alex:       { totalPoints: 75, totalWins: 3, totalPoles: 3, totalInterpole: 1, totalPodiums: 3, championships: 0 },
   Hulkenberg: { totalPoints: 4,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Bortoleto:  { totalPoints: 40, totalWins: 0, totalPoles: 0, totalPodiums: 2, championships: 0 },
   Colapinto:  { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
@@ -804,7 +803,7 @@ const css = `
   }
   .career-stats {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 8px;
   }
   .career-stat-box {
@@ -830,7 +829,7 @@ const css = `
   .career-stat-val.pts { color: #e8001d; }
   .career-stat-val.wins { color: #FFD700; }
   .career-stat-val.poles { color: #00d4ff; }
-  .career-stat-val.ipoles { color:rgb(5, 165, 0)f; }
+  .career-stat-val.interpole { color: #9D00FF; }
   .career-stat-val.podiums { color: #CD7F32; }
   .career-stat-val.wdc { color: #C0C0C0; }
   .career-stat-val.wcc { color: #C0C0C0; }
@@ -1605,6 +1604,8 @@ function CareerPage() {
       .sort((a, b) => b.totalPoints - a.totalPoints);
   }, []);
 
+  const driversWithInterpole = ['Igor', 'Alex', 'Manuel'];
+
   return (
     <>
       <div className="career-section">
@@ -1625,10 +1626,12 @@ function CareerPage() {
                   <div className="career-stat-label">Pole</div>
                   <div className="career-stat-val poles">{d.totalPoles}</div>
                 </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">InterPole</div>
-                  <div className="career-stat-val ipoles">{d.interPoles}</div>
-                </div>
+                {driversWithInterpole.includes(d.name) && (
+                  <div className="career-stat-box">
+                    <div className="career-stat-label">Interpole</div>
+                    <div className="career-stat-val interpole">{d.totalInterpole || 0}</div>
+                  </div>
+                )}
                 <div className="career-stat-box">
                   <div className="career-stat-label">Vittorie</div>
                   <div className="career-stat-val wins">{d.totalWins}</div>
@@ -1687,7 +1690,6 @@ function HeadToHeadPage({ season }) {
   const seasonData = SEASON_DATA[season];
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
 
-  // Raggruppa i piloti per team
   const teamPairs = useMemo(() => {
     const teams = {};
     Object.entries(DRIVER_TEAMS).forEach(([driver, info]) => {
@@ -1699,7 +1701,6 @@ function HeadToHeadPage({ season }) {
       .map(([team, drivers]) => ({ team, drivers }));
   }, [season]);
 
-  // Calcola statistiche H2H per una coppia di piloti
   function calculateH2H(driver1, driver2) {
     const stats1 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
     const stats2 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
@@ -1721,12 +1722,10 @@ function HeadToHeadPage({ season }) {
       if (pos1 >= 0 && pos1 < 3) stats1.podiums++;
       if (pos2 >= 0 && pos2 < 3) stats2.podiums++;
 
-      // Qualifica (usando driverPoles)
       const poles = seasonData.driverPoles || {};
       stats1.poles = poles[driver1.name] || 0;
       stats2.poles = poles[driver2.name] || 0;
 
-      // Race head-to-head
       if (pos1 >= 0 && pos2 >= 0) {
         if (pos1 < pos2) {
           stats1.raceWins++;
