@@ -266,6 +266,9 @@ const CAREER_STATS = {
   Alex:       { totalPoints: 75, totalWins: 3, totalPoles: 3, totalPodiums: 3, championships: 0 },
   Hulkenberg: { totalPoints: 4,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
   Bortoleto:  { totalPoints: 40, totalWins: 0, totalPoles: 0, totalPodiums: 2, championships: 0 },
+  Colapinto:  { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Ocon:       { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
+  Hadjar:     { totalPoints: 0,  totalWins: 0, totalPoles: 0, totalPodiums: 0, championships: 0 },
 };
 
 const TEAM_CAREER_STATS = {
