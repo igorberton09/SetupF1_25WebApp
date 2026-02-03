@@ -827,12 +827,12 @@ const css = `
     color: #dde4eb;
   }
   .career-stat-val.pts { color: #e8001d; }
-  .career-stat-val.wins { color: #FFD700; }
+  .career-stat-val.wins { color: #c0a300; }
   .career-stat-val.poles { color: #00d4ff; }
-  .career-stat-val.interpole { color: #9D00FF; }
-  .career-stat-val.podiums { color: #CD7F32; }
-  .career-stat-val.wdc { color: #C0C0C0; }
-  .career-stat-val.wcc { color: #C0C0C0; }
+  .career-stat-val.interpole { color: #00a816; }
+  .career-stat-val.podiums { color: #a16325; }
+  .career-stat-val.wdc { color: #ffc400; }
+  .career-stat-val.wcc { color: #ffc400; }
 
   /* ═══════════════════════════════════════════════════════════════
      HEAD TO HEAD PAGE
