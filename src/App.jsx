@@ -146,31 +146,17 @@ const TEAM_CHANGES = {
   "Stagione 2": {
     Alex: { team: "McLaren", num: 99 },
     Igor: { team: "Red Bull", num: 92 },
-    Sainz: { team: "Mercedes", num: 55 },
-    Bortoleto: { team: "Ferrari", num: 5 },
-    Piastri: { team: "Williams", num: 81 },
+    Piastri: { team: "", num: 81 },
     Manuel: { team: "Aston Martin", num: 95 },
-    Leclerc: { team: "Visa Cash App RB", num: 16 },
-    Stroll: { team: "Haas", num: 18 },
-    Russell: { team: "Alpine", num: 63 },
-    Tsunoda: { team: "Sauber", num: 22 },
+    Stroll: { team: "", num: 18 },
+    Tsunoda: { team: "", num: 22 },
+    Ocon: { team: "Haas", num: 31},
+    Colapinto: { team: "Alpine", num:  43},
+    Hadjar: { team: "Visa Cash Up RB", num: 6},
     Norris: { num: 1 },
     Verstappen: { num: 3 },
   },
   "Stagione 3": {
-    // Cambi cumulativi dalla Stagione 2
-    Alex: { team: "McLaren", num: 99 },
-    Igor: { team: "Red Bull", num: 92 },
-    Sainz: { team: "Mercedes", num: 55 },
-    Bortoleto: { team: "Ferrari", num: 5 },
-    Piastri: { team: "Williams", num: 81 },
-    Manuel: { team: "Aston Martin", num: 95 },
-    Leclerc: { team: "Visa Cash App RB", num: 16 },
-    Stroll: { team: "Haas", num: 18 },
-    Russell: { team: "Alpine", num: 63 },
-    Tsunoda: { team: "Sauber", num: 22 },
-    Norris: { num: 1 },
-    Verstappen: { num: 3 },
   }
 };
 
