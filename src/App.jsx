@@ -1711,7 +1711,7 @@ const ChevronDown = () => (
 
 function TrackCard({ id, track, isOpen, onToggle, index }) {
   return (
-    <button
+    <div  // ← Cambia da button a div
       className={`track-card${isOpen ? " open" : ""}`}
       style={{ animationDelay: `${index * 0.035}s` }}
       onClick={() => !isOpen && onToggle()}
@@ -1786,7 +1786,7 @@ function TrackCard({ id, track, isOpen, onToggle, index }) {
           </div>
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -1998,9 +1998,24 @@ function AISetupChatbot() {
   };
 
   const handleQuickAction = (question) => {
-    setInput(question);
-    setTimeout(() => handleSend(), 100);
+  const userMessage = {
+    sender: "user",
+    text: question,  // ← Usa direttamente la question
+    timestamp: new Date()
   };
+  setMessages(prev => [...prev, userMessage]);
+  setIsTyping(true);
+  
+  setTimeout(() => {
+    const aiResponse = {
+      sender: "ai",
+      text: analyzeSetupIssue(question),
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, aiResponse]);
+    setIsTyping(false);
+  }, 1000 + Math.random() * 1000);
+};
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
