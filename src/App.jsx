@@ -1734,91 +1734,248 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
 }
 
 // AI Setup Assistant Component
-function AISetupAssistant() {
-  const [selectedTrack, setSelectedTrack] = useState("");
-  const [result, setResult] = useState(null);
+// AI Setup Chatbot Component
+function AISetupChatbot() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  const handleAnalyze = () => {
-    if (!selectedTrack) return;
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  const analyzeSetupIssue = (userMessage) => {
+    const msg = userMessage.toLowerCase();
     
-    const track = TRACKS[selectedTrack];
-    if (!track) return;
-
-    // Simulate AI analysis
-    setResult({
-      track: track.nome,
-      recommendations: {
-        aeroFront: track.aero[0],
-        aeroRear: track.aero[1],
-        transmission: SHARED.trasmissione,
-        brakes: SHARED.freni,
-        tyres: SHARED.gomme
-      },
-      tip: `Per ${track.nome}, consigliamo un'aerodinamica ${track.aero[0] > 30 ? 'alta' : 'bassa'} per massimizzare le prestazioni. ${track.continente === 'Europa' ? 'Circuito tecnico europeo.' : 'Attenzione alle condizioni climatiche.'}`
+    // Detect track mention
+    let trackKey = null;
+    let trackData = null;
+    
+    Object.entries(TRACKS).forEach(([key, data]) => {
+      if (msg.includes(key) || msg.includes(data.nome.toLowerCase())) {
+        trackKey = key;
+        trackData = data;
+      }
     });
+
+    // Detect issues
+    const issues = {
+      usura: msg.includes("usura") || msg.includes("consumo") || msg.includes("gomme"),
+      sottosterzo: msg.includes("sottosterzo") || msg.includes("curva lenta"),
+      sovrasterzo: msg.includes("sovrasterzo") || msg.includes("instabile"),
+      velocita: msg.includes("velocità") || msg.includes("dritto") || msg.includes("top speed"),
+      freni: msg.includes("freni") || msg.includes("bloccaggio"),
+      accelerazione: msg.includes("accelerazione") || msg.includes("trazione")
+    };
+
+    let response = "";
+
+    if (!trackKey) {
+      response = "Non ho capito quale circuito stai usando. Puoi dirmi il nome della pista? (es. Austria, Monaco, Monza...)";
+    } else {
+      response = `**Setup consigliato per ${trackData.nome}:**\n\n`;
+
+      if (issues.usura) {
+        const aeroSuggestion = trackData.aero[0] > 35 ? "ridurre leggermente" : "aumentare";
+        response += `🔧 **Problema: Usura gomme eccessiva**\n`;
+        response += `• ${aeroSuggestion} l'aerodinamica anteriore per distribuire meglio il carico\n`;
+        response += `• Aumentare la rigidità delle sospensioni (S3-S4) di 1-2 punti\n`;
+        response += `• Verificare la pressione gomme: attualmente ${SHARED.gomme}\n\n`;
+      }
+
+      if (issues.sottosterzo) {
+        response += `🔧 **Problema: Sottosterzo in curva**\n`;
+        response += `• Aumentare l'aerodinamica anteriore: attualmente ${trackData.aero[0]}, prova +3/+5\n`;
+        response += `• Ridurre l'aerodinamica posteriore di 2 punti\n`;
+        response += `• Ammorbidire le sospensioni anteriori (S1-S2)\n\n`;
+      }
+
+      if (issues.sovrasterzo) {
+        response += `🔧 **Problema: Sovrasterzo**\n`;
+        response += `• Aumentare l'aerodinamica posteriore: attualmente ${trackData.aero[1]}, prova +3\n`;
+        response += `• Ridurre l'aerodinamica anteriore di 2 punti\n`;
+        response += `• Irrigidire le sospensioni posteriori (S3-S4)\n\n`;
+      }
+
+      if (issues.velocita) {
+        response += `🔧 **Problema: Velocità massima bassa**\n`;
+        response += `• Ridurre l'aerodinamica: Front ${Math.max(0, trackData.aero[0] - 5)} / Rear ${Math.max(0, trackData.aero[1] - 5)}\n`;
+        response += `• Ottimizzare la trasmissione verso valori più alti\n`;
+        response += `• Attenzione: questo potrebbe ridurre il grip in curva!\n\n`;
+      }
+
+      if (issues.freni) {
+        response += `🔧 **Problema: Frenata**\n`;
+        response += `• Aumentare la bias freni anteriore: ${SHARED.freni}\n`;
+        response += `• Ridurre la rigidità delle sospensioni anteriori\n`;
+        response += `• Verificare l'ABS e la modulazione\n\n`;
+      }
+
+      if (issues.accelerazione) {
+        response += `🔧 **Problema: Trazione in accelerazione**\n`;
+        response += `• Aumentare l'aerodinamica posteriore di 3-5 punti\n`;
+        response += `• Irrigidire le sospensioni posteriori (S3-S5)\n`;
+        response += `• Verificare la geometria: ${SHARED.geometria}\n\n`;
+      }
+
+      // Add current setup reference
+      response += `📊 **Setup base ${trackData.nome}:**\n`;
+      response += `• Aero: Front ${trackData.aero[0]} / Rear ${trackData.aero[1]}\n`;
+      response += `• Trasmissione: ${trackData.trasmissione}\n`;
+      response += `• Sospensioni: ${trackData.sosp.join(" - ")}`;
+    }
+
+    return response;
+  };
+
+  const handleSend = () => {
+    if (!input.trim() || isTyping) return;
+
+    const userMessage = {
+      sender: "user",
+      text: input,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInput("");
+    setIsTyping(true);
+
+    // Simulate AI thinking
+    setTimeout(() => {
+      const aiResponse = {
+        sender: "ai",
+        text: analyzeSetupIssue(input),
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, aiResponse]);
+      setIsTyping(false);
+    }, 1000 + Math.random() * 1000);
+  };
+
+  const handleQuickAction = (question) => {
+    setInput(question);
+    setTimeout(() => handleSend(), 100);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
   };
 
   return (
-    <div className="ai-assistant">
-      <div className="ai-assistant-header">
-        <div className="ai-icon">🤖</div>
-        <div>
-          <div className="ai-title">AI Setup Assistant</div>
-          <div className="ai-subtitle">Powered by Neural Network</div>
+    <div className="ai-chatbot">
+      <div className="chatbot-header">
+        <div className="chatbot-icon">🤖</div>
+        <div className="chatbot-title-section">
+          <div className="chatbot-title">AI Setup Engineer</div>
+          <div className="chatbot-subtitle">Assistente Setup Specializzato F1</div>
         </div>
       </div>
 
-      <div className="ai-input-section">
-        <label className="ai-label">Seleziona Circuito</label>
-        <select 
-          className="ai-select"
-          value={selectedTrack}
-          onChange={(e) => setSelectedTrack(e.target.value)}
-        >
-          <option value="">-- Scegli una pista --</option>
-          {Object.entries(TRACKS).map(([key, track]) => (
-            <option key={key} value={key}>
-              {CONTINENT_EMOJI[track.continente]} {track.nome}
-            </option>
-          ))}
-        </select>
+      <div className="chatbot-messages">
+        {messages.length === 0 ? (
+          <div className="welcome-message">
+            <div className="welcome-icon">🏎️</div>
+            <div className="welcome-title">Benvenuto!</div>
+            <div className="welcome-text">
+              Sono il tuo ingegnere virtuale specializzato in setup F1.<br/>
+              Descrivi il tuo problema e ti aiuterò a risolverlo!
+            </div>
+            <div className="quick-actions">
+              <button 
+                className="quick-action-btn"
+                onClick={() => handleQuickAction("Ho troppa usura gomme in Austria")}
+              >
+                🔥 Usura gomme
+              </button>
+              <button 
+                className="quick-action-btn"
+                onClick={() => handleQuickAction("Sottosterzo a Monaco")}
+              >
+                ↪️ Sottosterzo
+              </button>
+              <button 
+                className="quick-action-btn"
+                onClick={() => handleQuickAction("Sovrasterzo a Monza")}
+              >
+                ↩️ Sovrasterzo
+              </button>
+              <button 
+                className="quick-action-btn"
+                onClick={() => handleQuickAction("Poca velocità massima a Spa")}
+              >
+                ⚡ Velocità bassa
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {messages.map((msg, idx) => (
+              <div key={idx} className="chat-message">
+                <div className={`message-avatar ${msg.sender}`}>
+                  {msg.sender === "user" ? "👤" : "🤖"}
+                </div>
+                <div className="message-content">
+                  <div className="message-sender">
+                    {msg.sender === "user" ? "Tu" : "AI Engineer"}
+                  </div>
+                  <div 
+                    className="message-text"
+                    dangerouslySetInnerHTML={{ 
+                      __html: msg.text.replace(/\n/g, '<br/>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="chat-message">
+                <div className="message-avatar ai">🤖</div>
+                <div className="message-content">
+                  <div className="message-sender">AI Engineer</div>
+                  <div className="typing-indicator">
+                    <div className="typing-dot"></div>
+                    <div className="typing-dot"></div>
+                    <div className="typing-dot"></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </>
+        )}
       </div>
 
-      <button 
-        className="ai-button"
-        onClick={handleAnalyze}
-        disabled={!selectedTrack}
-      >
-        Analizza Setup Ottimale
-      </button>
-
-      {result && (
-        <div className="ai-result">
-          <div className="ai-result-title">
-            <span>⚡</span>
-            <span>Setup Raccomandato - {result.track}</span>
-          </div>
-          <div className="ai-result-item">
-            <span className="ai-result-label">Aero Anteriore</span>
-            <span className="ai-result-value">{result.recommendations.aeroFront}</span>
-          </div>
-          <div className="ai-result-item">
-            <span className="ai-result-label">Aero Posteriore</span>
-            <span className="ai-result-value">{result.recommendations.aeroRear}</span>
-          </div>
-          <div className="ai-result-item">
-            <span className="ai-result-label">Trasmissione</span>
-            <span className="ai-result-value">{result.recommendations.transmission}</span>
-          </div>
-          <div className="ai-result-item">
-            <span className="ai-result-label">Freni</span>
-            <span className="ai-result-value">{result.recommendations.brakes}</span>
-          </div>
-          <div className="ai-tip">
-            <strong>💡 Consiglio AI:</strong> {result.tip}
-          </div>
+      <div className="chatbot-input-area">
+        <div className="chatbot-input-wrapper">
+          <textarea
+            className="chatbot-input"
+            placeholder="Descrivi il tuo problema... (es: 'troppa usura in Austria')"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isTyping}
+            rows={1}
+          />
+          <button 
+            className="chatbot-send-btn"
+            onClick={handleSend}
+            disabled={!input.trim() || isTyping}
+          >
+            <span>Invia</span>
+            <span>→</span>
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -2304,7 +2461,7 @@ function SetupPage() {
           )}
         </div>
       </div>
-      <AISetupAssistant />
+      <AISetupChatbot />
     </div>
   );
 }
