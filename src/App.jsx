@@ -49,6 +49,58 @@ const SHARED = {
 const CONTINENTI = ["Tutti", "Europa", "Asia", "America", "Oceania"];
 const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oceania: "🌏" };
 
+// ─── RULES CONFIGURATION ──────────────────────────────────────────
+// 🔧 PER AGGIUNGERE/RIMUOVERE REGOLE: modifica questo array
+const RULES_CONFIG = [
+  {
+    id: "points",
+    title: "Sistema di Punteggio",
+    icon: "🏆",
+    content: [
+      "I punti vengono assegnati ai primi 10 classificati secondo lo schema standard F1:",
+      "1° posto: 25 punti",
+      "2° posto: 18 punti", 
+      "3° posto: 15 punti",
+      "4° posto: 12 punti",
+      "5° posto: 10 punti",
+      "6° posto: 8 punti",
+      "7° posto: 6 punti",
+      "8° posto: 4 punti",
+      "9° posto: 2 punti",
+      "10° posto: 1 punto",
+      "",
+      "Il pilota con più punti al termine della stagione viene incoronato Campione del Mondo."
+    ]
+  },
+  {
+    id: "qualifying",
+    title: "Qualifiche e Pole Position",
+    icon: "⏱️",
+    content: [
+      "Le qualifiche determinano la griglia di partenza per la gara.",
+      "Il pilota più veloce ottiene la Pole Position (1° posto in griglia).",
+      "",
+      "Le pole position vengono conteggiate nelle statistiche di carriera.",
+      "Non vengono assegnati punti per le qualifiche, ma una buona posizione di partenza è fondamentale per la strategia di gara."
+    ]
+  },
+  {
+    id: "teams",
+    title: "Campionato Costruttori",
+    icon: "🏗️",
+    content: [
+      "Ogni squadra schiera due piloti.",
+      "I punti di entrambi i piloti vengono sommati per il Campionato Costruttori.",
+      "",
+      "La squadra con più punti totali vince il Campionato Costruttori.",
+      "È possibile vincere il Campionato Piloti senza che la propria squadra vinca il Campionato Costruttori, e viceversa.",
+      "",
+      "I trasferimenti di piloti tra le stagioni possono modificare la composizione dei team."
+    ]
+  }
+];
+
+
 // ─── LEADERBOARD DATA PER STAGIONE ──────────────────────────────────
 const SEASON_DATA = {
   "Stagione 1": {
@@ -298,7 +350,9 @@ const NAV = [
   { id: "h2h",         label: "Head-to-Head", icon: "⚔️" },
   { id: "career",      label: "Carriera",    icon: "🏁" },
   { id: "setup",       label: "Setup",       icon: "⚙️" },
+  { id: "rules",       label: "Regole",      icon: "📋" },
 ];
+
 
 // ─── MASTER CSS ───────────────────────────────────────────────────
 const css = `
@@ -323,6 +377,10 @@ const css = `
   @keyframes modalIn {
     from { opacity: 0; transform: scale(0.95); }
     to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes ai-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+    50%      { box-shadow: 0 0 30px rgba(0,212,255,0.5), 0 0 40px rgba(232,0,29,0.2); }
   }
 
   /* ── Root ──────────────────────────────────────────────────── */
@@ -991,8 +1049,14 @@ const css = `
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     SETUP PAGE (original)
+     SETUP PAGE
      ══════════════════════════════════════════════════════════════ */
+  .setup-page-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+  }
+
   .f1-toolbar {
     display: flex; gap: 10px; margin-bottom: 20px;
     flex-wrap: wrap; align-items: center;
@@ -1209,7 +1273,247 @@ const css = `
   .no-results-icon { font-size: 26px; opacity: 0.15; margin-bottom: 12px; }
   .no-results-text { font-size: 11.5px; color: #2a3f52; letter-spacing: 0.3px; }
 
+  /* ── AI Setup Assistant ────────────────────────────────────── */
+  .ai-assistant {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 24px;
+    height: fit-content;
+    animation: card-in 0.5s cubic-bezier(.4,0,.2,1) both;
+  }
+  .ai-assistant-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1a2332;
+  }
+  .ai-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: ai-pulse 3s ease-in-out infinite;
+  }
+  .ai-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+  .ai-subtitle {
+    font-size: 9px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .ai-input-section {
+    margin-bottom: 16px;
+  }
+  .ai-label {
+    font-size: 9px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .ai-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 7px;
+    color: #c8d6e0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .ai-select:focus {
+    border-color: #00d4ff;
+  }
+  .ai-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0,212,255,0.3);
+  }
+  .ai-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,212,255,0.4);
+  }
+  .ai-button:active {
+    transform: translateY(0);
+  }
+  .ai-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .ai-result {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+  }
+  .ai-result-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #00d4ff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ai-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(26,35,50,0.3);
+    font-size: 10px;
+  }
+  .ai-result-item:last-child {
+    border-bottom: none;
+  }
+  .ai-result-label {
+    color: #5a7a8f;
+  }
+  .ai-result-value {
+    color: #dde4eb;
+    font-weight: 600;
+  }
+  .ai-tip {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(232,0,29,0.05);
+    border-left: 3px solid #e8001d;
+    border-radius: 4px;
+    font-size: 9.5px;
+    color: #8aacbe;
+    line-height: 1.5;
+  }
+  .ai-tip strong {
+    color: #e8001d;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RULES PAGE
+     ══════════════════════════════════════════════════════════════ */
+  .rules-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .rule-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #162232;
+    border-radius: 12px;
+    overflow: hidden;
+    animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .rule-card:hover {
+    border-color: #243848;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  }
+  .rule-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .rule-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(232,0,29,0.1);
+    border-radius: 8px;
+  }
+  .rule-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+  .rule-toggle {
+    font-size: 12px;
+    color: #5a7a8f;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), color 0.2s;
+  }
+  .rule-card.expanded .rule-toggle {
+    transform: rotate(180deg);
+    color: #e8001d;
+  }
+  .rule-content {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+  }
+  .rule-card.expanded .rule-content {
+    max-height: 800px;
+    opacity: 1;
+  }
+  .rule-content-inner {
+    padding: 0 20px 20px;
+    border-top: 1px solid #1a2332;
+  }
+  .rule-text {
+    font-size: 11px;
+    color: #8aacbe;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+  .rule-text-item {
+    margin-bottom: 8px;
+  }
+  .rule-text-item:last-child {
+    margin-bottom: 0;
+  }
+
   /* ── Responsive ──────────────────────────────────────────────── */
+  @media (max-width: 1000px) {
+    .setup-page-container {
+      grid-template-columns: 1fr;
+    }
+    .ai-assistant {
+      position: relative;
+      top: 0;
+    }
+  }
+
   @media (max-width: 600px) {
     .f1-header-top { padding: 16px 16px 0; }
     .f1-nav { padding: 10px 16px 0; overflow-x: auto; }
@@ -1245,6 +1549,7 @@ function AeroBar({ value, label, max = 50 }) {
     </div>
   );
 }
+
 function SetupAeroBar({ value, label, max = 50 }) {
   const pct = (value / max) * 100;
   const hue = 120 - (pct / 100) * 110;
@@ -1259,6 +1564,7 @@ function SetupAeroBar({ value, label, max = 50 }) {
     </div>
   );
 }
+
 const ChevronDown = () => (
   <svg viewBox="0 0 24 24">
     <polyline points="6,9 12,15 18,9" />
@@ -1423,6 +1729,96 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
           </table>
         </div>
       </div>
+    </div>
+  );
+}
+
+// AI Setup Assistant Component
+function AISetupAssistant() {
+  const [selectedTrack, setSelectedTrack] = useState("");
+  const [result, setResult] = useState(null);
+
+  const handleAnalyze = () => {
+    if (!selectedTrack) return;
+    
+    const track = TRACKS[selectedTrack];
+    if (!track) return;
+
+    // Simulate AI analysis
+    setResult({
+      track: track.nome,
+      recommendations: {
+        aeroFront: track.aero[0],
+        aeroRear: track.aero[1],
+        transmission: SHARED.trasmissione,
+        brakes: SHARED.freni,
+        tyres: SHARED.gomme
+      },
+      tip: `Per ${track.nome}, consigliamo un'aerodinamica ${track.aero[0] > 30 ? 'alta' : 'bassa'} per massimizzare le prestazioni. ${track.continente === 'Europa' ? 'Circuito tecnico europeo.' : 'Attenzione alle condizioni climatiche.'}`
+    });
+  };
+
+  return (
+    <div className="ai-assistant">
+      <div className="ai-assistant-header">
+        <div className="ai-icon">🤖</div>
+        <div>
+          <div className="ai-title">AI Setup Assistant</div>
+          <div className="ai-subtitle">Powered by Neural Network</div>
+        </div>
+      </div>
+
+      <div className="ai-input-section">
+        <label className="ai-label">Seleziona Circuito</label>
+        <select 
+          className="ai-select"
+          value={selectedTrack}
+          onChange={(e) => setSelectedTrack(e.target.value)}
+        >
+          <option value="">-- Scegli una pista --</option>
+          {Object.entries(TRACKS).map(([key, track]) => (
+            <option key={key} value={key}>
+              {CONTINENT_EMOJI[track.continente]} {track.nome}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button 
+        className="ai-button"
+        onClick={handleAnalyze}
+        disabled={!selectedTrack}
+      >
+        Analizza Setup Ottimale
+      </button>
+
+      {result && (
+        <div className="ai-result">
+          <div className="ai-result-title">
+            <span>⚡</span>
+            <span>Setup Raccomandato - {result.track}</span>
+          </div>
+          <div className="ai-result-item">
+            <span className="ai-result-label">Aero Anteriore</span>
+            <span className="ai-result-value">{result.recommendations.aeroFront}</span>
+          </div>
+          <div className="ai-result-item">
+            <span className="ai-result-label">Aero Posteriore</span>
+            <span className="ai-result-value">{result.recommendations.aeroRear}</span>
+          </div>
+          <div className="ai-result-item">
+            <span className="ai-result-label">Trasmissione</span>
+            <span className="ai-result-value">{result.recommendations.transmission}</span>
+          </div>
+          <div className="ai-result-item">
+            <span className="ai-result-label">Freni</span>
+            <span className="ai-result-value">{result.recommendations.brakes}</span>
+          </div>
+          <div className="ai-tip">
+            <strong>💡 Consiglio AI:</strong> {result.tip}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1872,41 +2268,88 @@ function SetupPage() {
   };
 
   return (
-    <>
-      <div className="f1-toolbar">
-        <div className="f1-search-wrap">
-          <span className="f1-search-icon">⌕</span>
-          <input
-            className="f1-search" type="text"
-            placeholder="Cerca pista o comando..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="f1-pills">
-          {CONTINENTI.map((c) => (
-            <button key={c} className={`f1-pill${filter === c ? " active" : ""}`} onClick={() => setFilter(c)}>{c}</button>
-          ))}
-        </div>
-        <span className="f1-count">{filtered.length} risultati</span>
-      </div>
-      <div className="f1-grid">
-        {filtered.length === 0 ? (
-          <div className="no-results">
-            <div className="no-results-icon">🔍</div>
-            <div className="no-results-text">Nessuna pista trovata</div>
-          </div>
-        ) : (
-          filtered.map(([key, track], i) => (
-            <TrackCard
-              key={key} id={key} track={track}
-              isOpen={openCard === key} index={i}
-              onToggle={() => handleToggle(key)}
+    <div className="setup-page-container">
+      <div>
+        <div className="f1-toolbar">
+          <div className="f1-search-wrap">
+            <span className="f1-search-icon">⌕</span>
+            <input
+              className="f1-search" type="text"
+              placeholder="Cerca pista o comando..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
-          ))
-        )}
+          </div>
+          <div className="f1-pills">
+            {CONTINENTI.map((c) => (
+              <button key={c} className={`f1-pill${filter === c ? " active" : ""}`} onClick={() => setFilter(c)}>{c}</button>
+            ))}
+          </div>
+          <span className="f1-count">{filtered.length} risultati</span>
+        </div>
+        <div className="f1-grid">
+          {filtered.length === 0 ? (
+            <div className="no-results">
+              <div className="no-results-icon">🔍</div>
+              <div className="no-results-text">Nessuna pista trovata</div>
+            </div>
+          ) : (
+            filtered.map(([key, track], i) => (
+              <TrackCard
+                key={key} id={key} track={track}
+                isOpen={openCard === key} index={i}
+                onToggle={() => handleToggle(key)}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </>
+      <AISetupAssistant />
+    </div>
+  );
+}
+
+// ─── RULES PAGE ───────────────────────────────────────────────────
+function RulesPage() {
+  const [expandedRules, setExpandedRules] = useState([]);
+
+  const toggleRule = (ruleId) => {
+    setExpandedRules(prev => 
+      prev.includes(ruleId) 
+        ? prev.filter(id => id !== ruleId)
+        : [...prev, ruleId]
+    );
+  };
+
+  return (
+    <div className="rules-grid">
+      {RULES_CONFIG.map((rule, idx) => (
+        <div 
+          key={rule.id} 
+          className={`rule-card${expandedRules.includes(rule.id) ? " expanded" : ""}`}
+          style={{ animationDelay: `${idx * 0.08}s` }}
+        >
+          <div className="rule-header" onClick={() => toggleRule(rule.id)}>
+            <div className="rule-header-left">
+              <div className="rule-icon">{rule.icon}</div>
+              <div className="rule-title">{rule.title}</div>
+            </div>
+            <div className="rule-toggle">▼</div>
+          </div>
+          <div className="rule-content">
+            <div className="rule-content-inner">
+              <div className="rule-text">
+                {rule.content.map((line, i) => (
+                  <div key={i} className="rule-text-item">
+                    {line || <br />}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -1920,21 +2363,32 @@ export default function App() {
   const completedRaces = seasonData.calendar.filter(r => r.status === "done").length;
   const totalRaces = seasonData.calendar.length;
 
-  const pageTitle = {
-    leaderboard: "Classifica Generale",
-    calendar: "Calendario",
-    h2h: "Head-to-Head",
-    career: "Statistiche Carriera",
-    setup: "Setup Dashboard"
-  }[page];
-
-  const pageSubtitle = {
-    leaderboard: `${season} · ${completedRaces}/${totalRaces} gare completate`,
-    calendar: `${season} · ${totalRaces} gare programmate`,
-    h2h: `${season} · Confronto compagni di squadra`,
-    career: `Tutte le stagioni · Statistiche totali carriera`,
-    setup: `${Object.keys(TRACKS).length} circuiti · simulatore`
-  }[page];
+  const pageInfo = {
+    leaderboard: { 
+      title: "Classifica Generale", 
+      subtitle: `${season} · ${completedRaces}/${totalRaces} gare completate` 
+    },
+    calendar: { 
+      title: "Calendario", 
+      subtitle: `${season} · ${totalRaces} gare programmate` 
+    },
+    h2h: { 
+      title: "Head-to-Head", 
+      subtitle: `${season} · Confronto compagni di squadra` 
+    },
+    career: { 
+      title: "Statistiche Carriera", 
+      subtitle: `Tutte le stagioni · Statistiche totali carriera` 
+    },
+    setup: { 
+      title: "Setup Dashboard", 
+      subtitle: `${Object.keys(TRACKS).length} circuiti · simulatore + AI` 
+    },
+    rules: { 
+      title: "Regolamento", 
+      subtitle: `Tutte le regole del campionato` 
+    }
+  };
 
   const showSeasonSelector = ["leaderboard", "calendar", "h2h"].includes(page);
 
@@ -1975,8 +2429,8 @@ export default function App() {
         <div className="f1-page">
           <div className="page-header">
             <div className="page-header-left">
-              <h2>{pageTitle}</h2>
-              <p>{pageSubtitle}</p>
+              <h2>{pageInfo[page].title}</h2>
+              <p>{pageInfo[page].subtitle}</p>
             </div>
             {showSeasonSelector && (
               <SeasonSelector currentSeason={season} onSeasonChange={setSeason} />
@@ -1988,6 +2442,7 @@ export default function App() {
           {page === "h2h" && <HeadToHeadPage season={season} />}
           {page === "career" && <CareerPage />}
           {page === "setup" && <SetupPage />}
+          {page === "rules" && <RulesPage />}
         </div>
       </div>
     </>
