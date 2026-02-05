@@ -382,6 +382,10 @@ const css = `
     0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
     50%      { box-shadow: 0 0 30px rgba(0,212,255,0.5), 0 0 40px rgba(232,0,29,0.2); }
   }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   /* ── Root ──────────────────────────────────────────────────── */
   .f1-root {
@@ -1273,17 +1277,8 @@ const css = `
   .no-results-icon { font-size: 26px; opacity: 0.15; margin-bottom: 12px; }
   .no-results-text { font-size: 11.5px; color: #2a3f52; letter-spacing: 0.3px; }
 
-/* ── AI Chatbot ────────────────────────────────────────────── */
-  @keyframes typing {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .ai-chatbot {
+/* ── AI Analyzer ────────────────────────────────────────────── */
+  .ai-analyzer {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #1a2332;
     border-radius: 12px;
@@ -1291,12 +1286,13 @@ const css = `
     flex-direction: column;
     position: sticky;
     top: 24px;
-    height: calc(100vh - 180px);
-    max-height: 800px;
+    height: fit-content;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
     animation: card-in 0.5s cubic-bezier(.4,0,.2,1) both;
   }
 
-  .chatbot-header {
+  .analyzer-header {
     padding: 20px;
     border-bottom: 1px solid #1a2332;
     display: flex;
@@ -1304,7 +1300,7 @@ const css = `
     gap: 12px;
   }
 
-  .chatbot-icon {
+  .analyzer-icon {
     width: 48px;
     height: 48px;
     background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
@@ -1317,11 +1313,7 @@ const css = `
     flex-shrink: 0;
   }
 
-  .chatbot-title-section {
-    flex: 1;
-  }
-
-  .chatbot-title {
+  .analyzer-title {
     font-family: 'Orbitron', sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -1329,160 +1321,34 @@ const css = `
     margin-bottom: 2px;
   }
 
-  .chatbot-subtitle {
+  .analyzer-subtitle {
     font-size: 9px;
     color: #2e4455;
     text-transform: uppercase;
     letter-spacing: 1.2px;
   }
 
-  .chatbot-messages {
-    flex: 1;
-    overflow-y: auto;
+  .analyzer-body {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 
-  .chatbot-messages::-webkit-scrollbar {
-    width: 6px;
+  .analyzer-section {
+    margin-bottom: 20px;
   }
 
-  .chatbot-messages::-webkit-scrollbar-track {
-    background: #0a1018;
-  }
-
-  .chatbot-messages::-webkit-scrollbar-thumb {
-    background: #1a2332;
-    border-radius: 3px;
-  }
-
-  .chatbot-messages::-webkit-scrollbar-thumb:hover {
-    background: #2a3f52;
-  }
-
-  .chat-message {
-    display: flex;
-    gap: 12px;
-    animation: slideUp 0.3s ease;
-  }
-
-  .message-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  .message-avatar.user {
-    background: rgba(232,0,29,0.1);
-  }
-
-  .message-avatar.ai {
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-  }
-
-  .message-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .message-sender {
+  .analyzer-label {
+    display: block;
     font-family: 'Orbitron', sans-serif;
     font-size: 10px;
     font-weight: 600;
     color: #5a7a8f;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
   }
 
-  .message-text {
-    font-size: 11.5px;
-    line-height: 1.6;
-    color: #c8d6e0;
-  }
-
-  .message-text strong {
-    color: #00d4ff;
-    font-weight: 600;
-  }
-
-  .message-text ul {
-    margin: 8px 0;
-    padding-left: 20px;
-  }
-
-  .message-text li {
-    margin: 4px 0;
-  }
-
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: 8px 0;
-  }
-
-  .typing-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #00d4ff;
-    animation: typing 1.4s infinite;
-  }
-
-  .typing-dot:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .typing-dot:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  .quick-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .quick-action-btn {
-    padding: 6px 12px;
-    background: rgba(0,212,255,0.05);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 6px;
-    color: #00d4ff;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .quick-action-btn:hover {
-    background: rgba(0,212,255,0.1);
-    border-color: rgba(0,212,255,0.4);
-    transform: translateY(-1px);
-  }
-
-  .chatbot-input-area {
-    padding: 16px 20px;
-    border-top: 1px solid #1a2332;
-    background: rgba(10,16,24,0.5);
-  }
-
-  .chatbot-input-wrapper {
-    display: flex;
-    gap: 10px;
-  }
-
-  .chatbot-input {
-    flex: 1;
+  .analyzer-select {
+    width: 100%;
     padding: 12px 16px;
     background: #0a1018;
     border: 1px solid #1a2332;
@@ -1492,69 +1358,363 @@ const css = `
     font-size: 11px;
     outline: none;
     transition: border-color 0.2s;
-    resize: none;
-    min-height: 44px;
-    max-height: 120px;
+    cursor: pointer;
   }
 
-  .chatbot-input::placeholder {
-    color: #2a3f52;
-  }
-
-  .chatbot-input:focus {
+  .analyzer-select:focus {
     border-color: #00d4ff;
   }
 
-  .chatbot-send-btn {
-    padding: 12px 20px;
+  .issue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .category-btn {
+    padding: 12px 10px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .category-btn:hover {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .category-btn.active {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.1);
+  }
+
+  .cat-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .cat-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #dde4eb;
+    line-height: 1.3;
+  }
+
+  .issue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .issue-item {
+    padding: 12px 14px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .issue-item:hover {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .issue-item.active {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.1);
+  }
+
+  .issue-item-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dde4eb;
+    margin-bottom: 3px;
+  }
+
+  .issue-item-desc {
+    font-size: 9px;
+    color: #5a7a8f;
+  }
+
+  .warnings-box {
+    padding: 12px;
+    background: rgba(255,128,0,0.05);
+    border: 1px solid rgba(255,128,0,0.3);
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .warning-item {
+    font-size: 10.5px;
+    color: #ffa040;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .warning-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .analyzer-empty small {
+    font-size: 9px;
+    color: #2e4455;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .issue-btn {
+    padding: 12px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .issue-btn:hover {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .issue-btn.active {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.1);
+  }
+
+  .issue-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .issue-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dde4eb;
+    margin-bottom: 2px;
+  }
+
+  .issue-desc {
+    font-size: 9px;
+    color: #5a7a8f;
+    line-height: 1.3;
+  }
+
+  .analyze-btn {
+    width: 100%;
+    padding: 14px;
     background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
     border: none;
     border-radius: 8px;
     color: #fff;
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
   }
 
-  .chatbot-send-btn:hover {
+  .analyze-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0,212,255,0.4);
   }
 
-  .chatbot-send-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
+  .analysis-results {
+    animation: slideUp 0.3s ease;
   }
 
-  .welcome-message {
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .results-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+
+  .reset-btn {
+    padding: 6px 12px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 6px;
+    color: #00d4ff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover {
+    background: rgba(0,212,255,0.2);
+    border-color: rgba(0,212,255,0.5);
+  }
+
+  .results-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .result-item {
+    padding: 10px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .result-label {
+    font-size: 8px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .result-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+
+  .recommendations {
+    margin-bottom: 16px;
+  }
+
+  .recommendations h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #5a7a8f;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+  }
+
+  .recommendation {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #0a1018;
+    border-left: 3px solid;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .recommendation.critical {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.05);
+  }
+
+  .recommendation.important {
+    border-color: #ffc400;
+    background: rgba(255,196,0,0.05);
+  }
+
+  .recommendation.suggestion {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .recommendation.warning {
+    border-color: #ff8000;
+    background: rgba(255,128,0,0.05);
+  }
+
+  .rec-marker {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .rec-text {
+    font-size: 10.5px;
+    color: #c8d6e0;
+    line-height: 1.5;
+  }
+
+  .current-setup {
+    padding: 12px;
+    background: rgba(0,212,255,0.03);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 8px;
+  }
+
+  .current-setup h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #00d4ff;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+  }
+
+  .setup-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .setup-value-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .setup-value-item span {
+    font-size: 8px;
+    color: #5a7a8f;
+  }
+
+  .setup-value-item strong {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #dde4eb;
+  }
+
+  .analyzer-empty {
     text-align: center;
     padding: 40px 20px;
   }
 
-  .welcome-icon {
+  .empty-icon {
     font-size: 48px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    opacity: 0.3;
   }
 
-  .welcome-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 8px;
-  }
-
-  .welcome-text {
+  .empty-text {
     font-size: 11px;
     color: #5a7a8f;
     line-height: 1.6;
-    margin-bottom: 20px;
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1872,262 +2032,378 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
 }
 
 // AI Setup Assistant Component
-// AI Setup Chatbot Component
-function AISetupChatbot() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
+// AI Setup Analyzer Component - Versione Avanzata
+function AISetupAnalyzer() {
+  const [selectedTrack, setSelectedTrack] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedIssue, setSelectedIssue] = useState("");
+  const [analysis, setAnalysis] = useState(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const categories = [
+    { 
+      id: "aero", 
+      label: "Aerodinamica", 
+      icon: "✈️",
+      issues: [
+        { id: "sottosterzo", label: "Sottosterzo", desc: "Macchina non gira in curva" },
+        { id: "sovrasterzo", label: "Sovrasterzo", desc: "Posteriore instabile" },
+        { id: "velocita_dritto", label: "Velocità sul Dritto", desc: "Top speed bassa" },
+        { id: "grip_curva", label: "Grip in Curva", desc: "Poco carico" }
+      ]
+    },
+    { 
+      id: "trasmissione", 
+      label: "Trasmissione", 
+      icon: "⚙️",
+      issues: [
+        { id: "sottosterzo_traz", label: "Sottosterzo in Trazione", desc: "Slip ruote anteriori" },
+        { id: "sovrasterzo_traz", label: "Sovrasterzo in Trazione", desc: "Slip ruote posteriori" }
+      ]
+    },
+    { 
+      id: "geometria", 
+      label: "Geometria Sospensioni", 
+      icon: "📐",
+      issues: [
+        { id: "grip_curva_camp", label: "Grip in Curva (Camber)", desc: "Campanatura" },
+        { id: "usura_gomme", label: "Usura Gomme", desc: "Consumo eccessivo" },
+        { id: "reattivita", label: "Reattività", desc: "Convergenza/Divergenza" },
+        { id: "stabilita", label: "Stabilità", desc: "Auto nervosa" }
+      ]
+    },
+    { 
+      id: "sospensioni", 
+      label: "Sospensioni", 
+      icon: "🔧",
+      issues: [
+        { id: "piste_lisce", label: "Piste Lisce", desc: "Grip su dorsi" },
+        { id: "alte_velocita", label: "Alte Velocità", desc: "Grip su dossi/cordoli" },
+        { id: "velocita_dritto_sosp", label: "Velocità sul Dritto", desc: "Altezza da terra" },
+        { id: "curva_cordoli", label: "Curva/Cordoli", desc: "Barre antirollio" }
+      ]
+    },
+    { 
+      id: "freni", 
+      label: "Freni", 
+      icon: "🛑",
+      issues: [
+        { id: "bloccaggio_ant", label: "Bloccaggio Anteriore", desc: "Ruote davanti" },
+        { id: "bloccaggio_post", label: "Bloccaggio Posteriore", desc: "Ruote dietro" },
+        { id: "potenza_fren", label: "Potenza Frenante", desc: "Pressione" }
+      ]
+    },
+    { 
+      id: "gomme", 
+      label: "Pressione Gomme", 
+      icon: "🏎️",
+      issues: [
+        { id: "usura_pressione", label: "Usura", desc: "Consumo" },
+        { id: "rettifili", label: "Velocità Rettifili", desc: "Top speed" },
+        { id: "grip_curva_press", label: "Grip in Curva", desc: "Aderenza" }
+      ]
+    }
+  ];
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  const analyzeSetupIssue = (userMessage) => {
-    const msg = userMessage.toLowerCase();
+  const analyzeSetup = () => {
+    if (!selectedTrack || !selectedIssue) return;
     
-    // Detect track mention
-    let trackKey = null;
-    let trackData = null;
-    
-    Object.entries(TRACKS).forEach(([key, data]) => {
-      if (msg.includes(key) || msg.includes(data.nome.toLowerCase())) {
-        trackKey = key;
-        trackData = data;
+    const trackData = TRACKS[selectedTrack];
+    let result = {
+      track: trackData.nome,
+      category: selectedCategory,
+      issue: selectedIssue,
+      recommendations: [],
+      warnings: [],
+      currentSetup: {
+        aero: trackData.aero,
+        sosp: trackData.sosp,
+        trasmissione: trackData.trasmissione
       }
-    });
-
-    // Detect issues
-    const issues = {
-      usura: msg.includes("usura") || msg.includes("consumo") || msg.includes("gomme"),
-      sottosterzo: msg.includes("sottosterzo") || msg.includes("curva lenta"),
-      sovrasterzo: msg.includes("sovrasterzo") || msg.includes("instabile"),
-      velocita: msg.includes("velocità") || msg.includes("dritto") || msg.includes("top speed"),
-      freni: msg.includes("freni") || msg.includes("bloccaggio"),
-      accelerazione: msg.includes("accelerazione") || msg.includes("trazione")
     };
 
-    let response = "";
+    // Analisi basata sulla guida completa
+    switch(selectedCategory) {
+      case "aero":
+        if (selectedIssue === "sottosterzo") {
+          result.recommendations = [
+            { type: "critical", text: `+ ALA: da ${trackData.aero[0]} → ${trackData.aero[0] + 4}` },
+            { type: "important", text: "Aumenta velocità sul dritto + Grip in curva" },
+            { type: "suggestion", text: `- ALA: da ${trackData.aero[1]} → ${Math.max(0, trackData.aero[1] - 3)}` }
+          ];
+          result.warnings = ["⚠️ Nota: Stabilità maggiore con carico equilibrato. Gap può rendere auto difficile da controllare."];
+        } else if (selectedIssue === "sovrasterzo") {
+          result.recommendations = [
+            { type: "critical", text: `- ALA: da ${trackData.aero[0]} → ${Math.max(0, trackData.aero[0] - 3)}` },
+            { type: "important", text: "Riduce velocità sul dritto - Riduce grip in curva" },
+            { type: "suggestion", text: `+ ALA: da ${trackData.aero[1]} → ${Math.min(50, trackData.aero[1] + 4)}` }
+          ];
+        } else if (selectedIssue === "velocita_dritto") {
+          result.recommendations = [
+            { type: "critical", text: "- ALA (anteriore e posteriore)" },
+            { type: "important", text: `Front: ${Math.max(0, trackData.aero[0] - 5)} | Rear: ${Math.max(0, trackData.aero[1] - 5)}` }
+          ];
+          result.warnings = ["⚠️ Ridurrà il grip in curva!"];
+        }
+        break;
 
-    if (!trackKey) {
-      response = "Non ho capito quale circuito stai usando. Puoi dirmi il nome della pista? (es. Austria, Monaco, Monza...)";
-    } else {
-      response = `**Setup consigliato per ${trackData.nome}:**\n\n`;
+      case "trasmissione":
+        if (selectedIssue === "sottosterzo_traz") {
+          result.recommendations = [
+            { type: "critical", text: "Bloccare (valori alti) = Stabilità in trazione" },
+            { type: "important", text: "+ Sottosterzo | + Usura gomme posteriori" }
+          ];
+        } else if (selectedIssue === "sovrasterzo_traz") {
+          result.recommendations = [
+            { type: "critical", text: "Sbloccare (valori bassi) = Stabilità in trazione" },
+            { type: "important", text: "+ Sovrasterzo | - Usura gomme posteriori" }
+          ];
+        }
+        result.warnings = ["ℹ️ Valori alti aiutano in uscita delle curve lente ma usura più il posteriore."];
+        break;
 
-      if (issues.usura) {
-        const aeroSuggestion = trackData.aero[0] > 35 ? "ridurre leggermente" : "aumentare";
-        response += `🔧 **Problema: Usura gomme eccessiva**\n`;
-        response += `• ${aeroSuggestion} l'aerodinamica anteriore per distribuire meglio il carico\n`;
-        response += `• Aumentare la rigidità delle sospensioni (S3-S4) di 1-2 punti\n`;
-        response += `• Verificare la pressione gomme: attualmente ${SHARED.gomme}\n\n`;
-      }
+      case "geometria":
+        if (selectedIssue === "grip_curva_camp") {
+          result.recommendations = [
+            { type: "critical", text: "+ Campanatura (Camber) = + Grip in curva | + Usura gomme" },
+            { type: "suggestion", text: "- Campanatura = - Grip in curva | - Usura gomme" }
+          ];
+        } else if (selectedIssue === "reattivita") {
+          result.recommendations = [
+            { type: "critical", text: "+ Convergenza (Toe-in anteriore) = + Stabilità sul dritto | - Reattività" },
+            { type: "suggestion", text: "- Convergenza = + Reattività/Accelerazione | - Stabilità" }
+          ];
+        } else if (selectedIssue === "stabilita") {
+          result.recommendations = [
+            { type: "critical", text: "+ Divergenza (Toe posteriore verso esterno) = Stabilità in frenata | + Usura" },
+            { type: "suggestion", text: "- Divergenza (Toe posteriore verso interno) = Stabilità | - Usura | + Accelerazione" }
+          ];
+        }
+        result.warnings = ["ℹ️ Geometria delicata: piccoli cambiamenti hanno grandi effetti."];
+        break;
 
-      if (issues.sottosterzo) {
-        response += `🔧 **Problema: Sottosterzo in curva**\n`;
-        response += `• Aumentare l'aerodinamica anteriore: attualmente ${trackData.aero[0]}, prova +3/+5\n`;
-        response += `• Ridurre l'aerodinamica posteriore di 2 punti\n`;
-        response += `• Ammorbidire le sospensioni anteriori (S1-S2)\n\n`;
-      }
+      case "sospensioni":
+        if (selectedIssue === "piste_lisce") {
+          result.recommendations = [
+            { type: "critical", text: "+ Rigidità sospensioni = + Stabilità su piste lisce | + Usura | + Grip su dossi" },
+            { type: "suggestion", text: "- Rigidità = + Grip su dossi e cordoli | - Stabilità ad alta velocità" }
+          ];
+        } else if (selectedIssue === "curva_cordoli") {
+          result.recommendations = [
+            { type: "critical", text: "+ Barra antirollio = + Reattività in curva | - Stabilità su cambi direzione" },
+            { type: "suggestion", text: "- Barra = + Stabilità | - Reattività" }
+          ];
+        } else if (selectedIssue === "velocita_dritto_sosp") {
+          result.recommendations = [
+            { type: "critical", text: "+ Altezza da terra = - Velocità sul dritto | + Grip in curva / sui cordoli" },
+            { type: "suggestion", text: "- Altezza = + Velocità sul dritto | - Grip su cordoli / rischio bottoming" }
+          ];
+        }
+        break;
 
-      if (issues.sovrasterzo) {
-        response += `🔧 **Problema: Sovrasterzo**\n`;
-        response += `• Aumentare l'aerodinamica posteriore: attualmente ${trackData.aero[1]}, prova +3\n`;
-        response += `• Ridurre l'aerodinamica anteriore di 2 punti\n`;
-        response += `• Irrigidire le sospensioni posteriori (S3-S4)\n\n`;
-      }
+      case "freni":
+        if (selectedIssue === "bloccaggio_ant") {
+          result.recommendations = [
+            { type: "critical", text: "+ Bilanciamento (verso anteriore) = Bloccaggio posteriore | + Rischio blocco ant." },
+            { type: "suggestion", text: "Attualmente: " + SHARED.freni }
+          ];
+        } else if (selectedIssue === "bloccaggio_post") {
+          result.recommendations = [
+            { type: "critical", text: "- Bilanciamento (verso posteriore) = + Bloccaggio posteriore | + Sovrasterzo in ingresso" },
+            { type: "suggestion", text: "Attualmente: " + SHARED.freni }
+          ];
+        } else if (selectedIssue === "potenza_fren") {
+          result.recommendations = [
+            { type: "critical", text: "+ Pressione freni = + Potenza frenante | + Rischio bloccaggio" },
+            { type: "suggestion", text: "- Pressione freni = - Potenza frenante | - Rischio bloccaggio" }
+          ];
+        }
+        break;
 
-      if (issues.velocita) {
-        response += `🔧 **Problema: Velocità massima bassa**\n`;
-        response += `• Ridurre l'aerodinamica: Front ${Math.max(0, trackData.aero[0] - 5)} / Rear ${Math.max(0, trackData.aero[1] - 5)}\n`;
-        response += `• Ottimizzare la trasmissione verso valori più alti\n`;
-        response += `• Attenzione: questo potrebbe ridurre il grip in curva!\n\n`;
-      }
-
-      if (issues.freni) {
-        response += `🔧 **Problema: Frenata**\n`;
-        response += `• Aumentare la bias freni anteriore: ${SHARED.freni}\n`;
-        response += `• Ridurre la rigidità delle sospensioni anteriori\n`;
-        response += `• Verificare l'ABS e la modulazione\n\n`;
-      }
-
-      if (issues.accelerazione) {
-        response += `🔧 **Problema: Trazione in accelerazione**\n`;
-        response += `• Aumentare l'aerodinamica posteriore di 3-5 punti\n`;
-        response += `• Irrigidire le sospensioni posteriori (S3-S5)\n`;
-        response += `• Verificare la geometria: ${SHARED.geometria}\n\n`;
-      }
-
-      // Add current setup reference
-      response += `📊 **Setup base ${trackData.nome}:**\n`;
-      response += `• Aero: Front ${trackData.aero[0]} / Rear ${trackData.aero[1]}\n`;
-      response += `• Trasmissione: ${trackData.trasmissione}\n`;
-      response += `• Sospensioni: ${trackData.sosp.join(" - ")}`;
+      case "gomme":
+        if (selectedIssue === "usura_pressione") {
+          result.recommendations = [
+            { type: "critical", text: "+ Pressione = - Attrito / usura | + Velocità sui rettifili | - Grip in curva" },
+            { type: "suggestion", text: "Attualmente: " + SHARED.gomme }
+          ];
+        } else if (selectedIssue === "grip_curva_press") {
+          result.recommendations = [
+            { type: "critical", text: "- Pressione = + Grip in curva | + Usura | + Grip su dossi" },
+            { type: "suggestion", text: "Attualmente: " + SHARED.gomme }
+          ];
+        }
+        result.warnings = ["ℹ️ Alte pressioni = gomme più dure e stivolose, basse = più grip ma si scaldano/usurano più."];
+        break;
     }
 
-    return response;
+    setAnalysis(result);
   };
 
-  const handleSend = () => {
-    if (!input.trim() || isTyping) return;
-
-    const userMessage = {
-      sender: "user",
-      text: input,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput("");
-    setIsTyping(true);
-
-    // Simulate AI thinking
-    setTimeout(() => {
-      const aiResponse = {
-        sender: "ai",
-        text: analyzeSetupIssue(input),
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, aiResponse]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
-  };
-
-  const handleQuickAction = (question) => {
-  const userMessage = {
-    sender: "user",
-    text: question,  // ← Usa direttamente la question
-    timestamp: new Date()
-  };
-  setMessages(prev => [...prev, userMessage]);
-  setIsTyping(true);
-  
-  setTimeout(() => {
-    const aiResponse = {
-      sender: "ai",
-      text: analyzeSetupIssue(question),
-      timestamp: new Date()
-    };
-    setMessages(prev => [...prev, aiResponse]);
-    setIsTyping(false);
-  }, 1000 + Math.random() * 1000);
-};
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
+  const currentCategory = categories.find(c => c.id === selectedCategory);
 
   return (
-    <div className="ai-chatbot">
-      <div className="chatbot-header">
-        <div className="chatbot-icon">🤖</div>
-        <div className="chatbot-title-section">
-          <div className="chatbot-title">AI Setup Engineer</div>
-          <div className="chatbot-subtitle">Assistente Setup Specializzato F1</div>
+    <div className="ai-analyzer">
+      <div className="analyzer-header">
+        <div className="analyzer-icon">🔧</div>
+        <div>
+          <div className="analyzer-title">AI Setup Analyzer Pro</div>
+          <div className="analyzer-subtitle">Analisi Avanzata Basata su Guida Tecnica</div>
         </div>
       </div>
 
-      <div className="chatbot-messages">
-        {messages.length === 0 ? (
-          <div className="welcome-message">
-            <div className="welcome-icon">🏎️</div>
-            <div className="welcome-title">Benvenuto!</div>
-            <div className="welcome-text">
-              Sono il tuo ingegnere virtuale specializzato in setup F1.<br/>
-              Descrivi il tuo problema e ti aiuterò a risolverlo!
-            </div>
-            <div className="quick-actions">
-              <button 
-                className="quick-action-btn"
-                onClick={() => handleQuickAction("Ho troppa usura gomme in Austria")}
-              >
-                🔥 Usura gomme
-              </button>
-              <button 
-                className="quick-action-btn"
-                onClick={() => handleQuickAction("Sottosterzo a Monaco")}
-              >
-                ↪️ Sottosterzo
-              </button>
-              <button 
-                className="quick-action-btn"
-                onClick={() => handleQuickAction("Sovrasterzo a Monza")}
-              >
-                ↩️ Sovrasterzo
-              </button>
-              <button 
-                className="quick-action-btn"
-                onClick={() => handleQuickAction("Poca velocità massima a Spa")}
-              >
-                ⚡ Velocità bassa
-              </button>
+      <div className="analyzer-body">
+        {/* Track Selection */}
+        <div className="analyzer-section">
+          <label className="analyzer-label">1. Seleziona Circuito</label>
+          <select 
+            className="analyzer-select"
+            value={selectedTrack}
+            onChange={(e) => {
+              setSelectedTrack(e.target.value);
+              setAnalysis(null);
+            }}
+          >
+            <option value="">-- Scegli pista --</option>
+            {Object.entries(TRACKS).map(([key, track]) => (
+              <option key={key} value={key}>
+                {CONTINENT_EMOJI[track.continente]} {track.nome}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Category Selection */}
+        {selectedTrack && (
+          <div className="analyzer-section">
+            <label className="analyzer-label">2. Categoria Setup</label>
+            <div className="category-grid">
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  className={`category-btn${selectedCategory === cat.id ? " active" : ""}`}
+                  onClick={() => {
+                    setSelectedCategory(cat.id);
+                    setSelectedIssue("");
+                    setAnalysis(null);
+                  }}
+                >
+                  <div className="cat-icon">{cat.icon}</div>
+                  <div className="cat-label">{cat.label}</div>
+                </button>
+              ))}
             </div>
           </div>
-        ) : (
-          <>
-            {messages.map((msg, idx) => (
-              <div key={idx} className="chat-message">
-                <div className={`message-avatar ${msg.sender}`}>
-                  {msg.sender === "user" ? "👤" : "🤖"}
-                </div>
-                <div className="message-content">
-                  <div className="message-sender">
-                    {msg.sender === "user" ? "Tu" : "AI Engineer"}
-                  </div>
-                  <div 
-                    className="message-text"
-                    dangerouslySetInnerHTML={{ 
-                      __html: msg.text.replace(/\n/g, '<br/>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
-                    }}
-                  />
-                </div>
+        )}
+
+        {/* Issue Selection */}
+        {selectedCategory && (
+          <div className="analyzer-section">
+            <label className="analyzer-label">3. Problema Specifico</label>
+            <div className="issue-list">
+              {currentCategory.issues.map(issue => (
+                <button
+                  key={issue.id}
+                  className={`issue-item${selectedIssue === issue.id ? " active" : ""}`}
+                  onClick={() => {
+                    setSelectedIssue(issue.id);
+                    setAnalysis(null);
+                  }}
+                >
+                  <div className="issue-item-label">{issue.label}</div>
+                  <div className="issue-item-desc">{issue.desc}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Analyze Button */}
+        {selectedTrack && selectedIssue && !analysis && (
+          <button className="analyze-btn" onClick={analyzeSetup}>
+            <span>🔍</span>
+            <span>Analizza Setup</span>
+          </button>
+        )}
+
+        {/* Results */}
+        {analysis && (
+          <div className="analysis-results">
+            <div className="results-header">
+              <h3>📊 Analisi Completata</h3>
+              <button 
+                className="reset-btn"
+                onClick={() => {
+                  setAnalysis(null);
+                  setSelectedIssue("");
+                }}
+              >
+                ↻ Nuova
+              </button>
+            </div>
+
+            <div className="results-info">
+              <div className="result-item">
+                <span className="result-label">Circuito:</span>
+                <span className="result-value">{analysis.track}</span>
               </div>
-            ))}
-            {isTyping && (
-              <div className="chat-message">
-                <div className="message-avatar ai">🤖</div>
-                <div className="message-content">
-                  <div className="message-sender">AI Engineer</div>
-                  <div className="typing-indicator">
-                    <div className="typing-dot"></div>
-                    <div className="typing-dot"></div>
-                    <div className="typing-dot"></div>
+              <div className="result-item">
+                <span className="result-label">Categoria:</span>
+                <span className="result-value">
+                  {categories.find(c => c.id === analysis.category)?.label}
+                </span>
+              </div>
+            </div>
+
+            <div className="recommendations">
+              <h4>🔧 Modifiche Consigliate</h4>
+              {analysis.recommendations.map((rec, idx) => (
+                <div key={idx} className={`recommendation ${rec.type}`}>
+                  <div className="rec-marker">
+                    {rec.type === "critical" && "🔴"}
+                    {rec.type === "important" && "🟡"}
+                    {rec.type === "suggestion" && "🔵"}
                   </div>
+                  <div className="rec-text">{rec.text}</div>
                 </div>
+              ))}
+            </div>
+
+            {analysis.warnings && analysis.warnings.length > 0 && (
+              <div className="warnings-box">
+                {analysis.warnings.map((warn, idx) => (
+                  <div key={idx} className="warning-item">{warn}</div>
+                ))}
               </div>
             )}
-            <div ref={messagesEndRef} />
-          </>
-        )}
-      </div>
 
-      <div className="chatbot-input-area">
-        <div className="chatbot-input-wrapper">
-          <textarea
-            className="chatbot-input"
-            placeholder="Descrivi il tuo problema... (es: 'troppa usura in Austria')"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            disabled={isTyping}
-            rows={1}
-          />
-          <button 
-            className="chatbot-send-btn"
-            onClick={handleSend}
-            disabled={!input.trim() || isTyping}
-          >
-            <span>Invia</span>
-            <span>→</span>
-          </button>
-        </div>
+            <div className="current-setup">
+              <h4>📋 Setup Base Corrente</h4>
+              <div className="setup-values">
+                <div className="setup-value-item">
+                  <span>Aero Front:</span>
+                  <strong>{analysis.currentSetup.aero[0]}</strong>
+                </div>
+                <div className="setup-value-item">
+                  <span>Aero Rear:</span>
+                  <strong>{analysis.currentSetup.aero[1]}</strong>
+                </div>
+                <div className="setup-value-item">
+                  <span>Trasmissione:</span>
+                  <strong>{analysis.currentSetup.trasmissione}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {!selectedTrack && (
+          <div className="analyzer-empty">
+            <div className="empty-icon">🏎️</div>
+            <div className="empty-text">
+              Seleziona un circuito per iniziare<br/>
+              <small>Analisi basata su guida tecnica professionale</small>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -2614,7 +2890,7 @@ function SetupPage() {
           )}
         </div>
       </div>
-      <AISetupChatbot />
+      <AISetupAnalyzer />
     </div>
   );
 }
