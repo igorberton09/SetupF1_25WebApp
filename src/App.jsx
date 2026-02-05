@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 
 // ─── FONT LOADER ──────────────────────────────────────────────────
 function useFonts() {
@@ -1871,6 +1871,7 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
   );
 }
 
+// AI Setup Assistant Component
 // AI Setup Chatbot Component
 function AISetupChatbot() {
   const [messages, setMessages] = useState([]);
