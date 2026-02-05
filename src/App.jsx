@@ -1871,7 +1871,6 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
   );
 }
 
-// AI Setup Assistant Component
 // AI Setup Chatbot Component
 function AISetupChatbot() {
   const [messages, setMessages] = useState([]);
