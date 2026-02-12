@@ -146,7 +146,7 @@ const SEASON_DATA = {
       { race: "Abu Dhabi", results: []},
       { race: "Olanda",    results: []},
       { race: "Jeddah",    results: []},
-      { race: "Qatar",     results: []},
+      { race: "Qatar",     results: []}
     ],
     calendar: [
       { round: 1, race: "Austrian GP",      city: "Red Bull Ring", status: "upcoming", winner: "...", raceKey: null },
@@ -165,15 +165,23 @@ const SEASON_DATA = {
     }
   },
   "Stagione 3": {
-    races: [],
+    races: [
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+      { race: "?",   results: []},
+    ],
     calendar: [
-      { round: 1, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 2, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 3, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 4, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 5, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 6, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
-      { round: 7, race: "Saudi Arabian GP", city: "Jeddah", status: "upcoming", winner: "...", raceKey: null },
+      { round: 1, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 2, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 3, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 4, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 5, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 6, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
+      { round: 7, race: "?", city: "?", status: "upcoming", winner: "...", raceKey: null },
     ],
     driverPoles: {
       Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0,
@@ -354,12 +362,12 @@ const TEAM_CAREER_STATS = {
 
 // ─── NAV ITEMS ────────────────────────────────────────────────────
 const NAV = [
-  { id: "leaderboard", label: "Leaderboard", icon: "🏆" },
-  { id: "calendar",    label: "Calendario",  icon: "📅" },
+  { id: "leaderboard", label: "Leaderboard",  icon: "🏆" },
+  { id: "calendar",    label: "Calendario",   icon: "📅" },
   { id: "h2h",         label: "Head-to-Head", icon: "⚔️" },
-  { id: "career",      label: "Carriera",    icon: "🏁" },
-  { id: "setup",       label: "Setup",       icon: "⚙️" },
-  { id: "rules",       label: "Regole",      icon: "📋" },
+  { id: "career",      label: "Carriera",     icon: "🏁" },
+  { id: "setup",       label: "Setup",        icon: "⚙️" },
+  { id: "rules",       label: "Regole",       icon: "📋" },
 ];
 
 
