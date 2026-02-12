@@ -69,19 +69,28 @@ const RULES_CONFIG = [
       "9° posto: 2 punti",
       "10° posto: 1 punto",
       "",
+      "Interpole: 1 punto",
+      "Pole: 1 punto",
+      "Maggior numero di sorpassi: 1 punto",
       "Il pilota con più punti al termine della stagione viene incoronato Campione del Mondo."
     ]
   },
   {
-    id: "qualifying",
-    title: "Qualifiche e Pole Position",
+    id: "qualifying and race",
+    title: "Qualifiche e Gare",
     icon: "⏱️",
     content: [
+      "Gare medie",
+      "Qualifiche complete",
       "Le qualifiche determinano la griglia di partenza per la gara.",
-      "Il pilota più veloce ottiene la Pole Position (1° posto in griglia).",
+      "Il pilota più veloce ottiene la Pole Position (1° posto in griglia) e riceverà un punto aggiuntivo.",
       "",
       "Le pole position vengono conteggiate nelle statistiche di carriera.",
-      "Non vengono assegnati punti per le qualifiche, ma una buona posizione di partenza è fondamentale per la strategia di gara."
+      "Non vengono assegnati punti per le qualifiche, ma una buona posizione di partenza è fondamentale per la strategia di gara.",
+      "",
+      "Nel Q1 è possibile fare la interpole solo se si vuole, chi fa il giro più veloce con le intermedio nel Q1 prima dei 14 minuti riceverà un punto in più, solo se la condizione della pista è asciutto",
+      "",
+      "Il pilota con il maggior numero di sorpassi riceverà 1 punto"
     ]
   },
   {
