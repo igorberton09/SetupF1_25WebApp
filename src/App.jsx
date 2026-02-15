@@ -15,42 +15,45 @@ function useFonts() {
 
 // ─── SETUP DATA ───────────────────────────────────────────────────
 const TRACKS = {
-  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: 41, sosp: [41, 1, 12, 17, 20, 44], continente: "Oceania" },
-  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: 41, sosp: [41, 1,  4,  8, 21, 48], continente: "Asia"    },
-  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: 41, sosp: [41, 1,  6, 21, 22, 42], continente: "Asia"    },
-  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: 41, sosp: [41, 10, 9, 10, 20, 40], continente: "Asia"    },
-  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: 41, sosp: [41, 6,  1,  7, 18, 40], continente: "Asia"    },
-  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: 30, sosp: [30, 1,  1, 17, 22, 40], continente: "America" },
-  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: 41, sosp: [41, 1,  9, 21, 23, 52], continente: "Europa"  },
-  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: 41, sosp: [41, 22, 3, 21, 19, 49], continente: "Europa"  },
-  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: 38, sosp: [38, 2,  6, 21, 20, 43], continente: "Europa"  },
-  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: 41, sosp: [41, 1,  1, 18, 19, 40], continente: "America" },
-  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: 41, sosp: [41, 5,  3, 20, 20, 46], continente: "Europa"  },
-  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: 41, sosp: [41, 1,  5, 18, 21, 40], continente: "Europa"  },
-  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: 41, sosp: [41, 1,  6, 12, 20, 40], continente: "Europa"  },
-  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: 41, sosp: [41, 1, 10, 21, 19, 40], continente: "Europa"  },
-  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: 41, sosp: [41, 1,  9, 21, 22, 40], continente: "Europa"  },
-  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: 41, sosp: [41, 1,  1, 21, 21, 40], continente: "Europa"  },
-  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: 41, sosp: [41, 1,  1, 19, 21, 40], continente: "Asia"    },
-  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: 41, sosp: [41, 1, 16, 21, 20, 40], continente: "Asia"    },
-  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: 41, sosp: [41, 3,  1, 21, 20, 40], continente: "America" },
-  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: 32, sosp: [32, 3,  5, 21, 23, 45], continente: "America" },
-  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: 41, sosp: [41, 5,  2, 21, 22, 41], continente: "America" },
-  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: 41, sosp: [41, 6,  5, 21, 23, 48], continente: "America" },
-  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: 41, sosp: [41, 3,  1, 16, 19, 45], continente: "Asia"    },
-  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: 41, sosp: [41, 1,  1, 17, 17, 40], continente: "Asia"    },
+  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: 41, sosp: [41, 1, 12, 17, 20, 44], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Oceania" },
+  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: 41, sosp: [41, 1,  4,  8, 21, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: 41, sosp: [41, 1,  6, 21, 22, 42], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: 41, sosp: [41, 10, 9, 10, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: 41, sosp: [41, 6,  1,  7, 18, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: 30, sosp: [30, 1,  1, 17, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: 41, sosp: [41, 1,  9, 21, 23, 52], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: 41, sosp: [41, 22, 3, 21, 19, 49], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: 38, sosp: [38, 2,  6, 21, 20, 43], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: 41, sosp: [41, 1,  1, 18, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: 41, sosp: [41, 5,  3, 20, 20, 46], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: 41, sosp: [41, 1,  5, 18, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: 41, sosp: [41, 1,  6, 12, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: 41, sosp: [41, 1, 10, 21, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: 41, sosp: [41, 1,  9, 21, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: 41, sosp: [41, 1,  1, 21, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: 41, sosp: [41, 1,  1, 19, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: 41, sosp: [41, 1, 16, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: 41, sosp: [41, 3,  1, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: 32, sosp: [32, 3,  5, 21, 23, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: 41, sosp: [41, 5,  2, 21, 22, 41], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: 41, sosp: [41, 6,  5, 21, 23, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: 41, sosp: [41, 3,  1, 16, 19, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: 41, sosp: [41, 1,  1, 17, 17, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
 };
+
 const SHARED = {
   trasmissione: "100 - 20",
   geometria:    "-3,50° · -2,00° · 0,00° · 0,10°",
   freni:        "55% - 100%",
   gomme:        "29,5 - 29,5 - 26,5 - 26,5",
 };
+
 const CONTINENTI = ["Tutti", "Europa", "Asia", "America", "Oceania"];
 const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oceania: "🌏" };
 
+// ... (rest of the data remains the same: RULES_CONFIG, SEASON_DATA, POINTS_TABLE, DRIVER_TEAMS_BASE, TEAM_CHANGES, TEAM_COLORS, CAREER_STATS, TEAM_CAREER_STATS, NAV)
+
 // ─── RULES CONFIGURATION ──────────────────────────────────────────
-// 🔧 PER AGGIUNGERE/RIMUOVERE REGOLE: modifica questo array
 const RULES_CONFIG = [
   {
     id: "points",
@@ -109,8 +112,6 @@ const RULES_CONFIG = [
   }
 ];
 
-
-// ─── LEADERBOARD DATA PER STAGIONE ──────────────────────────────────
 const SEASON_DATA = {
   "Stagione 1": {
     races: [
@@ -194,7 +195,6 @@ const SEASON_DATA = {
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
-// ─── DRIVER TEAMS BASE (Stagione 1) ────────────────────────────────
 const DRIVER_TEAMS_BASE = {
   Piastri:    { team: "McLaren", num: 81, flag: "🇦🇺" },
   Norris:     { team: "McLaren", num: 4, flag: "🇬🇧" },
@@ -221,7 +221,6 @@ const DRIVER_TEAMS_BASE = {
   Hadjar:     { team: "No Seat", num: 6, flag: "🇫🇷" },
 };
 
-// ─── TEAM CHANGES PER STAGIONE ─────────────────────────────────────
 const TEAM_CHANGES = {
   "Stagione 2": {
     Alex: { team: "McLaren", num: 99 },
@@ -240,7 +239,6 @@ const TEAM_CHANGES = {
   }
 };
 
-// Funzione per ottenere i team dei piloti per una specifica stagione
 function getDriverTeamsForSeason(season) {
   const changes = TEAM_CHANGES[season] || {};
   return Object.keys(DRIVER_TEAMS_BASE).reduce((acc, driver) => {
@@ -320,7 +318,6 @@ function computeTeamStandings(raceResults, season) {
 
 const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
 
-// ─── CAREER STATS ──────────────────
 const CAREER_STATS = {
   Piastri:    { totalPoints: 58, totalWins: 0, totalPoles: 0, totalPodiums: 1, championships: 0 },
   Norris:     { totalPoints: 97, totalWins: 1, totalPoles: 1, totalPodiums: 4, championships: 1 },
@@ -360,18 +357,16 @@ const TEAM_CAREER_STATS = {
   "Sauber":           { totalPoints: 44,  totalWins: 0, totalPoles: 0, championships: 0 },
 };
 
-// ─── NAV ITEMS ────────────────────────────────────────────────────
 const NAV = [
   { id: "leaderboard", label: "Leaderboard",  icon: "🏆" },
   { id: "calendar",    label: "Calendario",   icon: "📅" },
   { id: "h2h",         label: "Head-to-Head", icon: "⚔️" },
   { id: "career",      label: "Carriera",     icon: "🏁" },
-  { id: "setup",       label: "Setup",        icon: "⚙️" },
+  { id: "setup",       label: "Setup Creator", icon: "⚙️" },
   { id: "rules",       label: "Regole",       icon: "📋" },
 ];
 
-
-// ─── MASTER CSS ───────────────────────────────────────────────────
+// ─── MASTER CSS ─────────────────────────────────────────────────── 
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -435,7 +430,7 @@ const css = `
   }
   .f1-header-top {
     padding: 18px 28px 0;
-    max-width: 1200px; margin: 0 auto;
+    max-width: 1400px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 8px;
   }
@@ -460,7 +455,7 @@ const css = `
   .f1-nav {
     display: flex; gap: 2px;
     padding: 12px 28px 0;
-    max-width: 1200px; margin: 0 auto;
+    max-width: 1400px; margin: 0 auto;
   }
   .f1-nav-btn {
     padding: 8px 18px;
@@ -485,7 +480,7 @@ const css = `
   .f1-page {
     position: relative; z-index: 1;
     padding: 24px 28px 48px;
-    max-width: 1200px; margin: 0 auto; width: 100%;
+    max-width: 1400px; margin: 0 auto; width: 100%;
     flex: 1;
     animation: fadeIn 0.35s ease;
   }
@@ -569,7 +564,589 @@ const css = `
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     LEADERBOARD
+     SETUP CREATOR - ADVANCED INTERFACE
+     ══════════════════════════════════════════════════════════════ */
+  .setup-creator-container {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 20px;
+    height: calc(100vh - 240px);
+  }
+
+  /* Left Panel - Track Selection & Info */
+  .setup-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .track-selector-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    padding: 20px;
+    animation: card-in 0.4s ease;
+  }
+
+  .track-selector-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #dde4eb;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .track-select {
+    width: 100%;
+    padding: 12px 16px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    color: #c8d6e0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .track-select:focus {
+    border-color: #00d4ff;
+  }
+
+  .track-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .track-info-item {
+    padding: 10px;
+    background: rgba(0,212,255,0.03);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 6px;
+  }
+
+  .track-info-label {
+    font-size: 8px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .track-info-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #00d4ff;
+  }
+
+  .quick-guides-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .quick-guide-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #dde4eb;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quick-guide-section {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(26,35,50,0.6);
+  }
+
+  .quick-guide-section:last-child {
+    border-bottom: none;
+  }
+
+  .quick-guide-section h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #5a7a8f;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .quick-guide-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .quick-tip {
+    font-size: 10px;
+    color: #8aacbe;
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .quick-tip::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #00d4ff;
+  }
+
+  /* Right Panel - Setup Editor */
+  .setup-right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .setup-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+  }
+
+  .setup-editor-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #dde4eb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .setup-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .setup-action-btn {
+    padding: 8px 16px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 6px;
+    color: #c8d6e0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .setup-action-btn:hover {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .setup-action-btn.primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border: none;
+    color: #fff;
+  }
+
+  .setup-action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,212,255,0.4);
+  }
+
+  /* Setup Categories */
+  .setup-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .setup-category-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    animation: card-in 0.4s ease;
+  }
+
+  .setup-category-card:hover {
+    border-color: #243848;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    transform: translateY(-2px);
+  }
+
+  .setup-category-header {
+    padding: 16px 20px;
+    background: rgba(0,212,255,0.02);
+    border-bottom: 1px solid #1a2332;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .setup-category-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #dde4eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .setup-category-icon {
+    font-size: 18px;
+  }
+
+  .setup-category-body {
+    padding: 20px;
+  }
+
+  .setup-param-group {
+    margin-bottom: 20px;
+  }
+
+  .setup-param-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .setup-param-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .setup-param-name {
+    font-size: 10px;
+    color: #5a7a8f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .setup-param-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #00d4ff;
+  }
+
+  .setup-slider {
+    width: 100%;
+    height: 6px;
+    background: #0d1520;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .setup-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .setup-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(0,212,255,0.6);
+  }
+
+  .setup-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .setup-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(0,212,255,0.6);
+  }
+
+  .setup-hint {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(255,128,0,0.05);
+    border-left: 3px solid rgba(255,128,0,0.4);
+    border-radius: 4px;
+    font-size: 9px;
+    color: #ffa040;
+    line-height: 1.5;
+  }
+
+  /* Multi-value controls */
+  .setup-multi-param {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .setup-multi-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .setup-multi-label {
+    font-size: 8px;
+    color: #2e4455;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .setup-multi-input {
+    padding: 10px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 6px;
+    color: #c8d6e0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .setup-multi-input:focus {
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 2px rgba(0,212,255,0.1);
+  }
+
+  /* Preset buttons */
+  .setup-presets {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .setup-preset-btn {
+    padding: 6px 12px;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 4px;
+    color: #00d4ff;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .setup-preset-btn:hover {
+    background: rgba(0,212,255,0.1);
+    border-color: rgba(0,212,255,0.4);
+  }
+
+  /* Export Modal */
+  .export-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,16,0.9);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .export-modal {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
+  }
+
+  .export-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #1a2332;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .export-modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+
+  .export-modal-close {
+    background: transparent;
+    border: none;
+    color: #5a7a8f;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .export-modal-close:hover {
+    background: rgba(232,0,29,0.1);
+    color: #e8001d;
+  }
+
+  .export-modal-body {
+    padding: 20px 24px;
+  }
+
+  .export-format-label {
+    font-size: 11px;
+    color: #5a7a8f;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .export-formats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .export-format-btn {
+    flex: 1;
+    padding: 16px;
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .export-format-btn:hover {
+    border-color: #00d4ff;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .export-format-btn.active {
+    border-color: #e8001d;
+    background: rgba(232,0,29,0.1);
+  }
+
+  .export-format-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .export-format-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dde4eb;
+  }
+
+  .export-preview {
+    background: #0a1018;
+    border: 1px solid #1a2332;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #c8d6e0;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  .export-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .export-btn {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,212,255,0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .setup-creator-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .setup-left-panel {
+      flex-direction: row;
+    }
+    
+    .track-selector-card,
+    .quick-guides-card {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .setup-left-panel {
+      flex-direction: column;
+    }
+    
+    .setup-categories-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .export-formats {
+      flex-direction: column;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ORIGINAL STYLES (Leaderboard, Calendar, etc.)
      ══════════════════════════════════════════════════════════════ */
   .lb-tabs {
     display: flex; gap: 6px; margin-bottom: 18px;
@@ -662,16 +1239,7 @@ const css = `
   .lb-race-item-name { color: #5a7a8f; }
   .lb-race-item-pos { color: #c8d6e0; font-size: 10px; }
 
-  .no-data-message {
-    text-align: center;
-    padding: 48px 20px;
-    color: #2a3f52;
-    font-size: 12px;
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     CALENDAR & MODAL
-     ══════════════════════════════════════════════════════════════ */
+  /* Calendar */
   .cal-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -827,9 +1395,7 @@ const css = `
     font-size: 11px;
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     CAREER PAGE
-     ══════════════════════════════════════════════════════════════ */
+  /* Career */
   .career-section {
     margin-bottom: 32px;
   }
@@ -913,9 +1479,7 @@ const css = `
   .career-stat-val.wdc { color: #ffc400; }
   .career-stat-val.wcc { color: #ffc400; }
 
-  /* ═══════════════════════════════════════════════════════════════
-     HEAD TO HEAD PAGE
-     ══════════════════════════════════════════════════════════════ */
+  /* H2H */
   .h2h-team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
@@ -1069,674 +1633,7 @@ const css = `
     color: #e8001d;
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     SETUP PAGE
-     ══════════════════════════════════════════════════════════════ */
-  .setup-page-container {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 20px;
-  }
-
-  .f1-toolbar {
-    display: flex; gap: 10px; margin-bottom: 20px;
-    flex-wrap: wrap; align-items: center;
-  }
-  .f1-search-wrap { position: relative; flex: 1 1 220px; min-width: 180px; }
-  .f1-search-icon {
-    position: absolute; left: 12px; top: 50%;
-    transform: translateY(-50%); color: #2a3f52;
-    font-size: 13px; pointer-events: none;
-  }
-  .f1-search {
-    width: 100%; padding: 10px 14px 10px 36px;
-    background: #0a1018; border: 1px solid #1a2332; border-radius: 7px;
-    color: #c8d6e0; font-family: 'Share Tech Mono', monospace;
-    font-size: 12px; outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .f1-search::placeholder { color: #2a3f52; }
-  .f1-search:focus { border-color: #e8001d; box-shadow: 0 0 0 2px rgba(232,0,29,0.12); }
-
-  .f1-pills { display: flex; gap: 5px; flex-wrap: wrap; }
-  .f1-pill {
-    padding: 6px 14px; border-radius: 5px;
-    background: transparent; border: 1px solid #1a2332;
-    color: #3d5a6e; font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; text-transform: uppercase;
-    letter-spacing: 1.2px; cursor: pointer;
-    transition: all 0.18s ease;
-  }
-  .f1-pill:hover { border-color: #3a5068; color: #8aacbe; background: rgba(58,80,104,0.08); }
-  .f1-pill.active { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.4); color: #e8001d; }
-  .f1-pill.active:hover { background: rgba(232,0,29,0.16); border-color: rgba(232,0,29,0.55); }
-  .f1-count { font-size: 10px; color: #2a3f52; margin-left: auto; letter-spacing: 0.4px; }
-
-  .f1-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    align-content: start;
-  }
-
-  .track-card {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #162232;
-    border-radius: 10px;
-    padding: 14px 15px 15px;
-    cursor: pointer;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
-  }
-  .track-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent 10%, #e8001d 50%, transparent 90%);
-    opacity: 0; transition: opacity 0.25s;
-  }
-  .track-card:hover {
-    border-color: #243848;
-    box-shadow: 0 6px 28px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.2);
-    transform: translateY(-2px);
-  }
-  .track-card:hover::after { opacity: 0.7; }
-  .track-card.open {
-    grid-column: span 2;
-    border-color: #e8001d;
-    background: linear-gradient(155deg, #12101a 0%, #0b1018 100%);
-    box-shadow:
-      0 0 0 1px rgba(232,0,29,0.4),
-      0 8px 36px rgba(232,0,29,0.15),
-      0 4px 12px rgba(0,0,0,0.3);
-    transform: none;
-    cursor: default;
-  }
-  .track-card.open::after { opacity: 1; background: #e8001d; }
-  .track-card.open:hover {
-    transform: none;
-    box-shadow:
-      0 0 0 1px rgba(232,0,29,0.4),
-      0 8px 36px rgba(232,0,29,0.15),
-      0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .card-index {
-    position: absolute; top: 4px; right: 8px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 36px; font-weight: 900;
-    color: rgba(255,255,255,0.04);
-    line-height: 1; pointer-events: none; user-select: none;
-  }
-  .card-top {
-    display: flex; align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 3px; position: relative;
-  }
-  .card-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12.5px; font-weight: 600;
-    color: #dde4eb; letter-spacing: 0.3px;
-  }
-  .card-continent { font-size: 11px; opacity: 0.5; flex-shrink: 0; }
-  .card-cmd {
-    font-size: 10px; color: #2e4455;
-    letter-spacing: 0.6px; margin-bottom: 10px;
-    transition: color 0.2s;
-  }
-  .track-card.open .card-cmd { color: rgba(232,0,29,0.6); }
-
-  .card-arrow-btn {
-    position: absolute; top: 12px; right: 12px;
-    width: 28px; height: 28px; border-radius: 7px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid #1e2d3d;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 2;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  }
-  .card-arrow-btn:hover {
-    background: rgba(232,0,29,0.1);
-    border-color: rgba(232,0,29,0.4);
-  }
-  .card-arrow-btn svg {
-    width: 13px; height: 13px;
-    stroke: #3d5a6e; fill: none;
-    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
-    transition: stroke 0.2s, transform 0.35s cubic-bezier(.4,0,.2,1);
-  }
-  .card-arrow-btn:hover svg { stroke: #e8001d; }
-  .track-card.open .card-arrow-btn svg { transform: rotate(180deg); stroke: #e8001d; }
-  .track-card.open .card-arrow-btn { border-color: rgba(232,0,29,0.4); background: rgba(232,0,29,0.08); }
-
-  .aero-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
-  .aero-row:last-child { margin-bottom: 0; }
-  .aero-label {
-    font-size: 8.5px; color: #2e4455;
-    text-transform: uppercase; letter-spacing: 1px;
-    width: 34px; flex-shrink: 0;
-  }
-  .aero-track { flex: 1; height: 4px; background: #0d1520; border-radius: 2px; overflow: hidden; }
-  .aero-fill { height: 100%; border-radius: 2px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
-  .aero-val { font-size: 10.5px; color: #5a7a8f; width: 20px; text-align: right; flex-shrink: 0; }
-
-  .setup-body {
-    overflow: hidden;
-    max-height: 0; opacity: 0;
-    transition: max-height 0.42s cubic-bezier(.4,0,.2,1), opacity 0.3s 0.05s ease;
-  }
-  .track-card.open .setup-body {
-    max-height: 500px; opacity: 1;
-    transition: max-height 0.42s cubic-bezier(.4,0,.2,1), opacity 0.28s ease;
-  }
-  .setup-divider { height: 1px; background: #1a2332; margin: 12px 0 14px; }
-  .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
-  .setup-item { display: flex; flex-direction: column; gap: 3px; }
-  .setup-item-label {
-    font-size: 8px; color: #2e4455;
-    text-transform: uppercase; letter-spacing: 1.4px;
-  }
-  .setup-item-value {
-    font-size: 11.5px; color: #dde4eb; letter-spacing: 0.2px;
-    animation: value-pop 0.5s ease forwards;
-  }
-  .setup-item.sosp-full { grid-column: 1 / -1; }
-  .sosp-grid { 
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-  }
-  .sosp-labeled-val {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .sosp-label {
-    font-size: 7px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-    font-weight: 600;
-  }
-  .sosp-val {
-    text-align: center;
-    padding: 10px 6px;
-    background: linear-gradient(155deg, #0d1822 0%, #0a1218 100%);
-    border: 1px solid #1a2e3d; 
-    border-radius: 7px;
-    font-size: 13px; 
-    color: #dde4eb; 
-    letter-spacing: 0.4px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-    transition: all 0.2s;
-  }
-  .sosp-labeled-val:hover .sosp-val {
-    background: linear-gradient(155deg, #121a26 0%, #0d1420 100%);
-    border-color: #2a3f52;
-    transform: translateY(-1px);
-  }
-  .setup-aero-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-  .setup-aero-row:last-child { margin-bottom: 0; }
-  .setup-aero-label {
-    font-size: 8.5px; color: #2e4455;
-    text-transform: uppercase; letter-spacing: 1px;
-    width: 38px; flex-shrink: 0;
-  }
-  .setup-aero-track { flex: 1; height: 5px; background: #0d1520; border-radius: 3px; overflow: hidden; }
-  .setup-aero-fill { height: 100%; border-radius: 3px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
-  .setup-aero-val { font-size: 11px; color: #5a7a8f; width: 22px; text-align: right; flex-shrink: 0; }
-
-  .no-results { grid-column: 1 / -1; text-align: center; padding: 56px 20px; }
-  .no-results-icon { font-size: 26px; opacity: 0.15; margin-bottom: 12px; }
-  .no-results-text { font-size: 11.5px; color: #2a3f52; letter-spacing: 0.3px; }
-
-/* ── AI Analyzer ────────────────────────────────────────────── */
-  .ai-analyzer {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 24px;
-    height: fit-content;
-    max-height: calc(100vh - 180px);
-    overflow-y: auto;
-    animation: card-in 0.5s cubic-bezier(.4,0,.2,1) both;
-  }
-
-  .analyzer-header {
-    padding: 20px;
-    border-bottom: 1px solid #1a2332;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .analyzer-icon {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    animation: ai-pulse 3s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
-  .analyzer-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 2px;
-  }
-
-  .analyzer-subtitle {
-    font-size: 9px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-  }
-
-  .analyzer-body {
-    padding: 20px;
-  }
-
-  .analyzer-section {
-    margin-bottom: 20px;
-  }
-
-  .analyzer-label {
-    display: block;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: #5a7a8f;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 8px;
-  }
-
-  .analyzer-select {
-    width: 100%;
-    padding: 12px 16px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    color: #c8d6e0;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    outline: none;
-    transition: border-color 0.2s;
-    cursor: pointer;
-  }
-
-  .analyzer-select:focus {
-    border-color: #00d4ff;
-  }
-
-  .issue-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .category-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  .category-btn {
-    padding: 12px 10px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .category-btn:hover {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .category-btn.active {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.1);
-  }
-
-  .cat-icon {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
-
-  .cat-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: #dde4eb;
-    line-height: 1.3;
-  }
-
-  .issue-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .issue-item {
-    padding: 12px 14px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-  }
-
-  .issue-item:hover {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .issue-item.active {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.1);
-  }
-
-  .issue-item-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 3px;
-  }
-
-  .issue-item-desc {
-    font-size: 9px;
-    color: #5a7a8f;
-  }
-
-  .warnings-box {
-    padding: 12px;
-    background: rgba(255,128,0,0.05);
-    border: 1px solid rgba(255,128,0,0.3);
-    border-radius: 8px;
-    margin-bottom: 16px;
-  }
-
-  .warning-item {
-    font-size: 10.5px;
-    color: #ffa040;
-    line-height: 1.6;
-    margin-bottom: 6px;
-  }
-
-  .warning-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .analyzer-empty small {
-    font-size: 9px;
-    color: #2e4455;
-    display: block;
-    margin-top: 8px;
-  }
-
-  .issue-btn {
-    padding: 12px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-  }
-
-  .issue-btn:hover {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .issue-btn.active {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.1);
-  }
-
-  .issue-icon {
-    font-size: 20px;
-    margin-bottom: 4px;
-  }
-
-  .issue-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 2px;
-  }
-
-  .issue-desc {
-    font-size: 9px;
-    color: #5a7a8f;
-    line-height: 1.3;
-  }
-
-  .analyze-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .analyze-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,212,255,0.4);
-  }
-
-  .analysis-results {
-    animation: slideUp 0.3s ease;
-  }
-
-  .results-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
-  .results-header h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-
-  .reset-btn {
-    padding: 6px 12px;
-    background: rgba(0,212,255,0.1);
-    border: 1px solid rgba(0,212,255,0.3);
-    border-radius: 6px;
-    color: #00d4ff;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .reset-btn:hover {
-    background: rgba(0,212,255,0.2);
-    border-color: rgba(0,212,255,0.5);
-  }
-
-  .results-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .result-item {
-    padding: 10px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .result-label {
-    font-size: 8px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .result-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-
-  .recommendations {
-    margin-bottom: 16px;
-  }
-
-  .recommendations h4 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #5a7a8f;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 10px;
-  }
-
-  .recommendation {
-    display: flex;
-    gap: 10px;
-    padding: 10px 12px;
-    background: #0a1018;
-    border-left: 3px solid;
-    border-radius: 6px;
-    margin-bottom: 8px;
-  }
-
-  .recommendation.critical {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.05);
-  }
-
-  .recommendation.important {
-    border-color: #ffc400;
-    background: rgba(255,196,0,0.05);
-  }
-
-  .recommendation.suggestion {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .recommendation.warning {
-    border-color: #ff8000;
-    background: rgba(255,128,0,0.05);
-  }
-
-  .rec-marker {
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .rec-text {
-    font-size: 10.5px;
-    color: #c8d6e0;
-    line-height: 1.5;
-  }
-
-  .current-setup {
-    padding: 12px;
-    background: rgba(0,212,255,0.03);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 8px;
-  }
-
-  .current-setup h4 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: #00d4ff;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 10px;
-  }
-
-  .setup-values {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  .setup-value-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .setup-value-item span {
-    font-size: 8px;
-    color: #5a7a8f;
-  }
-
-  .setup-value-item strong {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #dde4eb;
-  }
-
-  .analyzer-empty {
-    text-align: center;
-    padding: 40px 20px;
-  }
-
-  .empty-icon {
-    font-size: 48px;
-    margin-bottom: 12px;
-    opacity: 0.3;
-  }
-
-  .empty-text {
-    font-size: 11px;
-    color: #5a7a8f;
-    line-height: 1.6;
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     RULES PAGE
-     ══════════════════════════════════════════════════════════════ */
+  /* Rules */
   .rules-grid {
     display: grid;
     gap: 16px;
@@ -1817,157 +1714,658 @@ const css = `
   .rule-text-item:last-child {
     margin-bottom: 0;
   }
-
-  /* ── Responsive ──────────────────────────────────────────────── */
-  @media (max-width: 1000px) {
-    .setup-page-container {
-      grid-template-columns: 1fr;
-    }
-    .ai-assistant {
-      position: relative;
-      top: 0;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .f1-header-top { padding: 16px 16px 0; }
-    .f1-nav { padding: 10px 16px 0; overflow-x: auto; }
-    .f1-nav-btn { padding: 7px 12px; font-size: 9.5px; white-space: nowrap; }
-    .f1-page { padding: 18px 16px 36px; }
-    .track-card.open { grid-column: 1 / -1; }
-    .setup-grid { grid-template-columns: 1fr; }
-    .sosp-grid { grid-template-columns: repeat(3, 1fr); }
-    .cal-grid { grid-template-columns: 1fr; }
-    .career-grid { grid-template-columns: 1fr; }
-    .lb-table th, .lb-table td { padding: 8px 8px; font-size: 10.5px; }
-    .lb-driver-name { font-size: 10px; }
-    .page-header { flex-direction: column; align-items: flex-start; }
-    .h2h-team-grid { grid-template-columns: 1fr; }
-    .h2h-race-item { grid-template-columns: 1fr auto auto; font-size: 9px; }
-  }
 `;
 
-// ─── COMPONENTS ───────────────────────────────────────────────────
+// ─── ADVANCED SETUP CREATOR COMPONENT ─────────────────────────────
+function AdvancedSetupCreator() {
+  const [selectedTrack, setSelectedTrack] = useState("");
+  const [setupValues, setSetupValues] = useState({
+    aero: [25, 25],
+    trasmissione: 50,
+    geometria: [-3.50, -2.00, 0.00, 0.10],
+    sosp: [41, 1, 10, 21, 20, 40],
+    freni: [55, 100],
+    gomme: [29.5, 29.5, 26.5, 26.5],
+  });
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [exportFormat, setExportFormat] = useState("text");
 
-// Setup sub-components
-function AeroBar({ value, label, max = 50 }) {
-  const pct = (value / max) * 100;
-  const hue = 120 - (pct / 100) * 110;
-  const color = `hsl(${hue}, 75%, 42%)`;
+  const trackData = selectedTrack ? TRACKS[selectedTrack] : null;
+
+  // Load track's base setup
+  useEffect(() => {
+    if (trackData) {
+      setSetupValues({
+        aero: [...trackData.aero],
+        trasmissione: trackData.trasmissione,
+        geometria: [...trackData.geometria],
+        sosp: [...trackData.sosp],
+        freni: [...trackData.freni],
+        gomme: [...trackData.gomme],
+      });
+    }
+  }, [selectedTrack]);
+
+  const updateSetupValue = (category, index, value) => {
+    setSetupValues(prev => {
+      const newValues = { ...prev };
+      if (Array.isArray(newValues[category])) {
+        const newArray = [...newValues[category]];
+        newArray[index] = parseFloat(value) || 0;
+        newValues[category] = newArray;
+      } else {
+        newValues[category] = parseFloat(value) || 0;
+      }
+      return newValues;
+    });
+  };
+
+  const resetToBase = () => {
+    if (trackData) {
+      setSetupValues({
+        aero: [...trackData.aero],
+        trasmissione: trackData.trasmissione,
+        geometria: [...trackData.geometria],
+        sosp: [...trackData.sosp],
+        freni: [...trackData.freni],
+        gomme: [...trackData.gomme],
+      });
+    }
+  };
+
+  const exportSetup = () => {
+    if (!trackData) return "";
+    
+    if (exportFormat === "text") {
+      return `═══════════════════════════════════════
+🏁 F1 SETUP EXPORT - ${trackData.nome}
+═══════════════════════════════════════
+
+📍 CIRCUITO: ${trackData.nome}
+🌍 CONTINENTE: ${trackData.continente}
+
+⚙️ SETUP DETTAGLIATO:
+
+✈️ AERODINAMICA:
+   Front Wing: ${setupValues.aero[0]}
+   Rear Wing: ${setupValues.aero[1]}
+
+🔧 TRASMISSIONE:
+   Differenziale: ${setupValues.trasmissione}
+
+📐 GEOMETRIA:
+   Camber Ant.: ${setupValues.geometria[0]}°
+   Camber Post.: ${setupValues.geometria[1]}°
+   Toe Ant.: ${setupValues.geometria[2]}°
+   Toe Post.: ${setupValues.geometria[3]}°
+
+🔩 SOSPENSIONI:
+   Trasmissione: ${setupValues.sosp[0]}
+   S1: ${setupValues.sosp[1]}
+   S2: ${setupValues.sosp[2]}
+   S3: ${setupValues.sosp[3]}
+   S4: ${setupValues.sosp[4]}
+   S5: ${setupValues.sosp[5]}
+
+🛑 FRENI:
+   Bilanciamento: ${setupValues.freni[0]}%
+   Pressione: ${setupValues.freni[1]}%
+
+🏎️ PRESSIONE GOMME:
+   Ant. Sx: ${setupValues.gomme[0]} PSI
+   Ant. Dx: ${setupValues.gomme[1]} PSI
+   Post. Sx: ${setupValues.gomme[2]} PSI
+   Post. Dx: ${setupValues.gomme[3]} PSI
+
+═══════════════════════════════════════
+Generated by F1 Dashboard Setup Creator
+═══════════════════════════════════════`;
+    } else if (exportFormat === "json") {
+      return JSON.stringify({
+        track: trackData.nome,
+        continent: trackData.continente,
+        setup: setupValues,
+        timestamp: new Date().toISOString()
+      }, null, 2);
+    }
+  };
+
+  const downloadSetup = () => {
+    const content = exportSetup();
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `setup-${trackData?.nome || 'custom'}.${exportFormat === 'json' ? 'json' : 'txt'}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const quickGuides = {
+    aero: [
+      "+ Ala = + Velocità dritto + Grip curva",
+      "- Ala = + Top speed - Grip curva",
+      "Gap ali = Auto difficile da controllare"
+    ],
+    trasmissione: [
+      "Valori alti = Blocca diff. = + Sottosterzo",
+      "Valori bassi = Sblocca diff. = + Sovrasterzo"
+    ],
+    geometria: [
+      "+ Camber = + Grip curva + Usura",
+      "+ Toe-in = + Stabilità - Reattività",
+      "Divergenza = Stabilità frenata"
+    ],
+    sospensioni: [
+      "+ Rigidità = Piste lisce + Stabilità",
+      "- Rigidità = Cordoli e dossi",
+      "+ Altezza = - Velocità + Grip cordoli"
+    ],
+    freni: [
+      "+ Bilanciamento ant. = Rischio blocco ant.",
+      "+ Pressione = + Potenza - Controllo"
+    ],
+    gomme: [
+      "+ Pressione = - Usura - Grip curva",
+      "- Pressione = + Grip + Usura"
+    ]
+  };
+
   return (
-    <div className="aero-row">
-      <span className="aero-label">{label}</span>
-      <div className="aero-track">
-        <div className="aero-fill" style={{ width: `${pct}%`, background: color }} />
-      </div>
-      <span className="aero-val">{value}</span>
-    </div>
-  );
-}
+    <div className="setup-creator-container">
+      {/* Left Panel */}
+      <div className="setup-left-panel">
+        <div className="track-selector-card">
+          <div className="track-selector-title">
+            🏁 Seleziona Circuito
+          </div>
+          <select 
+            className="track-select"
+            value={selectedTrack}
+            onChange={(e) => setSelectedTrack(e.target.value)}
+          >
+            <option value="">-- Scegli una pista --</option>
+            {Object.entries(TRACKS).map(([key, track]) => (
+              <option key={key} value={key}>
+                {CONTINENT_EMOJI[track.continente]} {track.nome}
+              </option>
+            ))}
+          </select>
 
-function SetupAeroBar({ value, label, max = 50 }) {
-  const pct = (value / max) * 100;
-  const hue = 120 - (pct / 100) * 110;
-  const color = `hsl(${hue}, 75%, 42%)`;
-  return (
-    <div className="setup-aero-row">
-      <span className="setup-aero-label">{label}</span>
-      <div className="setup-aero-track">
-        <div className="setup-aero-fill" style={{ width: `${pct}%`, background: color }} />
-      </div>
-      <span className="setup-aero-val">{value}</span>
-    </div>
-  );
-}
-
-const ChevronDown = () => (
-  <svg viewBox="0 0 24 24">
-    <polyline points="6,9 12,15 18,9" />
-  </svg>
-);
-
-function TrackCard({ id, track, isOpen, onToggle, index }) {
-  return (
-    <div  // ← Cambia da button a div
-      className={`track-card${isOpen ? " open" : ""}`}
-      style={{ animationDelay: `${index * 0.035}s` }}
-      onClick={() => !isOpen && onToggle()}
-    >
-      <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
-      <div className="card-top">
-        <div>
-          <div className="card-name">{track.nome}</div>
-          <div className="card-cmd">.{id}</div>
+          {trackData && (
+            <div className="track-info-grid">
+              <div className="track-info-item">
+                <div className="track-info-label">Continente</div>
+                <div className="track-info-value">{trackData.continente}</div>
+              </div>
+              <div className="track-info-item">
+                <div className="track-info-label">Circuito</div>
+                <div className="track-info-value">{trackData.nome}</div>
+              </div>
+            </div>
+          )}
         </div>
-        <span className="card-continent" style={{ marginRight: isOpen ? 32 : 0 }}>
-          {CONTINENT_EMOJI[track.continente]}
-        </span>
-      </div>
-      <button className="card-arrow-btn" onClick={(e) => { e.stopPropagation(); onToggle(); }}>
-        <ChevronDown />
-      </button>
-      <AeroBar value={track.aero[0]} label="Front" />
-      <AeroBar value={track.aero[1]} label="Rear" />
-      <div className="setup-body">
-        <div className="setup-divider" />
-        <div className="setup-item" style={{ marginBottom: 14 }}>
-          <span className="setup-item-label">Aerodinamica</span>
-          <SetupAeroBar value={track.aero[0]} label="Front" />
-          <SetupAeroBar value={track.aero[1]} label="Rear" />
-        </div>
-        <div className="setup-grid">
-          <div className="setup-item">
-            <span className="setup-item-label">Trasmissione</span>
-            <span className="setup-item-value">{SHARED.trasmissione}</span>
+
+        <div className="quick-guides-card">
+          <div className="quick-guide-title">
+            💡 Guide Rapide
           </div>
-          <div className="setup-item">
-            <span className="setup-item-label">Freni</span>
-            <span className="setup-item-value">{SHARED.freni}</span>
+          <div className="quick-guide-section">
+            <h4>✈️ Aerodinamica</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.aero.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
+            </div>
           </div>
-          <div className="setup-item">
-            <span className="setup-item-label">Geometria</span>
-            <span className="setup-item-value">{SHARED.geometria}</span>
+          <div className="quick-guide-section">
+            <h4>⚙️ Trasmissione</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.trasmissione.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
+            </div>
           </div>
-          <div className="setup-item">
-            <span className="setup-item-label">Gomme</span>
-            <span className="setup-item-value">{SHARED.gomme}</span>
+          <div className="quick-guide-section">
+            <h4>📐 Geometria</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.geometria.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
+            </div>
           </div>
-          <div className="setup-item sosp-full">
-            <span className="setup-item-label">Sospensioni</span>
-            <div className="sosp-grid">
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">Trasmissione</div>
-                <div className="sosp-val">{track.sosp[0]}</div>
-              </div>
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">S1</div>
-                <div className="sosp-val">{track.sosp[1]}</div>
-              </div>
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">S2</div>
-                <div className="sosp-val">{track.sosp[2]}</div>
-              </div>
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">S3</div>
-                <div className="sosp-val">{track.sosp[3]}</div>
-              </div>
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">S4</div>
-                <div className="sosp-val">{track.sosp[4]}</div>
-              </div>
-              <div className="sosp-labeled-val">
-                <div className="sosp-label">S5</div>
-                <div className="sosp-val">{track.sosp[5]}</div>
-              </div>
+          <div className="quick-guide-section">
+            <h4>🔩 Sospensioni</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.sospensioni.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
+            </div>
+          </div>
+          <div className="quick-guide-section">
+            <h4>🛑 Freni</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.freni.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
+            </div>
+          </div>
+          <div className="quick-guide-section">
+            <h4>🏎️ Gomme</h4>
+            <div className="quick-guide-tips">
+              {quickGuides.gomme.map((tip, i) => (
+                <div key={i} className="quick-tip">{tip}</div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Right Panel */}
+      <div className="setup-right-panel">
+        <div className="setup-editor-header">
+          <div className="setup-editor-title">
+            ⚙️ Editor Setup
+            {trackData && <span style={{color: '#00d4ff'}}>· {trackData.nome}</span>}
+          </div>
+          <div className="setup-actions">
+            {trackData && (
+              <>
+                <button className="setup-action-btn" onClick={resetToBase}>
+                  ↻ Reset
+                </button>
+                <button className="setup-action-btn primary" onClick={() => setShowExportModal(true)}>
+                  💾 Esporta
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {!selectedTrack && (
+          <div style={{
+            textAlign: 'center',
+            padding: '80px 20px',
+            color: '#2a3f52',
+            fontSize: '13px'
+          }}>
+            <div style={{fontSize: '48px', marginBottom: '16px', opacity: 0.3}}>🏎️</div>
+            Seleziona un circuito per iniziare a creare il tuo setup
+          </div>
+        )}
+
+        {trackData && (
+          <div className="setup-categories-grid">
+            {/* Aerodinamica */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">✈️</span>
+                  Aerodinamica
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-param-group">
+                  <div className="setup-param-label">
+                    <span className="setup-param-name">Front Wing</span>
+                    <span className="setup-param-value">{setupValues.aero[0]}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    value={setupValues.aero[0]}
+                    onChange={(e) => updateSetupValue('aero', 0, e.target.value)}
+                    className="setup-slider"
+                  />
+                  <div className="setup-hint">
+                    Aumenta per più grip in curva e velocità sul dritto
+                  </div>
+                </div>
+
+                <div className="setup-param-group">
+                  <div className="setup-param-label">
+                    <span className="setup-param-name">Rear Wing</span>
+                    <span className="setup-param-value">{setupValues.aero[1]}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    value={setupValues.aero[1]}
+                    onChange={(e) => updateSetupValue('aero', 1, e.target.value)}
+                    className="setup-slider"
+                  />
+                  <div className="setup-hint">
+                    Bilanciamento posteriore - attento al gap con l'anteriore!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trasmissione */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">⚙️</span>
+                  Trasmissione
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-param-group">
+                  <div className="setup-param-label">
+                    <span className="setup-param-name">Differenziale</span>
+                    <span className="setup-param-value">{setupValues.trasmissione}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="100"
+                    value={setupValues.trasmissione}
+                    onChange={(e) => updateSetupValue('trasmissione', null, e.target.value)}
+                    className="setup-slider"
+                  />
+                  <div className="setup-presets">
+                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 30)}>
+                      Sbloccato (30)
+                    </button>
+                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 50)}>
+                      Bilanciato (50)
+                    </button>
+                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 80)}>
+                      Bloccato (80)
+                    </button>
+                  </div>
+                  <div className="setup-hint">
+                    Valori alti = blocco = + sottosterzo. Valori bassi = sblocco = + sovrasterzo
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Geometria */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">📐</span>
+                  Geometria
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-multi-param">
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Camber Ant.</div>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={setupValues.geometria[0]}
+                      onChange={(e) => updateSetupValue('geometria', 0, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Camber Post.</div>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={setupValues.geometria[1]}
+                      onChange={(e) => updateSetupValue('geometria', 1, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Toe Ant.</div>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={setupValues.geometria[2]}
+                      onChange={(e) => updateSetupValue('geometria', 2, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Toe Post.</div>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={setupValues.geometria[3]}
+                      onChange={(e) => updateSetupValue('geometria', 3, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                </div>
+                <div className="setup-hint">
+                  Camber: + valore = + grip curva. Toe: + convergenza = + stabilità
+                </div>
+              </div>
+            </div>
+
+            {/* Sospensioni */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">🔧</span>
+                  Sospensioni
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-multi-param">
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Trasm.</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[0]}
+                      onChange={(e) => updateSetupValue('sosp', 0, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">S1</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[1]}
+                      onChange={(e) => updateSetupValue('sosp', 1, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">S2</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[2]}
+                      onChange={(e) => updateSetupValue('sosp', 2, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">S3</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[3]}
+                      onChange={(e) => updateSetupValue('sosp', 3, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">S4</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[4]}
+                      onChange={(e) => updateSetupValue('sosp', 4, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">S5</div>
+                    <input
+                      type="number"
+                      value={setupValues.sosp[5]}
+                      onChange={(e) => updateSetupValue('sosp', 5, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                </div>
+                <div className="setup-hint">
+                  + Rigidità = piste lisce. - Rigidità = cordoli/dossi
+                </div>
+              </div>
+            </div>
+
+            {/* Freni */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">🛑</span>
+                  Freni
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-param-group">
+                  <div className="setup-param-label">
+                    <span className="setup-param-name">Bilanciamento</span>
+                    <span className="setup-param-value">{setupValues.freni[0]}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="50"
+                    max="65"
+                    value={setupValues.freni[0]}
+                    onChange={(e) => updateSetupValue('freni', 0, e.target.value)}
+                    className="setup-slider"
+                  />
+                </div>
+
+                <div className="setup-param-group">
+                  <div className="setup-param-label">
+                    <span className="setup-param-name">Pressione</span>
+                    <span className="setup-param-value">{setupValues.freni[1]}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="80"
+                    max="100"
+                    value={setupValues.freni[1]}
+                    onChange={(e) => updateSetupValue('freni', 1, e.target.value)}
+                    className="setup-slider"
+                  />
+                </div>
+
+                <div className="setup-hint">
+                  Bilanciamento: + valore = più carico anteriore
+                </div>
+              </div>
+            </div>
+
+            {/* Gomme */}
+            <div className="setup-category-card">
+              <div className="setup-category-header">
+                <div className="setup-category-title">
+                  <span className="setup-category-icon">🏎️</span>
+                  Pressione Gomme
+                </div>
+              </div>
+              <div className="setup-category-body">
+                <div className="setup-multi-param">
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Ant. Sx</div>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={setupValues.gomme[0]}
+                      onChange={(e) => updateSetupValue('gomme', 0, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Ant. Dx</div>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={setupValues.gomme[1]}
+                      onChange={(e) => updateSetupValue('gomme', 1, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Post. Sx</div>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={setupValues.gomme[2]}
+                      onChange={(e) => updateSetupValue('gomme', 2, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                  <div className="setup-multi-item">
+                    <div className="setup-multi-label">Post. Dx</div>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={setupValues.gomme[3]}
+                      onChange={(e) => updateSetupValue('gomme', 3, e.target.value)}
+                      className="setup-multi-input"
+                    />
+                  </div>
+                </div>
+                <div className="setup-hint">
+                  + Pressione = - usura - grip. - Pressione = + grip + usura
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Export Modal */}
+      {showExportModal && (
+        <div className="export-modal-overlay" onClick={() => setShowExportModal(false)}>
+          <div className="export-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="export-modal-header">
+              <div>
+                <div className="export-modal-title">Esporta Setup</div>
+              </div>
+              <button className="export-modal-close" onClick={() => setShowExportModal(false)}>×</button>
+            </div>
+            <div className="export-modal-body">
+              <label className="export-format-label">Formato di esportazione:</label>
+              <div className="export-formats">
+                <button
+                  className={`export-format-btn${exportFormat === 'text' ? ' active' : ''}`}
+                  onClick={() => setExportFormat('text')}
+                >
+                  <div className="export-format-icon">📄</div>
+                  <div className="export-format-name">Testo</div>
+                </button>
+                <button
+                  className={`export-format-btn${exportFormat === 'json' ? ' active' : ''}`}
+                  onClick={() => setExportFormat('json')}
+                >
+                  <div className="export-format-icon">🔧</div>
+                  <div className="export-format-name">JSON</div>
+                </button>
+              </div>
+
+              <div className="export-preview">
+                {exportSetup()}
+              </div>
+
+              <div className="export-actions">
+                <button className="export-btn" onClick={downloadSetup}>
+                  💾 Scarica Setup
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-// Season Selector Component
+// ─── COMPONENTS (Keep existing components: SeasonSelector, RaceResultsModal, LeaderboardPage, CalendarPage, CareerPage, HeadToHeadPage, RulesPage) ───
+
 function SeasonSelector({ currentSeason, onSeasonChange }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -2000,7 +2398,6 @@ function SeasonSelector({ currentSeason, onSeasonChange }) {
   );
 }
 
-// Race Results Modal
 function RaceResultsModal({ race, raceResults, season, onClose }) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const raceData = raceResults.find(r => r.race === race.raceKey);
@@ -2048,385 +2445,6 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
   );
 }
 
-// AI Setup Assistant Component
-// AI Setup Analyzer Component - Versione Avanzata
-function AISetupAnalyzer() {
-  const [selectedTrack, setSelectedTrack] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedIssue, setSelectedIssue] = useState("");
-  const [analysis, setAnalysis] = useState(null);
-
-  const categories = [
-    { 
-      id: "aero", 
-      label: "Aerodinamica", 
-      icon: "✈️",
-      issues: [
-        { id: "sottosterzo", label: "Sottosterzo", desc: "Macchina non gira in curva" },
-        { id: "sovrasterzo", label: "Sovrasterzo", desc: "Posteriore instabile" },
-        { id: "velocita_dritto", label: "Velocità sul Dritto", desc: "Top speed bassa" },
-        { id: "grip_curva", label: "Grip in Curva", desc: "Poco carico" }
-      ]
-    },
-    { 
-      id: "trasmissione", 
-      label: "Trasmissione", 
-      icon: "⚙️",
-      issues: [
-        { id: "sottosterzo_traz", label: "Sottosterzo in Trazione", desc: "Slip ruote anteriori" },
-        { id: "sovrasterzo_traz", label: "Sovrasterzo in Trazione", desc: "Slip ruote posteriori" }
-      ]
-    },
-    { 
-      id: "geometria", 
-      label: "Geometria Sospensioni", 
-      icon: "📐",
-      issues: [
-        { id: "grip_curva_camp", label: "Grip in Curva (Camber)", desc: "Campanatura" },
-        { id: "usura_gomme", label: "Usura Gomme", desc: "Consumo eccessivo" },
-        { id: "reattivita", label: "Reattività", desc: "Convergenza/Divergenza" },
-        { id: "stabilita", label: "Stabilità", desc: "Auto nervosa" }
-      ]
-    },
-    { 
-      id: "sospensioni", 
-      label: "Sospensioni", 
-      icon: "🔧",
-      issues: [
-        { id: "piste_lisce", label: "Piste Lisce", desc: "Grip su dorsi" },
-        { id: "alte_velocita", label: "Alte Velocità", desc: "Grip su dossi/cordoli" },
-        { id: "velocita_dritto_sosp", label: "Velocità sul Dritto", desc: "Altezza da terra" },
-        { id: "curva_cordoli", label: "Curva/Cordoli", desc: "Barre antirollio" }
-      ]
-    },
-    { 
-      id: "freni", 
-      label: "Freni", 
-      icon: "🛑",
-      issues: [
-        { id: "bloccaggio_ant", label: "Bloccaggio Anteriore", desc: "Ruote davanti" },
-        { id: "bloccaggio_post", label: "Bloccaggio Posteriore", desc: "Ruote dietro" },
-        { id: "potenza_fren", label: "Potenza Frenante", desc: "Pressione" }
-      ]
-    },
-    { 
-      id: "gomme", 
-      label: "Pressione Gomme", 
-      icon: "🏎️",
-      issues: [
-        { id: "usura_pressione", label: "Usura", desc: "Consumo" },
-        { id: "rettifili", label: "Velocità Rettifili", desc: "Top speed" },
-        { id: "grip_curva_press", label: "Grip in Curva", desc: "Aderenza" }
-      ]
-    }
-  ];
-
-  const analyzeSetup = () => {
-    if (!selectedTrack || !selectedIssue) return;
-    
-    const trackData = TRACKS[selectedTrack];
-    let result = {
-      track: trackData.nome,
-      category: selectedCategory,
-      issue: selectedIssue,
-      recommendations: [],
-      warnings: [],
-      currentSetup: {
-        aero: trackData.aero,
-        sosp: trackData.sosp,
-        trasmissione: trackData.trasmissione
-      }
-    };
-
-    // Analisi basata sulla guida completa
-    switch(selectedCategory) {
-      case "aero":
-        if (selectedIssue === "sottosterzo") {
-          result.recommendations = [
-            { type: "critical", text: `+ ALA: da ${trackData.aero[0]} → ${trackData.aero[0] + 4}` },
-            { type: "important", text: "Aumenta velocità sul dritto + Grip in curva" },
-            { type: "suggestion", text: `- ALA: da ${trackData.aero[1]} → ${Math.max(0, trackData.aero[1] - 3)}` }
-          ];
-          result.warnings = ["⚠️ Nota: Stabilità maggiore con carico equilibrato. Gap può rendere auto difficile da controllare."];
-        } else if (selectedIssue === "sovrasterzo") {
-          result.recommendations = [
-            { type: "critical", text: `- ALA: da ${trackData.aero[0]} → ${Math.max(0, trackData.aero[0] - 3)}` },
-            { type: "important", text: "Riduce velocità sul dritto - Riduce grip in curva" },
-            { type: "suggestion", text: `+ ALA: da ${trackData.aero[1]} → ${Math.min(50, trackData.aero[1] + 4)}` }
-          ];
-        } else if (selectedIssue === "velocita_dritto") {
-          result.recommendations = [
-            { type: "critical", text: "- ALA (anteriore e posteriore)" },
-            { type: "important", text: `Front: ${Math.max(0, trackData.aero[0] - 5)} | Rear: ${Math.max(0, trackData.aero[1] - 5)}` }
-          ];
-          result.warnings = ["⚠️ Ridurrà il grip in curva!"];
-        }
-        break;
-
-      case "trasmissione":
-        if (selectedIssue === "sottosterzo_traz") {
-          result.recommendations = [
-            { type: "critical", text: "Bloccare (valori alti) = Stabilità in trazione" },
-            { type: "important", text: "+ Sottosterzo | + Usura gomme posteriori" }
-          ];
-        } else if (selectedIssue === "sovrasterzo_traz") {
-          result.recommendations = [
-            { type: "critical", text: "Sbloccare (valori bassi) = Stabilità in trazione" },
-            { type: "important", text: "+ Sovrasterzo | - Usura gomme posteriori" }
-          ];
-        }
-        result.warnings = ["ℹ️ Valori alti aiutano in uscita delle curve lente ma usura più il posteriore."];
-        break;
-
-      case "geometria":
-        if (selectedIssue === "grip_curva_camp") {
-          result.recommendations = [
-            { type: "critical", text: "+ Campanatura (Camber) = + Grip in curva | + Usura gomme" },
-            { type: "suggestion", text: "- Campanatura = - Grip in curva | - Usura gomme" }
-          ];
-        } else if (selectedIssue === "reattivita") {
-          result.recommendations = [
-            { type: "critical", text: "+ Convergenza (Toe-in anteriore) = + Stabilità sul dritto | - Reattività" },
-            { type: "suggestion", text: "- Convergenza = + Reattività/Accelerazione | - Stabilità" }
-          ];
-        } else if (selectedIssue === "stabilita") {
-          result.recommendations = [
-            { type: "critical", text: "+ Divergenza (Toe posteriore verso esterno) = Stabilità in frenata | + Usura" },
-            { type: "suggestion", text: "- Divergenza (Toe posteriore verso interno) = Stabilità | - Usura | + Accelerazione" }
-          ];
-        }
-        result.warnings = ["ℹ️ Geometria delicata: piccoli cambiamenti hanno grandi effetti."];
-        break;
-
-      case "sospensioni":
-        if (selectedIssue === "piste_lisce") {
-          result.recommendations = [
-            { type: "critical", text: "+ Rigidità sospensioni = + Stabilità su piste lisce | + Usura | + Grip su dossi" },
-            { type: "suggestion", text: "- Rigidità = + Grip su dossi e cordoli | - Stabilità ad alta velocità" }
-          ];
-        } else if (selectedIssue === "curva_cordoli") {
-          result.recommendations = [
-            { type: "critical", text: "+ Barra antirollio = + Reattività in curva | - Stabilità su cambi direzione" },
-            { type: "suggestion", text: "- Barra = + Stabilità | - Reattività" }
-          ];
-        } else if (selectedIssue === "velocita_dritto_sosp") {
-          result.recommendations = [
-            { type: "critical", text: "+ Altezza da terra = - Velocità sul dritto | + Grip in curva / sui cordoli" },
-            { type: "suggestion", text: "- Altezza = + Velocità sul dritto | - Grip su cordoli / rischio bottoming" }
-          ];
-        }
-        break;
-
-      case "freni":
-        if (selectedIssue === "bloccaggio_ant") {
-          result.recommendations = [
-            { type: "critical", text: "+ Bilanciamento (verso anteriore) = Bloccaggio posteriore | + Rischio blocco ant." },
-            { type: "suggestion", text: "Attualmente: " + SHARED.freni }
-          ];
-        } else if (selectedIssue === "bloccaggio_post") {
-          result.recommendations = [
-            { type: "critical", text: "- Bilanciamento (verso posteriore) = + Bloccaggio posteriore | + Sovrasterzo in ingresso" },
-            { type: "suggestion", text: "Attualmente: " + SHARED.freni }
-          ];
-        } else if (selectedIssue === "potenza_fren") {
-          result.recommendations = [
-            { type: "critical", text: "+ Pressione freni = + Potenza frenante | + Rischio bloccaggio" },
-            { type: "suggestion", text: "- Pressione freni = - Potenza frenante | - Rischio bloccaggio" }
-          ];
-        }
-        break;
-
-      case "gomme":
-        if (selectedIssue === "usura_pressione") {
-          result.recommendations = [
-            { type: "critical", text: "+ Pressione = - Attrito / usura | + Velocità sui rettifili | - Grip in curva" },
-            { type: "suggestion", text: "Attualmente: " + SHARED.gomme }
-          ];
-        } else if (selectedIssue === "grip_curva_press") {
-          result.recommendations = [
-            { type: "critical", text: "- Pressione = + Grip in curva | + Usura | + Grip su dossi" },
-            { type: "suggestion", text: "Attualmente: " + SHARED.gomme }
-          ];
-        }
-        result.warnings = ["ℹ️ Alte pressioni = gomme più dure e stivolose, basse = più grip ma si scaldano/usurano più."];
-        break;
-    }
-
-    setAnalysis(result);
-  };
-
-  const currentCategory = categories.find(c => c.id === selectedCategory);
-
-  return (
-    <div className="ai-analyzer">
-      <div className="analyzer-header">
-        <div className="analyzer-icon">🔧</div>
-        <div>
-          <div className="analyzer-title">AI Setup Analyzer Pro</div>
-          <div className="analyzer-subtitle">Analisi Avanzata Basata su Guida Tecnica</div>
-        </div>
-      </div>
-
-      <div className="analyzer-body">
-        {/* Track Selection */}
-        <div className="analyzer-section">
-          <label className="analyzer-label">1. Seleziona Circuito</label>
-          <select 
-            className="analyzer-select"
-            value={selectedTrack}
-            onChange={(e) => {
-              setSelectedTrack(e.target.value);
-              setAnalysis(null);
-            }}
-          >
-            <option value="">-- Scegli pista --</option>
-            {Object.entries(TRACKS).map(([key, track]) => (
-              <option key={key} value={key}>
-                {CONTINENT_EMOJI[track.continente]} {track.nome}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Category Selection */}
-        {selectedTrack && (
-          <div className="analyzer-section">
-            <label className="analyzer-label">2. Categoria Setup</label>
-            <div className="category-grid">
-              {categories.map(cat => (
-                <button
-                  key={cat.id}
-                  className={`category-btn${selectedCategory === cat.id ? " active" : ""}`}
-                  onClick={() => {
-                    setSelectedCategory(cat.id);
-                    setSelectedIssue("");
-                    setAnalysis(null);
-                  }}
-                >
-                  <div className="cat-icon">{cat.icon}</div>
-                  <div className="cat-label">{cat.label}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Issue Selection */}
-        {selectedCategory && (
-          <div className="analyzer-section">
-            <label className="analyzer-label">3. Problema Specifico</label>
-            <div className="issue-list">
-              {currentCategory.issues.map(issue => (
-                <button
-                  key={issue.id}
-                  className={`issue-item${selectedIssue === issue.id ? " active" : ""}`}
-                  onClick={() => {
-                    setSelectedIssue(issue.id);
-                    setAnalysis(null);
-                  }}
-                >
-                  <div className="issue-item-label">{issue.label}</div>
-                  <div className="issue-item-desc">{issue.desc}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Analyze Button */}
-        {selectedTrack && selectedIssue && !analysis && (
-          <button className="analyze-btn" onClick={analyzeSetup}>
-            <span>🔍</span>
-            <span>Analizza Setup</span>
-          </button>
-        )}
-
-        {/* Results */}
-        {analysis && (
-          <div className="analysis-results">
-            <div className="results-header">
-              <h3>📊 Analisi Completata</h3>
-              <button 
-                className="reset-btn"
-                onClick={() => {
-                  setAnalysis(null);
-                  setSelectedIssue("");
-                }}
-              >
-                ↻ Nuova
-              </button>
-            </div>
-
-            <div className="results-info">
-              <div className="result-item">
-                <span className="result-label">Circuito:</span>
-                <span className="result-value">{analysis.track}</span>
-              </div>
-              <div className="result-item">
-                <span className="result-label">Categoria:</span>
-                <span className="result-value">
-                  {categories.find(c => c.id === analysis.category)?.label}
-                </span>
-              </div>
-            </div>
-
-            <div className="recommendations">
-              <h4>🔧 Modifiche Consigliate</h4>
-              {analysis.recommendations.map((rec, idx) => (
-                <div key={idx} className={`recommendation ${rec.type}`}>
-                  <div className="rec-marker">
-                    {rec.type === "critical" && "🔴"}
-                    {rec.type === "important" && "🟡"}
-                    {rec.type === "suggestion" && "🔵"}
-                  </div>
-                  <div className="rec-text">{rec.text}</div>
-                </div>
-              ))}
-            </div>
-
-            {analysis.warnings && analysis.warnings.length > 0 && (
-              <div className="warnings-box">
-                {analysis.warnings.map((warn, idx) => (
-                  <div key={idx} className="warning-item">{warn}</div>
-                ))}
-              </div>
-            )}
-
-            <div className="current-setup">
-              <h4>📋 Setup Base Corrente</h4>
-              <div className="setup-values">
-                <div className="setup-value-item">
-                  <span>Aero Front:</span>
-                  <strong>{analysis.currentSetup.aero[0]}</strong>
-                </div>
-                <div className="setup-value-item">
-                  <span>Aero Rear:</span>
-                  <strong>{analysis.currentSetup.aero[1]}</strong>
-                </div>
-                <div className="setup-value-item">
-                  <span>Trasmissione:</span>
-                  <strong>{analysis.currentSetup.trasmissione}</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {!selectedTrack && (
-          <div className="analyzer-empty">
-            <div className="empty-icon">🏎️</div>
-            <div className="empty-text">
-              Seleziona un circuito per iniziare<br/>
-              <small>Analisi basata su guida tecnica professionale</small>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ─── LEADERBOARD PAGE ─────────────────────────────────────────────
 function LeaderboardPage({ season }) {
   const [tab, setTab] = useState("drivers");
   const [expandedDriver, setExpandedDriver] = useState(null);
@@ -2542,7 +2560,6 @@ function LeaderboardPage({ season }) {
   );
 }
 
-// ─── CALENDAR PAGE ────────────────────────────────────────────────
 function CalendarPage({ season }) {
   const [selectedRace, setSelectedRace] = useState(null);
   
@@ -2587,7 +2604,6 @@ function CalendarPage({ season }) {
   );
 }
 
-// ─── CAREER PAGE ──────────────────────────────────────────────────
 function CareerPage() {
   const drivers = useMemo(() => {
     return Object.keys(DRIVER_TEAMS_BASE).map((name) => ({
@@ -2684,7 +2700,6 @@ function CareerPage() {
   );
 }
 
-// ─── HEAD TO HEAD PAGE ────────────────────────────────────────────
 function HeadToHeadPage({ season }) {
   const seasonData = SEASON_DATA[season];
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
@@ -2850,69 +2865,6 @@ function HeadToHeadPage({ season }) {
   );
 }
 
-// ─── SETUP PAGE ───────────────────────────────────────────────────
-function SetupPage() {
-  const [search, setSearch]     = useState("");
-  const [filter, setFilter]     = useState("Tutti");
-  const [openCard, setOpenCard] = useState(null);
-
-  const filtered = useMemo(() =>
-    Object.entries(TRACKS).filter(([key, t]) => {
-      const q = search.toLowerCase();
-      const matchSearch = t.nome.toLowerCase().includes(q) || key.includes(q);
-      const matchFilter = filter === "Tutti" || t.continente === filter;
-      return matchSearch && matchFilter;
-    }),
-    [search, filter]
-  );
-
-  const handleToggle = (key) => {
-    setOpenCard((prev) => (prev === key ? null : key));
-  };
-
-  return (
-    <div className="setup-page-container">
-      <div>
-        <div className="f1-toolbar">
-          <div className="f1-search-wrap">
-            <span className="f1-search-icon">⌕</span>
-            <input
-              className="f1-search" type="text"
-              placeholder="Cerca pista o comando..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="f1-pills">
-            {CONTINENTI.map((c) => (
-              <button key={c} className={`f1-pill${filter === c ? " active" : ""}`} onClick={() => setFilter(c)}>{c}</button>
-            ))}
-          </div>
-          <span className="f1-count">{filtered.length} risultati</span>
-        </div>
-        <div className="f1-grid">
-          {filtered.length === 0 ? (
-            <div className="no-results">
-              <div className="no-results-icon">🔍</div>
-              <div className="no-results-text">Nessuna pista trovata</div>
-            </div>
-          ) : (
-            filtered.map(([key, track], i) => (
-              <TrackCard
-                key={key} id={key} track={track}
-                isOpen={openCard === key} index={i}
-                onToggle={() => handleToggle(key)}
-              />
-            ))
-          )}
-        </div>
-      </div>
-      <AISetupAnalyzer />
-    </div>
-  );
-}
-
-// ─── RULES PAGE ───────────────────────────────────────────────────
 function RulesPage() {
   const [expandedRules, setExpandedRules] = useState([]);
 
@@ -2984,8 +2936,8 @@ export default function App() {
       subtitle: `Tutte le stagioni · Statistiche totali carriera` 
     },
     setup: { 
-      title: "Setup Dashboard", 
-      subtitle: `${Object.keys(TRACKS).length} circuiti · simulatore + AI` 
+      title: "Setup Creator Pro", 
+      subtitle: `Crea e personalizza il tuo setup perfetto` 
     },
     rules: { 
       title: "Regolamento", 
@@ -3010,8 +2962,8 @@ export default function App() {
                 <span className="f1-status-label">{season} · Online</span>
               </div>
               <div className="f1-title-row">
-                <h1 className="f1-title">F1 Dashboard</h1>
-                <span className="f1-subtitle">Campionato in corso</span>
+                <h1 className="f1-title">F1 Dashboard Pro</h1>
+                <span className="f1-subtitle">Advanced Setup Creator</span>
               </div>
             </div>
           </div>
@@ -3044,7 +2996,7 @@ export default function App() {
           {page === "calendar" && <CalendarPage season={season} />}
           {page === "h2h" && <HeadToHeadPage season={season} />}
           {page === "career" && <CareerPage />}
-          {page === "setup" && <SetupPage />}
+          {page === "setup" && <AdvancedSetupCreator />}
           {page === "rules" && <RulesPage />}
         </div>
       </div>
