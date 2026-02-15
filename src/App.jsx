@@ -1710,7 +1710,7 @@ function AdvancedSetupCreator() {
   const [selectedTrack, setSelectedTrack] = useState("");
   const [setupValues, setSetupValues] = useState({
     aero: [25, 25],
-    trasmissione: 50,
+    trasmissione: [50, 1],
     geometria: [-3.50, -2.00, 0.00, 0.10],
     sosp: [41, 1, 10, 21, 20, 40],
     freni: [55, 100],
@@ -1726,7 +1726,7 @@ function AdvancedSetupCreator() {
     if (trackData) {
       setSetupValues({
         aero: [...trackData.aero],
-        trasmissione: trackData.trasmissione,
+        trasmissione: [...trackData.trasmissione],
         geometria: [...trackData.geometria],
         sosp: [...trackData.sosp],
         freni: [...trackData.freni],
@@ -1753,7 +1753,7 @@ function AdvancedSetupCreator() {
     if (trackData) {
       setSetupValues({
         aero: [...trackData.aero],
-        trasmissione: trackData.trasmissione,
+        trasmissione: [...trackData.trasmissione],
         geometria: [...trackData.geometria],
         sosp: [...trackData.sosp],
         freni: [...trackData.freni],
