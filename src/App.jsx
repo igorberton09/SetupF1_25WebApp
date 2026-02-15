@@ -15,30 +15,30 @@ function useFonts() {
 
 // ─── SETUP DATA ───────────────────────────────────────────────────
 const TRACKS = {
-  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: 41, sosp: [41, 1, 12, 17, 20, 44], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Oceania" },
-  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: 41, sosp: [41, 1,  4,  8, 21, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: 41, sosp: [41, 1,  6, 21, 22, 42], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: 41, sosp: [41, 10, 9, 10, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: 41, sosp: [41, 6,  1,  7, 18, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: 30, sosp: [30, 1,  1, 17, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: 41, sosp: [41, 1,  9, 21, 23, 52], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: 41, sosp: [41, 22, 3, 21, 19, 49], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: 38, sosp: [38, 2,  6, 21, 20, 43], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: 41, sosp: [41, 1,  1, 18, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: 41, sosp: [41, 5,  3, 20, 20, 46], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: 41, sosp: [41, 1,  5, 18, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: 41, sosp: [41, 1,  6, 12, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: 41, sosp: [41, 1, 10, 21, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: 41, sosp: [41, 1,  9, 21, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: 41, sosp: [41, 1,  1, 21, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
-  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: 41, sosp: [41, 1,  1, 19, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: 41, sosp: [41, 1, 16, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: 41, sosp: [41, 3,  1, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: 32, sosp: [32, 3,  5, 21, 23, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: 41, sosp: [41, 5,  2, 21, 22, 41], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: 41, sosp: [41, 6,  5, 21, 23, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
-  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: 41, sosp: [41, 3,  1, 16, 19, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
-  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: 41, sosp: [41, 1,  1, 17, 17, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  australia:   { nome: "Melbourne",   aero: [23, 10], trasmissione: [41, 1], sosp: [41, 1, 12, 17, 20, 44], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Oceania" },
+  cina:        { nome: "Shanghai",    aero: [24, 21], trasmissione: [41, 1], sosp: [41, 1,  4,  8, 21, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  suzuka:      { nome: "Suzuka",      aero: [31, 21], trasmissione: [41, 1], sosp: [41, 1,  6, 21, 22, 42], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  bahrain:     { nome: "Sakhir",      aero: [34, 29], trasmissione: [41, 10], sosp: [41, 10, 9, 10, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  jeddah:      { nome: "Jeddah",      aero: [15,  1], trasmissione: [41, 6], sosp: [41, 6,  1,  7, 18, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  miami:       { nome: "Miami",       aero: [12,  4], trasmissione: [30, 1], sosp: [30, 1,  1, 17, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  imola:       { nome: "Imola",       aero: [43, 37], trasmissione: [41, 1], sosp: [41, 1,  9, 21, 23, 52], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  monaco:      { nome: "Monaco",      aero: [50, 50], trasmissione: [41, 22], sosp: [41, 22, 3, 21, 19, 49], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  spagna:      { nome: "Barcellona",  aero: [41, 32], trasmissione: [38, 2], sosp: [38, 2,  6, 21, 20, 43], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  canada:      { nome: "Montreal",    aero: [35, 28], trasmissione: [41, 1], sosp: [41, 1,  1, 18, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  austria:     { nome: "Spielberg",   aero: [37, 30], trasmissione: [41, 5], sosp: [41, 5,  3, 20, 20, 46], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  silverstone: { nome: "Silverstone", aero: [12,  0], trasmissione: [41, 1], sosp: [41, 1,  5, 18, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  spa:         { nome: "Spa",         aero: [8,   8], trasmissione: [41, 1], sosp: [41, 1,  6, 12, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  ungheria:    { nome: "Budapest",    aero: [50, 50], trasmissione: [41, 1], sosp: [41, 1, 10, 21, 19, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  olanda:      { nome: "Zandvoort",   aero: [50, 48], trasmissione: [41, 1], sosp: [41, 1,  9, 21, 22, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  monza:       { nome: "Monza",       aero: [0,   3], trasmissione: [41, 1], sosp: [41, 1,  1, 21, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Europa"  },
+  baku:        { nome: "Baku",        aero: [4,   1], trasmissione: [41, 1], sosp: [41, 1,  1, 19, 21, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  singapore:   { nome: "Singapore",   aero: [50, 47], trasmissione: [41, 1], sosp: [41, 1, 16, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  austin:      { nome: "Austin",      aero: [41, 34], trasmissione: [41, 3], sosp: [41, 3,  1, 21, 20, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  messico:     { nome: "Mexico City", aero: [40, 36], trasmissione: [41, 3], sosp: [32, 3,  5, 21, 23, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  brasile:     { nome: "Sao Paolo",   aero: [27, 14], trasmissione: [41, 5], sosp: [41, 5,  2, 21, 22, 41], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  lasvegas:    { nome: "Las Vegas",   aero: [1,   0], trasmissione: [41, 6], sosp: [41, 6,  5, 21, 23, 48], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "America" },
+  qatar:       { nome: "Lusail",      aero: [42, 30], trasmissione: [41, 3], sosp: [41, 3,  1, 16, 19, 45], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
+  abudhabi:    { nome: "Yas Marina",  aero: [29, 18], trasmissione: [41, 1], sosp: [41, 1,  1, 17, 17, 40], freni: [55, 100], geometria: [-3.50, -2.00, 0.00, 0.10], gomme: [29.5, 29.5, 26.5, 26.5], continente: "Asia"    },
 };
 
 const SHARED = {
@@ -1845,31 +1845,40 @@ Generated by F1 Dashboard Setup Creator
 
   const quickGuides = {
     aero: [
-      "+ Ala = + Velocità dritto + Grip curva",
-      "- Ala = + Top speed - Grip curva",
-      "Gap ali = Auto difficile da controllare"
+      "+ Ala = + Velocità in curva + Grip curva",
+      "- Ala = + Velocità sul dritto - Grip curva",
+      "+ Gap ali = + Sovrasterzo - Stabilità",
+      "- Gap ali = + Sottosterzo + Stabilità"
     ],
     trasmissione: [
-      "Valori alti = Blocca diff. = + Sottosterzo",
-      "Valori bassi = Sblocca diff. = + Sovrasterzo"
+      "Valori alti = Blocca diff. = + Sottosterzo + Trazione",
+      "Valori bassi = Sblocca diff. = + Sovrasterzo - Trazione"
     ],
     geometria: [
-      "+ Camber = + Grip curva + Usura",
-      "+ Toe-in = + Stabilità - Reattività",
-      "Divergenza = Stabilità frenata"
+      "+ Campanatura = + Grip in curva + Usura gomme",
+      "- Campanatura = - Grip in curva - Usura gomme",
+      "+ Convergenza = + Stabilità - Reattività",
+      "- Convergenza = - Stabilità + Reattività",
+      "+ Divergenza = + Stabilità in frenata + Usura - Reattività",
+      "- Divergenza = - Stabilità in frenata - Usura + Reattività"
     ],
     sospensioni: [
-      "+ Rigidità = Piste lisce + Stabilità",
-      "- Rigidità = Cordoli e dossi",
-      "+ Altezza = - Velocità + Grip cordoli"
+      "+ Rigidità = + Stabilità piste lisce + Usura - Grip dossi",
+      "- Rigidità = - Stabilità piste lisce - Usura + Grip dossi",
+      "+ Barra = + Reattività in curva - Stabilità cambi direzione",
+      "- Barra = - Reattività in curva + Stabilità cambi direzione",
+      "+ Altezza = - Velocità sul dritto + Grip cordoli",
+      "- Altezza = + Velocità sul dritto - Grip cordoli + Bottoming"
     ],
     freni: [
-      "+ Bilanciamento ant. = Rischio blocco ant.",
-      "+ Pressione = + Potenza - Controllo"
+      "+ Bilanciamento = - Blocaggio post + Blocaggio ant + Sovrasterzo in ingresso",
+      "- Bilanciamento = + Blocaggio post - Blocaggio ant + Sottosterzo in ingresso",
+      "+ Pressione = + Potenza + Blocaggio",
+      "- Pressione = - Potenza - Blocaggio"
     ],
     gomme: [
-      "+ Pressione = - Usura - Grip curva",
-      "- Pressione = + Grip + Usura"
+      "+ Pressione = - Usura + Velocità sul dritto - Grip curva",
+      "- Pressione = - Usura + Velocità sul dritto - Grip curva"
     ]
   };
 
@@ -2067,20 +2076,7 @@ Generated by F1 Dashboard Setup Creator
                     onChange={(e) => updateSetupValue('trasmissione', null, e.target.value)}
                     className="setup-slider"
                   />
-                  <div className="setup-presets">
-                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 30)}>
-                      Sbloccato (30)
-                    </button>
-                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 50)}>
-                      Bilanciato (50)
-                    </button>
-                    <button className="setup-preset-btn" onClick={() => updateSetupValue('trasmissione', null, 80)}>
-                      Bloccato (80)
-                    </button>
-                  </div>
-                  <div className="setup-hint">
-                    Valori alti = blocco = + sottosterzo. Valori bassi = sblocco = + sovrasterzo
-                  </div>
+                  
                 </div>
               </div>
             </div>
