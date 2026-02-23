@@ -355,15 +355,15 @@ const TEAM_CAREER_STATS = {
 };
 
 const NAV = [
-  { id: "leaderboard", label: "Leaderboard",  icon: "🏆" },
-  { id: "calendar",    label: "Calendario",   icon: "📅" },
-  { id: "h2h",         label: "Head-to-Head", icon: "⚔️" },
-  { id: "career",      label: "Carriera",     icon: "🏁" },
-  { id: "setup",       label: "Setup Creator", icon: "⚙️" },
-  { id: "rules",       label: "Regole",       icon: "📋" },
+  { id: "leaderboard", label: "Classifica",  icon: "🏆" },
+  { id: "calendar",    label: "Calendario",  icon: "📅" },
+  { id: "h2h",         label: "H2H",         icon: "⚔️" },
+  { id: "career",      label: "Carriera",    icon: "🏁" },
+  { id: "setup",       label: "Setup",       icon: "⚙️" },
+  { id: "rules",       label: "Regole",      icon: "📋" },
 ];
 
-// ─── MASTER CSS ─────────────────────────────────────────────────── 
+// ─── MASTER CSS ──────────────────────────────────────────────────
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -386,14 +386,6 @@ const css = `
   @keyframes modalIn {
     from { opacity: 0; transform: scale(0.95); }
     to   { opacity: 1; transform: scale(1); }
-  }
-  @keyframes ai-pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
-    50%      { box-shadow: 0 0 30px rgba(0,212,255,0.5), 0 0 40px rgba(232,0,29,0.2); }
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ── Root ──────────────────────────────────────────────────── */
@@ -426,44 +418,54 @@ const css = `
     border-bottom: 1px solid #1a2332;
   }
   .f1-header-top {
-    padding: 18px 28px 0;
+    padding: 14px 16px 0;
     max-width: 1400px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 8px;
+    flex-wrap: wrap; gap: 6px;
   }
   .f1-status { display: flex; align-items: center; gap: 8px; }
   .f1-status-dot {
     width: 7px; height: 7px; border-radius: 50%;
     background: #e8001d;
     animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
   }
   .f1-status-label {
     font-size: 9px; color: #e8001d;
     text-transform: uppercase; letter-spacing: 2.8px; font-weight: 600;
   }
-  .f1-title-row { display: flex; align-items: baseline; gap: 14px; }
+  .f1-title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
   .f1-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 20px; font-weight: 700; color: #f0f4f8; letter-spacing: -0.3px;
+    font-size: 18px; font-weight: 700; color: #f0f4f8; letter-spacing: -0.3px;
   }
   .f1-subtitle { font-size: 9.5px; color: #2a3f52; }
 
   /* ── Nav tabs ──────────────────────────────────────────────── */
   .f1-nav {
-    display: flex; gap: 2px;
-    padding: 12px 28px 0;
-    max-width: 1400px; margin: 0 auto;
+    display: flex;
+    gap: 2px;
+    padding: 10px 16px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .f1-nav::-webkit-scrollbar { display: none; }
   .f1-nav-btn {
-    padding: 8px 18px;
+    padding: 8px 14px;
     background: transparent;
     border: none; border-bottom: 2px solid transparent;
     color: #3d5a6e;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 10.5px; letter-spacing: 1.2px;
+    font-size: 10px; letter-spacing: 0.8px;
     text-transform: uppercase; cursor: pointer;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
     border-radius: 6px 6px 0 0;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .f1-nav-btn:hover { color: #8aacbe; background: rgba(58,80,104,0.06); }
   .f1-nav-btn.active {
@@ -471,12 +473,12 @@ const css = `
     border-bottom-color: #e8001d;
     background: rgba(232,0,29,0.06);
   }
-  .f1-nav-btn .nav-icon { margin-right: 5px; }
+  .f1-nav-btn .nav-icon { margin-right: 4px; }
 
   /* ── Page content ──────────────────────────────────────────── */
   .f1-page {
     position: relative; z-index: 1;
-    padding: 24px 28px 48px;
+    padding: 16px 12px 48px;
     max-width: 1400px; margin: 0 auto; width: 100%;
     flex: 1;
     animation: fadeIn 0.35s ease;
@@ -484,28 +486,26 @@ const css = `
 
   /* ── Page header ───────────────────────────────────────────── */
   .page-header {
-    margin-bottom: 22px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
   }
   .page-header-left h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 16px; font-weight: 600;
-    color: #dde4eb; letter-spacing: 0.2px; margin-bottom: 4px;
+    font-size: 14px; font-weight: 600;
+    color: #dde4eb; letter-spacing: 0.2px; margin-bottom: 3px;
   }
   .page-header-left p {
-    font-size: 10.5px; color: #2a3f52; letter-spacing: 0.3px;
+    font-size: 10px; color: #2a3f52; letter-spacing: 0.3px;
   }
 
   /* ── Season selector ───────────────────────────────────────── */
-  .season-selector {
-    position: relative;
-  }
+  .season-selector { position: relative; }
   .season-btn {
-    padding: 8px 16px;
+    padding: 7px 13px;
     background: #0a1018;
     border: 1px solid #1a2332;
     border-radius: 7px;
@@ -513,673 +513,75 @@ const css = `
     font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 6px;
     transition: all 0.2s;
   }
-  .season-btn:hover {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.08);
-  }
-  .season-btn-icon {
-    font-size: 9px;
-    transition: transform 0.2s;
-  }
-  .season-btn.open .season-btn-icon {
-    transform: rotate(180deg);
-  }
+  .season-btn:hover { border-color: #e8001d; background: rgba(232,0,29,0.08); }
+  .season-btn-icon { font-size: 9px; transition: transform 0.2s; }
+  .season-btn.open .season-btn-icon { transform: rotate(180deg); }
   .season-dropdown {
     position: absolute;
-    top: calc(100% + 6px);
-    right: 0;
+    top: calc(100% + 6px); right: 0;
     background: #0a1018;
     border: 1px solid #1a2332;
     border-radius: 7px;
     overflow: hidden;
-    min-width: 160px;
+    min-width: 150px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     z-index: 100;
   }
   .season-option {
-    padding: 10px 16px;
-    font-size: 11px;
-    color: #c8d6e0;
+    padding: 9px 14px;
+    font-size: 11px; color: #c8d6e0;
     cursor: pointer;
     transition: background 0.15s;
     border-bottom: 1px solid rgba(26,35,50,0.6);
   }
-  .season-option:last-child {
-    border-bottom: none;
-  }
-  .season-option:hover {
-    background: rgba(232,0,29,0.08);
-  }
-  .season-option.active {
-    background: rgba(232,0,29,0.12);
-    color: #e8001d;
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     SETUP CREATOR - ADVANCED INTERFACE
-     ══════════════════════════════════════════════════════════════ */
-  .setup-creator-container {
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 20px;
-    height: calc(100vh - 240px);
-  }
-
-  /* Left Panel - Track Selection & Info */
-  .setup-left-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .track-selector-card {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-    padding: 20px;
-    animation: card-in 0.4s ease;
-  }
-
-  .track-selector-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .track-select {
-    width: 100%;
-    padding: 12px 16px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    color: #c8d6e0;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    outline: none;
-    transition: border-color 0.2s;
-    cursor: pointer;
-  }
-
-  .track-select:focus {
-    border-color: #00d4ff;
-  }
-
-  .track-info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .track-info-item {
-    padding: 10px;
-    background: rgba(0,212,255,0.03);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 6px;
-  }
-
-  .track-info-label {
-    font-size: 8px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .track-info-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #00d4ff;
-  }
-
-  .quick-guides-card {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-    padding: 20px;
-    flex: 1;
-    overflow-y: auto;
-  }
-
-  .quick-guide-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .quick-guide-section {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(26,35,50,0.6);
-  }
-
-  .quick-guide-section:last-child {
-    border-bottom: none;
-  }
-
-  .quick-guide-section h4 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #5a7a8f;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .quick-guide-tips {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .quick-tip {
-    font-size: 10px;
-    color: #8aacbe;
-    line-height: 1.5;
-    padding-left: 12px;
-    position: relative;
-  }
-
-  .quick-tip::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #00d4ff;
-  }
-
-  /* Right Panel - Setup Editor */
-  .setup-right-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    overflow-y: auto;
-  }
-
-  .setup-editor-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-  }
-
-  .setup-editor-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #dde4eb;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .setup-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .setup-action-btn {
-    padding: 8px 16px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 6px;
-    color: #c8d6e0;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .setup-action-btn:hover {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .setup-action-btn.primary {
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border: none;
-    color: #fff;
-  }
-
-  .setup-action-btn.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,212,255,0.4);
-  }
-
-  /* Setup Categories */
-  .setup-categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-  }
-
-  .setup-category-card {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.2s;
-    animation: card-in 0.4s ease;
-  }
-
-  .setup-category-card:hover {
-    border-color: #243848;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-    transform: translateY(-2px);
-  }
-
-  .setup-category-header {
-    padding: 16px 20px;
-    background: rgba(0,212,255,0.02);
-    border-bottom: 1px solid #1a2332;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .setup-category-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #dde4eb;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .setup-category-icon {
-    font-size: 18px;
-  }
-
-  .setup-category-body {
-    padding: 20px;
-  }
-
-  .setup-param-group {
-    margin-bottom: 20px;
-  }
-
-  .setup-param-group:last-child {
-    margin-bottom: 0;
-  }
-
-  .setup-param-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-
-  .setup-param-name {
-    font-size: 10px;
-    color: #5a7a8f;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .setup-param-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #00d4ff;
-  }
-
-  .setup-slider {
-    width: 100%;
-    height: 6px;
-    background: #0d1520;
-    border-radius: 3px;
-    outline: none;
-    -webkit-appearance: none;
-  }
-
-  .setup-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .setup-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 12px rgba(0,212,255,0.6);
-  }
-
-  .setup-slider::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-  }
-
-  .setup-slider::-moz-range-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 12px rgba(0,212,255,0.6);
-  }
-
-  .setup-hint {
-    margin-top: 8px;
-    padding: 8px 12px;
-    background: rgba(0,212,255,0.05);
-    border-left: 3px solid rgba(0,212,255,0.4);
-    border-radius: 4px;
-    font-size: 9px;
-    color: #00d4ff;
-    line-height: 1.5;
-  }
-
-  /* Multi-value controls */
-  .setup-multi-param {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
-  }
-
-  .setup-multi-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .setup-multi-label {
-    font-size: 8px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-  }
-
-  .setup-multi-input {
-    padding: 10px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 6px;
-    color: #c8d6e0;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-    outline: none;
-    transition: all 0.2s;
-  }
-
-  .setup-multi-input:focus {
-    border-color: #00d4ff;
-    box-shadow: 0 0 0 2px rgba(0,212,255,0.1);
-  }
-
-  /* Preset buttons */
-  .setup-presets {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-
-  .setup-preset-btn {
-    padding: 6px 12px;
-    background: rgba(0,212,255,0.05);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 4px;
-    color: #00d4ff;
-    font-size: 9px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .setup-preset-btn:hover {
-    background: rgba(0,212,255,0.1);
-    border-color: rgba(0,212,255,0.4);
-  }
-
-  /* Export Modal */
-  .export-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(5,8,16,0.9);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .export-modal {
-    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #1a2332;
-    border-radius: 12px;
-    max-width: 600px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
-  }
-
-  .export-modal-header {
-    padding: 20px 24px;
-    border-bottom: 1px solid #1a2332;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .export-modal-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-
-  .export-modal-close {
-    background: transparent;
-    border: none;
-    color: #5a7a8f;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: background 0.2s, color 0.2s;
-  }
-
-  .export-modal-close:hover {
-    background: rgba(232,0,29,0.1);
-    color: #e8001d;
-  }
-
-  .export-modal-body {
-    padding: 20px 24px;
-  }
-
-  .export-format-label {
-    font-size: 11px;
-    color: #5a7a8f;
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .export-formats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .export-format-btn {
-    flex: 1;
-    padding: 16px;
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .export-format-btn:hover {
-    border-color: #00d4ff;
-    background: rgba(0,212,255,0.05);
-  }
-
-  .export-format-btn.active {
-    border-color: #e8001d;
-    background: rgba(232,0,29,0.1);
-  }
-
-  .export-format-icon {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-
-  .export-format-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-
-  .export-preview {
-    background: #0a1018;
-    border: 1px solid #1a2332;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: #c8d6e0;
-    max-height: 300px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    line-height: 1.6;
-  }
-
-  .export-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .export-btn {
-    flex: 1;
-    padding: 12px;
-    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .export-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,212,255,0.4);
-  }
-
-  /* Responsive */
-  @media (max-width: 1200px) {
-    .setup-creator-container {
-      grid-template-columns: 1fr;
-    }
-    
-    .setup-left-panel {
-      flex-direction: row;
-    }
-    
-    .track-selector-card,
-    .quick-guides-card {
-      flex: 1;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .setup-left-panel {
-      flex-direction: column;
-    }
-    
-    .setup-categories-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .export-formats {
-      flex-direction: column;
-    }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     ORIGINAL STYLES (Leaderboard, Calendar, etc.)
-     ══════════════════════════════════════════════════════════════ */
+  .season-option:last-child { border-bottom: none; }
+  .season-option:hover { background: rgba(232,0,29,0.08); }
+  .season-option.active { background: rgba(232,0,29,0.12); color: #e8001d; }
+
+  /* ═══ LEADERBOARD ═══════════════════════════════════════════ */
   .lb-tabs {
-    display: flex; gap: 6px; margin-bottom: 18px;
+    display: flex; gap: 6px; margin-bottom: 14px;
   }
   .lb-tab {
-    padding: 7px 18px; border-radius: 6px;
+    padding: 7px 16px; border-radius: 6px;
     background: transparent; border: 1px solid #1a2332;
     color: #3d5a6e; font-family: 'Share Tech Mono', monospace;
     font-size: 10px; text-transform: uppercase;
-    letter-spacing: 1.2px; cursor: pointer;
+    letter-spacing: 1px; cursor: pointer;
     transition: all 0.18s ease;
   }
   .lb-tab:hover { border-color: #3a5068; color: #8aacbe; }
   .lb-tab.active { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.4); color: #e8001d; }
 
-  .lb-table {
+  /* Tabella scrollabile su mobile */
+  .lb-table-wrap {
     width: 100%;
-    border-collapse: collapse;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 10px;
-    overflow: hidden;
     border: 1px solid #1a2332;
   }
-  .lb-table thead {
-    background: #0a1018;
+  .lb-table {
+    width: 100%;
+    min-width: 360px;
+    border-collapse: collapse;
   }
+  .lb-table thead { background: #0a1018; }
   .lb-table th {
-    padding: 10px 14px;
+    padding: 10px 12px;
     text-align: left;
-    font-size: 8.5px; color: #2e4455;
-    text-transform: uppercase; letter-spacing: 1.4px;
+    font-size: 8px; color: #2e4455;
+    text-transform: uppercase; letter-spacing: 1.2px;
     font-weight: 600; border-bottom: 1px solid #1a2332;
+    white-space: nowrap;
   }
   .lb-table th:last-child { text-align: right; }
   .lb-table td {
-    padding: 11px 14px;
-    font-size: 12px; color: #c8d6e0;
+    padding: 10px 12px;
+    font-size: 11px; color: #c8d6e0;
     border-bottom: 1px solid rgba(26,35,50,0.6);
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     transition: background 0.15s;
@@ -1189,285 +591,152 @@ const css = `
 
   .lb-pos {
     font-family: 'Orbitron', sans-serif;
-    font-size: 13px; font-weight: 700;
-    width: 30px; text-align: center;
+    font-size: 12px; font-weight: 700;
+    width: 26px; text-align: center;
   }
   .lb-pos.p1 { color: #FFD700; }
   .lb-pos.p2 { color: #C0C0C0; }
   .lb-pos.p3 { color: #CD7F32; }
 
-  .lb-driver-cell { display: flex; align-items: center; gap: 10px; }
-  .lb-team-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .lb-driver-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px; font-weight: 600; color: #dde4eb;
-  }
-  .lb-driver-sub { font-size: 9px; color: #2e4455; }
-  .lb-pts {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 14px; font-weight: 700;
-    color: #e8001d; text-align: right;
-  }
-  .lb-stat { color: #5a7a8f; text-align: center; font-size: 11.5px; }
+  .lb-driver-cell { display: flex; align-items: center; gap: 8px; }
+  .lb-team-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .lb-driver-name { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 600; color: #dde4eb; }
+  .lb-driver-sub { font-size: 8.5px; color: #2e4455; }
+  .lb-pts { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #e8001d; text-align: right; }
+  .lb-stat { color: #5a7a8f; text-align: center; font-size: 11px; }
 
   .lb-race-toggle {
-    font-size: 9.5px; color: #2e4455; cursor: pointer;
+    font-size: 9px; color: #2e4455; cursor: pointer;
     background: none; border: none; font-family: 'Share Tech Mono', monospace;
     letter-spacing: 0.5px; padding: 0;
     transition: color 0.2s;
   }
   .lb-race-toggle:hover { color: #e8001d; }
   .lb-race-list {
-    overflow: hidden;
-    max-height: 0; opacity: 0;
+    overflow: hidden; max-height: 0; opacity: 0;
     transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s;
   }
   .lb-race-list.open { max-height: 600px; opacity: 1; }
   .lb-race-item {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 5px 0;
+    padding: 4px 0;
     border-bottom: 1px solid rgba(26,35,50,0.4);
-    font-size: 10.5px;
+    font-size: 10px;
   }
   .lb-race-item:last-child { border-bottom: none; }
   .lb-race-item-name { color: #5a7a8f; }
-  .lb-race-item-pos { color: #c8d6e0; font-size: 10px; }
+  .lb-race-item-pos { color: #c8d6e0; font-size: 9.5px; }
 
-  /* Calendar */
+  /* ═══ CALENDAR ═══════════════════════════════════════════════ */
   .cal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
   }
   .cal-card {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #162232;
     border-radius: 10px;
-    padding: 14px 16px;
+    padding: 12px 14px;
     position: relative;
     overflow: hidden;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
-  .cal-card.done {
-    border-left: 3px solid #e8001d;
-    cursor: pointer;
-  }
-  .cal-card.done:hover {
-    border-color: #243848;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
-  }
+  .cal-card.done { border-left: 3px solid #e8001d; cursor: pointer; }
+  .cal-card.done:hover { border-color: #243848; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transform: translateY(-2px); }
   .cal-card.upcoming { border-left: 3px solid #00d4ff; }
-
-  .cal-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-  .cal-round {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px; font-weight: 700;
-    color: #2e4455; letter-spacing: 1px;
-  }
-  .cal-status {
-    font-size: 8px; text-transform: uppercase;
-    letter-spacing: 1.2px; font-weight: 600;
-    padding: 2px 7px; border-radius: 3px;
-  }
+  .cal-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+  .cal-round { font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 700; color: #2e4455; letter-spacing: 1px; }
+  .cal-status { font-size: 7.5px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; padding: 2px 6px; border-radius: 3px; }
   .cal-status.done { background: rgba(232,0,29,0.12); color: #e8001d; }
   .cal-status.upcoming { background: rgba(0,212,255,0.1); color: #00d4ff; }
-
-  .cal-race-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px; font-weight: 600;
-    color: #dde4eb; margin-bottom: 3px;
-  }
-  .cal-city { font-size: 10px; color: #2e4455; margin-bottom: 8px; }
-  .cal-winner {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 10px; color: #5a7a8f;
-  }
-  .cal-winner-flag { font-size: 11px; }
+  .cal-race-name { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 600; color: #dde4eb; margin-bottom: 2px; }
+  .cal-city { font-size: 9.5px; color: #2e4455; margin-bottom: 7px; }
+  .cal-winner { display: flex; align-items: center; gap: 5px; font-size: 9.5px; color: #5a7a8f; }
+  .cal-winner-flag { font-size: 10px; }
   .cal-winner span { color: #c8d6e0; font-weight: 600; }
 
-  /* Modal */
+  /* ═══ MODAL ══════════════════════════════════════════════════ */
   .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(5,8,16,0.85);
+    position: fixed; inset: 0;
+    background: rgba(5,8,16,0.88);
     backdrop-filter: blur(4px);
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
     animation: fadeIn 0.25s ease;
   }
   .modal {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #1a2332;
     border-radius: 12px;
-    max-width: 600px;
-    width: 100%;
-    max-height: 80vh;
+    max-width: 500px; width: 100%;
+    max-height: 85vh;
     overflow-y: auto;
     animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
   }
   .modal-header {
-    padding: 20px 24px;
+    padding: 16px 20px;
     border-bottom: 1px solid #1a2332;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0;
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    z-index: 1;
   }
-  .modal-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-  .modal-subtitle {
-    font-size: 10px;
-    color: #2e4455;
-    margin-top: 2px;
-  }
+  .modal-title { font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 600; color: #dde4eb; }
+  .modal-subtitle { font-size: 10px; color: #2e4455; margin-top: 2px; }
   .modal-close {
-    background: transparent;
-    border: none;
-    color: #5a7a8f;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: background 0.2s, color 0.2s;
+    background: transparent; border: none; color: #5a7a8f; cursor: pointer;
+    font-size: 20px; padding: 0; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
   }
-  .modal-close:hover {
-    background: rgba(232,0,29,0.1);
-    color: #e8001d;
-  }
-  .modal-body {
-    padding: 20px 24px;
-  }
-  .modal-results-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .modal-results-table tr {
-    border-bottom: 1px solid rgba(26,35,50,0.5);
-  }
-  .modal-results-table tr:last-child {
-    border-bottom: none;
-  }
-  .modal-results-table td {
-    padding: 10px 8px;
-    font-size: 11.5px;
-  }
-  .modal-pos {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    width: 40px;
-  }
+  .modal-close:hover { background: rgba(232,0,29,0.1); color: #e8001d; }
+  .modal-body { padding: 16px 20px; }
+  .modal-results-table { width: 100%; border-collapse: collapse; }
+  .modal-results-table tr { border-bottom: 1px solid rgba(26,35,50,0.5); }
+  .modal-results-table tr:last-child { border-bottom: none; }
+  .modal-results-table td { padding: 9px 6px; font-size: 11px; }
+  .modal-pos { font-family: 'Orbitron', sans-serif; font-weight: 700; width: 36px; }
   .modal-pos.p1 { color: #FFD700; }
   .modal-pos.p2 { color: #C0C0C0; }
   .modal-pos.p3 { color: #CD7F32; }
-  .modal-driver {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .modal-driver-flag {
-    font-size: 14px;
-  }
-  .modal-driver-name {
-    color: #dde4eb;
-  }
-  .modal-pts {
-    text-align: right;
-    color: #5a7a8f;
-    font-size: 11px;
-  }
+  .modal-driver { display: flex; align-items: center; gap: 7px; }
+  .modal-driver-flag { font-size: 13px; }
+  .modal-driver-name { color: #dde4eb; }
+  .modal-pts { text-align: right; color: #5a7a8f; font-size: 10.5px; }
 
-  /* Career */
-  .career-section {
-    margin-bottom: 32px;
-  }
+  /* ═══ CAREER ═════════════════════════════════════════════════ */
+  .career-section { margin-bottom: 28px; }
   .career-section-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #dde4eb;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
+    font-size: 13px; font-weight: 600; color: #dde4eb;
+    margin-bottom: 14px; padding-bottom: 7px;
     border-bottom: 1px solid #1a2332;
   }
   .career-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 10px;
   }
   .career-card {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
     border: 1px solid #162232;
     border-radius: 10px;
-    padding: 16px;
-    position: relative;
-    overflow: hidden;
+    padding: 14px;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
-  .career-card:hover {
-    border-color: #243848;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-    transform: translateY(-2px);
-  }
-  .career-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-  .career-entity-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .career-entity-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-  .career-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 8px;
-  }
-  .career-stat-box {
-    background: #0a1018;
-    border: 1px solid #152230;
-    border-radius: 6px;
-    padding: 8px;
-    text-align: center;
-  }
-  .career-stat-label {
-    font-size: 7.5px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 3px;
-  }
-  .career-stat-val {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #dde4eb;
-  }
+  .career-card:hover { border-color: #243848; box-shadow: 0 4px 20px rgba(0,0,0,0.35); transform: translateY(-2px); }
+  .career-card-header { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+  .career-entity-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .career-entity-name { font-family: 'Orbitron', sans-serif; font-size: 11.5px; font-weight: 600; color: #dde4eb; }
+  .career-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 7px; }
+  .career-stat-box { background: #0a1018; border: 1px solid #152230; border-radius: 6px; padding: 7px; text-align: center; }
+  .career-stat-label { font-size: 7px; color: #2e4455; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+  .career-stat-val { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; color: #dde4eb; }
   .career-stat-val.pts { color: #e8001d; }
   .career-stat-val.wins { color: #c0a300; }
   .career-stat-val.poles { color: #00d4ff; }
@@ -1476,10 +745,10 @@ const css = `
   .career-stat-val.wdc { color: #ffc400; }
   .career-stat-val.wcc { color: #ffc400; }
 
-  /* H2H */
+  /* ═══ HEAD TO HEAD ════════════════════════════════════════════ */
   .h2h-team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 16px;
     margin-bottom: 24px;
   }
@@ -1491,229 +760,350 @@ const css = `
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
-  .h2h-team-card:hover {
-    border-color: #243848;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-    transform: translateY(-2px);
-  }
-  .h2h-team-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid #1a2332;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .h2h-team-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .h2h-team-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
+  .h2h-team-card:hover { border-color: #243848; box-shadow: 0 4px 20px rgba(0,0,0,0.35); transform: translateY(-2px); }
+  .h2h-team-header { padding: 14px 18px; border-bottom: 1px solid #1a2332; display: flex; align-items: center; gap: 10px; }
+  .h2h-team-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; }
+  .h2h-team-name { font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 600; color: #dde4eb; }
   .h2h-drivers-row {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 16px 20px;
-    gap: 16px;
+    padding: 14px 18px;
+    gap: 12px;
   }
-  .h2h-driver {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .h2h-driver.right {
-    align-items: flex-end;
-  }
+  .h2h-driver { display: flex; flex-direction: column; gap: 3px; }
+  .h2h-driver.right { align-items: flex-end; }
   .h2h-driver-name {
     font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #dde4eb;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 11px; font-weight: 600; color: #dde4eb;
+    display: flex; align-items: center; gap: 5px;
   }
-  .h2h-driver-num {
-    font-size: 10px;
-    color: #2e4455;
-  }
+  .h2h-driver-num { font-size: 9.5px; color: #2e4455; }
   .h2h-vs {
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: #e8001d;
-    padding: 6px 12px;
+    font-size: 10px; font-weight: 700; color: #e8001d;
+    padding: 5px 10px;
     background: rgba(232,0,29,0.1);
-    border-radius: 6px;
+    border-radius: 5px;
   }
-  .h2h-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: #1a2332;
-    border-top: 1px solid #1a2332;
-  }
+  .h2h-stats-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: #1a2332; border-top: 1px solid #1a2332; }
   .h2h-stat-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: grid; grid-template-columns: 1fr auto 1fr;
     align-items: center;
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    padding: 10px 20px;
-    gap: 16px;
+    padding: 9px 18px; gap: 12px;
   }
-  .h2h-stat-val {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #dde4eb;
-  }
-  .h2h-stat-val.left {
-    text-align: right;
-  }
-  .h2h-stat-val.winner {
-    color: #e8001d;
-  }
-  .h2h-stat-label {
-    font-size: 9px;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    text-align: center;
-    font-weight: 600;
-  }
-  .h2h-detail-section {
-    padding: 16px 20px;
-    border-top: 1px solid #1a2332;
-  }
-  .h2h-detail-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: #2e4455;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    margin-bottom: 12px;
-  }
-  .h2h-race-results {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .h2h-stat-val { font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #dde4eb; }
+  .h2h-stat-val.left { text-align: right; }
+  .h2h-stat-val.winner { color: #e8001d; }
+  .h2h-stat-label { font-size: 8.5px; color: #2e4455; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-weight: 600; white-space: nowrap; }
+  .h2h-detail-section { padding: 14px 18px; border-top: 1px solid #1a2332; }
+  .h2h-detail-title { font-family: 'Orbitron', sans-serif; font-size: 9.5px; font-weight: 600; color: #2e4455; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; }
+  .h2h-race-results { display: flex; flex-direction: column; gap: 5px; }
   .h2h-race-item {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 12px;
-    background: rgba(26,35,50,0.3);
-    border-radius: 6px;
-    font-size: 10px;
+    display: grid; grid-template-columns: 1fr auto auto;
+    align-items: center; gap: 10px;
+    padding: 7px 10px;
+    background: rgba(26,35,50,0.3); border-radius: 6px; font-size: 9.5px;
   }
-  .h2h-race-name {
-    color: #5a7a8f;
-  }
-  .h2h-race-pos {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: #c8d6e0;
-    min-width: 30px;
-    text-align: center;
-  }
-  .h2h-race-pos.winner {
-    color: #e8001d;
-  }
+  .h2h-race-name { color: #5a7a8f; }
+  .h2h-race-pos { font-family: 'Orbitron', sans-serif; font-size: 9.5px; font-weight: 600; color: #c8d6e0; min-width: 28px; text-align: center; }
+  .h2h-race-pos.winner { color: #e8001d; }
 
-  /* Rules */
-  .rules-grid {
+  /* ═══ SETUP CREATOR ══════════════════════════════════════════ */
+  .setup-creator-container {
     display: grid;
+    grid-template-columns: 360px 1fr;
     gap: 16px;
+    min-height: 600px;
   }
+  .setup-left-panel { display: flex; flex-direction: column; gap: 14px; }
+  .track-selector-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332; border-radius: 12px; padding: 18px;
+    animation: card-in 0.4s ease;
+  }
+  .track-selector-title { font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 600; color: #dde4eb; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .track-select {
+    width: 100%; padding: 10px 14px;
+    background: #0a1018; border: 1px solid #1a2332; border-radius: 8px;
+    color: #c8d6e0; font-family: 'Share Tech Mono', monospace; font-size: 12px;
+    outline: none; transition: border-color 0.2s; cursor: pointer;
+  }
+  .track-select:focus { border-color: #00d4ff; }
+  .track-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .track-info-item { padding: 9px; background: rgba(0,212,255,0.03); border: 1px solid rgba(0,212,255,0.2); border-radius: 6px; }
+  .track-info-label { font-size: 7.5px; color: #2e4455; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+  .track-info-value { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 600; color: #00d4ff; }
+
+  .quick-guides-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332; border-radius: 12px; padding: 18px;
+    flex: 1; overflow-y: auto;
+  }
+  .quick-guide-title { font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 600; color: #dde4eb; margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
+  .quick-guide-section { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(26,35,50,0.6); }
+  .quick-guide-section:last-child { border-bottom: none; }
+  .quick-guide-section h4 { font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 600; color: #5a7a8f; margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }
+  .quick-guide-tips { display: flex; flex-direction: column; gap: 5px; }
+  .quick-tip { font-size: 9.5px; color: #8aacbe; line-height: 1.5; padding-left: 11px; position: relative; }
+  .quick-tip::before { content: '•'; position: absolute; left: 0; color: #00d4ff; }
+
+  .setup-right-panel { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+  .setup-editor-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332; border-radius: 12px;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .setup-editor-title { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 600; color: #dde4eb; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .setup-actions { display: flex; gap: 7px; flex-wrap: wrap; }
+  .setup-action-btn {
+    padding: 7px 14px;
+    background: #0a1018; border: 1px solid #1a2332; border-radius: 6px;
+    color: #c8d6e0; font-family: 'Share Tech Mono', monospace; font-size: 10px;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+  }
+  .setup-action-btn:hover { border-color: #00d4ff; background: rgba(0,212,255,0.05); }
+  .setup-action-btn.primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border: none; color: #fff;
+  }
+  .setup-action-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,212,255,0.4); }
+
+  .setup-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .setup-category-card {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332; border-radius: 12px; overflow: hidden;
+    transition: all 0.2s; animation: card-in 0.4s ease;
+  }
+  .setup-category-card:hover { border-color: #243848; box-shadow: 0 4px 20px rgba(0,0,0,0.35); transform: translateY(-2px); }
+  .setup-category-header { padding: 14px 18px; background: rgba(0,212,255,0.02); border-bottom: 1px solid #1a2332; display: flex; align-items: center; justify-content: space-between; }
+  .setup-category-title { font-family: 'Orbitron', sans-serif; font-size: 11.5px; font-weight: 600; color: #dde4eb; display: flex; align-items: center; gap: 7px; }
+  .setup-category-icon { font-size: 17px; }
+  .setup-category-body { padding: 18px; }
+  .setup-param-group { margin-bottom: 18px; }
+  .setup-param-group:last-child { margin-bottom: 0; }
+  .setup-param-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+  .setup-param-name { font-size: 9.5px; color: #5a7a8f; text-transform: uppercase; letter-spacing: 1px; }
+  .setup-param-value { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; color: #00d4ff; }
+  .setup-slider {
+    width: 100%; height: 6px;
+    background: #0d1520; border-radius: 3px;
+    outline: none; -webkit-appearance: none;
+  }
+  .setup-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border-radius: 50%; cursor: pointer; transition: all 0.2s;
+  }
+  .setup-slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,212,255,0.6); }
+  .setup-slider::-moz-range-thumb {
+    width: 20px; height: 20px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border-radius: 50%; cursor: pointer; border: none; transition: all 0.2s;
+  }
+  .setup-hint { margin-top: 7px; padding: 7px 10px; background: rgba(0,212,255,0.05); border-left: 3px solid rgba(0,212,255,0.4); border-radius: 4px; font-size: 9px; color: #00d4ff; line-height: 1.5; }
+  .setup-multi-param { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; }
+  .setup-multi-item { display: flex; flex-direction: column; gap: 5px; }
+  .setup-multi-label { font-size: 7.5px; color: #2e4455; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+  .setup-multi-input {
+    padding: 9px;
+    background: #0a1018; border: 1px solid #1a2332; border-radius: 6px;
+    color: #c8d6e0; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 600;
+    text-align: center; outline: none; transition: all 0.2s;
+    width: 100%;
+  }
+  .setup-multi-input:focus { border-color: #00d4ff; box-shadow: 0 0 0 2px rgba(0,212,255,0.1); }
+
+  /* Export Modal */
+  .export-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5,8,16,0.9); backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    animation: fadeIn 0.25s ease;
+  }
+  .export-modal {
+    background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
+    border: 1px solid #1a2332; border-radius: 12px;
+    max-width: 560px; width: 100%; max-height: 85vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .export-modal-header { padding: 18px 22px; border-bottom: 1px solid #1a2332; display: flex; align-items: center; justify-content: space-between; }
+  .export-modal-title { font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 600; color: #dde4eb; }
+  .export-modal-close {
+    background: transparent; border: none; color: #5a7a8f; cursor: pointer;
+    font-size: 20px; padding: 0; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; transition: background 0.2s, color 0.2s; flex-shrink: 0;
+  }
+  .export-modal-close:hover { background: rgba(232,0,29,0.1); color: #e8001d; }
+  .export-modal-body { padding: 18px 22px; }
+  .export-format-label { font-size: 11px; color: #5a7a8f; margin-bottom: 10px; display: block; }
+  .export-formats { display: flex; gap: 10px; margin-bottom: 18px; }
+  .export-format-btn { flex: 1; padding: 14px; background: #0a1018; border: 1px solid #1a2332; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: center; }
+  .export-format-btn:hover { border-color: #00d4ff; background: rgba(0,212,255,0.05); }
+  .export-format-btn.active { border-color: #e8001d; background: rgba(232,0,29,0.1); }
+  .export-format-icon { font-size: 22px; margin-bottom: 7px; }
+  .export-format-name { font-family: 'Orbitron', sans-serif; font-size: 10.5px; font-weight: 600; color: #dde4eb; }
+  .export-preview {
+    background: #0a1018; border: 1px solid #1a2332; border-radius: 8px;
+    padding: 14px; font-family: 'Share Tech Mono', monospace; font-size: 9.5px; color: #c8d6e0;
+    max-height: 260px; overflow-y: auto; white-space: pre-wrap; line-height: 1.6;
+  }
+  .export-actions { display: flex; gap: 10px; margin-top: 16px; }
+  .export-btn {
+    flex: 1; padding: 11px;
+    background: linear-gradient(135deg, #00d4ff 0%, #e8001d 100%);
+    border: none; border-radius: 8px; color: #fff;
+    font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .export-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.4); }
+
+  /* ═══ RULES ══════════════════════════════════════════════════ */
+  .rules-grid { display: grid; gap: 14px; }
   .rule-card {
     background: linear-gradient(155deg, #0e1522 0%, #0b1018 100%);
-    border: 1px solid #162232;
-    border-radius: 12px;
-    overflow: hidden;
+    border: 1px solid #162232; border-radius: 12px; overflow: hidden;
     animation: card-in 0.4s cubic-bezier(.4,0,.2,1) both;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .rule-card:hover {
-    border-color: #243848;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  .rule-card:hover { border-color: #243848; box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
+  .rule-header { padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .rule-header-left { display: flex; align-items: center; gap: 10px; }
+  .rule-icon { font-size: 22px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: rgba(232,0,29,0.1); border-radius: 8px; }
+  .rule-title { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 600; color: #dde4eb; }
+  .rule-toggle { font-size: 12px; color: #5a7a8f; transition: transform 0.3s cubic-bezier(.4,0,.2,1), color 0.2s; }
+  .rule-card.expanded .rule-toggle { transform: rotate(180deg); color: #e8001d; }
+  .rule-content { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s; }
+  .rule-card.expanded .rule-content { max-height: 800px; opacity: 1; }
+  .rule-content-inner { padding: 0 18px 18px; border-top: 1px solid #1a2332; }
+  .rule-text { font-size: 11px; color: #8aacbe; line-height: 1.7; margin-top: 14px; }
+  .rule-text-item { margin-bottom: 7px; }
+  .rule-text-item:last-child { margin-bottom: 0; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — TABLET (≤ 900px)
+     ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .setup-creator-container {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+    .setup-left-panel {
+      flex-direction: row;
+    }
+    .track-selector-card,
+    .quick-guides-card {
+      flex: 1;
+      min-width: 0;
+    }
+    .h2h-team-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    .career-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
   }
-  .rule-header {
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — MOBILE (≤ 600px)
+     ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 600px) {
+    /* Header */
+    .f1-header-top { padding: 12px 12px 0; }
+    .f1-title { font-size: 15px; }
+    .f1-subtitle { display: none; }
+    .f1-nav { padding: 8px 12px 0; gap: 1px; }
+    .f1-nav-btn { padding: 7px 10px; font-size: 9px; letter-spacing: 0.5px; }
+    .f1-nav-btn .nav-icon { margin-right: 3px; }
+
+    /* Page */
+    .f1-page { padding: 12px 10px 40px; }
+    .page-header { margin-bottom: 12px; }
+    .page-header-left h2 { font-size: 13px; }
+
+    /* Leaderboard table */
+    .lb-table th { padding: 8px 8px; font-size: 7.5px; }
+    .lb-table td { padding: 9px 8px; font-size: 10.5px; }
+    .lb-driver-name { font-size: 10px; }
+    .lb-driver-sub { font-size: 8px; }
+    .lb-pts { font-size: 12px; }
+    .lb-pos { font-size: 11px; }
+
+    /* Calendar: 2 colonne su mobile */
+    .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cal-race-name { font-size: 10px; }
+    .cal-city { font-size: 9px; }
+    .cal-card { padding: 10px 11px; }
+
+    /* H2H: full width */
+    .h2h-team-grid { grid-template-columns: 1fr; gap: 12px; }
+    .h2h-drivers-row { padding: 12px 14px; gap: 8px; }
+    .h2h-driver-name { font-size: 10px; }
+    .h2h-stat-row { padding: 8px 14px; gap: 8px; }
+    .h2h-stat-val { font-size: 13px; }
+    .h2h-stat-label { font-size: 7.5px; letter-spacing: 0.5px; }
+    .h2h-detail-section { padding: 12px 14px; }
+
+    /* Career: full width */
+    .career-grid { grid-template-columns: 1fr; }
+    .career-stat-val { font-size: 14px; }
+
+    /* Setup: colonna singola */
+    .setup-creator-container { grid-template-columns: 1fr; gap: 12px; }
+    .setup-left-panel { flex-direction: column; }
+    .setup-categories-grid { grid-template-columns: 1fr; gap: 12px; }
+    .setup-editor-header { padding: 12px 14px; }
+    .setup-editor-title { font-size: 12px; }
+    .track-selector-card, .quick-guides-card { padding: 14px; }
+    .setup-category-body { padding: 14px; }
+    .setup-multi-param { grid-template-columns: repeat(2, 1fr); }
+    .quick-guides-card { max-height: 280px; }
+
+    /* Export modal */
+    .export-formats { flex-direction: column; }
+    .export-modal-body { padding: 14px 16px; }
+
+    /* Rules */
+    .rule-header { padding: 13px 14px; }
+    .rule-title { font-size: 12px; }
+    .rule-icon { width: 34px; height: 34px; font-size: 19px; }
+    .rule-content-inner { padding: 0 14px 14px; }
+
+    /* Modal */
+    .modal { max-height: 90vh; }
+    .modal-header { padding: 13px 16px; }
+    .modal-body { padding: 12px 16px; }
   }
-  .rule-header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .rule-icon {
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(232,0,29,0.1);
-    border-radius: 8px;
-  }
-  .rule-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #dde4eb;
-  }
-  .rule-toggle {
-    font-size: 12px;
-    color: #5a7a8f;
-    transition: transform 0.3s cubic-bezier(.4,0,.2,1), color 0.2s;
-  }
-  .rule-card.expanded .rule-toggle {
-    transform: rotate(180deg);
-    color: #e8001d;
-  }
-  .rule-content {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s;
-  }
-  .rule-card.expanded .rule-content {
-    max-height: 800px;
-    opacity: 1;
-  }
-  .rule-content-inner {
-    padding: 0 20px 20px;
-    border-top: 1px solid #1a2332;
-  }
-  .rule-text {
-    font-size: 11px;
-    color: #8aacbe;
-    line-height: 1.7;
-    margin-top: 16px;
-  }
-  .rule-text-item {
-    margin-bottom: 8px;
-  }
-  .rule-text-item:last-child {
-    margin-bottom: 0;
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE — VERY SMALL (≤ 380px)
+     ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 380px) {
+    .f1-title { font-size: 13px; }
+    .f1-nav-btn { padding: 6px 8px; font-size: 8.5px; }
+    .f1-nav-btn .nav-icon { display: none; }
+    .cal-grid { grid-template-columns: 1fr; }
+    .setup-multi-param { grid-template-columns: repeat(2, 1fr); }
+    .h2h-stat-label { font-size: 7px; }
+    .career-stat-val { font-size: 13px; }
+    .lb-table td { padding: 8px 6px; }
   }
 `;
 
-// ─── ADVANCED SETUP CREATOR COMPONENT ─────────────────────────────
+// ─── ADVANCED SETUP CREATOR ────────────────────────────────────────
 function AdvancedSetupCreator() {
   const [selectedTrack, setSelectedTrack] = useState("");
   const [setupValues, setSetupValues] = useState({
@@ -1729,7 +1119,6 @@ function AdvancedSetupCreator() {
 
   const trackData = selectedTrack ? TRACKS[selectedTrack] : null;
 
-  // Load track's base setup
   useEffect(() => {
     if (trackData) {
       setSetupValues({
@@ -1772,7 +1161,6 @@ function AdvancedSetupCreator() {
 
   const exportSetup = () => {
     if (!trackData) return "";
-    
     if (exportFormat === "text") {
       return `═══════════════════════════════════════
 🏁 F1 SETUP EXPORT - ${trackData.nome}
@@ -1885,10 +1273,8 @@ Generated by F1 Dashboard Setup Creator
       {/* Left Panel */}
       <div className="setup-left-panel">
         <div className="track-selector-card">
-          <div className="track-selector-title">
-            🏁 Seleziona Circuito
-          </div>
-          <select 
+          <div className="track-selector-title">🏁 Seleziona Circuito</div>
+          <select
             className="track-select"
             value={selectedTrack}
             onChange={(e) => setSelectedTrack(e.target.value)}
@@ -1900,7 +1286,6 @@ Generated by F1 Dashboard Setup Creator
               </option>
             ))}
           </select>
-
           {trackData && (
             <div className="track-info-grid">
               <div className="track-info-item">
@@ -1916,57 +1301,24 @@ Generated by F1 Dashboard Setup Creator
         </div>
 
         <div className="quick-guides-card">
-          <div className="quick-guide-title">
-            💡 Guide Rapide
-          </div>
-          <div className="quick-guide-section">
-            <h4>✈️ Aerodinamica</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.aero.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
+          <div className="quick-guide-title">💡 Guide Rapide</div>
+          {Object.entries({
+            "✈️ Aerodinamica": quickGuides.aero,
+            "⚙️ Trasmissione": quickGuides.trasmissione,
+            "📐 Geometria": quickGuides.geometria,
+            "🔩 Sospensioni": quickGuides.sospensioni,
+            "🛑 Freni": quickGuides.freni,
+            "🏎️ Gomme": quickGuides.gomme,
+          }).map(([title, tips]) => (
+            <div className="quick-guide-section" key={title}>
+              <h4>{title}</h4>
+              <div className="quick-guide-tips">
+                {tips.map((tip, i) => (
+                  <div key={i} className="quick-tip">{tip}</div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="quick-guide-section">
-            <h4>⚙️ Trasmissione</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.trasmissione.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
-            </div>
-          </div>
-          <div className="quick-guide-section">
-            <h4>📐 Geometria</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.geometria.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
-            </div>
-          </div>
-          <div className="quick-guide-section">
-            <h4>🔩 Sospensioni</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.sospensioni.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
-            </div>
-          </div>
-          <div className="quick-guide-section">
-            <h4>🛑 Freni</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.freni.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
-            </div>
-          </div>
-          <div className="quick-guide-section">
-            <h4>🏎️ Gomme</h4>
-            <div className="quick-guide-tips">
-              {quickGuides.gomme.map((tip, i) => (
-                <div key={i} className="quick-tip">{tip}</div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -1977,29 +1329,18 @@ Generated by F1 Dashboard Setup Creator
             ⚙️ Editor Setup
             {trackData && <span style={{color: '#00d4ff'}}>· {trackData.nome}</span>}
           </div>
-          <div className="setup-actions">
-            {trackData && (
-              <>
-                <button className="setup-action-btn" onClick={resetToBase}>
-                  ↻ Reset
-                </button>
-                <button className="setup-action-btn primary" onClick={() => setShowExportModal(true)}>
-                  💾 Esporta
-                </button>
-              </>
-            )}
-          </div>
+          {trackData && (
+            <div className="setup-actions">
+              <button className="setup-action-btn" onClick={resetToBase}>↻ Reset</button>
+              <button className="setup-action-btn primary" onClick={() => setShowExportModal(true)}>💾 Esporta</button>
+            </div>
+          )}
         </div>
 
         {!selectedTrack && (
-          <div style={{
-            textAlign: 'center',
-            padding: '80px 20px',
-            color: '#2a3f52',
-            fontSize: '13px'
-          }}>
-            <div style={{fontSize: '48px', marginBottom: '16px', opacity: 0.3}}>🏎️</div>
-            Seleziona un circuito per iniziare a creare il tuo setup
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#2a3f52', fontSize: '12px' }}>
+            <div style={{ fontSize: '42px', marginBottom: '14px', opacity: 0.3 }}>🏎️</div>
+            Seleziona un circuito per iniziare
           </div>
         )}
 
@@ -2008,57 +1349,27 @@ Generated by F1 Dashboard Setup Creator
             {/* Aerodinamica */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">✈️</span>
-                  Aerodinamica
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">✈️</span>Aerodinamica</div>
               </div>
               <div className="setup-category-body">
-                <div className="setup-param-group">
-                  <div className="setup-param-label">
-                    <span className="setup-param-name">Front Wing</span>
-                    <span className="setup-param-value">{setupValues.aero[0]}</span>
+                {[["Front Wing", 0, 0, 50], ["Rear Wing", 1, 0, 50]].map(([label, idx, min, max]) => (
+                  <div className="setup-param-group" key={label}>
+                    <div className="setup-param-label">
+                      <span className="setup-param-name">{label}</span>
+                      <span className="setup-param-value">{setupValues.aero[idx]}</span>
+                    </div>
+                    <input type="range" min={min} max={max} value={setupValues.aero[idx]}
+                      onChange={(e) => updateSetupValue('aero', idx, e.target.value)} className="setup-slider" />
                   </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="50"
-                    value={setupValues.aero[0]}
-                    onChange={(e) => updateSetupValue('aero', 0, e.target.value)}
-                    className="setup-slider"
-                  />
-                  <div className="setup-hint">
-                    Aumenta per più grip in curva, riduci per più velocità sul dritto
-                  </div>
-                </div>
-
-                <div className="setup-param-group">
-                  <div className="setup-param-label">
-                    <span className="setup-param-name">Rear Wing</span>
-                    <span className="setup-param-value">{setupValues.aero[1]}</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="50"
-                    value={setupValues.aero[1]}
-                    onChange={(e) => updateSetupValue('aero', 1, e.target.value)}
-                    className="setup-slider"
-                  />
-                  <div className="setup-hint">
-                    Bilanciamento posteriore - attento al gap con l'anteriore!
-                  </div>
-                </div>
+                ))}
+                <div className="setup-hint">Aumenta per più grip in curva, riduci per più velocità sul dritto</div>
               </div>
             </div>
 
-            {/* Trasmissione - CORRECTED */}
+            {/* Trasmissione */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">⚙️</span>
-                  Trasmissione
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">⚙️</span>Trasmissione</div>
               </div>
               <div className="setup-category-body">
                 <div className="setup-param-group">
@@ -2066,35 +1377,18 @@ Generated by F1 Dashboard Setup Creator
                     <span className="setup-param-name">Diff On-Throttle</span>
                     <span className="setup-param-value">{setupValues.trasmissione[0]}</span>
                   </div>
-                  <input
-                    type="range"
-                    min="20"
-                    max="100"
-                    value={setupValues.trasmissione[0]}
-                    onChange={(e) => updateSetupValue('trasmissione', 0, e.target.value)}
-                    className="setup-slider"
-                  />
-                  <div className="setup-hint">
-                    Alto = blocco = + sottosterzo + trazione
-                  </div>
+                  <input type="range" min="20" max="100" value={setupValues.trasmissione[0]}
+                    onChange={(e) => updateSetupValue('trasmissione', 0, e.target.value)} className="setup-slider" />
+                  <div className="setup-hint">Alto = blocco = + sottosterzo + trazione</div>
                 </div>
-
                 <div className="setup-param-group">
                   <div className="setup-param-label">
                     <span className="setup-param-name">Diff Off-Throttle</span>
                     <span className="setup-param-value">{setupValues.trasmissione[1]}</span>
                   </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="50"
-                    value={setupValues.trasmissione[1]}
-                    onChange={(e) => updateSetupValue('trasmissione', 1, e.target.value)}
-                    className="setup-slider"
-                  />
-                  <div className="setup-hint">
-                    Controlla comportamento in rilascio acceleratore
-                  </div>
+                  <input type="range" min="1" max="50" value={setupValues.trasmissione[1]}
+                    onChange={(e) => updateSetupValue('trasmissione', 1, e.target.value)} className="setup-slider" />
+                  <div className="setup-hint">Controlla comportamento in rilascio acceleratore</div>
                 </div>
               </div>
             </div>
@@ -2102,138 +1396,45 @@ Generated by F1 Dashboard Setup Creator
             {/* Geometria */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">📐</span>
-                  Geometria
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">📐</span>Geometria</div>
               </div>
               <div className="setup-category-body">
                 <div className="setup-multi-param">
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Camber Ant.</div>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value={setupValues.geometria[0]}
-                      onChange={(e) => updateSetupValue('geometria', 0, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Camber Post.</div>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value={setupValues.geometria[1]}
-                      onChange={(e) => updateSetupValue('geometria', 1, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Toe Ant.</div>
-                    <input
-                      type="number"
-                      step="0.05"
-                      value={setupValues.geometria[2]}
-                      onChange={(e) => updateSetupValue('geometria', 2, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Toe Post.</div>
-                    <input
-                      type="number"
-                      step="0.05"
-                      value={setupValues.geometria[3]}
-                      onChange={(e) => updateSetupValue('geometria', 3, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
+                  {[["Camber Ant.", 0, 0.1], ["Camber Post.", 1, 0.1], ["Toe Ant.", 2, 0.05], ["Toe Post.", 3, 0.05]].map(([label, idx, step]) => (
+                    <div className="setup-multi-item" key={label}>
+                      <div className="setup-multi-label">{label}</div>
+                      <input type="number" step={step} value={setupValues.geometria[idx]}
+                        onChange={(e) => updateSetupValue('geometria', idx, e.target.value)} className="setup-multi-input" />
+                    </div>
+                  ))}
                 </div>
-                <div className="setup-hint">
-                  Camber: + valore = + grip. Toe: + convergenza = + stabilità
-                </div>
+                <div className="setup-hint">Camber: + valore = + grip. Toe: + convergenza = + stabilità</div>
               </div>
             </div>
 
             {/* Sospensioni */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">🔧</span>
-                  Sospensioni
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">🔧</span>Sospensioni</div>
               </div>
               <div className="setup-category-body">
                 <div className="setup-multi-param">
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Trasm.</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[0]}
-                      onChange={(e) => updateSetupValue('sosp', 0, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">S1</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[1]}
-                      onChange={(e) => updateSetupValue('sosp', 1, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">S2</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[2]}
-                      onChange={(e) => updateSetupValue('sosp', 2, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">S3</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[3]}
-                      onChange={(e) => updateSetupValue('sosp', 3, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">S4</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[4]}
-                      onChange={(e) => updateSetupValue('sosp', 4, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">S5</div>
-                    <input
-                      type="number"
-                      value={setupValues.sosp[5]}
-                      onChange={(e) => updateSetupValue('sosp', 5, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
+                  {[["Trasm.", 0], ["S1", 1], ["S2", 2], ["S3", 3], ["S4", 4], ["S5", 5]].map(([label, idx]) => (
+                    <div className="setup-multi-item" key={label}>
+                      <div className="setup-multi-label">{label}</div>
+                      <input type="number" value={setupValues.sosp[idx]}
+                        onChange={(e) => updateSetupValue('sosp', idx, e.target.value)} className="setup-multi-input" />
+                    </div>
+                  ))}
                 </div>
-                <div className="setup-hint">
-                  + Rigidità = piste lisce. - Rigidità = cordoli/dossi
-                </div>
+                <div className="setup-hint">+ Rigidità = piste lisce. - Rigidità = cordoli/dossi</div>
               </div>
             </div>
 
             {/* Freni */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">🛑</span>
-                  Freni
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">🛑</span>Freni</div>
               </div>
               <div className="setup-category-body">
                 <div className="setup-param-group">
@@ -2241,91 +1442,37 @@ Generated by F1 Dashboard Setup Creator
                     <span className="setup-param-name">Bilanciamento</span>
                     <span className="setup-param-value">{setupValues.freni[0]}%</span>
                   </div>
-                  <input
-                    type="range"
-                    min="50"
-                    max="65"
-                    value={setupValues.freni[0]}
-                    onChange={(e) => updateSetupValue('freni', 0, e.target.value)}
-                    className="setup-slider"
-                  />
+                  <input type="range" min="50" max="65" value={setupValues.freni[0]}
+                    onChange={(e) => updateSetupValue('freni', 0, e.target.value)} className="setup-slider" />
                 </div>
-
                 <div className="setup-param-group">
                   <div className="setup-param-label">
                     <span className="setup-param-name">Pressione</span>
                     <span className="setup-param-value">{setupValues.freni[1]}%</span>
                   </div>
-                  <input
-                    type="range"
-                    min="80"
-                    max="100"
-                    value={setupValues.freni[1]}
-                    onChange={(e) => updateSetupValue('freni', 1, e.target.value)}
-                    className="setup-slider"
-                  />
+                  <input type="range" min="80" max="100" value={setupValues.freni[1]}
+                    onChange={(e) => updateSetupValue('freni', 1, e.target.value)} className="setup-slider" />
                 </div>
-
-                <div className="setup-hint">
-                  Bilanciamento: + valore = più carico anteriore
-                </div>
+                <div className="setup-hint">Bilanciamento: + valore = più carico anteriore</div>
               </div>
             </div>
 
             {/* Gomme */}
             <div className="setup-category-card">
               <div className="setup-category-header">
-                <div className="setup-category-title">
-                  <span className="setup-category-icon">🏎️</span>
-                  Pressione Gomme
-                </div>
+                <div className="setup-category-title"><span className="setup-category-icon">🏎️</span>Pressione Gomme</div>
               </div>
               <div className="setup-category-body">
                 <div className="setup-multi-param">
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Ant. Sx</div>
-                    <input
-                      type="number"
-                      step="0.5"
-                      value={setupValues.gomme[0]}
-                      onChange={(e) => updateSetupValue('gomme', 0, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Ant. Dx</div>
-                    <input
-                      type="number"
-                      step="0.5"
-                      value={setupValues.gomme[1]}
-                      onChange={(e) => updateSetupValue('gomme', 1, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Post. Sx</div>
-                    <input
-                      type="number"
-                      step="0.5"
-                      value={setupValues.gomme[2]}
-                      onChange={(e) => updateSetupValue('gomme', 2, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
-                  <div className="setup-multi-item">
-                    <div className="setup-multi-label">Post. Dx</div>
-                    <input
-                      type="number"
-                      step="0.5"
-                      value={setupValues.gomme[3]}
-                      onChange={(e) => updateSetupValue('gomme', 3, e.target.value)}
-                      className="setup-multi-input"
-                    />
-                  </div>
+                  {[["Ant. Sx", 0], ["Ant. Dx", 1], ["Post. Sx", 2], ["Post. Dx", 3]].map(([label, idx]) => (
+                    <div className="setup-multi-item" key={label}>
+                      <div className="setup-multi-label">{label}</div>
+                      <input type="number" step="0.5" value={setupValues.gomme[idx]}
+                        onChange={(e) => updateSetupValue('gomme', idx, e.target.value)} className="setup-multi-input" />
+                    </div>
+                  ))}
                 </div>
-                <div className="setup-hint">
-                  + Pressione = - usura - grip. - Pressione = + grip + usura
-                </div>
+                <div className="setup-hint">+ Pressione = - usura - grip. - Pressione = + grip + usura</div>
               </div>
             </div>
           </div>
@@ -2337,38 +1484,22 @@ Generated by F1 Dashboard Setup Creator
         <div className="export-modal-overlay" onClick={() => setShowExportModal(false)}>
           <div className="export-modal" onClick={(e) => e.stopPropagation()}>
             <div className="export-modal-header">
-              <div>
-                <div className="export-modal-title">Esporta Setup</div>
-              </div>
+              <div className="export-modal-title">Esporta Setup</div>
               <button className="export-modal-close" onClick={() => setShowExportModal(false)}>×</button>
             </div>
             <div className="export-modal-body">
               <label className="export-format-label">Formato di esportazione:</label>
               <div className="export-formats">
-                <button
-                  className={`export-format-btn${exportFormat === 'text' ? ' active' : ''}`}
-                  onClick={() => setExportFormat('text')}
-                >
-                  <div className="export-format-icon">📄</div>
-                  <div className="export-format-name">Testo</div>
-                </button>
-                <button
-                  className={`export-format-btn${exportFormat === 'json' ? ' active' : ''}`}
-                  onClick={() => setExportFormat('json')}
-                >
-                  <div className="export-format-icon">🔧</div>
-                  <div className="export-format-name">JSON</div>
-                </button>
+                {[["text","📄","Testo"],["json","🔧","JSON"]].map(([fmt, icon, name]) => (
+                  <button key={fmt} className={`export-format-btn${exportFormat === fmt ? ' active' : ''}`} onClick={() => setExportFormat(fmt)}>
+                    <div className="export-format-icon">{icon}</div>
+                    <div className="export-format-name">{name}</div>
+                  </button>
+                ))}
               </div>
-
-              <div className="export-preview">
-                {exportSetup()}
-              </div>
-
+              <div className="export-preview">{exportSetup()}</div>
               <div className="export-actions">
-                <button className="export-btn" onClick={downloadSetup}>
-                  💾 Scarica Setup
-                </button>
+                <button className="export-btn" onClick={downloadSetup}>💾 Scarica Setup</button>
               </div>
             </div>
           </div>
@@ -2378,31 +1509,20 @@ Generated by F1 Dashboard Setup Creator
   );
 }
 
-// ─── COMPONENTS ───────────────────────────────────────────────────
-
+// ─── SEASON SELECTOR ──────────────────────────────────────────────
 function SeasonSelector({ currentSeason, onSeasonChange }) {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="season-selector">
-      <button 
-        className={`season-btn${isOpen ? " open" : ""}`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button className={`season-btn${isOpen ? " open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
         <span>{currentSeason}</span>
         <span className="season-btn-icon">▼</span>
       </button>
       {isOpen && (
         <div className="season-dropdown">
           {SEASONS.map((season) => (
-            <div
-              key={season}
-              className={`season-option${season === currentSeason ? " active" : ""}`}
-              onClick={() => {
-                onSeasonChange(season);
-                setIsOpen(false);
-              }}
-            >
+            <div key={season} className={`season-option${season === currentSeason ? " active" : ""}`}
+              onClick={() => { onSeasonChange(season); setIsOpen(false); }}>
               {season}
             </div>
           ))}
@@ -2412,12 +1532,11 @@ function SeasonSelector({ currentSeason, onSeasonChange }) {
   );
 }
 
+// ─── RACE RESULTS MODAL ────────────────────────────────────────────
 function RaceResultsModal({ race, raceResults, season, onClose }) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const raceData = raceResults.find(r => r.race === race.raceKey);
-  
   if (!raceData) return null;
-
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -2459,6 +1578,7 @@ function RaceResultsModal({ race, raceResults, season, onClose }) {
   );
 }
 
+// ─── LEADERBOARD PAGE ──────────────────────────────────────────────
 function LeaderboardPage({ season }) {
   const [tab, setTab] = useState("drivers");
   const [expandedDriver, setExpandedDriver] = useState(null);
@@ -2482,22 +1602,77 @@ function LeaderboardPage({ season }) {
       </div>
 
       {tab === "drivers" && (
-        <table className="lb-table">
-          <thead>
-            <tr>
-              <th style={{ width: 40 }}>#</th>
-              <th>Pilota</th>
-              <th style={{ textAlign: "center" }}>Vittorie</th>
-              <th style={{ textAlign: "center" }}>Podi</th>
-              <th style={{ textAlign: "right" }}>Punti</th>
-            </tr>
-          </thead>
-          <tbody>
-            {driverStandings.map((d, i) => {
-              const isExp = expandedDriver === d.name;
-              const races = isExp ? getDriverRaces(d.name) : [];
-              return (
-                <tr key={d.name}>
+        <div className="lb-table-wrap">
+          <table className="lb-table">
+            <thead>
+              <tr>
+                <th style={{ width: 36 }}>#</th>
+                <th>Pilota</th>
+                <th style={{ textAlign: "center" }}>V</th>
+                <th style={{ textAlign: "center" }}>P</th>
+                <th style={{ textAlign: "right" }}>Punti</th>
+              </tr>
+            </thead>
+            <tbody>
+              {driverStandings.map((d, i) => {
+                const isExp = expandedDriver === d.name;
+                const races = isExp ? getDriverRaces(d.name) : [];
+                return (
+                  <tr key={d.name}>
+                    <td>
+                      <div className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
+                        {i + 1}
+                      </div>
+                    </td>
+                    <td>
+                      <div className="lb-driver-cell">
+                        <div className="lb-team-dot" style={{ background: TEAM_COLORS[d.team] || "#555" }} />
+                        <div>
+                          <div className="lb-driver-name">{d.flag} {d.name}</div>
+                          <div className="lb-driver-sub">{d.team} · #{d.num}</div>
+                          {races.length > 0 && (
+                            <>
+                              <button className="lb-race-toggle" onClick={() => setExpandedDriver(isExp ? null : d.name)}>
+                                {isExp ? "▲ chiudi" : "▼ risultati"}
+                              </button>
+                              <div className={`lb-race-list${isExp ? " open" : ""}`}>
+                                {races.map((r) => (
+                                  <div className="lb-race-item" key={r.race}>
+                                    <span className="lb-race-item-name">{r.race}</span>
+                                    <span className="lb-race-item-pos">P{r.pos} · {r.pts}pts</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="lb-stat">{d.wins}</td>
+                    <td className="lb-stat">{d.podiums}</td>
+                    <td><div className="lb-pts">{d.points}</div></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {tab === "teams" && (
+        <div className="lb-table-wrap">
+          <table className="lb-table">
+            <thead>
+              <tr>
+                <th style={{ width: 36 }}>#</th>
+                <th>Costruttore</th>
+                <th style={{ textAlign: "center" }}>Vittorie</th>
+                <th style={{ textAlign: "right" }}>Punti</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teamStandings.map((t, i) => (
+                <tr key={t.team}>
                   <td>
                     <div className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
                       {i + 1}
@@ -2505,95 +1680,35 @@ function LeaderboardPage({ season }) {
                   </td>
                   <td>
                     <div className="lb-driver-cell">
-                      <div className="lb-team-dot" style={{ background: TEAM_COLORS[d.team] || "#555" }} />
-                      <div>
-                        <div className="lb-driver-name">{d.flag} {d.name}</div>
-                        <div className="lb-driver-sub">{d.team} · #{d.num}</div>
-                        {races.length > 0 && (
-                          <>
-                            <button className="lb-race-toggle" onClick={() => setExpandedDriver(isExp ? null : d.name)}>
-                              {isExp ? "▲ chiudi risultati" : "▼ risultati gara"}
-                            </button>
-                            <div className={`lb-race-list${isExp ? " open" : ""}`}>
-                              {races.map((r) => (
-                                <div className="lb-race-item" key={r.race}>
-                                  <span className="lb-race-item-name">{r.race}</span>
-                                  <span className="lb-race-item-pos">P{r.pos} · {r.pts} pts</span>
-                                </div>
-                              ))}
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="lb-stat">{d.wins}</td>
-                  <td className="lb-stat">{d.podiums}</td>
-                  <td><div className="lb-pts">{d.points}</div></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-
-      {tab === "teams" && (
-        <table className="lb-table">
-          <thead>
-            <tr>
-              <th style={{ width: 40 }}>#</th>
-              <th>Costruttore</th>
-              <th style={{ textAlign: "center" }}>Vittorie</th>
-              <th style={{ textAlign: "right" }}>Punti</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teamStandings.map((t, i) => (
-              <tr key={t.team}>
-                <td>
-                  <div className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
-                    {i + 1}
-                  </div>
-                </td>
-                <td>
-                  <div className="lb-driver-cell">
-                    <div className="lb-team-dot" style={{ background: TEAM_COLORS[t.team] || "#555", width: 12, height: 12 }} />
-                    <div>
+                      <div className="lb-team-dot" style={{ background: TEAM_COLORS[t.team] || "#555", width: 11, height: 11 }} />
                       <div className="lb-driver-name">{t.team}</div>
                     </div>
-                  </div>
-                </td>
-                <td className="lb-stat">{t.wins}</td>
-                <td><div className="lb-pts">{t.points}</div></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                  <td className="lb-stat">{t.wins}</td>
+                  <td><div className="lb-pts">{t.points}</div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </>
   );
 }
 
+// ─── CALENDAR PAGE ─────────────────────────────────────────────────
 function CalendarPage({ season }) {
   const [selectedRace, setSelectedRace] = useState(null);
-  
   const seasonData = SEASON_DATA[season];
-
   return (
     <>
       <div className="cal-grid">
         {seasonData.calendar.map((race, i) => (
-          <div
-            key={race.round}
-            className={`cal-card ${race.status}`}
-            style={{ animationDelay: `${i * 0.04}s` }}
-            onClick={() => race.status === "done" && race.raceKey && setSelectedRace(race)}
-          >
+          <div key={race.round} className={`cal-card ${race.status}`} style={{ animationDelay: `${i * 0.04}s` }}
+            onClick={() => race.status === "done" && race.raceKey && setSelectedRace(race)}>
             <div className="cal-card-header">
               <span className="cal-round">Round {race.round}</span>
-              <span className={`cal-status ${race.status}`}>
-                {race.status === "done" ? "Completata" : "In arrivo"}
-              </span>
+              <span className={`cal-status ${race.status}`}>{race.status === "done" ? "Completata" : "In arrivo"}</span>
             </div>
             <div className="cal-race-name">{race.race}</div>
             <div className="cal-city">{race.city}</div>
@@ -2607,23 +1722,17 @@ function CalendarPage({ season }) {
         ))}
       </div>
       {selectedRace && (
-        <RaceResultsModal 
-          race={selectedRace} 
-          raceResults={seasonData.races}
-          season={season}
-          onClose={() => setSelectedRace(null)} 
-        />
+        <RaceResultsModal race={selectedRace} raceResults={seasonData.races} season={season} onClose={() => setSelectedRace(null)} />
       )}
     </>
   );
 }
 
+// ─── CAREER PAGE ───────────────────────────────────────────────────
 function CareerPage() {
   const drivers = useMemo(() => {
     return Object.keys(DRIVER_TEAMS_BASE).map((name) => ({
-      name,
-      ...DRIVER_TEAMS_BASE[name],
-      ...CAREER_STATS[name],
+      name, ...DRIVER_TEAMS_BASE[name], ...CAREER_STATS[name],
     })).sort((a, b) => b.totalPoints - a.totalPoints || b.totalWins - a.totalWins);
   }, []);
 
@@ -2647,32 +1756,14 @@ function CareerPage() {
                 <div className="career-entity-name">{d.flag} {d.name}</div>
               </div>
               <div className="career-stats">
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Punti</div>
-                  <div className="career-stat-val pts">{d.totalPoints}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Pole</div>
-                  <div className="career-stat-val poles">{d.totalPoles}</div>
-                </div>
+                <div className="career-stat-box"><div className="career-stat-label">Punti</div><div className="career-stat-val pts">{d.totalPoints}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Pole</div><div className="career-stat-val poles">{d.totalPoles}</div></div>
                 {driversWithInterpole.includes(d.name) && (
-                  <div className="career-stat-box">
-                    <div className="career-stat-label">Interpole</div>
-                    <div className="career-stat-val interpole">{d.totalInterpole || 0}</div>
-                  </div>
+                  <div className="career-stat-box"><div className="career-stat-label">Interpole</div><div className="career-stat-val interpole">{d.totalInterpole || 0}</div></div>
                 )}
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Vittorie</div>
-                  <div className="career-stat-val wins">{d.totalWins}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Podi</div>
-                  <div className="career-stat-val podiums">{d.totalPodiums}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">WDC</div>
-                  <div className="career-stat-val wdc">{d.championships}</div>
-                </div>
+                <div className="career-stat-box"><div className="career-stat-label">Vittorie</div><div className="career-stat-val wins">{d.totalWins}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Podi</div><div className="career-stat-val podiums">{d.totalPodiums}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">WDC</div><div className="career-stat-val wdc">{d.championships}</div></div>
               </div>
             </div>
           ))}
@@ -2689,22 +1780,10 @@ function CareerPage() {
                 <div className="career-entity-name">{t.team}</div>
               </div>
               <div className="career-stats">
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Punti</div>
-                  <div className="career-stat-val pts">{t.totalPoints}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Pole</div>
-                  <div className="career-stat-val poles">{t.totalPoles}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">Vittorie</div>
-                  <div className="career-stat-val wins">{t.totalWins}</div>
-                </div>
-                <div className="career-stat-box">
-                  <div className="career-stat-label">WCC</div>
-                  <div className="career-stat-val wcc">{t.championships}</div>
-                </div>
+                <div className="career-stat-box"><div className="career-stat-label">Punti</div><div className="career-stat-val pts">{t.totalPoints}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Pole</div><div className="career-stat-val poles">{t.totalPoles}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Vittorie</div><div className="career-stat-val wins">{t.totalWins}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">WCC</div><div className="career-stat-val wcc">{t.championships}</div></div>
               </div>
             </div>
           ))}
@@ -2714,6 +1793,7 @@ function CareerPage() {
   );
 }
 
+// ─── HEAD TO HEAD PAGE ─────────────────────────────────────────────
 function HeadToHeadPage({ season }) {
   const seasonData = SEASON_DATA[season];
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
@@ -2730,41 +1810,28 @@ function HeadToHeadPage({ season }) {
   }, [season]);
 
   function calculateH2H(driver1, driver2) {
-    const stats1 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
-    const stats2 = { points: 0, wins: 0, podiums: 0, poles: 0, qualiWins: 0, raceWins: 0, races: [] };
+    const stats1 = { points: 0, wins: 0, podiums: 0, poles: 0, raceWins: 0, races: [] };
+    const stats2 = { points: 0, wins: 0, podiums: 0, poles: 0, raceWins: 0, races: [] };
 
     seasonData.races.forEach(({ race, results }) => {
       const pos1 = results.indexOf(driver1.name);
       const pos2 = results.indexOf(driver2.name);
-      
-      if (pos1 >= 0 && pos1 < POINTS_TABLE.length) {
-        stats1.points += POINTS_TABLE[pos1];
-      }
-      if (pos2 >= 0 && pos2 < POINTS_TABLE.length) {
-        stats2.points += POINTS_TABLE[pos2];
-      }
-
+      if (pos1 >= 0 && pos1 < POINTS_TABLE.length) stats1.points += POINTS_TABLE[pos1];
+      if (pos2 >= 0 && pos2 < POINTS_TABLE.length) stats2.points += POINTS_TABLE[pos2];
       if (pos1 === 0) stats1.wins++;
       if (pos2 === 0) stats2.wins++;
-
       if (pos1 >= 0 && pos1 < 3) stats1.podiums++;
       if (pos2 >= 0 && pos2 < 3) stats2.podiums++;
-
       const poles = seasonData.driverPoles || {};
       stats1.poles = poles[driver1.name] || 0;
       stats2.poles = poles[driver2.name] || 0;
-
       if (pos1 >= 0 && pos2 >= 0) {
-        if (pos1 < pos2) {
-          stats1.raceWins++;
-        } else if (pos2 < pos1) {
-          stats2.raceWins++;
-        }
+        if (pos1 < pos2) stats1.raceWins++;
+        else if (pos2 < pos1) stats2.raceWins++;
         stats1.races.push({ race, pos: pos1 + 1 });
         stats2.races.push({ race, pos: pos2 + 1 });
       }
     });
-
     return { stats1, stats2 };
   }
 
@@ -2773,84 +1840,38 @@ function HeadToHeadPage({ season }) {
       {teamPairs.map(({ team, drivers }, idx) => {
         const [driver1, driver2] = drivers;
         const { stats1, stats2 } = calculateH2H(driver1, driver2);
-
         return (
           <div className="h2h-team-card" key={team} style={{ animationDelay: `${idx * 0.05}s` }}>
             <div className="h2h-team-header">
               <div className="h2h-team-dot" style={{ background: TEAM_COLORS[team] || "#555" }} />
               <div className="h2h-team-name">{team}</div>
             </div>
-
             <div className="h2h-drivers-row">
               <div className="h2h-driver">
-                <div className="h2h-driver-name">
-                  <span>{driver1.flag}</span>
-                  <span>{driver1.name}</span>
-                </div>
+                <div className="h2h-driver-name"><span>{driver1.flag}</span><span>{driver1.name}</span></div>
                 <div className="h2h-driver-num">#{driver1.num}</div>
               </div>
               <div className="h2h-vs">VS</div>
               <div className="h2h-driver right">
-                <div className="h2h-driver-name">
-                  <span>{driver2.name}</span>
-                  <span>{driver2.flag}</span>
-                </div>
+                <div className="h2h-driver-name"><span>{driver2.name}</span><span>{driver2.flag}</span></div>
                 <div className="h2h-driver-num">#{driver2.num}</div>
               </div>
             </div>
-
             <div className="h2h-stats-grid">
-              <div className="h2h-stat-row">
-                <div className={`h2h-stat-val left${stats1.points > stats2.points ? " winner" : ""}`}>
-                  {stats1.points}
+              {[
+                [stats1.points, stats2.points, "Punti"],
+                [stats1.wins, stats2.wins, "Vittorie"],
+                [stats1.podiums, stats2.podiums, "Podi"],
+                [stats1.poles, stats2.poles, "Pole"],
+                [stats1.raceWins, stats2.raceWins, "H2H"],
+              ].map(([v1, v2, label]) => (
+                <div className="h2h-stat-row" key={label}>
+                  <div className={`h2h-stat-val left${v1 > v2 ? " winner" : ""}`}>{v1}</div>
+                  <div className="h2h-stat-label">{label}</div>
+                  <div className={`h2h-stat-val${v2 > v1 ? " winner" : ""}`}>{v2}</div>
                 </div>
-                <div className="h2h-stat-label">Punti</div>
-                <div className={`h2h-stat-val${stats2.points > stats1.points ? " winner" : ""}`}>
-                  {stats2.points}
-                </div>
-              </div>
-
-              <div className="h2h-stat-row">
-                <div className={`h2h-stat-val left${stats1.wins > stats2.wins ? " winner" : ""}`}>
-                  {stats1.wins}
-                </div>
-                <div className="h2h-stat-label">Vittorie</div>
-                <div className={`h2h-stat-val${stats2.wins > stats1.wins ? " winner" : ""}`}>
-                  {stats2.wins}
-                </div>
-              </div>
-
-              <div className="h2h-stat-row">
-                <div className={`h2h-stat-val left${stats1.podiums > stats2.podiums ? " winner" : ""}`}>
-                  {stats1.podiums}
-                </div>
-                <div className="h2h-stat-label">Podi</div>
-                <div className={`h2h-stat-val${stats2.podiums > stats1.podiums ? " winner" : ""}`}>
-                  {stats2.podiums}
-                </div>
-              </div>
-
-              <div className="h2h-stat-row">
-                <div className={`h2h-stat-val left${stats1.poles > stats2.poles ? " winner" : ""}`}>
-                  {stats1.poles}
-                </div>
-                <div className="h2h-stat-label">Pole Position</div>
-                <div className={`h2h-stat-val${stats2.poles > stats1.poles ? " winner" : ""}`}>
-                  {stats2.poles}
-                </div>
-              </div>
-
-              <div className="h2h-stat-row">
-                <div className={`h2h-stat-val left${stats1.raceWins > stats2.raceWins ? " winner" : ""}`}>
-                  {stats1.raceWins}
-                </div>
-                <div className="h2h-stat-label">Gare Vinte H2H</div>
-                <div className={`h2h-stat-val${stats2.raceWins > stats1.raceWins ? " winner" : ""}`}>
-                  {stats2.raceWins}
-                </div>
-              </div>
+              ))}
             </div>
-
             {stats1.races.length > 0 && (
               <div className="h2h-detail-section">
                 <div className="h2h-detail-title">Risultati Gara</div>
@@ -2860,12 +1881,8 @@ function HeadToHeadPage({ season }) {
                     return (
                       <div className="h2h-race-item" key={r1.race}>
                         <div className="h2h-race-name">{r1.race}</div>
-                        <div className={`h2h-race-pos${r1.pos < r2.pos ? " winner" : ""}`}>
-                          P{r1.pos}
-                        </div>
-                        <div className={`h2h-race-pos${r2.pos < r1.pos ? " winner" : ""}`}>
-                          P{r2.pos}
-                        </div>
+                        <div className={`h2h-race-pos${r1.pos < r2.pos ? " winner" : ""}`}>P{r1.pos}</div>
+                        <div className={`h2h-race-pos${r2.pos < r1.pos ? " winner" : ""}`}>P{r2.pos}</div>
                       </div>
                     );
                   })}
@@ -2879,25 +1896,16 @@ function HeadToHeadPage({ season }) {
   );
 }
 
+// ─── RULES PAGE ────────────────────────────────────────────────────
 function RulesPage() {
   const [expandedRules, setExpandedRules] = useState([]);
-
   const toggleRule = (ruleId) => {
-    setExpandedRules(prev => 
-      prev.includes(ruleId) 
-        ? prev.filter(id => id !== ruleId)
-        : [...prev, ruleId]
-    );
+    setExpandedRules(prev => prev.includes(ruleId) ? prev.filter(id => id !== ruleId) : [...prev, ruleId]);
   };
-
   return (
     <div className="rules-grid">
       {RULES_CONFIG.map((rule, idx) => (
-        <div 
-          key={rule.id} 
-          className={`rule-card${expandedRules.includes(rule.id) ? " expanded" : ""}`}
-          style={{ animationDelay: `${idx * 0.08}s` }}
-        >
+        <div key={rule.id} className={`rule-card${expandedRules.includes(rule.id) ? " expanded" : ""}`} style={{ animationDelay: `${idx * 0.08}s` }}>
           <div className="rule-header" onClick={() => toggleRule(rule.id)}>
             <div className="rule-header-left">
               <div className="rule-icon">{rule.icon}</div>
@@ -2909,9 +1917,7 @@ function RulesPage() {
             <div className="rule-content-inner">
               <div className="rule-text">
                 {rule.content.map((line, i) => (
-                  <div key={i} className="rule-text-item">
-                    {line || <br />}
-                  </div>
+                  <div key={i} className="rule-text-item">{line || <br />}</div>
                 ))}
               </div>
             </div>
@@ -2933,30 +1939,12 @@ export default function App() {
   const totalRaces = seasonData.calendar.length;
 
   const pageInfo = {
-    leaderboard: { 
-      title: "Classifica Generale", 
-      subtitle: `${season} · ${completedRaces}/${totalRaces} gare completate` 
-    },
-    calendar: { 
-      title: "Calendario", 
-      subtitle: `${season} · ${totalRaces} gare programmate` 
-    },
-    h2h: { 
-      title: "Head-to-Head", 
-      subtitle: `${season} · Confronto compagni di squadra` 
-    },
-    career: { 
-      title: "Statistiche Carriera", 
-      subtitle: `Tutte le stagioni · Statistiche totali carriera` 
-    },
-    setup: { 
-      title: "Setup Creator Pro", 
-      subtitle: `Crea e personalizza il tuo setup perfetto` 
-    },
-    rules: { 
-      title: "Regolamento", 
-      subtitle: `Tutte le regole del campionato` 
-    }
+    leaderboard: { title: "Classifica Generale", subtitle: `${season} · ${completedRaces}/${totalRaces} gare completate` },
+    calendar:    { title: "Calendario",          subtitle: `${season} · ${totalRaces} gare programmate` },
+    h2h:         { title: "Head-to-Head",        subtitle: `${season} · Confronto compagni di squadra` },
+    career:      { title: "Statistiche Carriera",subtitle: `Tutte le stagioni · Totali carriera` },
+    setup:       { title: "Setup Creator Pro",   subtitle: `Crea e personalizza il tuo setup perfetto` },
+    rules:       { title: "Regolamento",         subtitle: `Tutte le regole del campionato` }
   };
 
   const showSeasonSelector = ["leaderboard", "calendar", "h2h"].includes(page);
@@ -2983,11 +1971,7 @@ export default function App() {
           </div>
           <nav className="f1-nav">
             {NAV.map((n) => (
-              <button
-                key={n.id}
-                className={`f1-nav-btn${page === n.id ? " active" : ""}`}
-                onClick={() => setPage(n.id)}
-              >
+              <button key={n.id} className={`f1-nav-btn${page === n.id ? " active" : ""}`} onClick={() => setPage(n.id)}>
                 <span className="nav-icon">{n.icon}</span>
                 {n.label}
               </button>
@@ -3007,11 +1991,11 @@ export default function App() {
           </div>
 
           {page === "leaderboard" && <LeaderboardPage season={season} />}
-          {page === "calendar" && <CalendarPage season={season} />}
-          {page === "h2h" && <HeadToHeadPage season={season} />}
-          {page === "career" && <CareerPage />}
-          {page === "setup" && <AdvancedSetupCreator />}
-          {page === "rules" && <RulesPage />}
+          {page === "calendar"    && <CalendarPage season={season} />}
+          {page === "h2h"         && <HeadToHeadPage season={season} />}
+          {page === "career"      && <CareerPage />}
+          {page === "setup"       && <AdvancedSetupCreator />}
+          {page === "rules"       && <RulesPage />}
         </div>
       </div>
     </>
