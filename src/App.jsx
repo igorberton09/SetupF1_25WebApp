@@ -1018,7 +1018,7 @@ const css = `
   .rule-toggle { font-size: 12px; color: #5a7a8f; transition: transform 0.3s cubic-bezier(.4,0,.2,1), color 0.2s; }
   .rule-card.expanded .rule-toggle { transform: rotate(180deg); color: #e8001d; }
   .rule-content { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s; }
-  .rule-card.expanded .rule-content { max-height: 800px; opacity: 1; }
+  .rule-card.expanded .rule-content { max-height: none; opacity: 1; }
   .rule-content-inner { padding: 0 18px 18px; border-top: 1px solid #1a2332; }
   .rule-text { font-size: 11px; color: #8aacbe; line-height: 1.7; margin-top: 14px; }
   .rule-text-item { margin-bottom: 7px; }
