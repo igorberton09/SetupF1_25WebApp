@@ -94,19 +94,50 @@ const RULES_CONFIG = [
     ]
   },
   {
-    id: "teams",
-    title: "Campionato Costruttori",
-    icon: "🏗️",
-    content: [
-      "Ogni squadra schiera due piloti.",
-      "I punti di entrambi i piloti vengono sommati per il Campionato Costruttori.",
-      "",
-      "La squadra con più punti totali vince il Campionato Costruttori.",
-      "È possibile vincere il Campionato Piloti senza che la propria squadra vinca il Campionato Costruttori, e viceversa.",
-      "",
-      "I trasferimenti di piloti tra le stagioni possono modificare la composizione dei team."
-    ]
-  }
+  id: "penalty",
+  title: "Penalità e Regole",
+  icon: "🚫",
+  content: [
+    "Ogni comportamento scorretto verrà valutato in base al danno causato al pilota coinvolto.",
+    "Ogni pilota dispone di 5 punti penalità. Al raggiungimento dei 5 punti scatterà la squalifica per una gara. I punti penalità verranno azzerati a inizio di ogni stagione.",
+    "",
+    "BRAKE CHECK:",
+    "Se il pilota danneggiato si ritira: squalifica dalla gara + squalifica dalla gara successiva, +1 punto penalità.",
+    "Ala Rossa: Drive Through oppure +10/+20 secondi (a discrezione della direzione gara in base alla pista).",
+    "Ala Arancione: +5 secondi.",
+    "Ala Gialla: +3 secondi.",
+    "Ala Verde chiaro: doppio avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "Nessun danno: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "",
+    "Tamponamento in entrata pit lane:",
+    "Se un pilota viene tamponato e riceve una penalità di 10 secondi, la penalità verrà trasferita al pilota responsabile del tamponamento.",
+    "La regola non si applica se il pilota tamponato effettua un brake check o rallenta/blocca volontariamente l’ingresso.",
+    "",
+    "Mandare volontariamente fuori pista un altro pilota:",
+    "Squalifica immediata dalla gara.",
+    "Se il pilota colpito subisce danni ma non si ritira: penalità in griglia per la gara successiva in base alla gravità del danno:",
+    "Danni gravi: -10 posizioni in griglia.",
+    "Danni medi: -5 posizioni in griglia.",
+    "Danni lievi o assenti: -3 posizioni in griglia.",
+    "Se il pilota colpito si ritira: squalifica anche dalla gara successiva +2 punti penalità.",
+    "",
+    "Ritiro dalla gara:",
+    "Il ritiro deve avvenire ai box utilizzando l’apposito comando.",
+    "È consentito ritirarsi in pista solo se non si arrecano danni ad altri piloti e non si provocano incidenti.",
+    "Il mancato rispetto di questa regola comporterà -5 posizioni in griglia nella gara successiva +1 punto penalità.",
+    "",
+    "Difese e attacchi illegali:",
+    "Movimento in frenata per ostacolare o spingere fuori un altro pilota: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "Zig-zag in rettilineo per impedire il sorpasso: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "Dive bomb eccessivi o irrealistici: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "Contatto volontario in rettilineo o in curva per impedire un sorpasso: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "Chiusura di traiettoria eccessivamente aggressiva con conseguente incidente: avvertimento (massimo 3). Superati i 3 avvertimenti: +3 secondi.",
+    "",
+    "Gli avvertimenti verranno sommati anche a quelli relativi ai track limits.",
+    "Gli incidenti tra piloti verranno riesaminati a fine gara dalla direzione gara, che deciderà eventuali penalità.",
+    "L’obiettivo è gareggiare in modo corretto, pulito e rispettoso."
+  ]
+}
 ];
 
 const SEASON_DATA = {
