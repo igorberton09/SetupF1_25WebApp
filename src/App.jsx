@@ -396,7 +396,7 @@ function computeTeamStandings(raceResults, raceExtras, season) {
     .sort((a, b) => b.points - a.points);
 }
 
-const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
+
 
 const CAREER_STATS = {
   Piastri:    { totalPoints: 58,  totalWins: 0, totalPoles: 0, totalPodiums: 1,  championships: 0 },
