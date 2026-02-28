@@ -1601,7 +1601,6 @@ function CareerPage() {
           {drivers.map((d, i) => (
             <div className="career-card" key={d.name} style={{ animationDelay: `${i * 0.035}s` }}>
               <div className="career-card-header">
-                <div className="career-entity-dot" style={{ background: TEAM_COLORS[d.team] || "#555" }} />
                 <div className="career-entity-name">{d.flag} {d.name}</div>
               </div>
               <div className="career-stats">
