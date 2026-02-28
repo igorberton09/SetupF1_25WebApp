@@ -178,7 +178,7 @@ const SEASON_DATA = {
   },
   "Stagione 2": {
     races: [
-      { race: "Austria",   results: ["Alex","Igor","Norris","Russell","Bortoleto","Hmailton","Antonelli","Colapinto","Sainz","Alonso","Gasly","Bearman","Hulkenberg","Lawson","Ocon","Hadjar","Verstappen","Manuel","Leclerc","Albon"] },
+      { race: "Austria",   results: ["Alex","Igor","Norris","Russell","Bortoleto","Hamilton","Antonelli","Colapinto","Sainz","Alonso","Gasly","Bearman","Hulkenberg","Lawson","Ocon","Hadjar","Verstappen","Manuel","Leclerc","Albon"] },
       { race: "Ungheria",  results: [] },
       { race: "Australia", results: [] },
       { race: "Abu Dhabi", results: [] },
