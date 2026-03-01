@@ -405,29 +405,29 @@ function computeTeamStandings(raceResults, raceExtras, season) {
 const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
 
 const CAREER_STATS = {
-  Piastri:    { totalPoints: 58,  totalWins: 0, totalPoles: 0, totalPodiums: 1,  championships: 0 },
-  Norris:     { totalPoints: 112, totalWins: 1, totalPoles: 1, totalPodiums: 5,  championships: 1 },
-  Verstappen: { totalPoints: 68,  totalWins: 0, totalPoles: 0, totalPodiums: 3,  championships: 0 },
-  Tsunoda:    { totalPoints: 16,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Russell:    { totalPoints: 40,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Antonelli:  { totalPoints: 63,  totalWins: 1, totalPoles: 0, totalPodiums: 2,  championships: 0 },
-  Leclerc:    { totalPoints: 38,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Hamilton:   { totalPoints: 59,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  championships: 0 },
-  Albon:      { totalPoints: 18,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Sainz:      { totalPoints: 39,  totalWins: 1, totalPoles: 0, totalPodiums: 1,  championships: 0 },
-  Alonso:     { totalPoints: 39,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Stroll:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Lawson:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Igor:       { totalPoints: 73,  totalWins: 1, totalPoles: 4, totalPodiums: 3,  championships: 0, totalInterpole: 0 },
-  Bearman:    { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Manuel:     { totalPoints: 23,  totalWins: 0, totalPoles: 0, totalPodiums: 1,  championships: 0, totalInterpole: 1 },
-  Gasly:      { totalPoints: 1,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Alex:       { totalPoints: 100, totalWins: 4, totalPoles: 3, totalPodiums: 4,  championships: 0, totalInterpole: 0 },
-  Hulkenberg: { totalPoints: 4,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Bortoleto:  { totalPoints: 50,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  championships: 0 },
-  Colapinto:  { totalPoints: 4,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Ocon:       { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
-  Hadjar:     { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  championships: 0 },
+  Piastri:    { totalPoints: 58,  totalWins: 0, totalPoles: 0, totalPodiums: 1, GrandSlam: 0, championships: 0 },
+  Norris:     { totalPoints: 112, totalWins: 1, totalPoles: 1, totalPodiums: 5, GrandSlam: 0, championships: 1 },
+  Verstappen: { totalPoints: 68,  totalWins: 0, totalPoles: 0, totalPodiums: 3, GrandSlam: 0, championships: 0 },
+  Tsunoda:    { totalPoints: 16,  totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Russell:    { totalPoints: 40,  totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Antonelli:  { totalPoints: 63,  totalWins: 1, totalPoles: 0, totalPodiums: 2, GrandSlam: 0, championships: 0 },
+  Leclerc:    { totalPoints: 38,  totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Hamilton:   { totalPoints: 59,  totalWins: 0, totalPoles: 0, totalPodiums: 2, GrandSlam: 0, championships: 0 },
+  Albon:      { totalPoints: 18,  totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Sainz:      { totalPoints: 39,  totalWins: 1, totalPoles: 0, totalPodiums: 1, GrandSlam: 0, championships: 0 },
+  Alonso:     { totalPoints: 39,  totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Stroll:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Lawson:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Igor:       { totalPoints: 73,  totalWins: 1, totalPoles: 4, totalPodiums: 3, GrandSlam: 0, championships: 0, totalInterpole: 0 },
+  Bearman:    { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Manuel:     { totalPoints: 23,  totalWins: 0, totalPoles: 0, totalPodiums: 1, GrandSlam: 0, championships: 0, totalInterpole: 1 },
+  Gasly:      { totalPoints: 1,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Alex:       { totalPoints: 100, totalWins: 4, totalPoles: 3, totalPodiums: 4, GrandSlam: 0, championships: 0, totalInterpole: 0 },
+  Hulkenberg: { totalPoints: 4,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Bortoleto:  { totalPoints: 50,  totalWins: 0, totalPoles: 0, totalPodiums: 2, GrandSlam: 0, championships: 0 },
+  Colapinto:  { totalPoints: 4,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Ocon:       { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
+  Hadjar:     { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0, GrandSlam: 0, championships: 0 },
 };
 
 const TEAM_CAREER_STATS = {
@@ -774,13 +774,14 @@ const css = `
   .career-stat-box { background: #0a1018; border: 1px solid #152230; border-radius: 6px; padding: 7px; text-align: center; }
   .career-stat-label { font-size: 7px; color: #2e4455; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
   .career-stat-val { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; color: #dde4eb; }
-  .career-stat-val.pts      { color: #e8001d; }
-  .career-stat-val.wins     { color: #c0a300; }
-  .career-stat-val.poles    { color: #00d4ff; }
-  .career-stat-val.interpole{ color: #00a816; }
-  .career-stat-val.podiums  { color: #a16325; }
-  .career-stat-val.wdc      { color: #ffc400; }
-  .career-stat-val.wcc      { color: #ffc400; }
+  .career-stat-val.pts        { color: #e8001d; }
+  .career-stat-val.wins       { color: #c0a300; }
+  .career-stat-val.poles      { color: #00d4ff; }
+  .career-stat-val.interpole  { color: #00a816; }
+  .career-stat-val.podiums    { color: #a16325; }
+  .career-stat-val.GrandSlam  { color: #fffda3; }
+  .career-stat-val.wdc        { color: #ffc400; }
+  .career-stat-val.wcc        { color: #ffc400; }
 
   /* ═══ HEAD TO HEAD ════════════════════════════════════════════ */
   .h2h-team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-bottom: 24px; }
@@ -1617,6 +1618,7 @@ function CareerPage() {
                 )}
                 <div className="career-stat-box"><div className="career-stat-label">Vittorie</div><div className="career-stat-val wins">{d.totalWins}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">Podi</div><div className="career-stat-val podiums">{d.totalPodiums}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Grand Slam</div><div className="career-stat-val wdc">{d.GrandSlam}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">WDC</div><div className="career-stat-val wdc">{d.championships}</div></div>
               </div>
             </div>
