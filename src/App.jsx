@@ -194,7 +194,7 @@ const SEASON_DATA = {
     ],
     raceExtras: [
       { race: "Austria",   pole: "Igor",  overtakes: "Antonelli", interpole: "Manuel" },
-      { race: "Ungheria",  pole: null,    overtakes: null, interpole: null },
+      { race: "Ungheria",  pole: null,    overtakes: null, interpole: "Igor" },
       { race: "Australia", pole: null,    overtakes: null, interpole: null },
       { race: "Abu Dhabi", pole: null,    overtakes: null, interpole: null },
       { race: "Olanda",    pole: null,    overtakes: null, interpole: null },
