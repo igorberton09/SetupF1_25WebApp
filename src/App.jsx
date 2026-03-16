@@ -211,7 +211,7 @@ const SEASON_DATA = {
       { round: 7, race: "Qatar GP",         city: "Lusail",        status: "upcoming", winner: "...",      raceKey: null },
     ],
     driverPoles: {
-      Alex: 2, Igor: 2, Norris: 1, Verstappen: 0, Hamilton: 0, Russell: 0,
+      Alex: 2, Igor: 3, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0,
       Ocon: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0,
       Colapinto: 0, Lawson: 0, Hadjar: 0, Bearman: 0, Manuel: 0, Gasly: 0,
       Hulkenberg: 0, Bortoleto: 0
