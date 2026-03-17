@@ -1619,6 +1619,7 @@ function CareerPage() {
                 )}
                 <div className="career-stat-box"><div className="career-stat-label">Vittorie</div><div className="career-stat-val wins">{d.totalWins}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">Podi</div><div className="career-stat-val podiums">{d.totalPodiums}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">Hat Trick</div><div className="career-stat-val wdc">{d.HatTrick}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">Grand Slam</div><div className="career-stat-val wdc">{d.GrandSlam}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">WDC</div><div className="career-stat-val wdc">{d.championships}</div></div>
               </div>
