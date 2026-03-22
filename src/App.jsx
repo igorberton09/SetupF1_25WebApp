@@ -1806,7 +1806,7 @@ function RulesPage() {
 export default function App() {
   useFonts();
   const [page, setPage]     = useState("leaderboard");
-  const [season, setSeason] = useState(SEASONS[1]);
+  const [season, setSeason] = useState(SEASONS[2]);
 
   const seasonData      = SEASON_DATA[season];
   const completedRaces  = seasonData.calendar.filter(r => r.status === "done").length;
