@@ -442,7 +442,7 @@ const CAREER_STATS = {
 };
 
 const TEAM_CAREER_STATS = {
-  "McLaren":          { totalPoints: 403, totalWins: 6, totalPoles: 6, championships: 2, driverchamp: 0 },
+  "McLaren":          { totalPoints: 403, totalWins: 6, totalPoles: 6, championships: 2, driverchamp: 2 },
   "Red Bull":         { totalPoints: 241, totalWins: 1, totalPoles: 6, championships: 0, driverchamp: 0 },
   "Mercedes":         { totalPoints: 189, totalWins: 1, totalPoles: 0, championships: 0, driverchamp: 0 },
   "Ferrari":          { totalPoints: 172, totalWins: 0, totalPoles: 0, championships: 0, driverchamp: 0 },
