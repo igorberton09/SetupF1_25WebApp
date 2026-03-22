@@ -162,18 +162,18 @@ const SEASON_DATA = {
       { race: "Olanda",     pole: null,   overtakes: null,   interpole: null    },
       { race: "Messico",    pole: null,   overtakes: null,   interpole: null    },
       { race: "Brasile",    pole: null,   overtakes: null,   interpole: null    },
-      { race: "Qatar",      pole: null, overtakes: null,   interpole: null    },
+      { race: "Qatar",      pole: null,   overtakes: null,   interpole: null    },
       { race: "Singapore",  pole: null,   overtakes: null,   interpole: null    },
       { race: "Monaco",     pole: null,   overtakes: null,   interpole: null    },
     ],
     calendar: [
-      { round: 1, race: "Australian GP", city: "Melbourne", status: "done", winner: "Alex", raceKey: "Australia" },
-      { round: 2, race: "Dutch GP", city: "Zandvoort", status: "done", winner: "Igor", raceKey: "Olanda" },
-      { round: 3, race: "Mexico City GP", city: "Mexico City", status: "done", winner: "Alex", raceKey: "Messico" },
-      { round: 4, race: "São Paulo GP", city: "São Paulo", status: "done", winner: "Alex", raceKey: "Brasile" },
-      { round: 5, race: "Qatar GP", city: "Lusail", status: "done", winner: "Norris", raceKey: "Qatar" },
-      { round: 6, race: "Singapore GP", city: "Singapore", status: "done", winner: "Antonelli", raceKey: "Singapore" },
-      { round: 7, race: "Monaco GP", city: "Monaco", status: "done", winner: "Sainz", raceKey: "Monaco" },
+      { round: 1, race: "Australian GP",  city: "Melbourne",   status: "done", winner: "Alex",      raceKey: "Australia" },
+      { round: 2, race: "Dutch GP",       city: "Zandvoort",   status: "done", winner: "Igor",      raceKey: "Olanda" },
+      { round: 3, race: "Mexico City GP", city: "Mexico City", status: "done", winner: "Alex",      raceKey: "Messico" },
+      { round: 4, race: "São Paulo GP",   city: "São Paulo",   status: "done", winner: "Alex",      raceKey: "Brasile" },
+      { round: 5, race: "Qatar GP",       city: "Lusail",      status: "done", winner: "Norris",    raceKey: "Qatar" },
+      { round: 6, race: "Singapore GP",   city: "Singapore",   status: "done", winner: "Antonelli", raceKey: "Singapore" },
+      { round: 7, race: "Monaco GP",      city: "Monaco",      status: "done", winner: "Sainz",     raceKey: "Monaco" },
     ],
     driverPoles: {
       Alex: 3, Igor: 3, Norris: 1, Verstappen: 0, Hamilton: 0, Russell: 0,
@@ -228,13 +228,13 @@ const SEASON_DATA = {
       { race: "Olanda",    results: [] },
     ],
     raceExtras: [
-      { race: "Spa",       pole: null, overtakes: null, interpole: null },
-      { race: "Ungheria",  pole: null, overtakes: null, interpole: null },
-      { race: "Austin",    pole: null, overtakes: null, interpole: null },
-      { race: "Australia", pole: null, overtakes: null, interpole: null },
-      { race: "Cina",      pole: null, overtakes: null, interpole: null },
-      { race: "Giappone",  pole: null, overtakes: null, interpole: null },
-      { race: "Olanda",    pole: null, overtakes: null, interpole: null },
+      { race: "Spa",       pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Ungheria",  pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Austin",    pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Australia", pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Cina",      pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Giappone",  pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Olanda",    pole: null, overtakes: null, fastest: null, loyal: null },
     ],
     calendar: [
       { round: 1, race: "Belgium GP",    city: "Spa-Francochamp", status: "upcoming", winner: "...", raceKey: null },
@@ -331,13 +331,15 @@ const TEAM_COLORS = {
 
 // ─── BONUS POINTS HELPERS ─────────────────────────────────────────
 function computeBonusPoints(raceExtras, driverName) {
-  let pole = 0, overtakes = 0, interpole = 0;
+  let pole = 0, overtakes = 0, interpole = 0, fastest = 0, loyal = 0;
   raceExtras.forEach(extra => {
     if (extra.pole       === driverName) pole++;
     if (extra.overtakes  === driverName) overtakes++;
     if (extra.interpole  === driverName) interpole++;
+    if (extra.fastest    === driverName) fastest++;
+    if (extra.loyal      === driverName) loyal++;
   });
-  return { pole, overtakes, interpole, total: pole + overtakes + interpole };
+  return { pole, overtakes, interpole, fastest, loyal, total: pole + overtakes + interpole + fastest + loyal};
 }
 
 function computeDriverStandings(raceResults, raceExtras, season) {
@@ -649,6 +651,8 @@ const css = `
   .lb-bonus-badge.pole      { background: rgba(0,212,255,0.12); color: #00d4ff; border: 1px solid rgba(0,212,255,0.25); }
   .lb-bonus-badge.overtakes { background: rgba(255,128,0,0.12); color: #FF8000; border: 1px solid rgba(255,128,0,0.25); }
   .lb-bonus-badge.interpole { background: rgba(0,168,22,0.12);  color: #00a816; border: 1px solid rgba(0,168,22,0.25);  }
+  .lb-bonus-badge.fastest   { background: rgba(255,128,0,0.12); color: #9700bd; border: 1px solid rgba(255,128,0,0.25); }
+  .lb-bonus-badge.loyal     { background: rgba(0,212,255,0.12); color: #c2ae00; border: 1px solid rgba(0,212,255,0.25); }
 
   /* Dettaglio punti sotto il nome */
   .lb-pts-breakdown { font-size: 8px; color: #3d5a6e; text-align: right; margin-top: 2px; }
@@ -698,6 +702,8 @@ const css = `
   .cal-bonus-chip.pole      { background: rgba(0,212,255,0.1);  color: #00d4ff; }
   .cal-bonus-chip.overtakes { background: rgba(255,128,0,0.1);  color: #FF8000; }
   .cal-bonus-chip.interpole { background: rgba(0,168,22,0.1);   color: #00a816; }
+  .cal-bonus-chip.fastest   { background: rgba(255,128,0,0.12); color: #9700bd; }
+  .cal-bonus-chip.loyal     { background: rgba(0,212,255,0.12); color: #c2ae00; }
 
   /* ═══ MODAL ══════════════════════════════════════════════════ */
   .modal-overlay {
@@ -745,6 +751,9 @@ const css = `
   .modal-bonus-dot.pole      { background: #00d4ff; }
   .modal-bonus-dot.overtakes { background: #FF8000; }
   .modal-bonus-dot.interpole { background: #00a816; }
+  .modal-bonus-dot.fastest   { background: #9700bd; }
+  .modal-bonus-dot.loyal      { background: #c2ae00; }
+  
   .modal-bonus-label { color: #5a7a8f; }
   .modal-bonus-driver { color: #c8d6e0; font-weight: 600; margin-left: 2px; }
   .modal-bonus-pts { color: #e8001d; font-size: 9px; margin-left: 2px; }
@@ -1311,9 +1320,11 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
     if (extraData.pole)       driverBonuses[extraData.pole]       = [...(driverBonuses[extraData.pole]       || []), { type: 'pole',      icon: '🅿️', label: 'Pole' }];
     if (extraData.overtakes)  driverBonuses[extraData.overtakes]  = [...(driverBonuses[extraData.overtakes]  || []), { type: 'overtakes', icon: '⚡', label: 'Sorpassi' }];
     if (extraData.interpole)  driverBonuses[extraData.interpole]  = [...(driverBonuses[extraData.interpole]  || []), { type: 'interpole', icon: '🌧️', label: 'Interpole' }];
+    if (extraData.fastest)    driverBonuses[extraData.fastest]    = [...(driverBonuses[extraData.fastest]    || []), { type: 'fastest',   icon: '🏎️', label: 'Veloce' }];
+    if (extraData.loyal)      driverBonuses[extraData.loyal]      = [...(driverBonuses[extraData.loyal]      || []), { type: 'loyal',     icon: '👑', label: 'Leale' }];
   }
 
-  const hasBonuses = extraData && (extraData.pole || extraData.overtakes || extraData.interpole);
+  const hasBonuses = extraData && (extraData.pole || extraData.overtakes || extraData.interpole || extraData.fastest || extraData.loyal);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -1350,6 +1361,22 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
                   <div className="modal-bonus-dot interpole" />
                   <span className="modal-bonus-label">Interpole:</span>
                   <span className="modal-bonus-driver">{extraData.interpole}</span>
+                  <span className="modal-bonus-pts">+1pt</span>
+                </div>
+              )}
+              {extraData.fastest && (
+                <div className="modal-bonus-item">
+                  <div className="modal-bonus-dot fastest" />
+                  <span className="modal-bonus-label">Veloce:</span>
+                  <span className="modal-bonus-driver">{extraData.fastest}</span>
+                  <span className="modal-bonus-pts">+1pt</span>
+                </div>
+              )}
+              {extraData.loyal && (
+                <div className="modal-bonus-item">
+                  <div className="modal-bonus-dot loyal" />
+                  <span className="modal-bonus-label">Leale:</span>
+                  <span className="modal-bonus-driver">{extraData.loyal}</span>
                   <span className="modal-bonus-pts">+1pt</span>
                 </div>
               )}
@@ -1415,6 +1442,8 @@ function LeaderboardPage({ season }) {
         extra.pole       === driverName ? '🅿️ Pole' : null,
         extra.overtakes  === driverName ? '⚡ Sorpassi' : null,
         extra.interpole  === driverName ? '🌧️ Interpole' : null,
+        extra.fastest    === driverName ? '🏎️ fastest' : null,
+        extra.loyal      === driverName ? '👑 loyal' : null,
       ].filter(Boolean);
       const racePts   = pos >= 0 && pos < POINTS_TABLE.length ? POINTS_TABLE[pos] : 0;
       const bonusPts  = bonuses.length;
@@ -1462,11 +1491,13 @@ function LeaderboardPage({ season }) {
                           <div className="lb-driver-name">{d.flag} {d.name}</div>
                           <div className="lb-driver-sub">{d.team} · #{d.num}</div>
                           {/* Badge bonus punti */}
-                          {(d.bonusPole > 0 || d.bonusOvertakes > 0 || d.bonusInterpole > 0) && (
+                          {(d.bonusPole > 0 || d.bonusOvertakes > 0 || d.bonusInterpole > 0|| d.bonusFastest > 0 || d.bonusLoyal > 0) && (
                             <div className="lb-bonus-row">
                               {d.bonusPole      > 0 && <span className="lb-bonus-badge pole">🅿️ Pole ×{d.bonusPole}</span>}
                               {d.bonusOvertakes > 0 && <span className="lb-bonus-badge overtakes">⚡ Sorpassi ×{d.bonusOvertakes}</span>}
                               {d.bonusInterpole > 0 && <span className="lb-bonus-badge interpole">🌧️ Interpole ×{d.bonusInterpole}</span>}
+                              {d.bonusFastest   > 0 && <span className="lb-bonus-badge fastest">🏎️ Veloce ×{d.bonusFastest}</span>}
+                              {d.bonusLoyal     > 0 && <span className="lb-bonus-badge loyal">👑 Leale ×{d.bonusLoyal}</span>}
                             </div>
                           )}
                           {/* Toggle risultati gara */}
@@ -1570,11 +1601,13 @@ function CalendarPage({ season }) {
                 </div>
               )}
               {/* Mini bonus chips sul calendario */}
-              {race.status === "done" && (extra.pole || extra.overtakes || extra.interpole) && (
+              {race.status === "done" && (extra.pole || extra.overtakes || extra.interpole || extra.fastest || extra.loyal ) && (
                 <div className="cal-bonuses">
                   {extra.pole      && <span className="cal-bonus-chip pole">🅿️ {extra.pole}</span>}
                   {extra.overtakes && <span className="cal-bonus-chip overtakes">⚡ {extra.overtakes}</span>}
                   {extra.interpole && <span className="cal-bonus-chip interpole">🌧️ {extra.interpole}</span>}
+                  {extra.fastest   && <span className="cal-bonus-chip fastest">🏎️ {extra.fastest}</span>}
+                  {extra.loyal     && <span className="cal-bonus-chip loyal">👑 {extra.loyal}</span>}
                 </div>
               )}
             </div>
@@ -1693,9 +1726,13 @@ function HeadToHeadPage({ season }) {
       if (extra.pole       === driver1.name) stats1.points++;
       if (extra.overtakes  === driver1.name) stats1.points++;
       if (extra.interpole  === driver1.name) stats1.points++;
+      if (extra.fastest    === driver1.name) stats1.points++;
+      if (extra.loyal      === driver1.name) stats1.points++;
       if (extra.pole       === driver2.name) stats2.points++;
       if (extra.overtakes  === driver2.name) stats2.points++;
       if (extra.interpole  === driver2.name) stats2.points++;
+      if (extra.fastest    === driver2.name) stats2.points++;
+      if (extra.loyal      === driver2.name) stats2.points++;
       const poles = seasonData.driverPoles || {};
       stats1.poles = poles[driver1.name] || 0;
       stats2.poles = poles[driver2.name] || 0;
