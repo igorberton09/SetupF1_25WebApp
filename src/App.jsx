@@ -302,7 +302,9 @@ const TEAM_CHANGES = {
     Tsunoda:   { team: "Red Bull",         num: 22 },
     Hamilton:  { team: "No Seat",          num: 44 },
     Piastri:   { team: "McLaren",          num: 81 },
-    Norris:    { team: "No Seat",          num: 4  }
+    Norris:    { team: "No Seat",          num: 4  },
+    Hadjar:    { team: "Visa Cash App RB", num: 6  },
+    Colapinto: { team: "Alpine",           num: 43 },
   }
 };
 
