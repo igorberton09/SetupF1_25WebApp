@@ -188,7 +188,7 @@ const SEASON_DATA = {
       { race: "Ungheria",  results: ["Norris","Alex","Verstappen","Hamilton","Alonso","Leclerc","Russell","Colapinto","Antonelli","Albon","Gasly","Bortoleto","Hulkenberg","Bearman","Hadjar","Lawson","Igor","Ocon","Manuel","Sainz"] },
       { race: "Australia", results: ["Alex","Igor","Manuel","Norris","Antonelli","Verstappen","Hamilton","Russell","Leclerc","Bortoleto","Alonso","Gasly","Colapinto","Albon","Ocon","Sainz","Bearman","Lawson","Hadjar","Hulkenberg"] },
       { race: "Abu Dhabi", results: ["Alex","Igor","Norris","Colapinto","Hamilton","Russell","Alonso","Antonelli","Verstappen","Leclerc","Albon","Sainz","Ocon","Hulkenberg","Bearman","Bortoleto","Gasly","Hadjar","Lawson","Manuel"] },
-      { race: "Olanda",    results: ["Igor","Alex","Antonelli","Russell","Albon","Leclerc","Norris","Sainz","hamilton","Hulkenberg","Alonso","Lawson","Bortoleto","Bearman","Verstappen","Ocon","Colapinto","Hadjar","Gasly","Manuel"] },
+      { race: "Olanda",    results: ["Igor","Alex","Antonelli","Russell","Albon","Leclerc","Norris","Sainz","Hamilton","Hulkenberg","Alonso","Lawson","Bortoleto","Bearman","Verstappen","Ocon","Colapinto","Hadjar","Gasly","Manuel"] },
       { race: "Jeddah",    results: ["Alex","Igor","Norris","Manuel","Antonelli","Russell","Leclerc","Bortoleto","Colapinto","Gasly","Hamilton","Albon","Bearman","Alonso","Hulkenberg","Ocon","Lawson","Sainz","Hadjar","Verstappen"] },
       { race: "Qatar",     results: ["Alex","Verstappen","Igor","Hamilton","Norris","Leclerc","Antonelli","Alonso","Colapinto","Ocon","Russell","Albon","Bortoleto","Hadjar","Gasly","Lawson","Hulkenberg","Sainz","Manuel","Bearman"] }
     ],
@@ -1686,7 +1686,7 @@ function CareerPage() {
                 <div className="career-stat-box"><div className="career-stat-label">Pole</div><div className="career-stat-val poles">{t.totalPoles}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">Vittorie</div><div className="career-stat-val wins">{t.totalWins}</div></div>
                 <div className="career-stat-box"><div className="career-stat-label">WCC</div><div className="career-stat-val wcc">{t.championships}</div></div>
-                <div className="career-stat-box"><div className="career-stat-label">WDC</div><div className="career-stat-val wdc">{d.driverchamp}</div></div>
+                <div className="career-stat-box"><div className="career-stat-label">WDC</div><div className="career-stat-val wdc">{t.driverchamp}</div></div>
               </div>
             </div>
           ))}
