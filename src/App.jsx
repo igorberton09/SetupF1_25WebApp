@@ -297,10 +297,12 @@ const TEAM_CHANGES = {
     Verstappen:{ num: 3 },
   },
   "Stagione 3": {
-    Alex:      { team: "Ferrari"},
-    Igor:      { team: "Mclaren"},
-    Tsunoda:   { team: "Red Bull"},
-    Hamilton:  { team: "No Seat"}
+    Alex:      { team: "Ferrari",          num: 1  },
+    Igor:      { team: "McLaren",          num: 92 },
+    Tsunoda:   { team: "Red Bull",         num: 22 },
+    Hamilton:  { team: "No Seat",          num: 44 },
+    Piastri:   { team: "McLaren",          num: 81 },
+    Norris:    { team: "No Seat",          num: 4  }
   }
 };
 
