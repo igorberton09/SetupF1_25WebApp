@@ -654,55 +654,83 @@ const css = `
     border-color: rgba(232,0,29,0.4); color: var(--red);
   }
 
-  /* ── Leaderboard table wrapper ── */
-  .lb-table-wrap {
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+  /* ── List container ── */
+  .lb-list {
+    border-radius: 12px; border: 1px solid var(--border);
+    overflow: hidden; box-shadow: 0 4px 40px rgba(0,0,0,0.3);
   }
-  .lb-table {
-    width: 100%;
-    border-collapse: collapse;
+
+  /* Header: # | Pilota | V | Podi | Pole | Punti */
+  .lb-list-header {
+    display: grid;
+    grid-template-columns: 52px 1fr 40px 40px 40px 90px;
+    padding: 9px 16px;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    align-items: center;
   }
-  .lb-table thead { background: var(--bg2); }
-  .lb-table th {
-    padding: 10px 12px; text-align: left;
+  .lb-list-header span {
     font-size: 8px; color: var(--dim);
     text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
-    border-bottom: 1px solid var(--border); white-space: nowrap;
     font-family: 'Share Tech Mono', monospace;
   }
-  .lb-table th:last-child { text-align: right; }
-  .lb-table td:last-child { text-align: right; }
-  .lb-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    vertical-align: middle;
-  }
-  .lb-table tr:last-child td { border-bottom: none; }
+  .lb-list-header span:nth-child(3),
+  .lb-list-header span:nth-child(4),
+  .lb-list-header span:nth-child(5) { text-align: center; }
+  .lb-list-header span:last-child { text-align: right; }
 
+  /* Row: same grid */
   .lb-row {
+    display: grid;
+    grid-template-columns: 52px 1fr 40px 40px 40px 90px;
+    align-items: center;
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
     background: var(--bg1);
     transition: background 0.18s;
     animation: rowIn 0.35s cubic-bezier(.4,0,.2,1) both;
   }
+  .lb-row:last-child { border-bottom: none; }
   .lb-row:hover { background: rgba(255,255,255,0.025); }
-  .lb-row.rank-1 td { background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, var(--bg1) 55%); }
-  .lb-row.rank-2 td { background: linear-gradient(90deg, rgba(192,192,192,0.03) 0%, var(--bg1) 55%); }
-  .lb-row.rank-3 td { background: linear-gradient(90deg, rgba(205,127,50,0.03) 0%, var(--bg1) 55%); }
+  .lb-row.rank-1 { background: linear-gradient(90deg, rgba(255,215,0,0.055) 0%, var(--bg1) 50%); }
+  .lb-row.rank-2 { background: linear-gradient(90deg, rgba(192,192,192,0.035) 0%, var(--bg1) 50%); }
+  .lb-row.rank-3 { background: linear-gradient(90deg, rgba(205,127,50,0.035) 0%, var(--bg1) 50%); }
 
-  /* Position */
-  .lb-pos {
-    font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700;
-    color: var(--muted); text-align: center; display: block;
+  /* ── POSITION BADGE (the "before" style, enhanced) ── */
+  .lb-pos-wrap {
+    display: flex; align-items: center; justify-content: center;
   }
-  .lb-pos.p1 { color: var(--gold); }
-  .lb-pos.p2 { color: var(--silver); }
-  .lb-pos.p3 { color: var(--bronze); }
+  .lb-pos {
+    font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 900;
+    width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    letter-spacing: -0.5px;
+    transition: all 0.2s;
+  }
+  .lb-pos.p1 {
+    color: #000;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-color: #FFD700;
+    box-shadow: 0 0 14px rgba(255,215,0,0.4), 0 2px 6px rgba(0,0,0,0.4);
+    font-size: 14px;
+  }
+  .lb-pos.p2 {
+    color: #000;
+    background: linear-gradient(135deg, #E8E8E8 0%, #A8A8A8 100%);
+    border-color: #C0C0C0;
+    box-shadow: 0 0 10px rgba(192,192,192,0.3), 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .lb-pos.p3 {
+    color: #000;
+    background: linear-gradient(135deg, #D4905A 0%, #A0522D 100%);
+    border-color: #CD7F32;
+    box-shadow: 0 0 10px rgba(205,127,50,0.3), 0 2px 6px rgba(0,0,0,0.3);
+  }
 
   /* Driver cell */
-  .lb-driver-cell { display: flex; align-items: center; gap: 9px; min-width: 0; }
+  .lb-driver-cell { display: flex; align-items: center; gap: 10px; min-width: 0; }
   .lb-team-bar {
     width: 3px; min-width: 3px; height: 36px; border-radius: 2px; flex-shrink: 0;
   }
@@ -751,33 +779,45 @@ const css = `
   .lb-race-item-name { color: var(--muted); }
   .lb-race-item-pos  { color: var(--text); font-family: 'Orbitron', sans-serif; font-size: 9px; flex-shrink: 0; margin-left: 8px; }
 
-  /* Wins / Podiums center cells */
-  .lb-stat { font-size: 13px; font-weight: 700; text-align: center; color: var(--muted); font-family: 'Orbitron', sans-serif; }
+  /* Stat cells (V, Podi, Pole) */
+  .lb-stat {
+    font-size: 14px; font-weight: 900; text-align: center;
+    color: var(--muted); font-family: 'Orbitron', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lb-stat.wins-col    { color: var(--gold); }
+  .lb-stat.podiums-col { color: var(--bronze); }
+  .lb-stat.poles-col   { color: var(--cyan); }
+  .lb-stat.zero        { color: var(--dim); font-size: 12px; font-weight: 600; }
 
   /* Points */
-  .lb-pts-cell { text-align: right; }
+  .lb-pts-wrap { text-align: right; }
   .lb-pts {
-    font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 900;
+    font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 900;
     color: var(--red); line-height: 1; display: block; text-align: right;
   }
   .lb-pts-breakdown { font-size: 7.5px; color: var(--muted); margin-top: 2px; font-family: 'Share Tech Mono', monospace; text-align: right; }
   .lb-bar-wrap { width: 100%; height: 2px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 5px; overflow: hidden; }
   .lb-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--red), #ff4060); transition: width 1s cubic-bezier(.4,0,.2,1); }
 
-  /* ── Mobile leaderboard: hide V/P columns on small screens ── */
-  @media (max-width: 500px) {
-    /* Hide Vittorie and Podiums columns (3rd and 4th th/td) */
-    .lb-table th:nth-child(3),
-    .lb-table th:nth-child(4),
-    .lb-table td:nth-child(3),
-    .lb-table td:nth-child(4) { display: none; }
-
-    .lb-table th { padding: 9px 8px; font-size: 7px; }
-    .lb-table td { padding: 9px 8px; }
+  /* ── Mobile responsive ── */
+  @media (max-width: 520px) {
+    /* On mobile hide "Pole" column (5th), keep V and Podi */
+    .lb-list-header { grid-template-columns: 46px 1fr 34px 34px 76px; }
+    .lb-row          { grid-template-columns: 46px 1fr 34px 34px 76px; padding: 10px 11px; }
+    .lb-list-header span:nth-child(5),
+    .lb-row .lb-stat.poles-col { display: none; }
+    .lb-pos { width: 30px; height: 30px; font-size: 11px; border-radius: 7px; }
     .lb-pts { font-size: 15px; }
     .lb-driver-name { font-size: 10px; }
     .lb-team-bar { height: 30px; }
-    .lb-driver-team { font-size: 8px; }
+  }
+  @media (max-width: 380px) {
+    /* Tiny phones: hide V too, just Podi */
+    .lb-list-header { grid-template-columns: 40px 1fr 32px 72px; }
+    .lb-row          { grid-template-columns: 40px 1fr 32px 72px; padding: 9px 9px; }
+    .lb-list-header span:nth-child(3),
+    .lb-row .lb-stat.wins-col { display: none; }
   }
 
   /* ═══ CALENDAR ════════════════════════════════════════════════ */
@@ -1297,9 +1337,7 @@ const css = `
     .f1-nav { padding: 8px 14px 0; }
     .f1-nav-btn { padding: 8px 11px; font-size: 10px; }
     .f1-page { padding: 14px 10px 44px; }
-    /* leaderboard list mobile */
-    .lb-list-header { padding: 8px 10px; }
-    .lb-row { padding: 10px 10px; }
+
     .lb-driver-name { font-size: 10.5px; }
     .lb-pts { font-size: 15px; }
     /* calendar */
@@ -1330,8 +1368,7 @@ const css = `
     .f1-nav-icon { display: none; }
     .cal-grid { grid-template-columns: 1fr; }
     .career-stat-val { font-size: 15px; }
-    .lb-list-header { grid-template-columns: 28px 1fr 60px; }
-    .lb-row { grid-template-columns: 28px 1fr 60px; }
+
   }
 `;
 
@@ -1694,18 +1731,26 @@ function LeaderboardPage({ season }) {
       {tab === "drivers" && (
         <div className="lb-list">
           <div className="lb-list-header">
-            <span>#</span><span>Pilota</span>
-            <span style={{textAlign:'center'}}>V</span>
-            <span style={{textAlign:'center'}}>P</span>
-            <span style={{textAlign:'right'}}>Punti</span>
+            <span>#</span>
+            <span>Pilota</span>
+            <span>V</span>
+            <span>Podi</span>
+            <span>Pole</span>
+            <span>Punti</span>
           </div>
           {driverStandings.map((d, i) => {
             const isExp = expandedDriver === d.name;
             const races = isExp ? getDriverRaces(d.name) : [];
             const pct   = Math.round((d.points / maxPts) * 100);
+            const poles = seasonData.driverPoles?.[d.name] || 0;
+            const posClass = i===0?" p1":i===1?" p2":i===2?" p3":"";
             return (
               <div key={d.name} className={`lb-row rank-${i+1}`} style={{ animationDelay: `${i * 0.035}s` }}>
-                <span className={`lb-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>{i+1}</span>
+                {/* Posizione con badge */}
+                <div className="lb-pos-wrap">
+                  <div className={`lb-pos${posClass}`}>{i+1}</div>
+                </div>
+                {/* Pilota */}
                 <div className="lb-driver-cell">
                   <div className="lb-team-bar" style={{ background: TEAM_COLORS[d.team]||"#555", boxShadow:`0 0 6px ${TEAM_COLORS[d.team]||"#555"}44` }} />
                   <div className="lb-driver-info">
@@ -1738,8 +1783,13 @@ function LeaderboardPage({ season }) {
                     )}
                   </div>
                 </div>
-                <span className="lb-stat">{d.wins}</span>
-                <span className="lb-stat">{d.podiums}</span>
+                {/* V */}
+                <span className={`lb-stat wins-col${d.wins===0?" zero":""}`}>{d.wins}</span>
+                {/* Podi */}
+                <span className={`lb-stat podiums-col${d.podiums===0?" zero":""}`}>{d.podiums}</span>
+                {/* Pole */}
+                <span className={`lb-stat poles-col${poles===0?" zero":""}`}>{poles}</span>
+                {/* Punti */}
                 <div className="lb-pts-wrap">
                   <span className="lb-pts">{d.points}</span>
                   {d.bonusTotal>0 && <div className="lb-pts-breakdown">{d.racePoints}+{d.bonusTotal}b</div>}
@@ -1754,24 +1804,35 @@ function LeaderboardPage({ season }) {
       {tab === "teams" && (
         <div className="lb-list">
           <div className="lb-list-header">
-            <span>#</span><span>Costruttore</span>
-            <span style={{textAlign:'center'}}>V</span>
+            <span>#</span>
+            <span>Costruttore</span>
+            <span>V</span>
+            <span>Pole</span>
             <span></span>
-            <span style={{textAlign:'right'}}>Punti</span>
+            <span>Punti</span>
           </div>
           {teamStandings.map((t, i) => {
             const pct = Math.round((t.points/maxTeamPts)*100);
             const tc = TEAM_COLORS[t.team]||'var(--red)';
+            const posClass = i===0?" p1":i===1?" p2":i===2?" p3":"";
+            // sum poles for this team from driverPoles
+            const DRIVER_TEAMS_CUR = getDriverTeamsForSeason(season);
+            const teamPoles = Object.entries(DRIVER_TEAMS_CUR)
+              .filter(([,info]) => info.team === t.team)
+              .reduce((sum,[name]) => sum + (seasonData.driverPoles?.[name]||0), 0);
             return (
               <div key={t.team} className={`lb-row rank-${i+1}`} style={{animationDelay:`${i*0.045}s`}}>
-                <span className={`lb-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>{i+1}</span>
+                <div className="lb-pos-wrap">
+                  <div className={`lb-pos${posClass}`}>{i+1}</div>
+                </div>
                 <div className="lb-driver-cell">
                   <div className="lb-team-bar" style={{background:tc, boxShadow:`0 0 6px ${tc}44`}} />
                   <div className="lb-driver-info">
                     <div className="lb-driver-name">{t.team}</div>
                   </div>
                 </div>
-                <span className="lb-stat">{t.wins}</span>
+                <span className={`lb-stat wins-col${t.wins===0?" zero":""}`}>{t.wins}</span>
+                <span className={`lb-stat poles-col${teamPoles===0?" zero":""}`}>{teamPoles}</span>
                 <span></span>
                 <div className="lb-pts-wrap">
                   <span className="lb-pts">{t.points}</span>
