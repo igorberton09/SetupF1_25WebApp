@@ -654,71 +654,75 @@ const css = `
     border-color: rgba(232,0,29,0.4); color: var(--red);
   }
 
+  /* ── Leaderboard table wrapper ── */
   .lb-table-wrap {
     border-radius: 12px;
     border: 1px solid var(--border);
     overflow: hidden;
     box-shadow: 0 4px 40px rgba(0,0,0,0.3);
   }
-  .lb-table { width: 100%; min-width: 400px; border-collapse: collapse; }
+  .lb-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
   .lb-table thead { background: var(--bg2); }
   .lb-table th {
-    padding: 11px 14px; text-align: left;
-    font-size: 9px; color: var(--dim);
+    padding: 10px 12px; text-align: left;
+    font-size: 8px; color: var(--dim);
     text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
     border-bottom: 1px solid var(--border); white-space: nowrap;
     font-family: 'Share Tech Mono', monospace;
   }
   .lb-table th:last-child { text-align: right; }
+  .lb-table td:last-child { text-align: right; }
+  .lb-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .lb-table tr:last-child td { border-bottom: none; }
 
   .lb-row {
-    border-bottom: 1px solid rgba(255,255,255,0.04);
     background: var(--bg1);
     transition: background 0.18s;
     animation: rowIn 0.35s cubic-bezier(.4,0,.2,1) both;
   }
-  .lb-row:last-child { border-bottom: none; }
   .lb-row:hover { background: rgba(255,255,255,0.025); }
-  .lb-row.rank-1 { background: linear-gradient(90deg, rgba(255,215,0,0.04) 0%, var(--bg1) 60%); }
-  .lb-row.rank-2 { background: linear-gradient(90deg, rgba(192,192,192,0.03) 0%, var(--bg1) 60%); }
-  .lb-row.rank-3 { background: linear-gradient(90deg, rgba(205,127,50,0.03) 0%, var(--bg1) 60%); }
+  .lb-row.rank-1 td { background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, var(--bg1) 55%); }
+  .lb-row.rank-2 td { background: linear-gradient(90deg, rgba(192,192,192,0.03) 0%, var(--bg1) 55%); }
+  .lb-row.rank-3 td { background: linear-gradient(90deg, rgba(205,127,50,0.03) 0%, var(--bg1) 55%); }
 
-  .lb-table td { padding: 11px 14px; font-size: 12px; color: var(--text); vertical-align: middle; }
-  .lb-table td:last-child { text-align: right; }
-
-  /* Position medal */
-  .lb-pos-wrap { position: relative; width: 32px; }
+  /* Position */
   .lb-pos {
     font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700;
-    color: var(--muted); text-align: center; width: 28px; display: block;
+    color: var(--muted); text-align: center; display: block;
   }
   .lb-pos.p1 { color: var(--gold); }
   .lb-pos.p2 { color: var(--silver); }
   .lb-pos.p3 { color: var(--bronze); }
 
-  /* Team color left border via box-shadow trick */
+  /* Driver cell */
+  .lb-driver-cell { display: flex; align-items: center; gap: 9px; min-width: 0; }
   .lb-team-bar {
-    width: 3px; height: 36px; border-radius: 2px; flex-shrink: 0;
-    transition: height 0.3s;
+    width: 3px; min-width: 3px; height: 36px; border-radius: 2px; flex-shrink: 0;
   }
-
-  .lb-driver-cell { display: flex; align-items: center; gap: 10px; }
-  .lb-driver-info { }
+  .lb-driver-info { min-width: 0; flex: 1; }
   .lb-driver-name {
-    font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700;
-    color: #e8ecf0; letter-spacing: 0.2px;
+    font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700;
+    color: #e8ecf0; letter-spacing: 0.1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .lb-driver-meta { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
-  .lb-driver-team { font-size: 10px; color: var(--muted); font-family: 'Share Tech Mono', monospace; }
-  .lb-driver-num  { font-size: 9px; color: var(--dim); font-family: 'Orbitron', sans-serif; }
+  .lb-driver-meta { display: flex; align-items: center; gap: 5px; margin-top: 2px; flex-wrap: wrap; }
+  .lb-driver-team { font-size: 9px; color: var(--muted); font-family: 'Share Tech Mono', monospace; white-space: nowrap; }
+  .lb-driver-num  { font-size: 8px; color: var(--dim); font-family: 'Orbitron', sans-serif; }
 
   /* Bonus badges */
-  .lb-bonus-row { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+  .lb-bonus-row { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; margin-top: 3px; }
   .lb-bonus-badge {
     display: inline-flex; align-items: center; gap: 2px;
-    padding: 2px 7px; border-radius: 4px;
-    font-size: 8px; font-weight: 700; letter-spacing: 0.5px;
-    font-family: 'Share Tech Mono', monospace;
+    padding: 1px 5px; border-radius: 3px;
+    font-size: 7.5px; font-weight: 700; letter-spacing: 0.3px;
+    font-family: 'Share Tech Mono', monospace; white-space: nowrap;
   }
   .lb-bonus-badge.pole      { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
   .lb-bonus-badge.overtakes { background: rgba(255,128,0,0.1); color: #FF8000;     border: 1px solid rgba(255,128,0,0.2); }
@@ -728,7 +732,7 @@ const css = `
   .lb-race-toggle {
     font-size: 9px; color: var(--dim); cursor: pointer;
     background: none; border: none; font-family: 'Share Tech Mono', monospace;
-    letter-spacing: 0.5px; padding: 0; transition: color 0.2s; margin-top: 4px;
+    letter-spacing: 0.5px; padding: 0; transition: color 0.2s; margin-top: 3px;
     display: block;
   }
   .lb-race-toggle:hover { color: var(--cyan); }
@@ -741,24 +745,40 @@ const css = `
   .lb-race-item {
     display: flex; align-items: center; justify-content: space-between;
     padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-size: 10px;
+    font-size: 9.5px;
   }
   .lb-race-item:last-child { border-bottom: none; }
   .lb-race-item-name { color: var(--muted); }
-  .lb-race-item-pos  { color: var(--text); font-family: 'Orbitron', sans-serif; font-size: 9px; }
+  .lb-race-item-pos  { color: var(--text); font-family: 'Orbitron', sans-serif; font-size: 9px; flex-shrink: 0; margin-left: 8px; }
 
-  /* Points display */
-  .lb-pts-wrap { }
+  /* Wins / Podiums center cells */
+  .lb-stat { font-size: 13px; font-weight: 700; text-align: center; color: var(--muted); font-family: 'Orbitron', sans-serif; }
+
+  /* Points */
+  .lb-pts-cell { text-align: right; }
   .lb-pts {
-    font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 900;
-    color: var(--red); text-align: right; line-height: 1;
+    font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 900;
+    color: var(--red); line-height: 1; display: block; text-align: right;
   }
-  .lb-pts-breakdown { font-size: 8px; color: var(--muted); text-align: right; margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
-  .lb-stat { font-size: 13px; font-weight: 600; text-align: center; color: var(--muted); }
+  .lb-pts-breakdown { font-size: 7.5px; color: var(--muted); margin-top: 2px; font-family: 'Share Tech Mono', monospace; text-align: right; }
+  .lb-bar-wrap { width: 100%; height: 2px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 5px; overflow: hidden; }
+  .lb-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--red), #ff4060); transition: width 1s cubic-bezier(.4,0,.2,1); }
 
-  /* Progress bar under points in standings */
-  .lb-bar-wrap { width: 60px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 4px; overflow: hidden; float: right; clear: both; }
-  .lb-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--red), #ff4060); transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+  /* ── Mobile leaderboard: hide V/P columns on small screens ── */
+  @media (max-width: 500px) {
+    /* Hide Vittorie and Podiums columns (3rd and 4th th/td) */
+    .lb-table th:nth-child(3),
+    .lb-table th:nth-child(4),
+    .lb-table td:nth-child(3),
+    .lb-table td:nth-child(4) { display: none; }
+
+    .lb-table th { padding: 9px 8px; font-size: 7px; }
+    .lb-table td { padding: 9px 8px; }
+    .lb-pts { font-size: 15px; }
+    .lb-driver-name { font-size: 10px; }
+    .lb-team-bar { height: 30px; }
+    .lb-driver-team { font-size: 8px; }
+  }
 
   /* ═══ CALENDAR ════════════════════════════════════════════════ */
   .cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
@@ -840,7 +860,11 @@ const css = `
     max-width: 500px; width: 100%; max-height: 88vh; overflow-y: auto;
     animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
     box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    -webkit-overflow-scrolling: touch;
   }
+  .modal-results-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .modal-results-table col:nth-child(1) { width: 42px; }
+  .modal-results-table col:nth-child(3) { width: 70px; }
   .modal-header {
     padding: 18px 22px; border-bottom: 1px solid var(--border);
     display: flex; align-items: center; justify-content: space-between;
@@ -1272,22 +1296,33 @@ const css = `
     .f1-subtitle { display: none; }
     .f1-nav { padding: 8px 14px 0; }
     .f1-nav-btn { padding: 8px 11px; font-size: 10px; }
-    .f1-page { padding: 14px 12px 44px; }
-    .lb-table th { padding: 9px 9px; font-size: 7px; }
-    .lb-table td { padding: 10px 9px; }
-    .lb-driver-name { font-size: 11px; }
-    .lb-pts { font-size: 14px; }
-    .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .f1-page { padding: 14px 10px 44px; }
+    /* leaderboard list mobile */
+    .lb-list-header { padding: 8px 10px; }
+    .lb-row { padding: 10px 10px; }
+    .lb-driver-name { font-size: 10.5px; }
+    .lb-pts { font-size: 15px; }
+    /* calendar */
+    .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .cal-race-name { font-size: 10px; }
+    /* h2h */
     .h2h-team-grid { grid-template-columns: 1fr; }
+    /* career */
     .career-grid { grid-template-columns: 1fr; }
+    /* setup */
     .setup-creator-container { grid-template-columns: 1fr; }
     .setup-left-panel { flex-direction: column; }
     .setup-categories-grid { grid-template-columns: 1fr; }
     .export-formats { flex-direction: column; }
-    .modal { max-height: 90vh; }
+    /* modal */
+    .modal-overlay { padding: 8px; align-items: flex-end; }
+    .modal { max-height: 92vh; border-radius: 14px 14px 0 0; }
     .modal-header { padding: 14px 16px; }
-    .modal-body { padding: 13px 16px; }
+    .modal-body { padding: 12px 14px; }
+    .modal-results-table td { padding: 8px 4px; font-size: 11px; }
+    .modal-driver-flag { font-size: 12px; }
+    .modal-driver-name { font-size: 11px; }
+    .modal-pts { font-size: 10px; }
   }
   @media (max-width: 380px) {
     .f1-title { font-size: 14px; }
@@ -1295,6 +1330,8 @@ const css = `
     .f1-nav-icon { display: none; }
     .cal-grid { grid-template-columns: 1fr; }
     .career-stat-val { font-size: 15px; }
+    .lb-list-header { grid-template-columns: 28px 1fr 60px; }
+    .lb-row { grid-template-columns: 28px 1fr 60px; }
   }
 `;
 
@@ -1593,6 +1630,7 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
             </div>
           )}
           <table className="modal-results-table">
+            <colgroup><col style={{width:'40px'}} /><col /><col style={{width:'64px'}} /></colgroup>
             <tbody>
               {raceData.results.map((driver, i) => {
                 const info   = DRIVER_TEAMS[driver];
@@ -1600,16 +1638,16 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
                 const bonuses = driverBonuses[driver] || [];
                 return (
                   <tr key={`${driver}-${i}`}>
-                    <td><div className={`modal-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>P{i + 1}</div></td>
+                    <td><div className={`modal-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>P{i+1}</div></td>
                     <td>
                       <div className="modal-driver">
-                        <span className="modal-driver-flag">{info?.flag || "🏁"}</span>
+                        <span className="modal-driver-flag">{info?.flag||"🏁"}</span>
                         <span className="modal-driver-name">{driver}</span>
-                        {bonuses.length > 0 && <div className="modal-driver-bonus">{bonuses.map((b, bi) => <span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}</div>}
+                        {bonuses.length>0 && <div className="modal-driver-bonus">{bonuses.map((b,bi)=><span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}</div>}
                       </div>
                     </td>
-                    <td className="modal-pts">
-                      {points > 0 ? `${points}${bonuses.length > 0 ? `+${bonuses.length}` : ''} pts` : bonuses.length > 0 ? `${bonuses.length} pts` : "—"}
+                    <td className="modal-pts" style={{textAlign:'right', whiteSpace:'nowrap'}}>
+                      {points>0 ? `${points}${bonuses.length>0?`+${bonuses.length}`:''}pt` : bonuses.length>0 ? `${bonuses.length}pt` : "—"}
                     </td>
                   </tr>
                 );
@@ -1654,122 +1692,94 @@ function LeaderboardPage({ season }) {
       </div>
 
       {tab === "drivers" && (
-        <div className="lb-table-wrap">
-          <table className="lb-table">
-            <thead>
-              <tr>
-                <th style={{ width: 40 }}>#</th>
-                <th>Pilota</th>
-                <th style={{ textAlign: "center", width: 44 }}>V</th>
-                <th style={{ textAlign: "center", width: 44 }}>P</th>
-                <th style={{ textAlign: "right", width: 90 }}>Punti</th>
-              </tr>
-            </thead>
-            <tbody>
-              {driverStandings.map((d, i) => {
-                const isExp = expandedDriver === d.name;
-                const races = isExp ? getDriverRaces(d.name) : [];
-                const pct   = Math.round((d.points / maxPts) * 100);
-                return (
-                  <tr key={d.name} className={`lb-row rank-${i+1}`} style={{ animationDelay: `${i * 0.035}s` }}>
-                    <td>
-                      <span className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
-                        {i + 1}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="lb-driver-cell">
-                        <div className="lb-team-bar" style={{ background: TEAM_COLORS[d.team] || "#555", boxShadow: `0 0 6px ${TEAM_COLORS[d.team] || "#555"}44` }} />
-                        <div className="lb-driver-info">
-                          <div className="lb-driver-name">{d.flag} {d.name}</div>
-                          <div className="lb-driver-meta">
-                            <span className="lb-driver-team">{d.team}</span>
-                            <span className="lb-driver-num">#{d.num}</span>
-                          </div>
-                          {(d.bonusPole > 0 || d.bonusOvertakes > 0 || d.bonusInterpole > 0) && (
-                            <div className="lb-bonus-row">
-                              {d.bonusPole      > 0 && <span className="lb-bonus-badge pole">🅿️ ×{d.bonusPole}</span>}
-                              {d.bonusOvertakes > 0 && <span className="lb-bonus-badge overtakes">⚡ ×{d.bonusOvertakes}</span>}
-                              {d.bonusInterpole > 0 && <span className="lb-bonus-badge interpole">🌧️ ×{d.bonusInterpole}</span>}
+        <div className="lb-list">
+          <div className="lb-list-header">
+            <span>#</span><span>Pilota</span>
+            <span style={{textAlign:'center'}}>V</span>
+            <span style={{textAlign:'center'}}>P</span>
+            <span style={{textAlign:'right'}}>Punti</span>
+          </div>
+          {driverStandings.map((d, i) => {
+            const isExp = expandedDriver === d.name;
+            const races = isExp ? getDriverRaces(d.name) : [];
+            const pct   = Math.round((d.points / maxPts) * 100);
+            return (
+              <div key={d.name} className={`lb-row rank-${i+1}`} style={{ animationDelay: `${i * 0.035}s` }}>
+                <span className={`lb-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>{i+1}</span>
+                <div className="lb-driver-cell">
+                  <div className="lb-team-bar" style={{ background: TEAM_COLORS[d.team]||"#555", boxShadow:`0 0 6px ${TEAM_COLORS[d.team]||"#555"}44` }} />
+                  <div className="lb-driver-info">
+                    <div className="lb-driver-name">{d.flag} {d.name}</div>
+                    <div className="lb-driver-meta">
+                      <span className="lb-driver-team">{d.team}</span>
+                      <span className="lb-driver-num">#{d.num}</span>
+                    </div>
+                    {(d.bonusPole>0||d.bonusOvertakes>0||d.bonusInterpole>0) && (
+                      <div className="lb-bonus-row">
+                        {d.bonusPole>0 && <span className="lb-bonus-badge pole">🅿️ ×{d.bonusPole}</span>}
+                        {d.bonusOvertakes>0 && <span className="lb-bonus-badge overtakes">⚡ ×{d.bonusOvertakes}</span>}
+                        {d.bonusInterpole>0 && <span className="lb-bonus-badge interpole">🌧️ ×{d.bonusInterpole}</span>}
+                      </div>
+                    )}
+                    {seasonData.races.some(r => r.results.includes(d.name)) && (
+                      <>
+                        <button className="lb-race-toggle" onClick={()=>setExpandedDriver(isExp?null:d.name)}>
+                          {isExp ? "▲ chiudi" : "▼ risultati"}
+                        </button>
+                        <div className={`lb-race-list${isExp?" open":""}`}>
+                          {races.map((r) => (
+                            <div className="lb-race-item" key={r.race}>
+                              <span className="lb-race-item-name">{r.race}</span>
+                              <span className="lb-race-item-pos">P{r.pos} · {r.pts}pt{r.bonuses.length>0 && <span style={{color:'var(--red)'}}> {r.bonuses.join('')}</span>}</span>
                             </div>
-                          )}
-                          {seasonData.races.some(r => r.results.includes(d.name)) && (
-                            <>
-                              <button className="lb-race-toggle" onClick={() => setExpandedDriver(isExp ? null : d.name)}>
-                                {isExp ? "▲ chiudi" : "▼ risultati"}
-                              </button>
-                              <div className={`lb-race-list${isExp ? " open" : ""}`}>
-                                {races.map((r) => (
-                                  <div className="lb-race-item" key={r.race}>
-                                    <span className="lb-race-item-name">{r.race}</span>
-                                    <span className="lb-race-item-pos">
-                                      P{r.pos} · {r.pts}pts
-                                      {r.bonuses.length > 0 && <span style={{ color: 'var(--red)', marginLeft: 4 }}>{r.bonuses.join(' ')}</span>}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </>
-                          )}
+                          ))}
                         </div>
-                      </div>
-                    </td>
-                    <td className="lb-stat">{d.wins}</td>
-                    <td className="lb-stat">{d.podiums}</td>
-                    <td>
-                      <div className="lb-pts">{d.points}</div>
-                      {d.bonusTotal > 0 && <div className="lb-pts-breakdown">{d.racePoints}+{d.bonusTotal}b</div>}
-                      <div className="lb-bar-wrap">
-                        <div className="lb-bar-fill" style={{ width: `${pct}%`, transition: 'width 1s cubic-bezier(.4,0,.2,1)' }} />
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <span className="lb-stat">{d.wins}</span>
+                <span className="lb-stat">{d.podiums}</span>
+                <div className="lb-pts-wrap">
+                  <span className="lb-pts">{d.points}</span>
+                  {d.bonusTotal>0 && <div className="lb-pts-breakdown">{d.racePoints}+{d.bonusTotal}b</div>}
+                  <div className="lb-bar-wrap"><div className="lb-bar-fill" style={{width:`${pct}%`}} /></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 
       {tab === "teams" && (
-        <div className="lb-table-wrap">
-          <table className="lb-table">
-            <thead>
-              <tr>
-                <th style={{ width: 40 }}>#</th>
-                <th>Costruttore</th>
-                <th style={{ textAlign: "center" }}>Vittorie</th>
-                <th style={{ textAlign: "right" }}>Punti</th>
-              </tr>
-            </thead>
-            <tbody>
-              {teamStandings.map((t, i) => {
-                const pct = Math.round((t.points / maxTeamPts) * 100);
-                return (
-                  <tr key={t.team} className={`lb-row rank-${i+1}`} style={{ animationDelay: `${i * 0.045}s` }}>
-                    <td>
-                      <span className={`lb-pos${i === 0 ? " p1" : i === 1 ? " p2" : i === 2 ? " p3" : ""}`}>
-                        {i + 1}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="lb-driver-cell">
-                        <div className="lb-team-bar" style={{ background: TEAM_COLORS[t.team] || "#555", boxShadow: `0 0 6px ${TEAM_COLORS[t.team] || "#555"}44` }} />
-                        <div className="lb-driver-name">{t.team}</div>
-                      </div>
-                    </td>
-                    <td className="lb-stat">{t.wins}</td>
-                    <td>
-                      <div className="lb-pts">{t.points}</div>
-                      <div className="lb-bar-wrap">
-                        <div className="lb-bar-fill" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${TEAM_COLORS[t.team] || 'var(--red)'}, ${TEAM_COLORS[t.team] || 'var(--red)'}88)`, transition: 'width 1s cubic-bezier(.4,0,.2,1)' }} />
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="lb-list">
+          <div className="lb-list-header">
+            <span>#</span><span>Costruttore</span>
+            <span style={{textAlign:'center'}}>V</span>
+            <span></span>
+            <span style={{textAlign:'right'}}>Punti</span>
+          </div>
+          {teamStandings.map((t, i) => {
+            const pct = Math.round((t.points/maxTeamPts)*100);
+            const tc = TEAM_COLORS[t.team]||'var(--red)';
+            return (
+              <div key={t.team} className={`lb-row rank-${i+1}`} style={{animationDelay:`${i*0.045}s`}}>
+                <span className={`lb-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>{i+1}</span>
+                <div className="lb-driver-cell">
+                  <div className="lb-team-bar" style={{background:tc, boxShadow:`0 0 6px ${tc}44`}} />
+                  <div className="lb-driver-info">
+                    <div className="lb-driver-name">{t.team}</div>
+                  </div>
+                </div>
+                <span className="lb-stat">{t.wins}</span>
+                <span></span>
+                <div className="lb-pts-wrap">
+                  <span className="lb-pts">{t.points}</span>
+                  <div className="lb-bar-wrap"><div className="lb-bar-fill" style={{width:`${pct}%`, background:`linear-gradient(90deg,${tc},${tc}88)`}} /></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </>
