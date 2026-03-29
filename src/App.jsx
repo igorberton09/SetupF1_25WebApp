@@ -143,7 +143,7 @@ const SEASON_DATA = {
   },
   "Stagione 3": {
     races: [
-      { race: "Spa",       results: ["Igor","Alex"," Antonelli","Piastri","Verstappen","Manuel","Colapinto","Gasly","Ocon","Russell","Albon","Hulkenberg","Alonso","Bortoleto","Lawson","Tsunoda","Leclerc","Bearman","Hadjar","Sainz"] },
+      { race: "Spa",       results: ["Igor","Alex","Antonelli","Piastri","Verstappen","Manuel","Colapinto","Gasly","Ocon","Russell","Albon","Hulkenberg","Alonso","Bortoleto","Lawson","Tsunoda","Leclerc","Bearman","Hadjar","Sainz"] },
       { race: "Ungheria",  results: [] },
       { race: "Austin",    results: [] },
       { race: "Australia", results: [] },
