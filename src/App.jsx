@@ -889,108 +889,94 @@ const css = `
   .cal-bonus-chip.overtakes { background: rgba(255,128,0,0.1);  color: #FF8000; }
   .cal-bonus-chip.interpole { background: rgba(0,168,22,0.1);   color: #00c820; }
 
-  /* ═══ MODAL ═════════════════════════════════════════════════ */
-.modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(3,5,8,0.88); backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px; animation: fadeIn 0.2s ease;
-}
-.modal {
-  background: var(--bg1);
-  border: 1px solid var(--border); border-radius: 14px;
-  max-width: 460px; width: 100%; max-height: 88vh; overflow-y: auto;
-  animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
-  -webkit-overflow-scrolling: touch;
-}
-.modal-header {
-  padding: 18px 22px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0;
-  background: var(--bg1); z-index: 1;
-  border-radius: 14px 14px 0 0;
-}
-.modal-title {
-  font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #e8ecf0;
-}
-.modal-subtitle { font-size: 10px; color: var(--muted); margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
-.modal-close {
-  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-  color: var(--muted); cursor: pointer; font-size: 18px;
-  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-  border-radius: 8px; transition: all 0.2s; flex-shrink: 0;
-}
-.modal-close:hover { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.3); color: var(--red); }
-.modal-body { padding: 16px 18px; }
+/* ═══ MODAL ═════════════════════════════════════════════════ */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(3,5,8,0.88); backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px; animation: fadeIn 0.2s ease;
+    overflow-y: auto;
+  }
+  .modal {
+    background: var(--bg1);
+    border: 1px solid var(--border); border-radius: 14px;
+    max-width: 460px; width: 100%;
+    margin: auto;
+    animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .modal-header {
+    padding: 18px 22px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    border-radius: 14px 14px 0 0;
+  }
+  .modal-title {
+    font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #e8ecf0;
+  }
+  .modal-subtitle { font-size: 10px; color: var(--muted); margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
+  .modal-close {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: var(--muted); cursor: pointer; font-size: 18px;
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; transition: all 0.2s; flex-shrink: 0;
+  }
+  .modal-close:hover { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.3); color: var(--red); }
+  .modal-body { padding: 16px 18px; }
 
-.modal-bonus-section {
-  display: flex; gap: 10px; flex-wrap: wrap;
-  padding: 10px 14px; margin-bottom: 14px;
-  background: rgba(0,212,255,0.03);
-  border: 1px solid rgba(0,212,255,0.1); border-radius: 9px;
-}
-.modal-bonus-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
-.modal-bonus-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.modal-bonus-dot.pole      { background: var(--cyan); }
-.modal-bonus-dot.overtakes { background: #FF8000; }
-.modal-bonus-dot.interpole { background: #00c820; }
-.modal-bonus-label  { color: var(--muted); }
-.modal-bonus-driver { color: var(--text); font-weight: 700; }
-.modal-bonus-pts    { color: var(--red); font-size: 9px; font-family: 'Share Tech Mono', monospace; }
+  .modal-bonus-section {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    padding: 10px 14px; margin-bottom: 14px;
+    background: rgba(0,212,255,0.03);
+    border: 1px solid rgba(0,212,255,0.1); border-radius: 9px;
+  }
+  .modal-bonus-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .modal-bonus-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .modal-bonus-dot.pole      { background: var(--cyan); }
+  .modal-bonus-dot.overtakes { background: #FF8000; }
+  .modal-bonus-dot.interpole { background: #00c820; }
+  .modal-bonus-label  { color: var(--muted); }
+  .modal-bonus-driver { color: var(--text); font-weight: 700; }
+  .modal-bonus-pts    { color: var(--red); font-size: 9px; font-family: 'Share Tech Mono', monospace; }
 
-.modal-results-table {
-  width: 100%; border-collapse: collapse;
-  table-layout: fixed;
-}
-.modal-results-table tr {
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: background 0.15s;
-}
-.modal-results-table tr:last-child { border-bottom: none; }
-.modal-results-table tr:hover { background: rgba(255,255,255,0.025); }
-.modal-results-table td {
-  padding: 9px 6px; font-size: 12px;
-  vertical-align: middle;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.modal-col-pos    { width: 44px; }
-.modal-col-pts    { width: 56px; }
+  .modal-results-table {
+    width: 100%; border-collapse: collapse; table-layout: fixed;
+  }
+  .modal-results-table tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s;
+  }
+  .modal-results-table tr:last-child { border-bottom: none; }
+  .modal-results-table tr:hover { background: rgba(255,255,255,0.025); }
+  .modal-results-table td {
+    padding: 9px 6px; font-size: 12px; vertical-align: middle;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .modal-col-pos { width: 44px; }
+  .modal-col-pts { width: 54px; }
 
-.modal-pos {
-  font-family: 'Orbitron', sans-serif; font-weight: 700;
-  font-size: 11px; color: var(--muted);
-  display: inline-block; min-width: 32px;
-}
-.modal-pos.p1 { color: var(--gold); }
-.modal-pos.p2 { color: var(--silver); }
-.modal-pos.p3 { color: var(--bronze); }
+  .modal-pos {
+    font-family: 'Orbitron', sans-serif; font-weight: 700;
+    font-size: 11px; color: var(--muted); display: inline-block; min-width: 32px;
+  }
+  .modal-pos.p1 { color: var(--gold); }
+  .modal-pos.p2 { color: var(--silver); }
+  .modal-pos.p3 { color: var(--bronze); }
 
-.modal-driver { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.modal-driver-flag { font-size: 14px; flex-shrink: 0; }
-.modal-driver-name {
-  color: #e8ecf0; font-weight: 600;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.modal-pts {
-  text-align: right; color: var(--muted);
-  font-size: 10px; font-family: 'Share Tech Mono', monospace;
-  white-space: nowrap;
-}
-.modal-driver-bonus { display: flex; gap: 3px; flex-shrink: 0; }
-.modal-driver-bonus-icon { font-size: 11px; }
+  .modal-driver { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .modal-driver-flag { font-size: 14px; flex-shrink: 0; }
+  .modal-driver-name { color: #e8ecf0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .modal-pts { text-align: right; color: var(--muted); font-size: 10px; font-family: 'Share Tech Mono', monospace; white-space: nowrap; }
+  .modal-driver-bonus { display: flex; gap: 3px; flex-shrink: 0; }
+  .modal-driver-bonus-icon { font-size: 11px; }
 
-@media (max-width: 600px) {
-  .modal-overlay { padding: 8px; align-items: flex-end; }
-  .modal { max-height: 92vh; border-radius: 14px 14px 0 0; }
-  .modal-header { padding: 14px 16px; }
-  .modal-body { padding: 12px 14px; }
-  .modal-results-table td { padding: 8px 4px; font-size: 11px; }
-  .modal-driver-flag { font-size: 13px; }
-  .modal-driver-name { font-size: 11px; }
-  .modal-col-pts { width: 50px; }
-}
+  @media (max-width: 600px) {
+    .modal-overlay { padding: 8px; align-items: flex-start; padding-top: 40px; }
+    .modal { border-radius: 14px; }
+    .modal-header { padding: 14px 16px; }
+    .modal-body { padding: 12px 14px; }
+    .modal-results-table td { padding: 8px 4px; font-size: 11px; }
+    .modal-col-pts { width: 48px; }
+  }
   /* ═══ CAREER ════════════════════════════════════════════════ */
   .career-section { margin-bottom: 32px; }
   .career-section-title {
@@ -1667,6 +1653,13 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const raceData  = raceResults.find(r => r.race === race.raceKey);
   const extraData = raceExtras.find(r => r.race === race.raceKey);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   if (!raceData) return null;
 
   const driverBonuses = {};
@@ -1681,7 +1674,7 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <div style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0, flex: 1 }}>
             <div className="modal-title">{race.race}</div>
             <div className="modal-subtitle">{race.city} · Round {race.round}</div>
           </div>
@@ -1703,30 +1696,26 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
             </colgroup>
             <tbody>
               {raceData.results.map((driver, i) => {
-                const info    = DRIVER_TEAMS[driver];
-                const points  = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
-                const bonuses = driverBonuses[driver] || [];
+                const info     = DRIVER_TEAMS[driver];
+                const points   = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
+                const bonuses  = driverBonuses[driver] || [];
                 const totalPts = points + bonuses.length;
-                const posClass = i===0 ? " p1" : i===1 ? " p2" : i===2 ? " p3" : "";
+                const posClass = i===0?" p1":i===1?" p2":i===2?" p3":"";
                 return (
                   <tr key={`${driver}-${i}`}>
-                    <td>
-                      <span className={`modal-pos${posClass}`}>P{i + 1}</span>
-                    </td>
+                    <td><span className={`modal-pos${posClass}`}>P{i+1}</span></td>
                     <td>
                       <div className="modal-driver">
-                        <span className="modal-driver-flag">{info?.flag || "🏁"}</span>
+                        <span className="modal-driver-flag">{info?.flag||"🏁"}</span>
                         <span className="modal-driver-name">{driver}</span>
                         {bonuses.length > 0 && (
                           <div className="modal-driver-bonus">
-                            {bonuses.map((b, bi) => <span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}
+                            {bonuses.map((b,bi) => <span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="modal-pts">
-                      {totalPts > 0 ? `${totalPts}pt` : "—"}
-                    </td>
+                    <td className="modal-pts">{totalPts > 0 ? `${totalPts}pt` : "—"}</td>
                   </tr>
                 );
               })}
