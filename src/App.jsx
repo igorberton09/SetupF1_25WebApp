@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 // ─── FONT LOADER ──────────────────────────────────────────────────
 function useFonts() {
@@ -1657,7 +1658,12 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
   }, [onClose]);
 
   if (!raceData) return null;
@@ -1670,16 +1676,18 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
   }
   const hasBonuses = extraData && (extraData.pole || extraData.overtakes || extraData.interpole);
 
-  return (
+  const overlay = (
     <div
       onClick={onClose}
       style={{
-        position: 'absolute', inset: 0,
+        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
         background: 'rgba(3,5,8,0.92)',
-        zIndex: 50,
-        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-        padding: '24px 12px',
-        overflowY: 'auto',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+        boxSizing: 'border-box',
       }}
     >
       <div
@@ -1688,18 +1696,24 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
           background: '#080c14',
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 14,
-          width: '100%', maxWidth: 440,
-          flexShrink: 0,
+          width: '100%',
+          maxWidth: 440,
+          maxHeight: 'calc(100vh - 32px)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
         }}
       >
-        {/* Header */}
+        {/* Header fisso */}
         <div style={{
-          padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.06)',
+          padding: '16px 20px',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+          flexShrink: 0,
         }}>
           <div style={{ minWidth: 0, flex: 1 }}>
-            <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 13, fontWeight: 700, color: '#e8ecf0' }}>{race.race}</div>
-            <div style={{ fontSize: 10, color: '#3d5a6e', marginTop: 3, fontFamily: 'Share Tech Mono, monospace' }}>{race.city} · Round {race.round}</div>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: '#e8ecf0' }}>{race.race}</div>
+            <div style={{ fontSize: 10, color: '#3d5a6e', marginTop: 3, fontFamily: "'Share Tech Mono', monospace" }}>{race.city} · Round {race.round}</div>
           </div>
           <button
             onClick={onClose}
@@ -1712,8 +1726,8 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
           >×</button>
         </div>
 
-        {/* Body */}
-        <div style={{ padding: '14px 18px' }}>
+        {/* Body scrollabile */}
+        <div style={{ padding: '14px 18px', overflowY: 'auto', flex: 1 }}>
           {hasBonuses && (
             <div style={{
               display: 'flex', gap: 10, flexWrap: 'wrap',
@@ -1725,19 +1739,19 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
                 <div style={{ width:7, height:7, borderRadius:'50%', background:'#00d4ff', flexShrink:0 }} />
                 <span style={{ color:'#3d5a6e' }}>Pole:</span>
                 <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.pole}</span>
-                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:"'Share Tech Mono',monospace" }}> +1pt</span>
               </div>}
               {extraData.overtakes && <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11 }}>
                 <div style={{ width:7, height:7, borderRadius:'50%', background:'#FF8000', flexShrink:0 }} />
                 <span style={{ color:'#3d5a6e' }}>Sorpassi:</span>
                 <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.overtakes}</span>
-                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:"'Share Tech Mono',monospace" }}> +1pt</span>
               </div>}
               {extraData.interpole && <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11 }}>
                 <div style={{ width:7, height:7, borderRadius:'50%', background:'#00c820', flexShrink:0 }} />
                 <span style={{ color:'#3d5a6e' }}>Interpole:</span>
                 <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.interpole}</span>
-                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:"'Share Tech Mono',monospace" }}> +1pt</span>
               </div>}
             </div>
           )}
@@ -1758,25 +1772,17 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
                 return (
                   <tr key={`${driver}-${i}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                     <td style={{ padding: '8px 4px', verticalAlign:'middle' }}>
-                      <span style={{
-                        fontFamily:'Orbitron,sans-serif', fontWeight:700, fontSize:11,
-                        color: posColor, display:'inline-block', minWidth:32,
-                      }}>P{i+1}</span>
+                      <span style={{ fontFamily:"'Orbitron',sans-serif", fontWeight:700, fontSize:11, color:posColor, display:'inline-block', minWidth:32 }}>P{i+1}</span>
                     </td>
                     <td style={{ padding: '8px 4px', verticalAlign:'middle', overflow:'hidden' }}>
                       <div style={{ display:'flex', alignItems:'center', gap:7, minWidth:0 }}>
                         <span style={{ fontSize:13, flexShrink:0 }}>{info?.flag||'🏁'}</span>
-                        <span style={{
-                          color:'#e8ecf0', fontWeight:600, fontSize:12,
-                          overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-                        }}>{driver}</span>
-                        {bonuses.map((b, bi) => (
-                          <span key={bi} style={{ fontSize:11, flexShrink:0 }}>{b.icon}</span>
-                        ))}
+                        <span style={{ color:'#e8ecf0', fontWeight:600, fontSize:12, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{driver}</span>
+                        {bonuses.map((b, bi) => <span key={bi} style={{ fontSize:11, flexShrink:0 }}>{b.icon}</span>)}
                       </div>
                     </td>
                     <td style={{ padding: '8px 4px', verticalAlign:'middle', textAlign:'right', whiteSpace:'nowrap' }}>
-                      <span style={{ fontSize:10, color:'#3d5a6e', fontFamily:'Share Tech Mono,monospace' }}>
+                      <span style={{ fontSize:10, color:'#3d5a6e', fontFamily:"'Share Tech Mono',monospace" }}>
                         {totalPts > 0 ? `${totalPts}pt` : '—'}
                       </span>
                     </td>
@@ -1789,6 +1795,8 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
       </div>
     </div>
   );
+
+  return createPortal(overlay, document.body);
 }
 
 function CalendarPage({ season }) {
@@ -1796,7 +1804,7 @@ function CalendarPage({ season }) {
   const seasonData = SEASON_DATA[season];
 
   return (
-    <div style={{ position: 'relative' }}>
+    <>
       <div className="cal-grid">
         {seasonData.calendar.map((race, i) => {
           const extra = seasonData.raceExtras.find(e => e.race === race.raceKey) || {};
@@ -1831,7 +1839,6 @@ function CalendarPage({ season }) {
           );
         })}
       </div>
-
       {selectedRace && (
         <RaceResultsModal
           race={selectedRace}
@@ -1841,7 +1848,7 @@ function CalendarPage({ season }) {
           onClose={() => setSelectedRace(null)}
         />
       )}
-    </div>
+    </>
   );
 }
 
