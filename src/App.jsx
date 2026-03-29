@@ -1799,59 +1799,6 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
   return createPortal(overlay, document.body);
 }
 
-function CalendarPage({ season }) {
-  const [selectedRace, setSelectedRace] = useState(null);
-  const seasonData = SEASON_DATA[season];
-
-  return (
-    <>
-      <div className="cal-grid">
-        {seasonData.calendar.map((race, i) => {
-          const extra = seasonData.raceExtras.find(e => e.race === race.raceKey) || {};
-          return (
-            <div key={race.round}
-              className={`cal-card ${race.status}`}
-              style={{ animationDelay: `${i * 0.05}s` }}
-              onClick={() => race.status === "done" && race.raceKey && setSelectedRace(race)}>
-              <div className="cal-card-stripe" />
-              <div className="cal-card-body">
-                <div className="cal-card-header">
-                  <span className="cal-round">Round {String(race.round).padStart(2,'0')}</span>
-                  <span className={`cal-status ${race.status}`}>{race.status === "done" ? "✓ Done" : "Soon"}</span>
-                </div>
-                <div className="cal-race-name">{race.race}</div>
-                <div className="cal-city">{race.city}</div>
-                {race.winner && race.winner !== "..." && (
-                  <div className="cal-winner">
-                    <span className="cal-winner-trophy">🏆</span>
-                    <span style={{ fontFamily: 'Orbitron', fontSize: 11, fontWeight: 700 }}>{race.winner}</span>
-                  </div>
-                )}
-                {race.status === "done" && (extra.pole || extra.overtakes || extra.interpole) && (
-                  <div className="cal-bonuses">
-                    {extra.pole      && <span className="cal-bonus-chip pole">🅿️ {extra.pole}</span>}
-                    {extra.overtakes && <span className="cal-bonus-chip overtakes">⚡ {extra.overtakes}</span>}
-                    {extra.interpole && <span className="cal-bonus-chip interpole">🌧️ {extra.interpole}</span>}
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {selectedRace && (
-        <RaceResultsModal
-          race={selectedRace}
-          raceResults={seasonData.races}
-          raceExtras={seasonData.raceExtras}
-          season={season}
-          onClose={() => setSelectedRace(null)}
-        />
-      )}
-    </>
-  );
-}
-
 // ─── LEADERBOARD PAGE ─────────────────────────────────────────────
 function LeaderboardPage({ season }) {
   const [tab, setTab] = useState("drivers");
