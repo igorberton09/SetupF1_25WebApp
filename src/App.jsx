@@ -63,7 +63,7 @@ const TRACKS = {
 };
 
 const CONTINENTI = ["Tutti", "Europa", "Asia", "America", "Oceania"];
-const CONTINENT_EMOJI = { Europa: "🇪🇺", Asia: "🌏", America: "🌎", Oceania: "🌏" };
+const CONTINENT_EMOJI = { Europa: "EU", Asia: "AS", America: "AM", Oceania: "OC" };
 
 const RULES_CONFIG = [
   {
@@ -152,13 +152,13 @@ const SEASON_DATA = {
       { race: "Olanda",    results: [] },
     ],
     raceExtras: [
-      { race: "Spa",       pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Ungheria",  pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Austin",    pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Australia", pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Cina",      pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Giappone",  pole: null, overtakes: null, fastest: null, loyal: null },
-      { race: "Olanda",    pole: null, overtakes: null, fastest: null, loyal: null },
+      { race: "Spa",       pole: "Igor", overtakes: null, fastest: null, loyal: null },
+      { race: "Ungheria",  pole: null,   overtakes: null, fastest: null, loyal: null },
+      { race: "Austin",    pole: null,   overtakes: null, fastest: null, loyal: null },
+      { race: "Australia", pole: null,   overtakes: null, fastest: null, loyal: null },
+      { race: "Cina",      pole: null,   overtakes: null, fastest: null, loyal: null },
+      { race: "Giappone",  pole: null,   overtakes: null, fastest: null, loyal: null },
+      { race: "Olanda",    pole: null,   overtakes: null, fastest: null, loyal: null },
     ],
     calendar: [
       { round: 1, race: "Belgium GP",    city: "Spa-Francochamps", status: "upcoming", winner: "...", raceKey: null },
@@ -169,7 +169,7 @@ const SEASON_DATA = {
       { round: 6, race: "Japan GP",      city: "Suzuka",           status: "upcoming", winner: "...", raceKey: null },
       { round: 7, race: "Dutch GP",      city: "Zandvoort",        status: "upcoming", winner: "...", raceKey: null },
     ],
-    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+    driverPoles: { Alex: 0, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
   }
 };
 
@@ -324,7 +324,7 @@ const CAREER_STATS = {
   Alonso:     { totalPoints: 59,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Stroll:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Lawson:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Igor:       { totalPoints: 139, totalWins: 2, totalPoles: 6, totalPodiums: 8,  HatTrick: 0, GrandSlam: 1, championships: 0, constructorchamp: 0, totalInterpole: 1 },
+  Igor:       { totalPoints: 140, totalWins: 2, totalPoles: 7, totalPodiums: 8,  HatTrick: 0, GrandSlam: 1, championships: 0, constructorchamp: 0, totalInterpole: 1 },
   Bearman:    { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Manuel:     { totalPoints: 39,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0, totalInterpole: 1 },
   Gasly:      { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
@@ -337,7 +337,7 @@ const CAREER_STATS = {
 };
 
 const TEAM_CAREER_STATS = {
-  "McLaren":          { totalPoints: 403, totalWins: 6, totalPoles: 6, championships: 2, driverchamp: 2 },
+  "McLaren":          { totalPoints: 404, totalWins: 6, totalPoles: 7, championships: 2, driverchamp: 2 },
   "Red Bull":         { totalPoints: 241, totalWins: 1, totalPoles: 6, championships: 0, driverchamp: 0 },
   "Mercedes":         { totalPoints: 189, totalWins: 1, totalPoles: 0, championships: 0, driverchamp: 0 },
   "Ferrari":          { totalPoints: 172, totalWins: 0, totalPoles: 0, championships: 0, driverchamp: 0 },
