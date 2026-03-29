@@ -1664,35 +1664,89 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
 
   const driverBonuses = {};
   if (extraData) {
-    if (extraData.pole)      driverBonuses[extraData.pole]      = [...(driverBonuses[extraData.pole]      || []), { type: 'pole',      icon: '🅿️' }];
-    if (extraData.overtakes) driverBonuses[extraData.overtakes] = [...(driverBonuses[extraData.overtakes] || []), { type: 'overtakes', icon: '⚡' }];
-    if (extraData.interpole) driverBonuses[extraData.interpole] = [...(driverBonuses[extraData.interpole] || []), { type: 'interpole', icon: '🌧️' }];
+    if (extraData.pole)      driverBonuses[extraData.pole]      = [...(driverBonuses[extraData.pole]      || []), { icon: '🅿️' }];
+    if (extraData.overtakes) driverBonuses[extraData.overtakes] = [...(driverBonuses[extraData.overtakes] || []), { icon: '⚡' }];
+    if (extraData.interpole) driverBonuses[extraData.interpole] = [...(driverBonuses[extraData.interpole] || []), { icon: '🌧️' }];
   }
   const hasBonuses = extraData && (extraData.pole || extraData.overtakes || extraData.interpole);
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
+    <div
+      onClick={onClose}
+      style={{
+        position: 'absolute', inset: 0,
+        background: 'rgba(3,5,8,0.92)',
+        zIndex: 50,
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+        padding: '24px 12px',
+        overflowY: 'auto',
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: '#080c14',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 14,
+          width: '100%', maxWidth: 440,
+          flexShrink: 0,
+        }}
+      >
+        {/* Header */}
+        <div style={{
+          padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+        }}>
           <div style={{ minWidth: 0, flex: 1 }}>
-            <div className="modal-title">{race.race}</div>
-            <div className="modal-subtitle">{race.city} · Round {race.round}</div>
+            <div style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 13, fontWeight: 700, color: '#e8ecf0' }}>{race.race}</div>
+            <div style={{ fontSize: 10, color: '#3d5a6e', marginTop: 3, fontFamily: 'Share Tech Mono, monospace' }}>{race.city} · Round {race.round}</div>
           </div>
-          <button className="modal-close" onClick={onClose}>×</button>
+          <button
+            onClick={onClose}
+            style={{
+              background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)',
+              color: '#3d5a6e', cursor: 'pointer', fontSize: 20, lineHeight: 1,
+              width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              borderRadius: 8, flexShrink: 0,
+            }}
+          >×</button>
         </div>
-        <div className="modal-body">
+
+        {/* Body */}
+        <div style={{ padding: '14px 18px' }}>
           {hasBonuses && (
-            <div className="modal-bonus-section">
-              {extraData.pole      && <div className="modal-bonus-item"><div className="modal-bonus-dot pole" /><span className="modal-bonus-label">Pole:</span><span className="modal-bonus-driver"> {extraData.pole}</span><span className="modal-bonus-pts"> +1pt</span></div>}
-              {extraData.overtakes && <div className="modal-bonus-item"><div className="modal-bonus-dot overtakes" /><span className="modal-bonus-label">Sorpassi:</span><span className="modal-bonus-driver"> {extraData.overtakes}</span><span className="modal-bonus-pts"> +1pt</span></div>}
-              {extraData.interpole && <div className="modal-bonus-item"><div className="modal-bonus-dot interpole" /><span className="modal-bonus-label">Interpole:</span><span className="modal-bonus-driver"> {extraData.interpole}</span><span className="modal-bonus-pts"> +1pt</span></div>}
+            <div style={{
+              display: 'flex', gap: 10, flexWrap: 'wrap',
+              padding: '9px 13px', marginBottom: 13,
+              background: 'rgba(0,212,255,0.04)',
+              border: '1px solid rgba(0,212,255,0.12)', borderRadius: 9,
+            }}>
+              {extraData.pole && <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11 }}>
+                <div style={{ width:7, height:7, borderRadius:'50%', background:'#00d4ff', flexShrink:0 }} />
+                <span style={{ color:'#3d5a6e' }}>Pole:</span>
+                <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.pole}</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+              </div>}
+              {extraData.overtakes && <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11 }}>
+                <div style={{ width:7, height:7, borderRadius:'50%', background:'#FF8000', flexShrink:0 }} />
+                <span style={{ color:'#3d5a6e' }}>Sorpassi:</span>
+                <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.overtakes}</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+              </div>}
+              {extraData.interpole && <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:11 }}>
+                <div style={{ width:7, height:7, borderRadius:'50%', background:'#00c820', flexShrink:0 }} />
+                <span style={{ color:'#3d5a6e' }}>Interpole:</span>
+                <span style={{ color:'#c8d6e0', fontWeight:700 }}> {extraData.interpole}</span>
+                <span style={{ color:'#e8001d', fontSize:9, fontFamily:'Share Tech Mono,monospace' }}> +1pt</span>
+              </div>}
             </div>
           )}
-          <table className="modal-results-table">
+
+          <table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed' }}>
             <colgroup>
-              <col className="modal-col-pos" />
+              <col style={{ width: 44 }} />
               <col />
-              <col className="modal-col-pts" />
+              <col style={{ width: 52 }} />
             </colgroup>
             <tbody>
               {raceData.results.map((driver, i) => {
@@ -1700,22 +1754,32 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
                 const points   = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
                 const bonuses  = driverBonuses[driver] || [];
                 const totalPts = points + bonuses.length;
-                const posClass = i===0?" p1":i===1?" p2":i===2?" p3":"";
+                const posColor = i===0 ? '#FFD700' : i===1 ? '#C0C0C0' : i===2 ? '#CD7F32' : '#3d5a6e';
                 return (
-                  <tr key={`${driver}-${i}`}>
-                    <td><span className={`modal-pos${posClass}`}>P{i+1}</span></td>
-                    <td>
-                      <div className="modal-driver">
-                        <span className="modal-driver-flag">{info?.flag||"🏁"}</span>
-                        <span className="modal-driver-name">{driver}</span>
-                        {bonuses.length > 0 && (
-                          <div className="modal-driver-bonus">
-                            {bonuses.map((b,bi) => <span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}
-                          </div>
-                        )}
+                  <tr key={`${driver}-${i}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                    <td style={{ padding: '8px 4px', verticalAlign:'middle' }}>
+                      <span style={{
+                        fontFamily:'Orbitron,sans-serif', fontWeight:700, fontSize:11,
+                        color: posColor, display:'inline-block', minWidth:32,
+                      }}>P{i+1}</span>
+                    </td>
+                    <td style={{ padding: '8px 4px', verticalAlign:'middle', overflow:'hidden' }}>
+                      <div style={{ display:'flex', alignItems:'center', gap:7, minWidth:0 }}>
+                        <span style={{ fontSize:13, flexShrink:0 }}>{info?.flag||'🏁'}</span>
+                        <span style={{
+                          color:'#e8ecf0', fontWeight:600, fontSize:12,
+                          overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+                        }}>{driver}</span>
+                        {bonuses.map((b, bi) => (
+                          <span key={bi} style={{ fontSize:11, flexShrink:0 }}>{b.icon}</span>
+                        ))}
                       </div>
                     </td>
-                    <td className="modal-pts">{totalPts > 0 ? `${totalPts}pt` : "—"}</td>
+                    <td style={{ padding: '8px 4px', verticalAlign:'middle', textAlign:'right', whiteSpace:'nowrap' }}>
+                      <span style={{ fontSize:10, color:'#3d5a6e', fontFamily:'Share Tech Mono,monospace' }}>
+                        {totalPts > 0 ? `${totalPts}pt` : '—'}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
@@ -1723,6 +1787,60 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
           </table>
         </div>
       </div>
+    </div>
+  );
+}
+
+function CalendarPage({ season }) {
+  const [selectedRace, setSelectedRace] = useState(null);
+  const seasonData = SEASON_DATA[season];
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div className="cal-grid">
+        {seasonData.calendar.map((race, i) => {
+          const extra = seasonData.raceExtras.find(e => e.race === race.raceKey) || {};
+          return (
+            <div key={race.round}
+              className={`cal-card ${race.status}`}
+              style={{ animationDelay: `${i * 0.05}s` }}
+              onClick={() => race.status === "done" && race.raceKey && setSelectedRace(race)}>
+              <div className="cal-card-stripe" />
+              <div className="cal-card-body">
+                <div className="cal-card-header">
+                  <span className="cal-round">Round {String(race.round).padStart(2,'0')}</span>
+                  <span className={`cal-status ${race.status}`}>{race.status === "done" ? "✓ Done" : "Soon"}</span>
+                </div>
+                <div className="cal-race-name">{race.race}</div>
+                <div className="cal-city">{race.city}</div>
+                {race.winner && race.winner !== "..." && (
+                  <div className="cal-winner">
+                    <span className="cal-winner-trophy">🏆</span>
+                    <span style={{ fontFamily: 'Orbitron', fontSize: 11, fontWeight: 700 }}>{race.winner}</span>
+                  </div>
+                )}
+                {race.status === "done" && (extra.pole || extra.overtakes || extra.interpole) && (
+                  <div className="cal-bonuses">
+                    {extra.pole      && <span className="cal-bonus-chip pole">🅿️ {extra.pole}</span>}
+                    {extra.overtakes && <span className="cal-bonus-chip overtakes">⚡ {extra.overtakes}</span>}
+                    {extra.interpole && <span className="cal-bonus-chip interpole">🌧️ {extra.interpole}</span>}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {selectedRace && (
+        <RaceResultsModal
+          race={selectedRace}
+          raceResults={seasonData.races}
+          raceExtras={seasonData.raceExtras}
+          season={season}
+          onClose={() => setSelectedRace(null)}
+        />
+      )}
     </div>
   );
 }
