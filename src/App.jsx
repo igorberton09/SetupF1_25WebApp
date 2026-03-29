@@ -890,80 +890,107 @@ const css = `
   .cal-bonus-chip.interpole { background: rgba(0,168,22,0.1);   color: #00c820; }
 
   /* ═══ MODAL ═════════════════════════════════════════════════ */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(3,5,8,0.88); backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex; align-items: center; justify-content: center;
-    padding: 16px; animation: fadeIn 0.2s ease;
-  }
-  .modal {
-    background: var(--bg1);
-    border: 1px solid var(--border); border-radius: 14px;
-    max-width: 500px; width: 100%; max-height: 88vh; overflow-y: auto;
-    animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
-    -webkit-overflow-scrolling: touch;
-  }
-  .modal-results-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .modal-results-table col:nth-child(1) { width: 42px; }
-  .modal-results-table col:nth-child(3) { width: 70px; }
-  .modal-header {
-    padding: 18px 22px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0;
-    background: var(--bg1); z-index: 1;
-    border-radius: 14px 14px 0 0;
-  }
-  .modal-title {
-    font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #e8ecf0;
-  }
-  .modal-subtitle { font-size: 10px; color: var(--muted); margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
-  .modal-close {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-    color: var(--muted); cursor: pointer; font-size: 18px;
-    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-    border-radius: 8px; transition: all 0.2s; flex-shrink: 0;
-  }
-  .modal-close:hover { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.3); color: var(--red); }
-  .modal-body { padding: 18px 22px; }
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(3,5,8,0.88); backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: var(--bg1);
+  border: 1px solid var(--border); border-radius: 14px;
+  max-width: 460px; width: 100%; max-height: 88vh; overflow-y: auto;
+  animation: modalIn 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  -webkit-overflow-scrolling: touch;
+}
+.modal-header {
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0;
+  background: var(--bg1); z-index: 1;
+  border-radius: 14px 14px 0 0;
+}
+.modal-title {
+  font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; color: #e8ecf0;
+}
+.modal-subtitle { font-size: 10px; color: var(--muted); margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
+.modal-close {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer; font-size: 18px;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; transition: all 0.2s; flex-shrink: 0;
+}
+.modal-close:hover { background: rgba(232,0,29,0.1); border-color: rgba(232,0,29,0.3); color: var(--red); }
+.modal-body { padding: 16px 18px; }
 
-  /* Bonus strip */
-  .modal-bonus-section {
-    display: flex; gap: 10px; flex-wrap: wrap;
-    padding: 10px 14px; margin-bottom: 16px;
-    background: rgba(0,212,255,0.03);
-    border: 1px solid rgba(0,212,255,0.1); border-radius: 9px;
-  }
-  .modal-bonus-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
-  .modal-bonus-dot  { width: 7px; height: 7px; border-radius: 50%; }
-  .modal-bonus-dot.pole      { background: var(--cyan); }
-  .modal-bonus-dot.overtakes { background: #FF8000; }
-  .modal-bonus-dot.interpole { background: #00c820; }
-  .modal-bonus-label  { color: var(--muted); }
-  .modal-bonus-driver { color: var(--text); font-weight: 700; }
-  .modal-bonus-pts    { color: var(--red); font-size: 9px; font-family: 'Share Tech Mono', monospace; }
+.modal-bonus-section {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; margin-bottom: 14px;
+  background: rgba(0,212,255,0.03);
+  border: 1px solid rgba(0,212,255,0.1); border-radius: 9px;
+}
+.modal-bonus-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+.modal-bonus-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.modal-bonus-dot.pole      { background: var(--cyan); }
+.modal-bonus-dot.overtakes { background: #FF8000; }
+.modal-bonus-dot.interpole { background: #00c820; }
+.modal-bonus-label  { color: var(--muted); }
+.modal-bonus-driver { color: var(--text); font-weight: 700; }
+.modal-bonus-pts    { color: var(--red); font-size: 9px; font-family: 'Share Tech Mono', monospace; }
 
-  /* Results table */
-  .modal-results-table { width: 100%; border-collapse: collapse; }
-  .modal-results-table tr {
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.15s;
-  }
-  .modal-results-table tr:last-child { border-bottom: none; }
-  .modal-results-table tr:hover { background: rgba(255,255,255,0.025); }
-  .modal-results-table td { padding: 9px 6px; font-size: 12px; }
-  .modal-pos { font-family: 'Orbitron', sans-serif; font-weight: 700; width: 40px; font-size: 11px; color: var(--muted); }
-  .modal-pos.p1 { color: var(--gold); }
-  .modal-pos.p2 { color: var(--silver); }
-  .modal-pos.p3 { color: var(--bronze); }
-  .modal-driver { display: flex; align-items: center; gap: 8px; }
-  .modal-driver-flag { font-size: 14px; }
-  .modal-driver-name { color: #e8ecf0; font-weight: 600; }
-  .modal-pts { text-align: right; color: var(--muted); font-size: 10px; font-family: 'Share Tech Mono', monospace; }
-  .modal-driver-bonus { display: flex; gap: 3px; margin-left: 4px; }
-  .modal-driver-bonus-icon { font-size: 11px; }
+.modal-results-table {
+  width: 100%; border-collapse: collapse;
+  table-layout: fixed;
+}
+.modal-results-table tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+}
+.modal-results-table tr:last-child { border-bottom: none; }
+.modal-results-table tr:hover { background: rgba(255,255,255,0.025); }
+.modal-results-table td {
+  padding: 9px 6px; font-size: 12px;
+  vertical-align: middle;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.modal-col-pos    { width: 44px; }
+.modal-col-pts    { width: 56px; }
 
+.modal-pos {
+  font-family: 'Orbitron', sans-serif; font-weight: 700;
+  font-size: 11px; color: var(--muted);
+  display: inline-block; min-width: 32px;
+}
+.modal-pos.p1 { color: var(--gold); }
+.modal-pos.p2 { color: var(--silver); }
+.modal-pos.p3 { color: var(--bronze); }
+
+.modal-driver { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.modal-driver-flag { font-size: 14px; flex-shrink: 0; }
+.modal-driver-name {
+  color: #e8ecf0; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.modal-pts {
+  text-align: right; color: var(--muted);
+  font-size: 10px; font-family: 'Share Tech Mono', monospace;
+  white-space: nowrap;
+}
+.modal-driver-bonus { display: flex; gap: 3px; flex-shrink: 0; }
+.modal-driver-bonus-icon { font-size: 11px; }
+
+@media (max-width: 600px) {
+  .modal-overlay { padding: 8px; align-items: flex-end; }
+  .modal { max-height: 92vh; border-radius: 14px 14px 0 0; }
+  .modal-header { padding: 14px 16px; }
+  .modal-body { padding: 12px 14px; }
+  .modal-results-table td { padding: 8px 4px; font-size: 11px; }
+  .modal-driver-flag { font-size: 13px; }
+  .modal-driver-name { font-size: 11px; }
+  .modal-col-pts { width: 50px; }
+}
   /* ═══ CAREER ════════════════════════════════════════════════ */
   .career-section { margin-bottom: 32px; }
   .career-section-title {
@@ -1636,7 +1663,6 @@ function SeasonSelector({ currentSeason, onSeasonChange }) {
   );
 }
 
-// ─── RACE RESULTS MODAL ───────────────────────────────────────────
 function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
   const DRIVER_TEAMS = getDriverTeamsForSeason(season);
   const raceData  = raceResults.find(r => r.race === race.raceKey);
@@ -1645,9 +1671,9 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
 
   const driverBonuses = {};
   if (extraData) {
-    if (extraData.pole)       driverBonuses[extraData.pole]       = [...(driverBonuses[extraData.pole]       || []), { type: 'pole',      icon: '🅿️' }];
-    if (extraData.overtakes)  driverBonuses[extraData.overtakes]  = [...(driverBonuses[extraData.overtakes]  || []), { type: 'overtakes', icon: '⚡' }];
-    if (extraData.interpole)  driverBonuses[extraData.interpole]  = [...(driverBonuses[extraData.interpole]  || []), { type: 'interpole', icon: '🌧️' }];
+    if (extraData.pole)      driverBonuses[extraData.pole]      = [...(driverBonuses[extraData.pole]      || []), { type: 'pole',      icon: '🅿️' }];
+    if (extraData.overtakes) driverBonuses[extraData.overtakes] = [...(driverBonuses[extraData.overtakes] || []), { type: 'overtakes', icon: '⚡' }];
+    if (extraData.interpole) driverBonuses[extraData.interpole] = [...(driverBonuses[extraData.interpole] || []), { type: 'interpole', icon: '🌧️' }];
   }
   const hasBonuses = extraData && (extraData.pole || extraData.overtakes || extraData.interpole);
 
@@ -1655,7 +1681,7 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <div>
+          <div style={{ minWidth: 0 }}>
             <div className="modal-title">{race.race}</div>
             <div className="modal-subtitle">{race.city} · Round {race.round}</div>
           </div>
@@ -1664,30 +1690,42 @@ function RaceResultsModal({ race, raceResults, raceExtras, season, onClose }) {
         <div className="modal-body">
           {hasBonuses && (
             <div className="modal-bonus-section">
-              {extraData.pole && <div className="modal-bonus-item"><div className="modal-bonus-dot pole" /><span className="modal-bonus-label">Pole:</span><span className="modal-bonus-driver"> {extraData.pole}</span><span className="modal-bonus-pts"> +1pt</span></div>}
+              {extraData.pole      && <div className="modal-bonus-item"><div className="modal-bonus-dot pole" /><span className="modal-bonus-label">Pole:</span><span className="modal-bonus-driver"> {extraData.pole}</span><span className="modal-bonus-pts"> +1pt</span></div>}
               {extraData.overtakes && <div className="modal-bonus-item"><div className="modal-bonus-dot overtakes" /><span className="modal-bonus-label">Sorpassi:</span><span className="modal-bonus-driver"> {extraData.overtakes}</span><span className="modal-bonus-pts"> +1pt</span></div>}
               {extraData.interpole && <div className="modal-bonus-item"><div className="modal-bonus-dot interpole" /><span className="modal-bonus-label">Interpole:</span><span className="modal-bonus-driver"> {extraData.interpole}</span><span className="modal-bonus-pts"> +1pt</span></div>}
             </div>
           )}
           <table className="modal-results-table">
-            <colgroup><col style={{width:'40px'}} /><col /><col style={{width:'64px'}} /></colgroup>
+            <colgroup>
+              <col className="modal-col-pos" />
+              <col />
+              <col className="modal-col-pts" />
+            </colgroup>
             <tbody>
               {raceData.results.map((driver, i) => {
-                const info   = DRIVER_TEAMS[driver];
-                const points = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
+                const info    = DRIVER_TEAMS[driver];
+                const points  = i < POINTS_TABLE.length ? POINTS_TABLE[i] : 0;
                 const bonuses = driverBonuses[driver] || [];
+                const totalPts = points + bonuses.length;
+                const posClass = i===0 ? " p1" : i===1 ? " p2" : i===2 ? " p3" : "";
                 return (
                   <tr key={`${driver}-${i}`}>
-                    <td><div className={`modal-pos${i===0?" p1":i===1?" p2":i===2?" p3":""}`}>P{i+1}</div></td>
+                    <td>
+                      <span className={`modal-pos${posClass}`}>P{i + 1}</span>
+                    </td>
                     <td>
                       <div className="modal-driver">
-                        <span className="modal-driver-flag">{info?.flag||"🏁"}</span>
+                        <span className="modal-driver-flag">{info?.flag || "🏁"}</span>
                         <span className="modal-driver-name">{driver}</span>
-                        {bonuses.length>0 && <div className="modal-driver-bonus">{bonuses.map((b,bi)=><span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}</div>}
+                        {bonuses.length > 0 && (
+                          <div className="modal-driver-bonus">
+                            {bonuses.map((b, bi) => <span key={bi} className="modal-driver-bonus-icon">{b.icon}</span>)}
+                          </div>
+                        )}
                       </div>
                     </td>
-                    <td className="modal-pts" style={{textAlign:'right', whiteSpace:'nowrap'}}>
-                      {points>0 ? `${points}${bonuses.length>0?`+${bonuses.length}`:''}pt` : bonuses.length>0 ? `${bonuses.length}pt` : "—"}
+                    <td className="modal-pts">
+                      {totalPts > 0 ? `${totalPts}pt` : "—"}
                     </td>
                   </tr>
                 );
