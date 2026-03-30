@@ -145,7 +145,7 @@ const SEASON_DATA = {
   "Stagione 3": {
     races: [
       { race: "Spa",       results: ["Igor","Alex","Antonelli","Piastri","Verstappen","Manuel","Colapinto","Gasly","Ocon","Russell","Albon","Hulkenberg","Alonso","Bortoleto","Lawson","Tsunoda","Leclerc","Bearman","Hadjar","Sainz"] },
-      { race: "Ungheria",  results: [] },
+      { race: "Ungheria",  results: ["Igor","Alex","Piastri","Verstappen","Sainz","Leclerc","Russell","Lawson","Bortoleto","Alonso","Albon","Tsunoda","Ocon","Hadjar","Antonelli","Bearman","Manuel","Colapinto","Hulkenberg","Gasly"] },
       { race: "Austin",    results: [] },
       { race: "Australia", results: [] },
       { race: "Cina",      results: [] },
@@ -153,8 +153,8 @@ const SEASON_DATA = {
       { race: "Olanda",    results: [] },
     ],
     raceExtras: [
-      { race: "Spa",       pole: "Igor", overtakes: "Alex", fastest: "Igor", loyal: "Manuel" },
-      { race: "Ungheria",  pole: null,   overtakes: null,   fastest: null,   loyal: null },
+      { race: "Spa",       pole: "Igor", overtakes: "Alex",      fastest: "Igor",   loyal: "Manuel" },
+      { race: "Ungheria",  pole: "Alex", overtakes: "Russell",   fastest: "Igor",   loyal: "Alex" },
       { race: "Austin",    pole: null,   overtakes: null,   fastest: null,   loyal: null },
       { race: "Australia", pole: null,   overtakes: null,   fastest: null,   loyal: null },
       { race: "Cina",      pole: null,   overtakes: null,   fastest: null,   loyal: null },
@@ -162,15 +162,15 @@ const SEASON_DATA = {
       { race: "Olanda",    pole: null,   overtakes: null,   fastest: null,   loyal: null },
     ],
     calendar: [
-      { round: 1, race: "Belgium GP",    city: "Spa-Francochamps", status: "done",     winner: "Igor", raceKey: "Spa" },
-      { round: 2, race: "Hungary GP",    city: "Hungaroring",      status: "upcoming", winner: "...",  raceKey: null },
+      { round: 1, race: "Belgium GP",    city: "Spa-Francochamps", status: "done",     winner: "Igor", raceKey: "Spa"      },
+      { round: 2, race: "Hungary GP",    city: "Hungaroring",      status: "done",     winner: "Igor", raceKey: "Ungheria" },
       { round: 3, race: "Texas GP",      city: "Austin",           status: "upcoming", winner: "...",  raceKey: null },
       { round: 4, race: "Australian GP", city: "Melbourne",        status: "upcoming", winner: "...",  raceKey: null },
       { round: 5, race: "Chinese GP",    city: "Shanghai",         status: "upcoming", winner: "...",  raceKey: null },
       { round: 6, race: "Japan GP",      city: "Suzuka",           status: "upcoming", winner: "...",  raceKey: null },
       { round: 7, race: "Dutch GP",      city: "Zandvoort",        status: "upcoming", winner: "...",  raceKey: null },
     ],
-    driverPoles: { Alex: 0, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+    driverPoles: { Alex: 1, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
   }
 };
 
@@ -334,36 +334,36 @@ function computeTeamStandings(raceResults, raceExtras, season) {
 const SEASONS = ["Stagione 1", "Stagione 2", "Stagione 3"];
 
 const CAREER_STATS = {
-  Piastri:    { totalPoints: 70,  totalWins: 0, totalPoles: 0, totalPodiums: 1,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 1 },
+  Piastri:    { totalPoints: 85,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 1 },
   Norris:     { totalPoints: 196, totalWins: 2, totalPoles: 2, totalPodiums: 7,  HatTrick: 0, GrandSlam: 0, championships: 1, constructorchamp: 2 },
-  Verstappen: { totalPoints: 121, totalWins: 0, totalPoles: 0, totalPodiums: 4,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Verstappen: { totalPoints: 133, totalWins: 0, totalPoles: 0, totalPodiums: 4,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Tsunoda:    { totalPoints: 16,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Russell:    { totalPoints: 79,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Russell:    { totalPoints: 86,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Antonelli:  { totalPoints: 126, totalWins: 1, totalPoles: 0, totalPodiums: 4,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Leclerc:    { totalPoints: 71,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Leclerc:    { totalPoints: 79,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Hamilton:   { totalPoints: 101, totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Albon:      { totalPoints: 29,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Sainz:      { totalPoints: 44,  totalWins: 1, totalPoles: 0, totalPodiums: 1,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Alonso:     { totalPoints: 59,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Sainz:      { totalPoints: 54,  totalWins: 1, totalPoles: 0, totalPodiums: 1,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Alonso:     { totalPoints: 60,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Stroll:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Lawson:     { totalPoints: 2,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Igor:       { totalPoints: 166, totalWins: 3, totalPoles: 7, totalPodiums: 9,  HatTrick: 0, GrandSlam: 1, championships: 0, constructorchamp: 0, totalInterpole: 1 },
+  Lawson:     { totalPoints: 6,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Igor:       { totalPoints: 192, totalWins: 4, totalPoles: 7, totalPodiums: 10, HatTrick: 0, GrandSlam: 1, championships: 0, constructorchamp: 0, totalInterpole: 1 },
   Bearman:    { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Manuel:     { totalPoints: 48,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0, totalInterpole: 1 },
   Gasly:      { totalPoints: 6,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Alex:       { totalPoints: 262, totalWins: 6, totalPoles: 6, totalPodiums: 11, HatTrick: 0, GrandSlam: 2, championships: 1, constructorchamp: 1, totalInterpole: 3 },
+  Alex:       { totalPoints: 282, totalWins: 6, totalPoles: 7, totalPodiums: 12, HatTrick: 0, GrandSlam: 2, championships: 1, constructorchamp: 1, totalInterpole: 3 },
   Hulkenberg: { totalPoints: 5,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
-  Bortoleto:  { totalPoints: 55,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Bortoleto:  { totalPoints: 57,  totalWins: 0, totalPoles: 0, totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Colapinto:  { totalPoints: 30,  totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Ocon:       { totalPoints: 3,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Hadjar:     { totalPoints: 0,   totalWins: 0, totalPoles: 0, totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
 };
 
 const TEAM_CAREER_STATS = {
-  "McLaren":          { totalPoints: 442, totalWins: 7, totalPoles: 7, championships: 2, driverchamp: 2 },
+  "McLaren":          { totalPoints: 443, totalWins: 8, totalPoles: 7, championships: 2, driverchamp: 2 },
   "Red Bull":         { totalPoints: 251, totalWins: 1, totalPoles: 6, championships: 0, driverchamp: 0 },
-  "Mercedes":         { totalPoints: 205, totalWins: 1, totalPoles: 0, championships: 0, driverchamp: 0 },
-  "Ferrari":          { totalPoints: 190, totalWins: 0, totalPoles: 0, championships: 0, driverchamp: 0 },
+  "Mercedes":         { totalPoints: 206, totalWins: 1, totalPoles: 0, championships: 0, driverchamp: 0 },
+  "Ferrari":          { totalPoints: 191, totalWins: 0, totalPoles: 1, championships: 0, driverchamp: 0 },
   "Williams":         { totalPoints: 72,  totalWins: 1, totalPoles: 0, championships: 0, driverchamp: 0 },
   "Aston Martin":     { totalPoints: 96,  totalWins: 0, totalPoles: 0, championships: 0, driverchamp: 0 },
   "Visa Cash App RB": { totalPoints: 56,  totalWins: 1, totalPoles: 3, championships: 0, driverchamp: 0 },
