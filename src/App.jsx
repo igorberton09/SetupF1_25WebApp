@@ -1550,14 +1550,26 @@ function CalendarPage({ season }) {
 // ─── CAREER PAGE ──────────────────────────────────────────────────
 function CareerPage() {
   const drivers = useMemo(() => {
+    const currentTeams = getDriverTeamsForSeason("Stagione 3");
     return Object.keys(DRIVER_TEAMS_BASE).map((name) => ({
-      name, ...DRIVER_TEAMS_BASE[name], ...CAREER_STATS[name],
-    })).sort((a, b) => b.totalPoints - a.totalPoints || b.totalWins - a.totalWins);
+      name, ...DRIVER_TEAMS_BASE[name],
+      team: currentTeams[name]?.team || DRIVER_TEAMS_BASE[name].team,
+      ...CAREER_STATS[name],
+    })).sort((a, b) =>
+      b.championships - a.championships ||
+      b.totalWins     - a.totalWins     ||
+      b.totalPodiums  - a.totalPodiums  ||
+      b.totalPoints   - a.totalPoints
+    );
   }, []);
   const teams = useMemo(() => {
     return Object.entries(TEAM_CAREER_STATS)
       .map(([team, stats]) => ({ team, ...stats }))
-      .sort((a, b) => b.totalPoints - a.totalPoints);
+      .sort((a, b) =>
+        b.championships - a.championships ||
+        b.totalWins     - a.totalWins     ||
+        b.totalPoints   - a.totalPoints
+      );
   }, []);
   const driversWithInterpole = ['Igor', 'Alex', 'Manuel'];
 
