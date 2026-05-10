@@ -155,7 +155,7 @@ const SEASON_DATA = {
     raceExtras: [
       { race: "Spa",       pole: "Igor", overtakes: "Alex",      fastest: "Igor",   loyal: "Manuel" },
       { race: "Ungheria",  pole: "Alex", overtakes: "Russell",   fastest: "Igor",   loyal: "Alex" },
-      { race: "Austin",    pole: "igor", overtakes: "Igor",      fastest: "Igor",   loyal: "Igor" },
+      { race: "Austin",    pole: "Igor", overtakes: "Igor",      fastest: "Igor",   loyal: "Igor" },
       { race: "Australia", pole: null,   overtakes: null,   fastest: null,   loyal: null },
       { race: "Cina",      pole: null,   overtakes: null,   fastest: null,   loyal: null },
       { race: "Giappone",  pole: null,   overtakes: null,   fastest: null,   loyal: null },
