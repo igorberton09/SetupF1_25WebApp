@@ -147,7 +147,7 @@ const SEASON_DATA = {
       { race: "Spa",       results: ["Igor","Alex","Antonelli","Piastri","Verstappen","Manuel","Colapinto","Gasly","Ocon","Russell","Albon","Hulkenberg","Alonso","Bortoleto","Lawson","Tsunoda","Leclerc","Bearman","Hadjar","Sainz"] },
       { race: "Ungheria",  results: ["Igor","Alex","Piastri","Verstappen","Sainz","Leclerc","Russell","Lawson","Bortoleto","Alonso","Albon","Tsunoda","Ocon","Hadjar","Antonelli","Bearman","Manuel","Colapinto","Hulkenberg","Gasly"] },
       { race: "Austin",    results: ["Igor","Alex","Piastri","Verstappen","Antonelli","Russell","Tsunoda","Colapinto","Leclerc","Albon","Manuel","Sainz","Bortoleto","Ocon","Hulkenberg","Hadjar","Gasly","Lawson","Bearman","Alonso"] },
-      { race: "Australia", results: [] },
+      { race: "Australia", results: ["Igor","Alex","Verstappen","Manuel","Leclerc","Colapinto","Russell","Antonelli","Bortoleto","Alonso","Sainz","Albon","Hulkenberg","Ocon","Hadjar","Tsunoda","Lawson","Bearman","Gasly","Piastri"] },
       { race: "Cina",      results: [] },
       { race: "Giappone",  results: [] },
       { race: "Olanda",    results: [] },
