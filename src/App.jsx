@@ -255,9 +255,9 @@ const TEAM_COLORS = {
 // ─── BONUS CONFIG ─────────────────────────────────────────────────
 // Centralised so adding a new bonus type only requires one edit here
 const BONUS_CONFIG = {
-  pole:       { icon: "🅿️", label: "Pole",     color: "#00d4ff", bg: "rgba(0,212,255,0.1)",  border: "rgba(0,212,255,0.2)",  dotColor: "#00d4ff" },
+  pole:       { icon: "🅿️",  label: "Pole",     color: "#00d4ff", bg: "rgba(0,212,255,0.1)",  border: "rgba(0,212,255,0.2)",  dotColor: "#00d4ff" },
   overtakes:  { icon: "⚡",  label: "Sorpassi", color: "#FF8000", bg: "rgba(255,128,0,0.1)",  border: "rgba(255,128,0,0.2)",  dotColor: "#FF8000" },
-  interpole:  { icon: "🌧️", label: "Interpole",color: "#00c820", bg: "rgba(0,168,22,0.1)",   border: "rgba(0,168,22,0.2)",   dotColor: "#00c820" },
+  interpole:  { icon: "🌧️",  label: "Interpole",color: "#00c820", bg: "rgba(0,168,22,0.1)",   border: "rgba(0,168,22,0.2)",   dotColor: "#00c820" },
   fastest:    { icon: "⏱️",  label: "Fastest",  color: "#c77dff", bg: "rgba(199,125,255,0.1)",border: "rgba(199,125,255,0.2)",dotColor: "#c77dff" },
   loyal:      { icon: "🤝",  label: "Loyal",    color: "#ffd166", bg: "rgba(255,209,102,0.1)",border: "rgba(255,209,102,0.2)",dotColor: "#ffd166" },
 };
@@ -352,7 +352,7 @@ const CAREER_STATS = {
   Manuel:     { totalPoints: 82,  totalWins: 0, totalPoles: 0,  totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0, totalInterpole: 1 },
   Gasly:      { totalPoints: 15,  totalWins: 0, totalPoles: 0,  totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Alex:       { totalPoints: 357, totalWins: 8, totalPoles: 7,  totalPodiums: 16, HatTrick: 0, GrandSlam: 2, championships: 1, constructorchamp: 1, totalInterpole: 3 },
-  Hulkenberg: { totalPoints: 6,   totalWins: 0, totalPoles: 0,  totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
+  Hulkenberg: { totalPoints: 5,   totalWins: 0, totalPoles: 0,  totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Bortoleto:  { totalPoints: 59,  totalWins: 0, totalPoles: 0,  totalPodiums: 2,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Colapinto:  { totalPoints: 46,  totalWins: 0, totalPoles: 0,  totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
   Ocon:       { totalPoints: 3,   totalWins: 0, totalPoles: 0,  totalPodiums: 0,  HatTrick: 0, GrandSlam: 0, championships: 0, constructorchamp: 0 },
@@ -369,7 +369,7 @@ const TEAM_CAREER_STATS = {
   "Visa Cash App RB": { totalPoints: 56,  totalWins: 1,  totalPoles: 3,  championships: 0, driverchamp: 0 },
   "Haas":             { totalPoints: 25,  totalWins: 0,  totalPoles: 0,  championships: 0, driverchamp: 0 },
   "Alpine":           { totalPoints: 136, totalWins: 3,  totalPoles: 3,  championships: 0, driverchamp: 0 },
-  "Sauber":           { totalPoints: 63,  totalWins: 0,  totalPoles: 0,  championships: 0, driverchamp: 0 },
+  "Sauber":           { totalPoints: 62,  totalWins: 0,  totalPoles: 0,  championships: 0, driverchamp: 0 },
 };
 
 const NAV = [
