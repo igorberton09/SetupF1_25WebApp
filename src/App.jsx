@@ -440,7 +440,7 @@ const TEAM_CHANGES = {
     Ocon:      { team: "Haas",             num: 31 }
   },
   "Stagione 4": {
-    Alex:      { team: "Mclaren",          num: 99 },
+    Alex:      { team: "McLaren",          num: 99 },
     Igor:      { team: "McLaren",          num: 1  },
     Tsunoda:   { team: "No Seat",          num: 22 },
     Hamilton:  { team: "Ferrari",          num: 44 },
