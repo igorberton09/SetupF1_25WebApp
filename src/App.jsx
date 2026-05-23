@@ -448,6 +448,9 @@ const TEAM_CHANGES = {
     Manuel:    { team: "Red Bull",         num: 95 },
     Stroll:    { team: "Aston Martin",     num: 18 },
     Norris:    { team: "No Seat",          num: 4  },
+    Colapinto: { team: "Alpine",           num: 43 },
+    Hadjar:    { team: "Visa Cash App RB", num: 6  },
+    Ocon:      { team: "Haas",             num: 31 }
   },
 };
 
