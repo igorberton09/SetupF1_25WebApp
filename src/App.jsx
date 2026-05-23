@@ -1976,7 +1976,7 @@ function RulesPage() {
 export default function App() {
   useFonts();
   const [page, setPage]     = useState("leaderboard");
-  const [season, setSeason] = useState(SEASONS[2]);
+  const [season, setSeason] = useState(SEASONS[3]);
   const [pageKey, setPageKey] = useState(0);
 
   const seasonData     = SEASON_DATA[season];
