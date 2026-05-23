@@ -440,17 +440,18 @@ const TEAM_CHANGES = {
     Ocon:      { team: "Haas",             num: 31 }
   },
   "Stagione 4": {
-    Alex:      { team: "McLaren",          num: 99 },
-    Igor:      { team: "McLaren",          num: 1  },
-    Tsunoda:   { team: "No Seat",          num: 22 },
-    Hamilton:  { team: "Ferrari",          num: 44 },
-    Piastri:   { team: "No Seat",          num: 81 },
-    Manuel:    { team: "Red Bull",         num: 95 },
-    Stroll:    { team: "Aston Martin",     num: 18 },
-    Norris:    { team: "No Seat",          num: 4  },
-    Colapinto: { team: "Alpine",           num: 43 },
-    Hadjar:    { team: "Visa Cash App RB", num: 6  },
-    Ocon:      { team: "Haas",             num: 31 }
+    Alex:       { team: "McLaren",          num: 99 },
+    Igor:       { team: "McLaren",          num: 1  },
+    Tsunoda:    { team: "No Seat",          num: 22 },
+    Hamilton:   { team: "Ferrari",          num: 44 },
+    Piastri:    { team: "No Seat",          num: 81 },
+    Manuel:     { team: "Red Bull",         num: 95 },
+    Stroll:     { team: "Aston Martin",     num: 18 },
+    Norris:     { team: "No Seat",          num: 4  },
+    Colapinto:  { team: "Alpine",           num: 43 },
+    Hadjar:     { team: "Visa Cash App RB", num: 6  },
+    Ocon:       { team: "Haas",             num: 31 },
+    Verstappen: { team: "Red Bull",         num: 3  }
   },
 };
 
