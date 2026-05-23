@@ -447,6 +447,7 @@ const TEAM_CHANGES = {
     Piastri:   { team: "No Seat",          num: 81 },
     Manuel:    { team: "Red Bull",         num: 95 },
     Stroll:    { team: "Aston Martin",     num: 18 },
+    Norris:    { team: "No Seat",          num: 4  },
   },
 };
 
