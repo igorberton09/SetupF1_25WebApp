@@ -171,7 +171,217 @@ const SEASON_DATA = {
       { round: 7, race: "Dutch GP",      city: "Zandvoort",        status: "done",     winner: "Igor", raceKey: "Olanda" },
     ],
     driverPoles: { Alex: 1, Igor: 6, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
-  }
+  },
+  "Stagione 4": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 5": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 6": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 7": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 8": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 9": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
+  "Stagione 10": {
+    races: [
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+      { race: "?",  results: [] },
+    ],
+    raceExtras: [
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+      { race: "?",    pole: "...", overtakes: "...",   fastest: "...",   loyal: "..."   },
+    ],
+    calendar: [
+      { round: 1, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 2, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 3, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 4, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 5, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 6, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "?",    city: "?",   status: "undone",     winner: "...", raceKey: "..."  },
+    ],
+    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+  },
 };
 
 const POINTS_TABLE = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
@@ -1550,7 +1760,7 @@ function CalendarPage({ season }) {
 // ─── CAREER PAGE ──────────────────────────────────────────────────
 function CareerPage() {
   const drivers = useMemo(() => {
-    const currentTeams = getDriverTeamsForSeason("Stagione 3");
+    const currentTeams = getDriverTeamsForSeason("Stagione 4");
     return Object.keys(DRIVER_TEAMS_BASE).map((name) => ({
       name, ...DRIVER_TEAMS_BASE[name],
       team: currentTeams[name]?.team || DRIVER_TEAMS_BASE[name].team,
