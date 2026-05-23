@@ -438,7 +438,16 @@ const TEAM_CHANGES = {
     Manuel:    { team: "Aston Martin",     num: 95 },
     Stroll:    { team: "No Seat",          num: 18 },
     Ocon:      { team: "Haas",             num: 31 }
-  }
+  },
+  "Stagione 4": {
+    Alex:      { team: "Mclaren",          num: 99 },
+    Igor:      { team: "McLaren",          num: 1  },
+    Tsunoda:   { team: "No Seat",          num: 22 },
+    Hamilton:  { team: "Ferrari",          num: 44 },
+    Piastri:   { team: "No Seat",          num: 81 },
+    Manuel:    { team: "Red Bull",         num: 95 },
+    Stroll:    { team: "Aston Martin",     num: 18 },
+  },
 };
 
 function getDriverTeamsForSeason(season) {
