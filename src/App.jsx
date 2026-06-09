@@ -181,6 +181,7 @@ const SEASON_DATA = {
       { race: "Austria",    results: [] },
       { race: "Spa",        results: [] },
       { race: "Brasile",    results: [] },
+      { race: "Madrid",     results: [] },
     ],
     raceExtras: [
       { race: "Qatar",       pole: "...", overtakes: "...",   fastest: "..."   },
@@ -190,6 +191,7 @@ const SEASON_DATA = {
       { race: "Austria",     pole: "...", overtakes: "...",   fastest: "...",  },
       { race: "Spa",         pole: "...", overtakes: "...",   fastest: "...",  },
       { race: "Brasile",     pole: "...", overtakes: "...",   fastest: "...",  },
+      { race: "Madrid",      pole: "...", overtakes: "...",   fastest: "...",  },
     ],
     calendar: [
       { round: 1, race: "Qatar GP",          city: "Lusail",            status: "upcoming",     winner: "...", raceKey: "..."  },
@@ -199,6 +201,7 @@ const SEASON_DATA = {
       { round: 5, race: "Austrian GP",       city: "Red Bull Ring",     status: "upcoming",     winner: "...", raceKey: "..."  },
       { round: 6, race: "Belgium GP",        city: "Spa-Francochamps",  status: "upcoming",     winner: "...", raceKey: "..."  },
       { round: 7, race: "São Paulo GP",      city: "São Paulo",         status: "upcoming",     winner: "...", raceKey: "..."  },
+      { round: 7, race: "Madring",           city: "Madrid",            status: "upcoming",     winner: "...", raceKey: "..."  },
     ],
     driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
   },
