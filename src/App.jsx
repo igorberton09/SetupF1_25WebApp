@@ -184,14 +184,14 @@ const SEASON_DATA = {
       { race: "Madrid",     results: [] },
     ],
     raceExtras: [
-      { race: "Qatar",       pole: "...", overtakes: "...",   fastest: "..."   },
-      { race: "Giappone",    pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Australia",   pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Jeddah",      pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Austria",     pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Spa",         pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Brasile",     pole: "...", overtakes: "...",   fastest: "...",  },
-      { race: "Madrid",      pole: "...", overtakes: "...",   fastest: "...",  },
+      { race: "Qatar",       pole: "Igor", overtakes: "...",   fastest: "..."   },
+      { race: "Giappone",    pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Australia",   pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Jeddah",      pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Austria",     pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Spa",         pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Brasile",     pole: "...",  overtakes: "...",   fastest: "...",  },
+      { race: "Madrid",      pole: "...",  overtakes: "...",   fastest: "...",  },
     ],
     calendar: [
       { round: 1, race: "Qatar GP",          city: "Lusail",            status: "upcoming",     winner: "...", raceKey: "..."  },
@@ -203,7 +203,7 @@ const SEASON_DATA = {
       { round: 7, race: "São Paulo GP",      city: "São Paulo",         status: "upcoming",     winner: "...", raceKey: "..."  },
       { round: 8, race: "Madring",           city: "Madrid",            status: "upcoming",     winner: "...", raceKey: "..."  },
     ],
-    driverPoles: { Alex: 0, Igor: 0, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+    driverPoles: { Alex: 0, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
   },
   "Stagione 5": {
     races: [
