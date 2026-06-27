@@ -203,7 +203,7 @@ const SEASON_DATA = {
       { round: 7, race: "São Paulo GP",      city: "São Paulo",         status: "upcoming",     winner: "...", raceKey: "..."  },
       { round: 8, race: "Madring",           city: "Madrid",            status: "upcoming",     winner: "...", raceKey: "..."  },
     ],
-    driverPoles: { Alex: 0, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0 }
+    driverPoles: { Alex: 0, Igor: 1, Norris: 0, Verstappen: 0, Hamilton: 0, Russell: 0, Piastri: 0, Antonelli: 0, Leclerc: 0, Alonso: 0, Albon: 0, Sainz: 0, Stroll: 0, Lawson: 0, Tsunoda: 0, Bearman: 0, Manuel: 0, Gasly: 0, Hulkenberg: 0, Bortoleto: 0, Lindblad: 0, Perez: 0, Bottas: 0, }
   },
   "Stagione 5": {
     races: [
@@ -413,6 +413,9 @@ const DRIVER_TEAMS_BASE = {
   Ocon:       { team: "No Seat",          num: 31, flag: "🇫🇷" },
   Colapinto:  { team: "No Seat",          num: 43, flag: "🇦🇷" },
   Hadjar:     { team: "No Seat",          num: 6,  flag: "🇫🇷" },
+  Lindblad:   { team: "No Seat",          num: 41, flag: "🇬🇧"},
+  Bottas:     { team: "No Seat",          num: 77, flag: "🇫🇮"},
+  Perez:      { team: "No Seat",          num: 11, flag: "🇲🇽"},
 };
 
 const TEAM_CHANGES = {
